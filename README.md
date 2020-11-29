@@ -5,7 +5,7 @@
 - The specifications for the design are (to be refined during the project)
 
 | Parameter            | Specification |
-|----------------------|---------------|
+| -------------------- | ------------- |
 | Primary Supply       | 50 V          |
 | IPT Frequency        | 150 kHz       |
 | Rated Power          | 50 W          |
