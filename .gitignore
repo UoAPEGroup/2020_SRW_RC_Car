@@ -1,0 +1,41 @@
+cat .gitignore
+
+## Ignore Mac and windows files
+.DS_Store
+desktop.ini
+Icon*
+
+## Ignore Altium files
+*.LOG
+__Previews/
+History/
+*.PrjPCBStructure
+*.SchDocPreview
+*.PcbDocPreview
+Project\ Logs
+
+## Ignore LTSpice created files
+*.net
+*.op
+*.raw
+*.lnk
+*.log
+*.ipynd_checkpoints
+*checkpoint.ipynb
+*.csv
+
+## Ignore Proteus files
+*.pdsbak
+
+## Ignore Atmel Studio files
+.vs/
+[Dd]ebug/
+[Rr]elease/
+*.o
+*.d
+*.eep
+*.elf
+*.hex
+*.map
+*.srec
+*.atsuo
