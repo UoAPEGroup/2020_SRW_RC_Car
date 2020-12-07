@@ -28,8 +28,8 @@ DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
-OutputPath=..\..\..\..\MotorDriver\Hardware\Motor_Driver\AltiumLibrary\SumWkshop_Lib
-LogFolderPath=..\..\..\..\MotorDriver\Hardware\Motor_Driver\AltiumLibrary\SumWkshop_Lib
+OutputPath=
+LogFolderPath=Project Outputs for SumWkshop
 ManagedProjectGUID=
 IncludeDesignInRelease=0
 
@@ -55,7 +55,7 @@ GenerateClassCluster=0
 DocumentUniqueId=MEXOSSVR
 
 [Document2]
-DocumentPath=..\SumWkshop.PcbLib
+DocumentPath=SumWkshop.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -71,11 +71,11 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=SONFLHHM
 
-[Generic_EDE]
-OutputDir=..\..\..\..\MotorDriver\Hardware\Motor_Driver\AltiumLibrary\SumWkshop_Lib
-
 [Generic_IntLibOptions]
 OldFormat=False
+
+[Generic_EDE]
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
