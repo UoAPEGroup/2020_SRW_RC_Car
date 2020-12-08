@@ -1,0 +1,9 @@
+Manufacturer=Microchip
+PartNumber=ATMEGA328PB-MU
+PartCategory=Integrated Circuit
+PackageCategory=Quad Flat No-Lead
+PinCount=33
+Version=2.1
+Released=2019-01-11 10:35:45
+Downloaded=2020-12-03 21:23:33
+3D=Y

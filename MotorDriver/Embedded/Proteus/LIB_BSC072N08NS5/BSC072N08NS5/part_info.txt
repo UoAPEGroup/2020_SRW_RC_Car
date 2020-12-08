@@ -1,0 +1,9 @@
+Manufacturer=Infineon
+PartNumber=BSC072N08NS5
+PartCategory=Transistor
+PackageCategory=Other
+PinCount=9
+Version=1.3
+Released=2019-07-29 23:07:56
+Downloaded=2020-12-02 03:35:28
+3D=N

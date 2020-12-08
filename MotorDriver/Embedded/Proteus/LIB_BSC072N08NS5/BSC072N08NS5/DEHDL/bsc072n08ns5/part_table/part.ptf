@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'BSC072N08NS5'
+CLASS = DISCRETE
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "DESCRIPTION", "DATASHEET";
+{========================================================================================}
+ "Infineon", "BSC072N08NS5" (!) = "", "BSC080N03LSG", "Other", "", "", "N/A", "https://www.mouser.co.uk/ProductDetail/Infineon-Technologies/BSC072N08NS5?qs=eERmAtE5kX0PueJFVqKhsA%3D%3D", "Infineon DIFFERENTIATED MOSFETS", "https://www.infineon.com/dgdl/Infineon-BSC072N08NS5-DS-v02_00-EN.pdf?fileId=5546d4624ad04ef9014ae3d8e8192c7c"
+END_PART
+
+END.

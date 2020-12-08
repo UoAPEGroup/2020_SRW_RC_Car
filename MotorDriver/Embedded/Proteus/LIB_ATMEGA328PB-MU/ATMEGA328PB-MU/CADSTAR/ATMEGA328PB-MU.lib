@@ -1,0 +1,19 @@
+.ATMEGA328PB-MU :1 ;Microchip Technology ATMEGA328PB-MU, 8bit AVR Microcontroller, 20MHz, 32 kB Flash, 32-Pin VQFN
+QFN50P500X500X90-33N-D
+*STM IC
+*NGS
+*PLB 1="(OC2B/INT1/PTCXY) PD3" 2="(XCK0/T0/PTCXY) PD4" 3="(SDA1/ICP4/ACO/PTCXY) PE0" 4="VCC" 5="GND_1" 6="(SCL1/T4/PTCXY) PE1" 7="(XTAL1/TOSC1) PB6" 8="(XTAL2/TOSC2) PB7" 9="(OC0B/T1/PTCXY) PD5" 10="(OC0A/PTCXY/AIN0) PD6" 11="(PTCXY/AIN1) PD7" 12="(ICP1/CLKO/PTCXY) PB0" 13="(OC1A/PTCXY) PB1" 14="('SS0'/OC1B/PTCXY) PB2" 15="(MOSI0/TXD1/OC2A/PTCXY) PB3" 16="(MISO0/RXD1/PTCXY) PB4" 17="PB5 (PTCXY/XCK1/SCK0)" 18="AVCC" 19="PE2 (ADC6/PTCY/ICP3/'SS1)'" 20="AREF" &
+21="GND_2" 22="PE3 (ADC7/PTCY/T3/MOSI1)" 23="PC0 (ADC0/PTCY/MISO1)" 24="PC1 (ADC1/PTCY/SCK1)" 25="PC2 (ADC2/PTCY)" 26="PC3 (ADC3/PTCY)" 27="PC4 (ADC4/PTCY/SDA0)" 28="PC5 (ADC5/PTCY/SCL0)" 29="PC6 ('RESET)'" 30="PD0 (PTCXY/OC3A/RXD0)" 31="PD1 (PTCXY/OC4A/TXD0)" 32="PD2 (PTCXY/INT0/OC3B/OC4B)" 33="GND_3"
+*MXP 33
+*DFN ATMEGA328PB-MU
+~!Manufacturer_Name (Microchip)
+~!Manufacturer_Part_Number (ATMEGA328PB-MU)
+~!Arrow Part Number (ATMEGA328PB-MU)
+~!Link Arrow Price/Stock (https://www.arrow.com/en/products/atmega328pb-mu/microchip-technology)
+~!Mouser Part Number (556-ATMEGA328PB-MU)
+~!Link Mouser Price/Stock (https://www.mouser.co.uk/ProductDetail/Microchip-Technology-Atmel/ATMEGA328PB-MU?qs=jy4bLUHv09ij6n2RwzX9vg%3D%3D)
+~!Link Datasheet (http://ww1.microchip.com/downloads/en/DeviceDoc/40001907A.pdf)
+~!Height (0.9mm)
+~!3D_Model (ATMEGA328PB-MU)
+ATMEGA328PB-MU
+1.1!U 2.1!U 3.1!U 4.1!U 5.1!U 6.1!U 7.1!U 8.1!U 9.1!U 10.1!U 11.1!U 12.1!U 13.1!U 14.1!U 15.1!U 16.1!U 24.1!U 23.1!U 22.1!U 21.1!U 20.1!U 19.1!U 18.1!U 17.1!U 33.1!U 32.1!U 31.1!U 30.1!U 29.1!U 28.1!U 27.1!U 26.1!U 25.1!U 

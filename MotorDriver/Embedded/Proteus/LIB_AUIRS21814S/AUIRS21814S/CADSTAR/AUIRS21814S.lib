@@ -1,0 +1,17 @@
+.AUIRS21814S :1 ;HIGH- AND LOW-SIDE DRIVER
+SOIC127P600X175-14N
+*STM IC
+*NGS
+*PLB 1="HIN" 2="LIN" 3="VSS" 4="NC_2" 5="COM" 6="LO" 7="VCC" 8="NC_4" 9="NC_5" 10="NC" 11="VS" 12="HO" 13="VB" 14="NC_3"
+*MXP 14
+*DFN AUIRS21814S
+~!Manufacturer_Name (Infineon)
+~!Manufacturer_Part_Number (AUIRS21814S)
+~!Arrow Part Number (-)
+~!Arrow Price/Stock (-)
+~!Mouser Part Number (-)
+~!Mouser Price/Stock (-)
+~!Link Datasheet (-)
+~!Height (-)
+AUIRS21814S
+1.1!U 2.1!U 3.1!U 4.1!U 5.1!U 6.1!U 7.1!U 8.1!U 9.1!U 10.1!U 11.1!U 12.1!U 13.1!U 14.1!U 

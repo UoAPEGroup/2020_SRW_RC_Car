@@ -1,0 +1,9 @@
+Manufacturer=Infineon
+PartNumber=AUIRS21814S
+PartCategory=Integrated Circuit
+PackageCategory=Other
+PinCount=14
+Version=1.1
+Released=2017-01-11 16:49:50
+Downloaded=2020-12-03 21:16:06
+3D=N

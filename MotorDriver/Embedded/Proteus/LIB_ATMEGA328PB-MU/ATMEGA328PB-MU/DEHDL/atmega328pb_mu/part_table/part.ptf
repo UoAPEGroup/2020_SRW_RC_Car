@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART 'ATMEGA328PB_MU'
+CLASS = IC
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "ARROW_PART_NUMBER", "ARROW_PRICE/STOCK", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "Microchip", "ATMEGA328PB-MU" (!) = "", "QFN50P500X500X90-33N-D", "Quad Flat No-Lead", "ATMEGA328PB-MU", "https://www.arrow.com/en/products/atmega328pb-mu/microchip-technology", "556-ATMEGA328PB-MU", "https://www.mouser.co.uk/ProductDetail/Microchip-Technology-Atmel/ATMEGA328PB-MU?qs=jy4bLUHv09ij6n2RwzX9vg%3D%3D", "Microchip Technology ATMEGA328PB-MU, 8bit AVR Microcontroller, 20MHz, 32 kB Flash, 32-Pin VQFN", "http://ww1.microchip.com/downloads/en/DeviceDoc/40001907A.pdf", "0.9 mm"
+END_PART
+
+END.
