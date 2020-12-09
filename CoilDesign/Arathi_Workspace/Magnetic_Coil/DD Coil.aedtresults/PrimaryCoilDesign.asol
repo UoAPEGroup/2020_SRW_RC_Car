@@ -1,7 +1,7 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000008, hour=000000000015, min=000000000053, sec=000000000030)
+    time(year=000000002020, month=000000000012, day=000000000009, hour=000000000012, min=000000000031, sec=000000000020)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
@@ -11,10 +11,10 @@ $end '$base_index$'
 $begin 'SolutionBlock1'
 	ProductName='Maxwell 3D'
 	CircuitName='PrimaryCoilDesign'
-	VersionID=65
+	VersionID=77
 	PostProcess=false
 	LossLess=true
-	NextUniqueID=72
+	NextUniqueID=79
 	MoveBackwards=false
 	$begin 'LinkedDataList'
 	$end 'LinkedDataList'
