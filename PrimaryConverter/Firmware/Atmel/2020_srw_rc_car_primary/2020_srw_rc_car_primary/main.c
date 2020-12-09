@@ -6,7 +6,7 @@
  */ 
 
 #include <avr/io.h>
-#include "timer0.h"
+#include "timer_control.h"
 
 #define F_CPU 8000000
 
@@ -14,9 +14,10 @@ int main(void)
 {
 	//IO set up
 	PORTD |= (1 << PORTD5);						//Set PD5 as output for PWM testing
+	PORTD |= (1 << PORTD3);						//Set PD3 as output for PWM testing
 	
-	timer0_init();
-
+	timer_control_init();
+	
     while (1) 
     {
     }
