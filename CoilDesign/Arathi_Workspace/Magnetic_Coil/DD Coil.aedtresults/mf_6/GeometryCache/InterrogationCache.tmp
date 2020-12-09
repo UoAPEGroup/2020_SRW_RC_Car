@@ -19,16 +19,16 @@ $begin 'InterrogationCache'
 		$end '6'
 		$begin '34'
 			$begin 'BoundingBox'
-				Low[3: -12.5, -9, -5.5]
-				High[3: 27.5, 9, 5.5]
+				Low[3: -20, -9, -5.5]
+				High[3: 20, 9, 5.5]
 				Exact=true
 				Valid=true
 			$end 'BoundingBox'
 		$end '34'
 		$begin '116'
 			$begin 'BoundingBox'
-				Low[3: -12.5, -9, -0]
-				High[3: 27.5, -7.5, 0]
+				Low[3: -20, -9, -0]
+				High[3: 20, -7.5, 0]
 				Exact=true
 				Valid=true
 			$end 'BoundingBox'
