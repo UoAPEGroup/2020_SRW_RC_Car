@@ -1,0 +1,79 @@
+SimValueCacheVersionID=1
+$begin 'SimValueInfos'
+	NextUniqueID=6
+	MoveBackwards=false
+	$begin 'SimValue'
+		ID=0
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.CplCoef(Lpt_A,Lpt_A)'
+			ValueState(90, 15, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=1
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.Lnom(Lpt_A,Lpt_A)'
+			ValueState(22, 3, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=2
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.Lnom(Lpt_B,Lpt_B)'
+			ValueState(22, 3, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=3
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.Lnom(Lpt_B,Lpt_A)'
+			ValueState(22, 3, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=4
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.Lnom(Lpt_A,Lpt_B)'
+			ValueState(22, 3, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=5
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.CplCoef(Lpt_B,Lpt_A)'
+			ValueState(90, 15, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+$end 'SimValueInfos'
+$begin 'SimValueCache'
+	$begin 'DesignMap'
+		DesignID=12
+		$begin 'SolutionMap'
+			$begin 'ContextMap'
+				SolutionID=164
+			$end 'ContextMap'
+			$begin 'ContextMap'
+				SolutionID=165
+				$begin 'VersionMap'
+					$begin 'ReportTypeSolnDef'
+						ReportType=1
+						SimValueContext(0, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0)
+					$end 'ReportTypeSolnDef'
+					$begin 'MajorVVMap'
+						VersionID=208
+						$begin 'MinorVVMap'
+							MajorVariation='$box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\''
+							MinorCacheFile='min31B31600160747837427.tmp'
+						$end 'MinorVVMap'
+					$end 'MajorVVMap'
+				$end 'VersionMap'
+			$end 'ContextMap'
+		$end 'SolutionMap'
+	$end 'DesignMap'
+$end 'SimValueCache'
