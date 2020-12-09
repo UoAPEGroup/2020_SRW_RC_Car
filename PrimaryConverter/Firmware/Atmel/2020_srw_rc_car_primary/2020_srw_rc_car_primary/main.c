@@ -13,8 +13,7 @@
 int main(void)
 {
 	//IO set up
-	PORTD |= (1 << PORTD5);						//Set PD5 as output for PWM testing
-	PORTD |= (1 << PORTD3);						//Set PD3 as output for PWM testing
+	DDRD |= ((1 << DDD3) | (1 << DDD5));					//Set PD3 and PD5 as output for PWM testing
 	
 	timer_control_init();
 	
