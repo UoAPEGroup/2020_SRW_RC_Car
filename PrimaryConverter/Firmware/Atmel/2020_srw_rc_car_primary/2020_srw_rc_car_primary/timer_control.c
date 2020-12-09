@@ -12,10 +12,10 @@
 
 #define OFFSET	25
 
-static uint8_t duty_cycle = 26;
-static uint8_t period = 52; 
+static volatile uint8_t duty_cycle = 26;
+static volatile uint8_t period = 52; 
 
-//timer control is required to synchronize the timers
+//timer control is required to synchronize the timers in order to produce PWM signal 
 void timer_control_init()
 {
 	GTCCR |= ((1 << TSM) | (1 << PSRASY) | (1 << PSRSYNC));				//halt all timers
