@@ -1,0 +1,16 @@
+G3dErrFileVersion 2018P3.1
+FlagFileMetaData Begin
+   Final Report of Quality Improvement process :Title    
+   All elements are good. :ToolTip  
+   Classic :Author   
+   1607560478 :TimeStamp
+FlagFileMetaData End
+BEGIN_ERR 
+26 Final report of Qimprove
+ Final report of Qimprove 
+ All elements have good aspect ratio and good altitude, nothing to report 
+0 # nfids, fids[]
+0 # nbids, bids[]
+      0 0 0 0 #ntets ntri ned npts
+   0   0.000000000000e+00   0.000000000000e+00   0.000000000000e+00 #flag location
+END_ERR 

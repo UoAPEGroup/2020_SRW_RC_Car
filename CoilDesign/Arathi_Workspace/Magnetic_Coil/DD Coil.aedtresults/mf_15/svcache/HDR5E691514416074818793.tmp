@@ -50,15 +50,6 @@ $begin 'SimValueCache'
 			$begin 'ContextMap'
 				SolutionID=164
 			$end 'ContextMap'
-			$begin 'ContextMap'
-				SolutionID=165
-				$begin 'VersionMap'
-					$begin 'ReportTypeSolnDef'
-						ReportType=1
-						SimValueContext(0, 0, 2, 0, false, false, -1, 1, 0, 1, 1, '', 0, 0)
-					$end 'ReportTypeSolnDef'
-				$end 'VersionMap'
-			$end 'ContextMap'
 		$end 'SolutionMap'
 	$end 'DesignMap'
 $end 'SimValueCache'
