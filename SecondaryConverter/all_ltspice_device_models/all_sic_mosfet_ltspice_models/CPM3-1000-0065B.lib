@@ -1,0 +1,191 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET CPM3-1000-0065B Spice Library 
+****	Version 1.0 Date: 7-25-2017
+****	Version 2.0 Date: 01-22-2018
+***********************************************************
+****	Revision record
+****	Version 1	Initial Release
+****	Version 3	This spice model is compatible to both Ltspice and Orcad Pspsice
+*********************************************************************************
+****Parasitics excluded
+****Tj = Junction Temperature
+****D = Drain
+****G = Gate
+****S = Source
+***********************************************************
+
+.subckt CPM3-1000-0065B d g s Tj  
+
+xgmos	d3 d1 g1 s1 Tj gmos_CPM3-1000-0065B
+Ls 		s	s1	1f
+R_Ls 		s	s1      10
+R_g 		g1	g2	4.7
+Lg 		g	g3	1f
+R_Lg		g	g3	20
+Ld 		d	d3      1f
+R_Ld		d	d3	10
+
+G1		d2	d1      Value {V(d1,s1)}
+R_A		d2	d1	1E5
+vgate_s		g3	g2	0
+vdrain_s	d3	d2	0
+Gheat		0	Tj	value {abs((V(d,s)*I(Vdrain_s)))+abs((V(g1,g2)*I(Vgate_s)))}
+xCGD		d2	g1	cgdmos_CPM3-1000-0065B 
+CGS		g1	s1	656p
+D1		s1	d2	bodydiode_CPM3-1000-0065B
+
+
+.ends CPM3-1000-0065B
+*****************************************
+
+.subckt gmos_CPM3-1000-0065B d3 d1 g1 s1 Tj
+
+e3		NET3	0	Value {0.00001*(V(Tj)**2)-0.00735*V(Tj)+2.5308}
+R_C		NET3	0 	1E6
+
+e2		NET2	0	Value {3.571m*(V(gk,s1)**2)-29.57m*V(gk,s1)+0.5206}
+R_B		NET2	0 	1E6
+
+e4		NET4	0	value {
++				if(V(Tj)>50,
++					0 
++					,
++					0
++					)
++					}    
+R_d		NET4	0 	1E6
+
+e5		NET5	0	value {
++				if(V(gk,s1)>13,
++					-491.22n*(V(Tj)**2)-77.24u*v(Tj)+64.23m   
++					,
++					0
++					)
++					}
+R_e		NET5	0 	1E6
+
+e6		NET6	0	value {
++				if(V(gk,s1)>11 & V(gk,s1)<=13,
++					-695.12n*(V(Tj)**2)-58.35u*v(Tj)+88.89m
++					,
++					0
++					)
++					}
+R_f		NET6	0 	1E6
+
+e7		NET7	0	value {
++				if(V(gk,s1)>9 & V(gk,s1)<=11,
++					-1.19u*(V(Tj)**2)+64.3u*v(Tj)+119.14m
++					,
++					0
++					)
++					}
+R_g		NET7	0 	1E6
+
+e8		NET8	0	value {
++				if(V(gk,s1)>7 & V(gk,s1)<=9,
++					-821.95n*(V(Tj)**2)+287.84u*v(Tj)+133.32m   
++					,
++					0
++					)
++					}
+R_h		NET8	0 	1E6
+
+e9		NET9	0	value {
++				if(V(gk,s1)>1 & V(gk,s1)<=7,
++					914.63n*(V(Tj)**2)+639.94u*v(Tj)+128.43m    
++					,
++					0
++					)
++					}
+R_j		NET9	0 	1E6
+
+.param p8  = 0.0011
+.param p11 = -8
+.param p12 = 19
+
+R100 gk s1	1E6
+E100 gk s1 	value {limit(V(g1,s1),p11,p12)} 
+
+
+********************************
+G1 d1 s1 value {
++	if(V(s1,d3)<0,
++		0
++		,
++		if (V(gk,s1)<v(NET3,0) ,
++		-((0.035)*(v(gk,s1)-V(NET3,0)))*(-(1+p8*v(s1,d3))*0.008)*(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-
++		((log(1+exp(v(gk,s1)-V(NET3,0)-(0.854*v(s1,d3)))))**2))
++		,
++		-(((v(NET5,0)+v(NET6,0)+v(NET7,0)+v(NET8,0)+v(NET9,0))*(v(gk,s1)-V(NET3,0)))+v(NET4,0))*(1+p8*v(s1,d3))*
++		(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-((log(1+exp(v(gk,s1)-V(NET3,0)-(V(NET2,0)*v(s1,d3)))))**2))
++		)
++			)
++			}
+G2 d1 s1 value {
++	if(V(d3,s1)<0,
++		0
++		,
++		if (V(gk,s1)<v(NET3,0) ,
++		((0.035)*(v(gk,s1)-V(NET3,0)))*(-(1+p8*v(d3,s1))*0.008)*(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-
++		((log(1+exp(v(gk,s1)-V(NET3,0)-(0.854*v(d3,s1)))))**2))
++		,
++		(((v(NET5,0)+v(NET6,0)+v(NET7,0)+v(NET8,0)+v(NET9,0))*(v(gk,s1)-V(NET3,0)))+v(NET4,0))*(1+p8*v(d3,s1))*
++		(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-((log(1+exp(v(gk,s1)-V(NET3,0)-(V(NET2,0)*v(d3,s1)))))**2))
++		)
++			)
++			}
+
+.ends gmos_CPM3-1000-0065B
+****************************************
+.model bodydiode_CPM3-1000-0065B d(is=145.99n cjo=999.24p bv=1160 m=0.6600636575 EG=6.72827 vj=5.9708436 n=10.4 
++	rs=0.043  trs1=0.000281895  trs2=-8.41479u Tnom=25
++	tt=15n ibv=500u Xti=0.13 level=1)
+****************************************
+
+.subckt cgdmos_CPM3-1000-0065B d2 g1
+.param k1=135p	
+.param k2=0.35		
+.param ka=40	
+.param kb=0.3	
+.param kc=6.5277	
+G11 g1 d1 value {
++		k1*(
++		(1+(limit(v(d2,g1),0,560))*(1+ka*(1+TANH(kb*V(d2,g1)-kc))/2))**-k2
++		)*ddt(v(g1,d2))
++			}
+R_CGD d1 d2 1e-4
+.ends cgdmos_CPM3-1000-0065B
+
+
+
+
+
+
+
+
+
+
+

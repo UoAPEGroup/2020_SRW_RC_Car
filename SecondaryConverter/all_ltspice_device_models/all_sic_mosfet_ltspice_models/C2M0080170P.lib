@@ -1,0 +1,245 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET C2M0080170P Spice Library 
+****	Version 1.0 Date: 05-04-2018
+***********************************************************
+****	Revision record
+****	Version 1	Initial Release
+****	
+***********************************************************
+****Parasitics Included
+****Tj = Junction Temperature
+****Tc = Case Temperature
+****D = Drain
+****G = Gate
+****S1 = Kelvin Source
+****S2 = Power Source
+***********************************************************
+
+.subckt C2M0080170P d g s1 s2 Tj Tc 
+
+xgmos	d3 d1 g1 s Tj Tc gmos_C2M0080170P
+RS1		s1	sb	25.332m
+Ls1 		sb	s	8.396n
+R_Ls1 		sb	s       200
+
+RS2		s2	sa	1.573m
+Ls2 		sa	s	3.761n
+R_Ls2 		sa	s      	1
+
+R_g 		g1	g2	2
+RG		g	ga	37.89m
+Lg 		ga	g3	12.422n
+R_Lg		ga	g3	0.9
+
+Rd		d	da	87.42u
+Ld 		da	d3      4.366n
+R_Ld		da	d3	1
+
+G1		d2	d1      Value {V(d1,s)}
+R_A		d2	d1	1E6
+vgate_s		g3	g2	0
+vdrain_s	d3	d2	0
+Gheat		0	Tj	value {abs((V(d,s1)*I(Vdrain_s)))+abs((V(g1,g2)*I(Vgate_s)))}
+
+xCGD		d2	g1	cgdmos_C2M0080170P 
+CGS		g1	s	2246p
+
+
+D1		s	d2	bodydiode_C2M0080170P
+xCDS		d2	s	cds_C2M0080170P
+
+
+R0 N1 Tj 10.9m
+R1 N2 N1 34.4m
+R2 N3 N2 163m
+R3 Tc N3 158m
+C0 Tj 0 1.3m
+C1 N1 0 4.83m
+C2 N2 0 18.2m
+C3 N3 0 138m
+
+.ends C2M0080170P
+
+*****************************************
+
+.subckt gmos_C2M0080170P d3 d1 g1 s Tj Tc
+
+
+e1		NET1	0	Value {12.683u*(V(Tj)**2)-4.6195m*V(Tj)+1.50756}
+R_a		NET1	0 	1E6
+
+e2		NET2	0	Value {15m*max(v(gk,s),5.5)-80m}
+R_b		NET2	0 	1E6
+
+e3		NET3	0	Value {14.7685u*(V(Tj)**2)-7.9537m*V(Tj)+2.42355}
+R_C		NET3	0 	1E6
+
+e4		NET4	0	Value {-9.122u*(V(Tj)**2)+476.34u*V(Tj)+193.79m}
+R_d		NET4	0 	1E6
+
+e5		NET5	0	value {
++				if(V(gk,s)>18.2,
++					-754.63n*(V(Tj)**2)-35.139u*v(Tj)+48.05m   
++					,
++					0
++					)
++					}
+R_e		NET5	0 	1E6
+
+e6		NET6	0	value {
++				if(V(gk,s)>16.2 & V(gk,s)<=18.2,
++					-1.1007u*(V(Tj)**2)-41.772u*v(Tj)+69.33m
++					,
++					0
++					)
++					}
+R_f		NET6	0 	1E6
+
+e7		NET7	0	value {
++				if(V(gk,s)>14.2 & V(gk,s)<=16.2,
++					-1.739u*(V(Tj)**2)-39.67u*v(Tj)+0.10408
++					,
++					0
++					)
++					}
+R_g		NET7	0 	1E6
+
+e8		NET8	0	value {
++				if(V(gk,s)>12.2 & V(gk,s)<=14.2,
++					-3.0293u*(V(Tj)**2)+34.122u*v(Tj)+0.16104 
++					,
++					0
++					)
++					}
+R_h		NET8	0 	1E6
+
+e9		NET9	0	value {
++				if(V(gk,s)>10.2 & V(gk,s)<=12.2,
++					-5.634u*(V(Tj)**2)+305.96u*v(Tj)+0.2559    
++					,
++					0
++					)
++					}
+R_j		NET9	0 	1E6
+
+e12		NET12	0	value {
++				if(V(gk,s)>v(NET3) & V(gk,s)<=10.2,
++					-9.634u*(V(Tj)**2)+1.086m*v(Tj)+0.4089  
++					,
++					0
++					)
++					}
+R_m		NET12	0 	1E6
+
+
+e10		NET10   0	Value {-5m*V(gk,s)+(-3.171u*(V(Tj)**2)+154.878u*V(Tj)+218.11m)}
+R_K		NET10	0	1E6
+
+
+.param p8  = 0.0011
+.param p11 = -10
+.param p12 = 25
+
+
+R100 gk s	1E6
+E100 gk s 	value {limit(V(g1,s),p11,p12)} 
+
+********************************
+G1 d1 s value {
++	if(V(s,d3)<0,
++		0
++		,
++		if (V(gk,s)<v(NET3) ,
++		-((0.035)*(v(gk,s)-V(NET3)))*(-(1+p8*v(s,d3))*0.008)*(((log(1+exp(v(gk,s)-V(NET3))))**2)
++		-((log(1+exp(v(gk,s)-V(NET3)-(0.854*v(s,d3)))))**2))
++		,
++		-(((v(NET5)+v(NET6)+v(NET7)+v(NET8)+v(NET9)+v(NET12))*(v(gk,s)-V(NET3)))+v(NET4))*(1+p8*v(s,d3))*
++		(((log(1+exp(v(gk,s)-V(NET3))))**2)-((log(1+exp(v(gk,s)-V(NET3)
++		-(V(NET2)*v(s,d3)*((1+exp(-v(NET10)*v(s,d3)))**v(NET1))))))**2))
++		)
++			)
++			}
+G2 d1 s value {
++	if(V(d3,s)<0,
++		0
++		,
++		if (V(gk,s)<v(NET3) ,
++		((0.035)*(v(gk,s)-V(NET3)))*(-(1+p8*v(d3,s))*0.008)*(((log(1+exp(v(gk,s)-V(NET3))))**2)
++		-((log(1+exp(v(gk,s)-V(NET3)-(0.854*v(d3,s)))))**2))
++		,
++		(((v(NET5)+v(NET6)+v(NET7)+v(NET8)+v(NET9)+v(NET12))*(v(gk,s)-V(NET3))))*(1+p8*v(d3,s))*
++		(((log(1+exp(v(gk,s)-V(NET3))))**2)-((log(1+exp(v(gk,s)-V(NET3)
++		-(V(NET2)*v(d3,s)*((1+exp(-v(NET10)*v(d3,s)))**v(NET1))))))**2))
++		)
++			)
++			}
+
+
+.ends gmos_C2M0080170P
+
+****************************************
+
+.subckt cgdmos_C2M0080170P d2 g1
+.param k1=700p	
+.param k2=0.4		
+.param ka=420	
+.param kb=0.5	
+.param kc=4.5277	
+G11 g1 d1 value {
++		k1*(
++		(1+(limit(v(d2,g1),0,800))*(1+ka*(1+TANH(kb*V(d2,g1)-kc))/2))**-k2
++		)*ddt(v(g1,d2))
++		}
+R_CGD d1 d2 1e-4
+.ends cgdmos_C2M0080170P
+
+
+****************************************
+.subckt cds_C2M0080170P d2 s
+.param Cjo = 1800p
+.param Vj  = 1.6
+.param M   = 0.45
+
+G12 d1 s value {
++	if(V(d2,s)>0,
++		(Cjo/(1+((limit(ABS(v(d2,s)),0,1000))/Vj))**M)*ddt(abs(v(s,d2)))
++		,
++		0
++			)
++			}
+
+R_CDS d1 d2 1e-4
+.ends cds_C2M0080170P
+
+
+****************************************
+.model bodydiode_C2M0080170P d(is=30.889n bv=2150 EG=3.840422 n=6.7
++	rs=0.0227 trs1=-4.08m  trs2=12.5003u Tnom=25
++	tt=7.5n ibv=500u Xti=10.13 level=1)
+
+
+
+
+

@@ -1,0 +1,218 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET E3M0065090D Spice Library 
+****	Version 1.0 Date: 07-26-2018
+***********************************************************
+****	Revision record
+****	Version 1	Initial Release
+*********************************************************************************
+****Parasitics Included
+****Tj = Junction Temperature
+****Tc = Case Temperature
+****D = Drain
+****G = Gate
+****S = Source
+***********************************************************
+
+.subckt E3M0065090D d g s Tj Tc 
+
+xgmos	d3 d1 g1 s1 Tj Tc gmos_E3M0065090D
+
+RS		s	sa	3.55993m
+Ls 		sa	s1	2.993n
+*R_Ls 		sa	s1      5
+
+R_g 		g1	g2	4.7
+RG		g	ga	36.09m
+Lg 		ga	g3	8.535n
+*R_Lg		ga	g3	1000
+
+Rd		d	da	87.42u
+Ld 		da	d3      4.366n
+R_Ld		da	d3	5
+
+G1		d2	d1      Value {V(d1,s1)}
+R_A		d2	d1	1E6
+vgate_s		g3	g2	0
+vdrain_s	d3	d2	0
+Gheat		0	Tj	value = {abs((V(d,s)*I(Vdrain_s)))+abs((V(g1,g2)*I(Vgate_s)))}
+xCGD		d2	g1	cgdmos_E3M0065090D 
+CGS		g1	s1	656p
+xCds		d2	s1	cdsmos_E3M0065090D
+D1		s1	d2	bodydiode_E3M0065090D
+
+
+R0 N1 Tj 384.6m
+R1 N2 N1 202.4m
+R2 N3 N2 189m
+R3 Tc N3 224.2m
+C0 Tj 0 3.3m
+C1 N1 0 13.1m
+C2 N2 0 107.4m
+C3 N3 0 828.9m
+
+.ends E3M0065090D
+
+*****************************************
+
+.subckt gmos_E3M0065090D d3 d1 g1 s1 Tj Tc
+
+e3		NET3	0	Value {0.00001*(V(Tj)**2)-0.00735*V(Tj)+2.5308}
+R_C		NET3	0 	1E6
+
+e2		NET2	0	Value {3.571m*(V(gk,s1)**2)-29.57m*V(gk,s1)+0.5206}
+R_B		NET2	0 	1E6
+
+e4		NET4	0	Value {-2.6585u*(V(Tj)**2)-454.76u*V(Tj)+183.03m}
+R_d		NET4	0 	1E6
+
+e5		NET5	0	value {
++				if(V(gk,s1)>13,
++					-729.76n*(V(Tj)**2)-61.89u*v(Tj)+66.8m   
++					,
++					0
++					)
++					}
+R_e		NET5	0 	1E6
+
+e6		NET6	0	value {
++				if(V(gk,s1)>11 & V(gk,s1)<=13,
++					-865.37n*(V(Tj)**2)-90.96u*v(Tj)+97.61m
++					,
++					0
++					)
++					}
+R_f		NET6	0 	1E6
+
+e7		NET7	0	value {
++				if(V(gk,s1)>9 & V(gk,s1)<=11,
++					-1.4707u*(V(Tj)**2)-6.622u*v(Tj)+136.08m
++					,
++					0
++					)
++					}
+R_g		NET7	0 	1E6
+
+e8		NET8	0	value {
++				if(V(gk,s1)>7 & V(gk,s1)<=9,
++					-4.163u*(V(Tj)**2)+312.6u*v(Tj)+204.79m   
++					,
++					0
++					)
++					}
+R_h		NET8	0 	1E6
+
+e9		NET9	0	value {
++				if(V(gk,s1)>v(NET3,0) & V(gk,s1)<=7,
++					-2.768u*(V(Tj)**2)+604.45u*v(Tj)+201.62m    
++					,
++					0
++					)
++					}
+R_j		NET9	0 	1E6
+
+.param p8  = 0.0011
+.param p11 = -8
+.param p12 = 18
+
+R100 gk s1	1E6
+E100 gk s1 	value {limit(V(g1,s1),p11,p12)}
+
+
+********************************
+G1 d1 s1 value {
++	if(V(s1,d3)<0,
++		0
++		,
++		if (V(gk,s1)<v(NET3,0) ,
+*+		0
++		-((0.035)*(v(gk,s1)-V(NET3,0)))*(-(1+p8*v(s1,d3))*0.008)*(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-
++		((log(1+exp(v(gk,s1)-V(NET3,0)-(0.854*v(s1,d3)))))**2))
++		,
++		-(((v(NET5,0)+v(NET6,0)+v(NET7,0)+v(NET8,0)+v(NET9,0))*(v(gk,s1)-V(NET3,0)))+v(NET4,0))*(1+p8*v(s1,d3))*
++		(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-((log(1+exp(v(gk,s1)-V(NET3,0)-(V(NET2,0)*v(s1,d3)))))**2))
++		)
++			)
++			}
+G2 d1 s1 value {
++	if(V(d3,s1)<0,
++		0
++		,
++		if (V(gk,s1)<v(NET3,0) ,
++		((0.035)*(v(gk,s1)-V(NET3,0)))*(-(1+p8*v(d3,s1))*0.008)*(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-
++		((log(1+exp(v(gk,s1)-V(NET3,0)-(0.854*v(d3,s1)))))**2))
++		,
++		(((v(NET5,0)+v(NET6,0)+v(NET7,0)+v(NET8,0)+v(NET9,0))*(v(gk,s1)-V(NET3,0))))*(1+p8*v(d3,s1))*
++		(((log(1+exp(v(gk,s1)-V(NET3,0))))**2)-((log(1+exp(v(gk,s1)-V(NET3,0)-(V(NET2,0)*v(d3,s1)))))**2))
++		)
++			)
++			}
+
+.ends gmos_E3M0065090D
+
+****************************************
+.model bodydiode_E3M0065090D d(is=145.99n bv=1160 EG=6.72827 n=10.4 
++	rs=0.043  trs1=0.000281895  trs2=-8.41479u Tnom=25
++	tt=7n ibv=500u Xti=0.13 level=1)
+****************************************
+
+.subckt cgdmos_E3M0065090D d2 g1
+.param k1=135p	
+.param k2=0.35		
+.param ka=40	
+.param kb=0.4	
+.param kc=6.5277	
+G11 g1 d1 value {
++		k1*(
++		(1+(limit(v(d2,g1),0,570))*(1+ka*(1+TANH(kb*V(d2,g1)-kc))/2))**-k2
++		)*ddt(v(g1,d2))
++			}
+R_CGD d1 d2 1e-4
+.ends cgdmos_E3M0065090D
+
+
+.subckt cdsmos_E3M0065090D d3 s1
+.param Cjo = 999.24p
+.param Vj  = 7.7708436
+.param M   = 0.6600636575
+   
+G12 d1 s1 value {
++	if(V(d3,s1)>0,
++		(Cjo/(1+((limit(ABS(v(d3,s1)),0,580))/Vj))**M)*ddt(v(d3,s1))
++		,
++		0
++			)
++			}
+
+R_CDS d1 d3 1e-4
+.ends cdsmos_E3M0065090D
+
+
+
+
+
+
+
+
+
