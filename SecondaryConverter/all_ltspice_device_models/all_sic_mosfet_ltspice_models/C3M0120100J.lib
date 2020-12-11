@@ -1,0 +1,240 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET C3M0120100J Spice Library 
+****	Version 2.0 Date: 11-27-2017
+****	Version 3.0 Date: 01-22-2018
+****	Version 4.0 Date: 06-19-2018
+***********************************************************
+****	Revision record
+****	Version 1	Initial Release
+****	Version 2	Include Tc at gmos subcircuit
+****	Version 3	This spice model is compatible to both Ltspice and Orcad Pspsice
+****	Version 4	Update the thermal RC model
+*********************************************************************************
+****Parasitics Included
+****Tj = Junction Temperature
+****Tc = Case Temperature
+****D = Drain
+****G = Gate
+****S1 = Kelvin Source
+****S2,S3,S4,S5,S6 = Power Source
+***********************************************************
+
+.subckt C3M0120100J d g s1 s2 s3 s4 s5 s6 Tj Tc 
+
+xgmos	d3 d1 g1 s Tj Tc gmos_C3M0120100J
+
+
+Rg1		g		ga		19.29m
+RS1		s1		s1a		8.479m
+RS2		s2		s2a		0.4616m
+RS3		s3		s3a		0.4616m
+RS4		s4		s4a		0.4616m
+RS5		s5		s5a		0.4616m
+RS6		s6		s6a		0.4616m
+Rd		d		da		0.01166m
+
+Lg1		ga		g3		7.059n
+Ls1		s1a		s		7.532n
+Ls2		s2a		s_c		2.5n
+Ls3		s3a		s_c		2.5n
+Ls4		s4a		s_c		2.5n
+Ls5		s5a		s_c		2.5n
+Ls6		s6a		s_c		2.5n
+Ld 		da		d3      	1.495n
+
+RPg   ga		g3		500
+RP1   s1a		s		100
+RP2   s2a		s_c		100
+RP3   s3a		s_c		100
+RP4   s4a		s_c		100
+RP5   s5a		s_c		100
+RP6   s6a		s_c		100
+RPd   da		d3		1
+
+R_g 		g1	g2	16
+R_S		S_C	S_d	3.875m
+L_s		S_d	S	2.742n
+*R_PLS		S_d	s	100
+
+
+G1		d2	d1      Value {V(d1,s)}
+R_A		d2	d1	1E6
+vgate_s		g3	g2	0
+vdrain_s	d3	d2	0
+Gheat		0	Tj	value {abs((V(d,s)*I(Vdrain_s)))+abs((V(g1,g2)*I(Vgate_s)))}
+xCGD		d2	g1	cgdmos_C3M0120100J 
+CGS		g1	s	347p
+D1		s	d2	bodydiode_C3M0120100J
+
+R0 N1 Tj 0.09
+R1 N2 N1 0.73
+R2 N3 N2 0.35
+R3 Tc N3 0.33
+C0 Tj 0 0.4m
+C1 N1 0 1.7m
+C2 N2 0 12.8m
+C3 N3 0 248.5m
+
+.ends C3M0120100J
+
+*****************************************
+
+.subckt gmos_C3M0120100J d3 d1 g1 s Tj Tc
+
+e3		NET3	0	Value {10u*(V(Tj)**2)-0.0068*V(Tj)+2.3439}
+R_C		NET3	0 	1E6
+
+e2		NET2	0	Value {-0.005*v(g2,s)+0.165}
+R_B		NET2	0 	1E6
+
+e1		NET1	0	Value {-0.1717*v(g2,s)+3.5755}
+R_a		NET1	0 	1E6
+
+e4		NET4	0	value {
++				if(V(Tj)>50,
++					0.05 
++					,
++					0.32
++					)
++					}    
+R_d		NET4	0 	1E6
+e5		NET5	0	value {
++				if(V(g2,s)>13,
++					-1.565u*(V(Tj)**2)-137u*v(Tj)+0.1645   
++					,
++					0
++					)
++					}
+R_e		NET5	0 	1E6
+
+e6		NET6	0	value {
++				if(V(g2,s)>11 & V(g2,s)<=13,
++					-1.67u*(V(Tj)**2)-32.646u*v(Tj)+0.152
++					,
++					0
++					)
++					}
+R_f		NET6	0 	1E6
+
+e7		NET7	0	value {
++				if(V(g2,s)>9 & V(g2,s)<=11,
++					-1.88u*(V(Tj)**2)+136.512u*v(Tj)+0.138
++					,
++					0
++					)
++					}
+R_g		NET7	0 	1E6
+
+e8		NET8	0	value {
++				if(V(g2,s)>7 & V(g2,s)<=9,
++					-1.8u*(V(Tj)**2)+268.975u*v(Tj)+0.117   
++					,
++					0
++					)
++					}
+R_h		NET8	0 	1E6
+
+e9		NET9	0	value {
++				if(V(g2,s)>1 & V(g2,s)<=7,
++					-0.66u*(V(Tj)**2)+356.28u*v(Tj)+83m   
++					,
++					0
++					)
++					}
+R_j		NET9	0 	1E6
+
+
+
+.param p8  = 0.0011
+.param p9  = -0.102
+.param p11 = -8
+.param p12 = 19
+
+R100 g2 s	1E6
+E100 g2 s 	value {limit(V(g1,s),p11,p12)} 
+
+
+********************************
+G1 d1 s value {
++	if(V(s,d3)<0,
++		0
++		,
++		if (V(g2,s)<V(NET3,0) ,
++		-((0.035)*(v(g2,s)-V(NET3,0)))*(-(1+p8*v(s,d3))*0.008)*(((log(1+exp(v(g2,s)-V(NET3,0))))**2)-
++		((log(1+exp(v(g2,s)-V(NET3,0)-(0.854*v(s,d3)))))**2))
++		,
++		-(((v(NET5,0)+v(NET6,0)+v(NET7,0)+v(NET8,0)+v(NET9,0))*(v(g2,s)-V(NET3,0)))+v(NET4,0))*(1+p8*v(s,d3))*
++		(((log(1+exp(v(g2,s)-V(NET3,0))))**2)-((log(1+exp(v(g2,s)-V(NET3,0)-
++		(V(NET2,0)*v(s,d3)*((1+exp(p9*v(s,d3)))**v(NET1,0))))))**2))
++		)
++			)
++			}
+G2 d1 s value {
++	if(V(d3,s)<0,
++		0
++		,
++		if (V(g2,s)<V(NET3,0) ,
++		((0.035)*(v(g2,s)-V(NET3,0)))*(-(1+p8*v(d3,s))*0.008)*(((log(1+exp(v(g2,s)-V(NET3,0))))**2)-
++		((log(1+exp(v(g2,s)-V(NET3,0)-(0.854*v(d3,s)))))**2))
++		,
++		(((v(NET5,0)+v(NET6,0)+v(NET7,0)+v(NET8,0)+v(NET9,0))*(v(g2,s)-V(NET3,0))))*(1+p8*v(d3,s))*
++		(((log(1+exp(v(g2,s)-V(NET3,0))))**2)-((log(1+exp(v(g2,s)-V(NET3,0)-
++		(V(NET2,0)*v(d3,s)*((1+exp(p9*v(d3,s)))**v(NET1,0))))))**2))
++		)
++			)
++			}
+
+.ends gmos_C3M0120100J
+
+****************************************
+.model bodydiode_C3M0120100J d(is=38.9n cjo=700p bv=1160 m=0.65 EG=5.02827 vj=5 n=7.65 
++	rs=0.092 trs1=-0.0016  trs2=1.003u Tnom=25
++	tt=3n ibv=500u Xti=0.13 level=1)
+****************************************
+
+.subckt cgdmos_C3M0120100J d2 g1
+.param k1=140p	
+.param k2=0.4		
+.param ka=30	
+.param kb=0.3	
+.param kc=6.5277	
+G11 g1 d1 value {
++		k1*(
++		(1+(limit(v(d1,g1),0,600))*(1+ka*(1+TANH(kb*V(d1,g1)-kc))/2))**-k2
++		)*ddt(v(g1,d1))
++			}
+R_CGD d1 d2 1e-4
+.ends cgdmos_C3M0120100J
+
+
+
+
+
+
+
+
+
+
+

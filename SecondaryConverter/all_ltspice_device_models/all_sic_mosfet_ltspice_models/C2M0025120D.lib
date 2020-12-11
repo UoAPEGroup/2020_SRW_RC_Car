@@ -1,0 +1,167 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET C2M0025120D Spice Library Beta Version
+****	Version 1.0 Date: 11-28-2016
+****	Version 2.0 Date: 01-22-2018
+****	Version 3.0 Date: 06-19-2018
+***********************************************************
+****	Revision record
+****	Version Beta	Initial Release
+****	Version 1	Included model number at subcircuit to avoid library overlapping when two Modfet models called
+****	Version 2	This spice model is compatible to both Ltspice and Orcad Pspsice
+****	Version 3	Update the thermal RC model
+*********************************************************************************
+****Parasitics Included
+****Tj = Junction Temperature
+****Tc = Case Temperature
+****D = Drain
+****G = Gate
+****S = Source
+***********************************************************
+
+.subckt C2M0025120D d g s Tj Tc
+
+xgmos	d1 g1 s1 Tj Tc gmos_C2M0025120D 
+Ls 		s	s1	9n
+R_Ls 		s	s1      10
+
+Rg 		g1	g2	1.1
+Lg 		g	g3	15n
+R_Lg		g	g3	10
+Rgg		g1	s1	1E6
+
+Ld 		d	d3      6n
+R_Ld		d	d3	10
+
+G1		d2	d1      Value {(V(d2,d1))/((0.0000007714*((V(Tj))**2)+0.0000978571*(V(Tj))+0.0231428571)+1n)}
+R_A		d2	d1	1E6
+Vgate_s		g3	g2	0
+Vdrain_s	d3	d2	0
+Gheat		0	Tj	value {abs((V(d,s)*I(Vdrain_s)))+abs((V(g1,g2)*I(Vgate_s)))}
+XCGD		d2	g1	cgdmos_C2M0025120D 
+CGS		g1	s1	2825.325p
+CDS		d2	s1	70p
+D1		s1	d2	bodydiode_C2M0025120D
+D2		s1	d2	bodydiode_C2M0025120D
+D3		s1	d2	bodydiode_C2M0025120D
+R0 N1 Tj 4.4m
+R1 N2 N1 4.4m
+R2 N3 N2 19.1m
+R3 N4 N3 19.7m
+R4 N5 N4 28.8m
+R5 N6 N5 25.2m
+R6 N7 N6 17.5m
+R7 N8 N7 18.2m
+R8 N9 N8 25.9m
+R9 N10 N9 34.5m
+R10 N11 N10 26.9m
+R11 N12 N11 10m
+R12 N13 N12 2.88m
+R13 Tc N13 0.183m
+C0 Tj 0 1.32m
+C1 N1 0 1.1m
+C2 N2 0 5.02m
+C3 N3 0 8.95m
+C4 N4 0 8.04m
+C5 N5 0 10m
+C6 N6 0 21.9m
+C7 N7 0 47.3m
+C8 N8 0 65.1m
+C9 N9 0 68.9m
+C10 N10 0 88.9m
+C11 N11 0 0.291
+C12 N12 0 5.78
+C13 N13 0 1.29m
+
+.ends C2M0025120D 
+*****************************************
+
+.subckt gmos_C2M0025120D d1 g1 s1 Tj Tc
+
+.param Adj = 0.55
+e2		NET1	0	Value {(-0.0237528571*(V(Tj))+26.30875)}
+R_B		NET1	0 	1E12
+
+e3		NET2	0	Value {((0.0000290194*((V(Tj))**2)-0.0144927440*(V(Tj))+6.6778449647)*Adj)}
+R_C		NET2	0 	1E12
+
+.param p3  = 13
+.param p4  = 0.0257											
+.param p5  = 2.2
+.param p6  = 2.0
+.param p7  = 0.5
+.param p8  = 0.001
+.param p9  = {2*p3*p4}
+.param p10 = {p9*p4}
+.param p11 = -10
+.param p12 = 25
+
+R100 g2 s1	1e9
+E100 g2 s1 	value {limit(V(g1,s1),p11,p12)} 
+
+G1 d1 s1 value {
++	if(V(d1,s1)<0,
++		-p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0))/p9)))**p5)
++		*(1+p8*v(s1,d1))
++		,
++		p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0))/p9)))**p5)
++		*(1+p8*v(d1,s1))
++		)
++			}
+G2 d1 s1 value {
++	if(V(d1,s1)<0,
++		p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0)-p6*(v(s1,d1))**p7)/p9)))**p5)
++		*(1+p8*v(s1,d1))
++		,
++		-p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0)-p6*(v(d1,s1))**p7)/p9)))**p5)
++		*(1+p8*v(d1,s1))
++		)
++			}
+
+
+
+.ends gmos_C2M0025120D
+****************************************
+
+.model bodydiode_C2M0025120D d(is=1.2e-12 cjo=842.1649p bv=1600 m=0.58729 EG=3.26 vj=3.82 n=3.9 
++	rs=0.02  trs1=-0.0047035655  trs2=0.0000227057 Tnom=25
++	tt=15n ibv=500u Xti=12 level=1)
+****************************************
+
+.subckt cgdmos_C2M0025120D d2 g1
+.param k1=1702.69p
+.param k2=0.545
+.param ka=18.096
+.param kb=0.2678
+.param kc=7.5277
+G11 g1 d1 value {
++		k1*(
++		(1+(limit(v(d2,g1),0,500))*(1+ka*(1+TANH(kb*V(d2,g1)-kc))/2))**-k2
++		)*ddt(v(g1,d2))
++			}
+R_CGD d1 d2 1e-3
+
+.ends cgdmos_C2M0025120D
+***************************************
+                               

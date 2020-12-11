@@ -1,0 +1,123 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied 
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET CPM2-1200-0025B Spice Library Beta Version
+****	Version 2.0 Date: 7-25-2017
+****	Version 3.0 Date: 01-22-2018
+***********************************************************
+****	Revision record
+****	Version Beta	Initial Release
+****	Version 1	Included model number at subcircuit to avoid library overlapping when two Modfet models called
+****	Version 2	Rename and remove Tc
+****	Version 3	This spice model is compatible to both Ltspice and Orcad Pspsice
+*********************************************************************************
+****NO Parasitics Included
+****Tj = Junction Temperature
+****D = Drain
+****G = Gate
+****S = Source
+***********************************************************
+
+.subckt CPM2-1200-0025B d g s Tj
+
+xgmos	d1 g1 s1 Tj gmos_CPM2-1200-0025B 
+Ls 		s	s1	1f
+R_Ls 		s	s1      10
+Rg 		g1	g2	1.1
+Lg 		g	g3	1f
+R_Lg		g	g3	10
+Ld 		d	d3      1f
+R_Ld		d	d3	10
+
+G1		d2	d1      Value {(V(d2,d1))/((0.0000007714*((V(Tj))**2)+0.0000978571*(V(Tj))+0.0231428571)+1n)}
+R_A		d2	d1	1E12
+Vgate_s		g3	g2	0
+Vdrain_s	d3	d2	0
+Gheat		0	Tj	value {abs((V(d,s)*I(Vdrain_s)))+abs((V(g1,g2)*I(Vgate_s)))}
+XCGD		d1	g1	cgdmos_CPM2-1200-0025B 
+CGS		g1	s1	2825.325p
+CDS		d2	s1	70p
+D1		s1	d2	bodydiode_CPM2-1200-0025B
+D2		s1	d2	bodydiode_CPM2-1200-0025B
+D3		s1	d2	bodydiode_CPM2-1200-0025B
+
+.ends CPM2-1200-0025B 
+*****************************************
+
+.subckt gmos_CPM2-1200-0025B d1 g1 s1 Tj
+
+.param Adj = 0.55
+e2		NET1	0	Value {(-0.0237528571*(V(Tj))+26.30875)}
+R_B		NET1	0 	1E12
+
+e3		NET2	0	Value {((0.0000290194*((V(Tj))**2)-0.0144927440*(V(Tj))+6.6778449647)*Adj)}
+R_C		NET2	0 	1E12
+
+.param p3  = 13
+.param p4  = 0.0257											
+.param p5  = 2.2
+.param p6  = 2.0
+.param p7  = 0.5
+.param p8  = 0.001
+.param p9  = {2*p3*p4}
+.param p10 = {p9*p4}
+.param p11 = -10
+.param p12 = 25
+
+R100 g2 s1	1e9
+E100 g2 s1 	value {limit(V(g1,s1),p11,p12)} 
+G1 d1 s1 value {
++	if(V(d1,s1)<0,
++		-p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0))/p9)))**p5)*(1+p8*v(s1,d1))+
++		p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0)-p6*(v(s1,d1))**p7)/p9)))**p5)*(1+p8*v(s1,d1))
++		,
++		p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0))/p9)))**p5)*(1+p8*v(d1,s1))-
++		p10*V(NET1,0)*((log(1+exp((v(g2,s1)-V(NET2,0)-p6*(v(d1,s1))**p7)/p9)))**p5)*(1+p8*v(d1,s1))
++		)
++			}
+
+
+.ends gmos_CPM2-1200-0025B
+****************************************
+
+.model bodydiode_CPM2-1200-0025B d(is=1.2e-12 cjo=842.1649p bv=1600 m=0.58729 EG=3.26 vj=3.82 n=3.9 
++	rs=0.02  trs1=-0.0047035655  trs2=0.0000227057 Tnom=25
++	tt=15n ibv=500u Xti=12 level=1)
+****************************************
+
+.subckt cgdmos_CPM2-1200-0025B d2 g
+.param k1=1702.69p
+.param k2=0.545
+.param ka=18.096
+.param kb=0.2678
+.param kc=7.5277
+G11 g d1 value {
++		k1*(
++		(1+(limit(v(d1,g),0,500))*(1+ka*(1+TANH(kb*V(d1,g)-kc))/2))**-k2
++		)*ddt(v(g,d1))
++			}
+R_CGD d1 d2 1e-3
+C_CGD g d1 1p
+.ends cgdmos_CPM2-1200-0025B
+***************************************
+                               

@@ -1,0 +1,257 @@
+*********************************************************************************
+*										*
+*	    ,o888888o.    888888888888.   88888888888888 88888888888888		*
+*	   8888     `88.  888888    `88.  888888         888888         	*
+*	,888888       `8. 888888     `88  888888         888888         	*
+*	8888888           888888     ,88  888888         888888         	*
+*	8888888           888888.   ,88'  88888888888888 88888888888888 	*
+*	8888888           888888888888'   888888         888888         	*
+*	8888888           888888`8b       888888         888888         	*
+*	`888888       .8' 888888 `8b.     888888         888888         	*
+*	   8888     ,88'  888888   `8b.   888888         888888         	*
+*	    `8888888P'    888888     `88. 88888888888888 88888888888888		*
+*										*
+*********************************************************************************
+*******************************************************************************
+**	DISCLAIMER
+*******************************************************************************
+**	This model is provided as is, where is, and with no warranty of any kind
+**	either expressed or implied, including but not limited to any implied
+**	warranties of merchantability and fitness for a particular purpose.
+*******************************************************************************
+
+***********************************************************
+****	Cree SiC MOSFET C3M0160120J Spice Library
+****	Version 1 Date: 05-18-2020
+****
+***********************************************************
+****	Revision record
+****	Revision 1	Initial Release Rev A 04-2020
+****
+*********************************************************************************
+****Parasitics Included
+****Tj = Junction Temperature
+****Tc = Case Temperature
+****D = Drain
+****G = Gate
+****S1 = Kelvin Source
+****S2,S3,S4,S5,S6 = Power Source
+***********************************************************
+
+.subckt C3M0160120J d g s1 s2 s3 s4 s5 s6 Tj Tc 
+.param p11 = -8
+.param p12 = 19
+.param Rgint = 8
+
+R1022	Tjc	0	1E6
+E1022	Tjc	0 	value {limit(v(Tj),-55,175)}
+
+R100	gk	s	1E6
+E100	gk	s 	value {limit(v(g1,s),-8,19)}
+
+e33		NET3	0	Value {12.22u*V(Tjc)**2-6.554m*V(Tjc)+2.8542}
+R_cc		NET3	0 	1E6
+
+xgmos	d3 d1 gk s Tjc NET3 NET5 gmos_C3M0160120J
+
+Rg1		g		ga		26.094m
+RS1		s1		s1a		9.094m
+RS2		s2		s2a		0.55m
+RS3		s3		s3a		0.55m
+RS4		s4		s4a		0.55m
+RS5		s5		s5a		0.55m
+RS6		s6		s6a		0.55m
+Rd		d		da		0.01166m
+
+Lg1		ga		g2		7.43n
+Ls1		s1a		s		4.972n
+Ls2		s2a		s_c		2.66n
+Ls3		s3a		s_C		2.66n
+Ls4		s4a		s_C		2.66n
+Ls5		s5a		s_C		2.66n
+Ls6		s6a		s_C		2.66n
+Ld 		da		d3      	1.495n
+RPd   		da		d3		10
+
+R_g 		g1	g2	{Rgint}
+R_S		s_C	s_d	3.972m
+L_s		s_d	s	3.07n
+*R_PLS		s_d	s	300
+
+
+vdrain_s	d3	d1	0
+Gheat		0	Tj	value {abs((V(d1,s)*I(Vdrain_s)))+abs((V(g1,g2)*V(g1,g2)/Rgint))}
+
+xCGD		d3	g1	cgdmos_C3M0160120J
+CGS		g1	s	629p
+
+*e16		dd1	d1	value {0.25}
+e15		dd1	d1	value {
++				if (V(gk,s)>V(NET3),
++					Limit(((-91.17u*V(Tjc)**3+19.15m*V(Tjc)**2+0.8444*V(Tjc)-276.654)*(V(gk,s)**2)+
++					(2.259m*V(Tjc)**3-0.4744*V(Tjc)**2-20.934*V(Tj)+6909.53)*v(gk,s)+
++					(-10.39m*V(Tjc)**3+2.139*V(Tjc)**2+97.136*V(Tjc)-30350.4))/1000,-2.6,15)
++					,
++					0
++					)
++					}
+
+D1		s	dd1	bodydiode_C3M0160120J
+xCDS		d3	s	cds_C3M0160120J
+CDS1		d1	s	1p
+R_DS1		d1	s	0.8G
+
+*D_cd1		dk	d3	ideal_diodev
+*D_cd2		d3 	dk	ideal_diodew
+.model ideal_diodev d(is=1 rs=6 Cjo=0.1p)
+.model ideal_diodew d(is=1 rs=100m Cjo=0.1p)
+
+
+R0 N1 Tj 0.2332
+R1 N2 N1 0.666
+R2 N3 N2 0.2097
+R3 Tc N3 0.2766
+C0 Tj 0 445u
+C1 N1 0 2.2m
+C2 N2 0 7.62m
+C3 N3 0 34.7m
+
+.ends C3M0160120J
+
+*****************************************
+
+.subckt gmos_C3M0160120J d3 d1 gk s Tjc NET3 NET5
+
+e1		NET1	0	Value {
++					if (V(Tjc)>150,
++					Limit(((46.1u*V(Tjc)**2+736.2u*V(Tjc)-1.055)*(V(gk,s)**4)+
++					(-2.406m*V(Tjc)**2-49.52m*V(Tjc)+54.703)*(V(gk,s)**3)+
++					(45.62m*V(Tjc)**2+1.119*V(Tjc)-1014.014)*(V(gk,s)**2)+
++					(-0.3672*V(Tjc)**2-10.696*V(Tjc)+7948.838)*v(gk,s)+
++					(1.015*V(Tjc)**2+41.622*V(Tjc)-21267.916))/1000,0,52)
++					,
++					Limit(((-13.99u*V(Tjc)**2+6.445m*V(Tjc)-0.5596)*(V(gk,s)**4)+
++					(860.6u*V(Tjc)**2-0.3598*V(Tjc)+27.76)*(V(gk,s)**3)+
++					(-19.29m*V(Tjc)**2+7.286*V(Tjc)-478.49)*(V(gk,s)**2)+
++					(0.185*V(Tjc)**2-63.2*V(Tjc)+3389.294)*v(gk,s)+
++					(-0.644*V(Tjc)**2+199.299*V(Tjc)-7574.953))/1000,0,52)
++					)
++					}
+R_a		NET1	0 	1E6
+
+
+*e9	P9	0	value {1.8}
+e9	P9	0	value {Limit(((-40.07u*V(Tjc)**3+5.304m*V(Tjc)**2+0.5215*V(Tjc)-32.73)*(V(gk,s)**2)+
++					(1.012m*V(Tjc)**3-0.1378*V(Tjc)**2-12.01*V(Tjc)+725.52)*v(gk,s)+
++					(-6.174m*V(Tjc)**3+0.8805*V(Tjc)**2+61.521*V(Tjc)-3342))/1000,0,5)}
+R_s	P9	0 	1E6
+
+e2		NET2	0	Value {15.35m*V(gk,s)+371.85m}
+R_B		NET2	0 	1E6
+
+
+e6		NET6	0	value {0}
+R_f		NET6	0 	1E6
+
+e5		NET5	0	value {
++					if (V(Tjc)<=26,
++				Limit(((109.29n*V(Tjc)**2-29.539u*V(Tjc)-3.9572m)*V(gk,s)**5+
++				(-6.722u*V(Tjc)**2+1.328m*V(Tjc)+0.26799)*V(gk,s)**4+
++				(143.683u*V(Tjc)**2-16.465m*V(Tjc)-6.626)*V(gk,s)**3+
++				(-1.159m*V(Tjc)**2-13.66m*V(Tjc)+70.826)*V(gk,s)**2+
++				(1.6973m*V(Tjc)**2+1.042*V(Tjc)-301.715)*v(gk,s)+
++				(5.6715m*V(Tjc)**2-2.0711*V(Tjc)+569.633))
++				/9200,0.002,1)
++					,
++				Limit(((-246.79n*V(Tjc)**2+80.208u*V(Tjc)-6.4784m)*V(gk,s)**5+
++				(18.634u*V(Tjc)**2-5.9585m*V(Tjc)+0.43435)*V(gk,s)**4+
++				(-566.45u*V(Tjc)**2+0.17326*V(Tjc)-10.925)*V(gk,s)**3+
++				(8.5429m*V(Tjc)**2-2.4253*V(Tjc)+125.05)*V(gk,s)**2+
++				(-61.952m*V(Tjc)**2+15.85*V(Tjc)-632.14)*v(gk,s)+
++				(0.15986*V(Tjc)**2-36.122*V(Tjc)+1324.5))
+*+				/9850,0.002,1)
++				/(-0.27467*v(Tjc)**2+53.267*v(Tjc)+8040),0.0001,1)
++					)
++					}
+R_e		NET5	0 	1E6
+
+
+e10		NET10	0	Value {Limit((-3.7557u*V(Tjc)**2+383.34u*V(Tjc)+87.536m),0,1)}
+R_K		NET10	0	1E6
+
+e_p8	P8	0	Value {Limit((1.266u*V(Tjc)**2-74.52u*V(Tjc)+26.07m),0.0005,0.18)}
+R_R	P8	0 	1E6
+
+R_T	NET3	0 	1E6
+R_V	gk	s 	1E6
+
+********************************
+G1 d1 s value {
++	if(V(s,d3)<=0,
++		0
++		,
++		if (V(gk,s)<V(NET3),
++		0
++		,
++		-((((v(NET5)+v(NET6))*(v(gk,s)-V(NET3))))*(1+v(P9)*v(s,d3))*(((log(1+exp(v(gk,s)-V(NET3))))**2)-
++		((log(1+exp(v(gk,s)-V(NET3)-(V(NET2)*v(s,d3)*((1+exp(-v(NET10)*v(s,d3)))**v(NET1))))))**2)))
++		)
++			)
++			}
+G2 d1 s value {
++	if(V(d3,s)<=0,
++		0
++		,
++		if (V(gk,s)<V(NET3),
++		0
++		,
++		(((v(NET5))*(v(gk,s)-V(NET3))))*(1+v(P8)*v(d3,s))*(((log(1+exp(v(gk,s)-V(NET3))))**2)-
++		((log(1+exp(v(gk,s)-V(NET3)-(V(NET2)*v(d3,s)*((1+exp(-v(NET10)*v(d3,s)))**v(NET1))))))**2))
++		)
++			)
++			}
+
+.ends gmos_C3M0160120J
+******************************************
+
+.subckt cgdmos_C3M0160120J d3 g1
+.param k1=215p
+.param k2=0.475
+.param ka=48
+.param kb=0.3
+.param kc=4
+G11 g1 d1 value {
++		k1*(
++		(1+(limit(v(d3,g1),0,220))*(1+ka*(1+TANH(kb*V(d3,g1)-kc))/2))**-k2
++		)*ddt(v(g1,d3))
++			}
+R_CGD d1 d3 1E-4
+.ends cgdmos_C3M0160120J
+
+.subckt cds_C3M0160120J d3 s
+
+.param Cjo = 517p
+.param Vj  = 4.4365
+.param M   = 0.55
+
+G12 d1 s value {
++	if(V(d3,s)>0,
++		(Cjo/(1+(limit(v(d3,s),0,510)/Vj)**M))*ddt(v(d3,s))
++		,
++		0
++			)
++			}
+R_CDS d1 d3 1E-4
+
+.ends cds_C3M0160120J
+
+****************************************
+.model bodydiode_C3M0160120J d(is=200n bv=1529 EG=4.3 n=9.5
++	rs=0.1  trs1=-0.0025  trs2=1u Tnom=25
++	tt=0n ibv=500u Xti=20 level=1)
+
+
+
+
+
+
