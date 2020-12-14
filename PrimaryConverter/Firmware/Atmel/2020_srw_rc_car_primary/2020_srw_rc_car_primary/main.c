@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include "timer_control.h"
 
-#define F_CPU 8000000
+#define F_CPU 16000000UL
 
 int main(void)
 {
