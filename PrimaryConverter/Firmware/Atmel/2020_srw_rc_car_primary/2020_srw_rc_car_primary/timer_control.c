@@ -12,7 +12,7 @@
 
 #define OFFSET	83														//started with 1/2 period offset -> experimentally determined required offset (83) to match signals in time
 
-static volatile uint8_t duty_cycle = 100;
+static volatile uint8_t duty_cycle = 79;
 static volatile uint8_t period = 159; 
 
 //timer control is required to synchronize the timers in order to produce PWM signal 
