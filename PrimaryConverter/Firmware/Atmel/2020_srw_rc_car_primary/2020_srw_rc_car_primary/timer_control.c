@@ -10,10 +10,10 @@
 #include "timer0.h"
 #include "timer2.h"
 
-#define OFFSET	25
+#define OFFSET	0
 
-static volatile uint8_t duty_cycle = 26;
-static volatile uint8_t period = 52; 
+static volatile uint8_t duty_cycle = 79;
+static volatile uint8_t period = 159; 
 
 //timer control is required to synchronize the timers in order to produce PWM signal 
 void timer_control_init()
