@@ -10,7 +10,7 @@
 #include "timer0.h"
 #include "timer2.h"
 
-#define OFFSET	83														//started with 1/2 period offset -> experimentally determined required offset (83) to match signals in time
+#define OFFSET	83														//180deg out of phase
 
 static volatile uint8_t duty_cycle = 79;
 static volatile uint8_t period = 159; 
