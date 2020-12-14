@@ -38,13 +38,13 @@ PrefsVaultGUID=
 PrefsRevisionGUID=
 
 [Document1]
-DocumentPath=ConverterSch.SchDoc
+DocumentPath=MotorDriver.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=0
+AnnotateOrder=-1
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -52,10 +52,10 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=BDQZBPLX
+DocumentUniqueId=OGRRPCCC
 
 [Document2]
-DocumentPath=AltiumLibrary\CommonDevices_V1.IntLib
+DocumentPath=..\..\..\..\..\..\..\Downloads\E209_Lib.IntLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -72,7 +72,7 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document3]
-DocumentPath=AltiumLibrary\E209_Lib.IntLib
+DocumentPath=..\..\..\..\..\..\..\Downloads\CommonDevices_V1.IntLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -89,13 +89,13 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document4]
-DocumentPath=MotorDriverPCB.PcbDoc
+DocumentPath=MotorDriver.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=-1
+AnnotateOrder=0
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -103,10 +103,10 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=XPIDXFGQ
+DocumentUniqueId=PDVNENWO
 
 [Document5]
-DocumentPath=..\..\..\..\..\UoA\Summer 2020\Summer Workshop\Altium\Project Outputs for SumWkshop\SumWkshop.IntLib
+DocumentPath=..\..\..\AltiumLibs\SumWkshop.IntLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
