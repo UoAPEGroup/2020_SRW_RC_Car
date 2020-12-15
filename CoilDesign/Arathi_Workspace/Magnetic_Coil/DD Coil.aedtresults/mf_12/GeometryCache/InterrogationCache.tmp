@@ -19,8 +19,8 @@ $begin 'InterrogationCache'
 		$end '11'
 		$begin '483'
 			$begin 'BoundingBox'
-				Low[3: -450, -109, -8]
-				High[3: 465, 109, 0]
+				Low[3: -469.99999999999994, -109, -8]
+				High[3: 484.99999999999994, 109, 0]
 				Exact=true
 				Valid=true
 			$end 'BoundingBox'
@@ -35,7 +35,7 @@ $begin 'InterrogationCache'
 		$end '14857'
 		$begin '15129'
 			$begin 'BoundingBox'
-				Low[3: 0, -50, -0]
+				Low[3: 0, -30, -0]
 				High[3: 0, 0, 5]
 				Exact=true
 				Valid=true
@@ -44,7 +44,7 @@ $begin 'InterrogationCache'
 		$begin '15132'
 			$begin 'BoundingBox'
 				Low[3: 0, 0, 0]
-				High[3: 0, 50, 5]
+				High[3: 0, 30, 5]
 				Exact=true
 				Valid=true
 			$end 'BoundingBox'
