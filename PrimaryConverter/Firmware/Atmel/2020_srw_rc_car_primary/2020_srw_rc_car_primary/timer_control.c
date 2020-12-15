@@ -23,6 +23,8 @@ void timer_control_init()
 	timer0_init(period, duty_cycle);									//configure timer0
 	timer2_init(period, duty_cycle);									//configure timer2
 	
+	
+	
 	GTCCR = 0;															//release all timers
 	
 	TCNT0 = 0;															//set value for timer0
