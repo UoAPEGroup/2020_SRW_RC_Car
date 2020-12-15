@@ -58,12 +58,6 @@ uint16_t adc_read(uint8_t channel) {
 	ADMUX &= ~( (1<<MUX3) | (1<<MUX2) | (1<<MUX1) | (1<<MUX0) ); //clearing MUX register
 	ADMUX |= channel; //select the adc channel
 	
-	ADCSRA |= (1<<ADSC); //start the ADC conversion
-	
-	while((ADCSRA & (1<<ADIF)) == 0) { //wait until the conversion is complete
-		;
-	}
-	
 	return ADC; //return the ADC value from the ADCL and ADCH registers
 }
 
