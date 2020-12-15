@@ -1,379 +1,20 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000015, hour=000000000016, min=000000000011, sec=000000000037)
+    time(year=000000002020, month=000000000012, day=000000000015, hour=000000000016, min=000000000020, sec=000000000006)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
-    $index$(pos=000000200043, lin=000000001099, lvl=000000000000)
+    $index$(pos=000000138159, lin=000000000350, lvl=000000000000)
   $end '$base_index$'
 $end '$base_index$'
-$begin 'SolutionBlock386'
-	SolutionName='AdaptivePass'
-	SolutionID=164
-	V=1013
-	$begin 'States'
-		F(VID=978, Ver=1013)
-		F(VID=979, Ver=1013)
-		F(VID=1020, Ver=1013)
-		F(VID=1034, Ver=1013)
-		F(VID=1035, Ver=1013)
-		F(VID=1036, Ver=1013)
-		F(VID=1037, Ver=1013)
-		F(VID=1038, Ver=1013)
-		F(VID=1039, Ver=1013)
-		F(VID=1040, Ver=1013)
-		F(VID=1041, Ver=1013)
-		F(VID=1042, Ver=1013)
-		F(VID=1043, Ver=1013)
-		F(VID=1044, Ver=1013)
-		F(VID=1045, Ver=1013)
-	$end 'States'
-	$begin 'Definition'
-		SamplingInterpolation=false
-		Frequencies()
-		SolutionType=1
-		CenterFreq=0
-	$end 'Definition'
-	$begin 'PAR'
-		NextUniqueID=44
-		MoveBackwards=false
-		$begin 'SubData'
-			ID=1
-			Ver=42
-			PAR(VID=978, Ver=42, File='DV978_SOL164_PAR1_V42.sd')
-			PAR(VID=979, Ver=42, File='DV979_SOL164_PAR1_V42.sd')
-			PAR(VID=1020, Ver=42, File='DV1020_SOL164_PAR1_V42.sd')
-			PAR(VID=1034, Ver=42, File='DV1034_SOL164_PAR1_V42.sd')
-			PAR(VID=1035, Ver=42, File='DV1035_SOL164_PAR1_V42.sd')
-			PAR(VID=1036, Ver=42, File='DV1036_SOL164_PAR1_V42.sd')
-			PAR(VID=1037, Ver=42, File='DV1037_SOL164_PAR1_V42.sd')
-			PAR(VID=1038, Ver=42, File='DV1038_SOL164_PAR1_V42.sd')
-			PAR(VID=1039, Ver=42, File='DV1039_SOL164_PAR1_V42.sd')
-			PAR(VID=1040, Ver=42, File='DV1040_SOL164_PAR1_V42.sd')
-			PAR(VID=1041, Ver=42, File='DV1041_SOL164_PAR1_V42.sd')
-			PAR(VID=1042, Ver=42, File='DV1042_SOL164_PAR1_V42.sd')
-			PAR(VID=1043, Ver=42, File='DV1043_SOL164_PAR1_V42.sd')
-			PAR(VID=1044, Ver=42, File='DV1044_SOL164_PAR1_V42.sd')
-			PAR(VID=1045, Ver=42, File='DV1045_SOL164_PAR1_V42.sd')
-		$end 'SubData'
-	$end 'PAR'
-	$begin 'NFSP'
-		$begin 'SubData'
-			ID=10
-			NFSP(VID=978, Ver=1013, File='DV978_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=979, Ver=1013, File='DV979_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1020, Ver=1013, File='DV1020_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1034, Ver=1013, File='DV1034_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1035, Ver=1013, File='DV1035_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1036, Ver=1013, File='DV1036_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1037, Ver=1013, File='DV1037_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1038, Ver=1013, File='DV1038_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1039, Ver=1013, File='DV1039_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1040, Ver=1013, File='DV1040_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1041, Ver=1013, File='DV1041_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1042, Ver=1013, File='DV1042_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1043, Ver=1013, File='DV1043_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1044, Ver=1013, File='DV1044_SOL164_NFSP10_V1013.sd')
-			NFSP(VID=1045, Ver=1013, File='DV1045_SOL164_NFSP10_V1013.sd')
-		$end 'SubData'
-	$end 'NFSP'
-$end 'SolutionBlock386'
-$begin 'BlockMapName'
-	FileHeader='SolutionBlock1'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'10\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'104.44444444444443mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock379'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'12\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'85.454545454545453mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock392'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'14\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'72.307692307692307mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock393'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'16\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'62.666666666666664mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock394'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'18\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'55.294117647058819mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock395'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'20\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'49.473684210526315mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock396'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'22\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'44.761904761904759mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock397'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'24\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'40.869565217391305mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock398'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'26\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'37.599999999999994mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock399'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'28\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'34.81481481481481mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock400'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'30\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'32.41379310344827mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock401'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'4\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'313.33333333333331mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock389'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'50\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'19.183673469387752mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock388'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'6\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'188mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock390'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'90mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'8\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'60mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'134.28571428571428mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'90mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'60mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=919)'='SolutionBlock391'
-	'SolutionKey(SimSetup=163, Instance=\'SetupDefinition\', Solution=-1, VersionID=919)'='SolutionBlock377'
-	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=164, VersionID=1013)'='SolutionBlock386'
-	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=165, VersionID=1013)'='SolutionBlock387'
-$end 'BlockMapName'
-$begin 'SolutionBlock387'
-	SolutionName='LastAdaptive'
-	SolutionID=165
-	V=1013
-	$begin 'States'
-		F(VID=978, Ver=1013)
-		F(VID=979, Ver=1013)
-		F(VID=1020, Ver=1013)
-		F(VID=1034, Ver=1013)
-		F(VID=1035, Ver=1013)
-		F(VID=1036, Ver=1013)
-		F(VID=1037, Ver=1013)
-		F(VID=1038, Ver=1013)
-		F(VID=1039, Ver=1013)
-		F(VID=1040, Ver=1013)
-		F(VID=1041, Ver=1013)
-		F(VID=1042, Ver=1013)
-		F(VID=1043, Ver=1013)
-		F(VID=1044, Ver=1013)
-		F(VID=1045, Ver=1013)
-	$end 'States'
-	$begin 'Definition'
-		SamplingInterpolation=false
-		Frequencies()
-		SolutionType=1
-		CenterFreq=0
-	$end 'Definition'
-	$begin 'Fields'
-		IDDblMap(976, -1)
-		$begin 'DataMap'
-			VID=978
-			Ver=1013
-			Field(DblID=976, Dir='DV978_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=979
-			Ver=1013
-			Field(DblID=976, Dir='DV979_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1020
-			Ver=1013
-			Field(DblID=976, Dir='DV1020_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1034
-			Ver=1013
-			Field(DblID=976, Dir='DV1034_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1035
-			Ver=1013
-			Field(DblID=976, Dir='DV1035_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1036
-			Ver=1013
-			Field(DblID=976, Dir='DV1036_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1037
-			Ver=1013
-			Field(DblID=976, Dir='DV1037_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1038
-			Ver=1013
-			Field(DblID=976, Dir='DV1038_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1039
-			Ver=1013
-			Field(DblID=976, Dir='DV1039_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1040
-			Ver=1013
-			Field(DblID=976, Dir='DV1040_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1041
-			Ver=1013
-			Field(DblID=976, Dir='DV1041_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1042
-			Ver=1013
-			Field(DblID=976, Dir='DV1042_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1043
-			Ver=1013
-			Field(DblID=976, Dir='DV1043_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1044
-			Ver=1013
-			Field(DblID=976, Dir='DV1044_SOL165_V1013.Field976/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1045
-			Ver=1013
-			Field(DblID=976, Dir='DV1045_SOL165_V1013.Field976/')
-		$end 'DataMap'
-	$end 'Fields'
-	$begin 'PAR'
-		NextUniqueID=44
-		MoveBackwards=false
-		$begin 'SubData'
-			ID=1
-			Ver=42
-			PAR(VID=978, Ver=42, File='DV978_SOL165_PAR1_V42.sd')
-			PAR(VID=979, Ver=42, File='DV979_SOL165_PAR1_V42.sd')
-			PAR(VID=1020, Ver=42, File='DV1020_SOL165_PAR1_V42.sd')
-			PAR(VID=1034, Ver=42, File='DV1034_SOL165_PAR1_V42.sd')
-			PAR(VID=1035, Ver=42, File='DV1035_SOL165_PAR1_V42.sd')
-			PAR(VID=1036, Ver=42, File='DV1036_SOL165_PAR1_V42.sd')
-			PAR(VID=1037, Ver=42, File='DV1037_SOL165_PAR1_V42.sd')
-			PAR(VID=1038, Ver=42, File='DV1038_SOL165_PAR1_V42.sd')
-			PAR(VID=1039, Ver=42, File='DV1039_SOL165_PAR1_V42.sd')
-			PAR(VID=1040, Ver=42, File='DV1040_SOL165_PAR1_V42.sd')
-			PAR(VID=1041, Ver=42, File='DV1041_SOL165_PAR1_V42.sd')
-			PAR(VID=1042, Ver=42, File='DV1042_SOL165_PAR1_V42.sd')
-			PAR(VID=1043, Ver=42, File='DV1043_SOL165_PAR1_V42.sd')
-			PAR(VID=1044, Ver=42, File='DV1044_SOL165_PAR1_V42.sd')
-			PAR(VID=1045, Ver=42, File='DV1045_SOL165_PAR1_V42.sd')
-		$end 'SubData'
-	$end 'PAR'
-$end 'SolutionBlock387'
-$begin 'SolutionBlock377'
-	SimSetupID=163
-	SimSetupName='Setup1'
-	VersionID=919
-	SolveSetupID=0
-	$begin 'CurrMeshes'
-		IDDblMap(974, -1)
-		$begin 'DataMap'
-			VID=978
-			Ver=919
-			M(DblID=974, Dir='DV978_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=979
-			Ver=919
-			M(DblID=974, Dir='DV979_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1020
-			Ver=919
-			M(DblID=974, Dir='DV1020_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1034
-			Ver=919
-			M(DblID=974, Dir='DV1034_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1035
-			Ver=919
-			M(DblID=974, Dir='DV1035_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1036
-			Ver=919
-			M(DblID=974, Dir='DV1036_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1037
-			Ver=919
-			M(DblID=974, Dir='DV1037_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1038
-			Ver=919
-			M(DblID=974, Dir='DV1038_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1039
-			Ver=919
-			M(DblID=974, Dir='DV1039_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1040
-			Ver=919
-			M(DblID=974, Dir='DV1040_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1041
-			Ver=919
-			M(DblID=974, Dir='DV1041_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1042
-			Ver=919
-			M(DblID=974, Dir='DV1042_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1043
-			Ver=919
-			M(DblID=974, Dir='DV1043_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1044
-			Ver=919
-			M(DblID=974, Dir='DV1044_S163_V919.cmesh974/')
-		$end 'DataMap'
-		$begin 'DataMap'
-			VID=1045
-			Ver=919
-			M(DblID=974, Dir='DV1045_S163_V919.cmesh974/')
-		$end 'DataMap'
-	$end 'CurrMeshes'
-	$begin 'LastPassNumbers'
-		LP(VID=978, Ver=919, P=19)
-		LP(VID=979, Ver=919, P=21)
-		LP(VID=1020, Ver=919, P=14)
-		LP(VID=1034, Ver=919, P=20)
-		LP(VID=1035, Ver=919, P=19)
-		LP(VID=1036, Ver=919, P=18)
-		LP(VID=1037, Ver=919, P=18)
-		LP(VID=1038, Ver=919, P=17)
-		LP(VID=1039, Ver=919, P=17)
-		LP(VID=1040, Ver=919, P=17)
-		LP(VID=1041, Ver=919, P=16)
-		LP(VID=1042, Ver=919, P=16)
-		LP(VID=1043, Ver=919, P=16)
-		LP(VID=1044, Ver=919, P=16)
-		LP(VID=1045, Ver=919, P=16)
-	$end 'LastPassNumbers'
-	$begin 'Profiles'
-		P(VID=978, Ver=919, File='DV978_S163_V919.profile')
-		P(VID=979, Ver=919, File='DV979_S163_V919.profile')
-		P(VID=1020, Ver=919, File='DV1020_S163_V919.profile')
-		P(VID=1034, Ver=919, File='DV1034_S163_V919.profile')
-		P(VID=1035, Ver=919, File='DV1035_S163_V919.profile')
-		P(VID=1036, Ver=919, File='DV1036_S163_V919.profile')
-		P(VID=1037, Ver=919, File='DV1037_S163_V919.profile')
-		P(VID=1038, Ver=919, File='DV1038_S163_V919.profile')
-		P(VID=1039, Ver=919, File='DV1039_S163_V919.profile')
-		P(VID=1040, Ver=919, File='DV1040_S163_V919.profile')
-		P(VID=1041, Ver=919, File='DV1041_S163_V919.profile')
-		P(VID=1042, Ver=919, File='DV1042_S163_V919.profile')
-		P(VID=1043, Ver=919, File='DV1043_S163_V919.profile')
-		P(VID=1044, Ver=919, File='DV1044_S163_V919.profile')
-		P(VID=1045, Ver=919, File='DV1045_S163_V919.profile')
-	$end 'Profiles'
-	$begin 'MI'
-		$begin 'SubData'
-			ID=0
-			MI(VID=978, Ver=919, Dir='DV978_S163_MI0_V919.sd/')
-			MI(VID=979, Ver=919, Dir='DV979_S163_MI0_V919.sd/')
-			MI(VID=1020, Ver=919, Dir='DV1020_S163_MI0_V919.sd/')
-			MI(VID=1034, Ver=919, Dir='DV1034_S163_MI0_V919.sd/')
-			MI(VID=1035, Ver=919, Dir='DV1035_S163_MI0_V919.sd/')
-			MI(VID=1036, Ver=919, Dir='DV1036_S163_MI0_V919.sd/')
-			MI(VID=1037, Ver=919, Dir='DV1037_S163_MI0_V919.sd/')
-			MI(VID=1038, Ver=919, Dir='DV1038_S163_MI0_V919.sd/')
-			MI(VID=1039, Ver=919, Dir='DV1039_S163_MI0_V919.sd/')
-			MI(VID=1040, Ver=919, Dir='DV1040_S163_MI0_V919.sd/')
-			MI(VID=1041, Ver=919, Dir='DV1041_S163_MI0_V919.sd/')
-			MI(VID=1042, Ver=919, Dir='DV1042_S163_MI0_V919.sd/')
-			MI(VID=1043, Ver=919, Dir='DV1043_S163_MI0_V919.sd/')
-			MI(VID=1044, Ver=919, Dir='DV1044_S163_MI0_V919.sd/')
-			MI(VID=1045, Ver=919, Dir='DV1045_S163_MI0_V919.sd/')
-		$end 'SubData'
-	$end 'MI'
-$end 'SolutionBlock377'
 $begin 'SolutionBlock1'
 	ProductName='Maxwell 3D'
 	CircuitName='BothCoils'
 	VersionID=919
 	PostProcess=false
 	LossLess=true
-	NextUniqueID=1046
+	NextUniqueID=1089
 	MoveBackwards=false
 	$begin 'VariationIDs'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'109.99999999999999mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'10mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'108.88888888888889mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'109.99999999999999mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'10mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=705)
@@ -576,7 +217,6 @@ $begin 'SolutionBlock1'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=730)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=737)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=738)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=979)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=745)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=746)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'81.818181818181813mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=683)
@@ -589,12 +229,8 @@ $begin 'SolutionBlock1'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'85.454545454545453mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=732)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'85.454545454545453mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=739)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'85.454545454545453mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=740)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'85.454545454545453mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1036)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'85.454545454545453mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=747)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'12\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'85.454545454545453mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=748)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'14\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'72.307692307692307mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1037)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'16\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'62.666666666666664mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1038)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'18\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'55.294117647058819mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1039)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'2\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'900mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=677)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'2\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'900mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=678)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'2\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'900mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=685)
@@ -607,14 +243,6 @@ $begin 'SolutionBlock1'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'2\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'939.99999999999989mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=734)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'2\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'939.99999999999989mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=741)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'2\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'939.99999999999989mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=742)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'20\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'49.473684210526315mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1040)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'22\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'44.761904761904759mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1041)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'24\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'40.869565217391305mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1042)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'26\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'37.599999999999994mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1043)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'28\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'34.81481481481481mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1044)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'30\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'32.41379310344827mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1045)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'4\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'313.33333333333331mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1034)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'50\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'19.183673469387752mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1020)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'180mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=679)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'180mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=680)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'20mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'180mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'10mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=687)
@@ -625,412 +253,57 @@ $begin 'SolutionBlock1'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'188mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=728)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'188mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=735)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'188mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=736)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'188mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=978)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'188mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=743)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'188mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=744)
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'90mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'8\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'134.28571428571428mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'90mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'60mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1035)
 	$end 'VariationIDs'
 	$begin 'LinkedDataList'
 	$end 'LinkedDataList'
-	$begin 'InitialMeshes'
-		M(VID=978, Ver=919, Dir='DV978_V919.imesh/')
-		M(VID=979, Ver=919, Dir='DV979_V919.imesh/')
-		M(VID=1020, Ver=919, Dir='DV1020_V919.imesh/')
-		M(VID=1034, Ver=919, Dir='DV1034_V919.imesh/')
-		M(VID=1035, Ver=919, Dir='DV1035_V919.imesh/')
-		M(VID=1036, Ver=919, Dir='DV1036_V919.imesh/')
-		M(VID=1037, Ver=919, Dir='DV1037_V919.imesh/')
-		M(VID=1038, Ver=919, Dir='DV1038_V919.imesh/')
-		M(VID=1039, Ver=919, Dir='DV1039_V919.imesh/')
-		M(VID=1040, Ver=919, Dir='DV1040_V919.imesh/')
-		M(VID=1041, Ver=919, Dir='DV1041_V919.imesh/')
-		M(VID=1042, Ver=919, Dir='DV1042_V919.imesh/')
-		M(VID=1043, Ver=919, Dir='DV1043_V919.imesh/')
-		M(VID=1044, Ver=919, Dir='DV1044_V919.imesh/')
-		M(VID=1045, Ver=919, Dir='DV1045_V919.imesh/')
-	$end 'InitialMeshes'
 	$begin 'MI'
-		$begin 'SubData'
-			ID=0
-			MI(VID=978, Ver=919, Dir='DV978_MI0_V919.sd/')
-			MI(VID=979, Ver=919, Dir='DV979_MI0_V919.sd/')
-			MI(VID=1020, Ver=919, Dir='DV1020_MI0_V919.sd/')
-			MI(VID=1034, Ver=919, Dir='DV1034_MI0_V919.sd/')
-			MI(VID=1035, Ver=919, Dir='DV1035_MI0_V919.sd/')
-			MI(VID=1036, Ver=919, Dir='DV1036_MI0_V919.sd/')
-			MI(VID=1037, Ver=919, Dir='DV1037_MI0_V919.sd/')
-			MI(VID=1038, Ver=919, Dir='DV1038_MI0_V919.sd/')
-			MI(VID=1039, Ver=919, Dir='DV1039_MI0_V919.sd/')
-			MI(VID=1040, Ver=919, Dir='DV1040_MI0_V919.sd/')
-			MI(VID=1041, Ver=919, Dir='DV1041_MI0_V919.sd/')
-			MI(VID=1042, Ver=919, Dir='DV1042_MI0_V919.sd/')
-			MI(VID=1043, Ver=919, Dir='DV1043_MI0_V919.sd/')
-			MI(VID=1044, Ver=919, Dir='DV1044_MI0_V919.sd/')
-			MI(VID=1045, Ver=919, Dir='DV1045_MI0_V919.sd/')
-		$end 'SubData'
 	$end 'MI'
 $end 'SolutionBlock1'
-$begin 'OptimetricsResults'
-	'2:0'='OptimetricsResult1'
-$end 'OptimetricsResults'
-$begin 'SolutionBlock389'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(2571.5, N/A)', tet=772, te=1.106130783661732e-05, ee=2571.493522935531)
-	c(p=2, de_ee='(689.94, 43.103)', tet=1010, te=6.293536837834699e-06, ee=689.9406401373274, de=43.10313996505376)
-	c(p=3, de_ee='(480.77, 22.228)', tet=1320, te=4.894626410699693e-06, ee=480.7677073677327, de=22.22773081624328)
-	c(p=4, de_ee='(119.43, 32.937)', tet=1723, te=3.282489262420239e-06, ee=119.4250110916888, de=32.93687838473859)
-	c(p=5, de_ee='(73.298, 18.822)', tet=2247, te=2.664661300706465e-06, ee=73.29836818258664, de=18.82193397513931)
-	c(p=6, de_ee='(46.623, 10.162)', tet=2928, te=2.393886201349446e-06, ee=46.62339115676912, de=10.16170795459932)
-	c(p=7, de_ee='(29.772, 5.2783)', tet=3811, te=2.267530213437307e-06, ee=29.77199943819097, de=5.278278802096442)
-	c(p=8, de_ee='(26.178, 4.8436)', tet=4960, te=2.157699362230588e-06, ee=26.17809333109746, de=4.843633419121144)
-	c(p=9, de_ee='(21.967, 6.4651)', tet=6456, te=2.018201517288318e-06, ee=21.96727321554691, de=6.465119626214268)
-	c(p=10, de_ee='(15.323, 3.7009)', tet=8401, te=1.94351030180133e-06, ee=15.32263090455294, de=3.700879959070908)
-	c(p=11, de_ee='(12.409, 3.8484)', tet=10930, te=1.868716205497534e-06, ee=12.40916307507021, de=3.848402359095995)
-	c(p=12, de_ee='(9.4875, 1.904)', tet=14215, te=1.833135883510285e-06, ee=9.487507151156921, de=1.903998150311757)
-	c(p=13, de_ee='(6.6029, 1.6401)', tet=18487, te=1.803070257315176e-06, ee=6.602878201082707, de=1.640119887759573)
-	c(p=14, de_ee='(4.9381, 1.7763)', tet=24038, te=1.771041875860475e-06, ee=4.938109833984377, de=1.776324650953549)
-	c(p=15, de_ee='(3.4666, 1.104)', tet=31258, te=1.751488793809317e-06, ee=3.466576286171009, de=1.104044027285207)
-	c(p=16, de_ee='(2.6534, 0.68179)', tet=40646, te=1.739547238619437e-06, ee=2.653429577339126, de=0.6817945528448759)
-	c(p=17, de_ee='(1.9569, 0.62144)', tet=52849, te=1.728736985455919e-06, ee=1.956885438897471, de=0.621440621072032)
-	c(p=18, de_ee='(1.4372, 0.37939)', tet=68711, te=1.722178271430443e-06, ee=1.437204917110148, de=0.3793933999593153)
-	c(p=19, de_ee='(1.0519, 0.29631)', tet=89329, te=1.717075248224342e-06, ee=1.051851441841509, de=0.2963121350882432)
-	c(p=20, de_ee='(0.74629, 0.21904)', tet=116137, te=1.713314099445184e-06, ee=0.7462876137708683, de=0.2190439110369389)
-$end 'SolutionBlock389'
-$begin 'SolutionBlock390'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(2228.8, N/A)', tet=919, te=7.911288255759696e-06, ee=2228.754805975505)
-	c(p=2, de_ee='(451.39, 27.046)', tet=1199, te=5.771637960469799e-06, ee=451.3899220018541, de=27.04553577266202)
-	c(p=3, de_ee='(223.33, 24.132)', tet=1564, te=4.378821991418509e-06, ee=223.325964489105, de=24.13207444040578)
-	c(p=4, de_ee='(135.17, 21.427)', tet=2041, te=3.440589061250237e-06, ee=135.1734449843494, de=21.4266058772655)
-	c(p=5, de_ee='(102.17, 12.992)', tet=2668, te=2.99359813294603e-06, ee=102.1717340973194, de=12.99169765254616)
-	c(p=6, de_ee='(71.869, 16.344)', tet=3476, te=2.504337850125813e-06, ee=71.86876652645985, de=16.34355251079512)
-	c(p=7, de_ee='(41.398, 4.8088)', tet=4525, te=2.383909920980596e-06, ee=41.3979436421596, de=4.808773270713738)
-	c(p=8, de_ee='(24.713, 6.2898)', tet=5889, te=2.233965988601798e-06, ee=24.71329187353505, de=6.289832139174123)
-	c(p=9, de_ee='(19.694, 5.823)', tet=7662, te=2.103883254882496e-06, ee=19.69404366768832, de=5.822950500724448)
-	c(p=10, de_ee='(12.071, 3.7507)', tet=9965, te=2.024973504441346e-06, ee=12.07149213927484, de=3.750671538357606)
-	c(p=11, de_ee='(9.4763, 2.2517)', tet=12961, te=1.979376828316981e-06, ee=9.476337476240648, de=2.251717171822688)
-	c(p=12, de_ee='(7.2882, 1.6191)', tet=16859, te=1.947328135869898e-06, ee=7.288239975252853, de=1.619130424717218)
-	c(p=13, de_ee='(5.553, 1.4962)', tet=21924, te=1.918191365856188e-06, ee=5.553014628651099, de=1.496243466984794)
-	c(p=14, de_ee='(4.5245, 0.79263)', tet=28504, te=1.902987153536211e-06, ee=4.524528637385869, de=0.7926327159329137)
-	c(p=15, de_ee='(3.1871, 1.0623)', tet=37061, te=1.882772478408195e-06, ee=3.187119930892455, de=1.062260199205894)
-	c(p=16, de_ee='(2.4265, 0.8388)', tet=48185, te=1.866979810261121e-06, ee=2.42651162910058, de=0.8387985446030085)
-	c(p=17, de_ee='(1.8282, 0.50326)', tet=62646, te=1.857583989270318e-06, ee=1.828175815553799, de=0.5032631279225468)
-	c(p=18, de_ee='(1.323, 0.33108)', tet=81445, te=1.851433946666272e-06, ee=1.323021841543648, de=0.3310774984910365)
-	c(p=19, de_ee='(0.98082, 0.25528)', tet=105884, te=1.8467075626546e-06, ee=0.9808195726580267, de=0.2552823458910028)
-$end 'SolutionBlock390'
-$begin 'SolutionBlock391'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(1785.9, N/A)', tet=1171, te=1.098253509730744e-05, ee=1785.908894630892)
-	c(p=2, de_ee='(613.46, 36.498)', tet=1525, te=6.974129574031094e-06, ee=613.4640301058827, de=36.49799875676315)
-	c(p=3, de_ee='(191.64, 39.31)', tet=1994, te=4.232632283159947e-06, ee=191.6378386365065, de=39.30952618201131)
-	c(p=4, de_ee='(107.57, 19.8)', tet=2598, te=3.394576010537983e-06, ee=107.5696781294409, de=19.79988377342097)
-	c(p=5, de_ee='(94.489, 12.457)', tet=3385, te=2.971709455843607e-06, ee=94.48899745607885, de=12.4571243472424)
-	c(p=6, de_ee='(52.636, 11.599)', tet=4406, te=2.627020544106263e-06, ee=52.63602601337586, de=11.5990111704744)
-	c(p=7, de_ee='(38.146, 7.2023)', tet=5733, te=2.437815291985648e-06, ee=38.14648604709221, de=7.202275313190769)
-	c(p=8, de_ee='(22.069, 6.4115)', tet=7459, te=2.281515079777028e-06, ee=22.06874041124344, de=6.411487068870998)
-	c(p=9, de_ee='(13.777, 4.4784)', tet=9701, te=2.179339683844536e-06, ee=13.77651025261819, de=4.478401078220233)
-	c(p=10, de_ee='(11.07, 2.0903)', tet=12616, te=2.133785834495238e-06, ee=11.07028966202241, de=2.090259250863437)
-	c(p=11, de_ee='(8.1638, 2.2374)', tet=16406, te=2.086044938009403e-06, ee=8.163829274181543, de=2.23737995229164)
-	c(p=12, de_ee='(6.2388, 1.6904)', tet=21334, te=2.05078243076465e-06, ee=6.238828133378395, de=1.690400173181415)
-	c(p=13, de_ee='(4.9553, 0.97249)', tet=27737, te=2.03083883651364e-06, ee=4.955349841010126, de=0.9724870835553807)
-	c(p=14, de_ee='(3.6402, 1.0185)', tet=36066, te=2.010155404273163e-06, ee=3.640186710993187, de=1.018467436637387)
-	c(p=15, de_ee='(2.9043, 0.73794)', tet=46891, te=1.995321698037761e-06, ee=2.904315191269962, de=0.7379382809840936)
-	c(p=16, de_ee='(2.1015, 0.58217)', tet=60962, te=1.983705491215427e-06, ee=2.101511041252791, de=0.5821721296248735)
-	c(p=17, de_ee='(1.5623, 0.39244)', tet=79254, te=1.97592067980187e-06, ee=1.562300470235008, de=0.392437861770898)
-	c(p=18, de_ee='(1.1879, 0.32429)', tet=103034, te=1.969512960244986e-06, ee=1.187857382127199, de=0.3242903231077986)
-	c(p=19, de_ee='(0.87295, 0.20059)', tet=133948, te=1.96556232055729e-06, ee=0.8729473951418992, de=0.2005896771151465)
-$end 'SolutionBlock391'
-$begin 'SolutionBlock379'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(1450.5, N/A)', tet=1397, te=1.121703139977118e-05, ee=1450.525201520586)
-	c(p=2, de_ee='(190.96, 49.853)', tet=1821, te=5.624971011536091e-06, ee=190.9644179067755, de=49.85330065447764)
-	c(p=3, de_ee='(119.26, 29.124)', tet=2371, te=3.986755480594698e-06, ee=119.2625410992221, de=29.123981751757)
-	c(p=4, de_ee='(98.762, 11.74)', tet=3087, te=3.518698114559153e-06, ee=98.76235866548426, de=11.74030783462361)
-	c(p=5, de_ee='(62.276, 16.042)', tet=4021, te=2.954229461584118e-06, ee=62.2759890246977, de=16.0419744632101)
-	c(p=6, de_ee='(37.933, 12.274)', tet=5230, te=2.591622047317912e-06, ee=37.93344946010554, de=12.27417907042904)
-	c(p=7, de_ee='(29.078, 4.5922)', tet=6809, te=2.472609211042291e-06, ee=29.0775772540237, de=4.592214223473965)
-	c(p=8, de_ee='(23.236, 5.2733)', tet=8860, te=2.342222110585052e-06, ee=23.23640261130172, de=5.273259513672867)
-	c(p=9, de_ee='(12.24, 3.3317)', tet=11528, te=2.264185325271433e-06, ee=12.23988084861603, de=3.331741467256787)
-	c(p=10, de_ee='(9.1747, 2.5609)', tet=14997, te=2.206202756973384e-06, ee=9.174664984004149, de=2.56085787902975)
-	c(p=11, de_ee='(6.6952, 1.806)', tet=19502, te=2.166358299222163e-06, ee=6.695182647069875, de=1.806019760662521)
-	c(p=12, de_ee='(5.4218, 0.80289)', tet=25358, te=2.148964811336146e-06, ee=5.421831958446282, de=0.8028906341237367)
-	c(p=13, de_ee='(4.2687, 0.97174)', tet=32973, te=2.128082486633435e-06, ee=4.268710827851963, de=0.9717387922107159)
-	c(p=14, de_ee='(3.1451, 0.78535)', tet=42872, te=2.11136958547023e-06, ee=3.145110780892061, de=0.7853502516081819)
-	c(p=15, de_ee='(2.3429, 0.74783)', tet=55740, te=2.095580099540464e-06, ee=2.342939315100002, de=0.7478314568147623)
-	c(p=16, de_ee='(1.7657, 0.52074)', tet=72469, te=2.084667653399326e-06, ee=1.765653984621688, de=0.5207362936654384)
-	c(p=17, de_ee='(1.356, 0.32151)', tet=94218, te=2.077965189549735e-06, ee=1.355966846449804, de=0.3215123446014126)
-	c(p=18, de_ee='(1.0481, 0.23722)', tet=122489, te=2.073035743093573e-06, ee=1.048096715818906, de=0.2372246888905086)
-	c(p=19, de_ee='(0.76074, 36844)', tet=159240, te=0.0007644615066319926, ee=0.7607406212115844, de=36844.23853691908)
-	c(p=20, de_ee='(0.58762, 99.729)', tet=207020, te=2.066493895979082e-06, ee=0.5876166399835863, de=99.72931240484581)
-	c(p=21, de_ee='(0.44754, 0.093867)', tet=269132, te=2.064554148603728e-06, ee=0.4475350127700896, de=0.09386659109560895)
-$end 'SolutionBlock379'
-$begin 'SolutionBlock392'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(763.5, N/A)', tet=1667, te=1.098108075072955e-05, ee=763.4964431266338)
-	c(p=2, de_ee='(210.27, 48.009)', tet=2175, te=5.709148833460894e-06, ee=210.2727747610104, de=48.00922638619522)
-	c(p=3, de_ee='(107.47, 32.105)', tet=2827, te=3.876211261873617e-06, ee=107.4710897902199, de=32.10526866710091)
-	c(p=4, de_ee='(70.499, 16.943)', tet=3682, te=3.21946334557109e-06, ee=70.49937231151124, de=16.94303720651901)
-	c(p=5, de_ee='(50.069, 11.539)', tet=4785, te=2.847964632934219e-06, ee=50.06865094734309, de=11.53915024837693)
-	c(p=6, de_ee='(29.619, 9.0688)', tet=6226, te=2.589687966308656e-06, ee=29.61891778602534, de=9.068815800548217)
-	c(p=7, de_ee='(18.125, 5.0627)', tet=8099, te=2.458580875224203e-06, ee=18.12544445455789, de=5.06265977948427)
-	c(p=8, de_ee='(14.238, 2.3842)', tet=10533, te=2.399964414539198e-06, ee=14.23838926292898, de=2.38415832790773)
-	c(p=9, de_ee='(11.361, 2.283)', tet=13698, te=2.345174042342799e-06, ee=11.36094096039598, de=2.282966025015793)
-	c(p=10, de_ee='(9.4617, 1.8168)', tet=17814, te=2.302567693476081e-06, ee=9.461712457101159, de=1.816767032955676)
-	c(p=11, de_ee='(6.5187, 2.0621)', tet=23162, te=2.255085462195374e-06, ee=6.518746143606534, de=2.062142685977904)
-	c(p=12, de_ee='(4.6674, 1.128)', tet=30117, te=2.229648648828749e-06, ee=4.667401142837408, de=1.127975581992465)
-	c(p=13, de_ee='(3.5485, 0.99078)', tet=39157, te=2.207557668314327e-06, ee=3.548512118546514, de=0.9907830332831307)
-	c(p=14, de_ee='(2.6795, 0.70501)', tet=50913, te=2.191994265964448e-06, ee=2.679494709441716, de=0.7050054715790233)
-	c(p=15, de_ee='(2.0391, 0.51893)', tet=66192, te=2.180619257880953e-06, ee=2.039101533640497, de=0.5189342080003368)
-	c(p=16, de_ee='(1.595, 0.40066)', tet=86058, te=2.171882302403706e-06, ee=1.594980823866955, de=0.4006639602796945)
-	c(p=17, de_ee='(1.2481, 0.2598)', tet=111881, te=2.166239764259965e-06, ee=1.24807485682619, de=0.2597994438969258)
-	c(p=18, de_ee='(0.90313, 0.22305)', tet=145450, te=2.161407937152521e-06, ee=0.9031279651670575, de=0.2230513531863875)
-$end 'SolutionBlock392'
-$begin 'SolutionBlock393'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(298.58, N/A)', tet=1856, te=7.399107318349824e-06, ee=298.5828233538058)
-	c(p=2, de_ee='(172.66, 24.182)', tet=2424, te=5.60984056521079e-06, ee=172.6606592908774, de=24.18219761053666)
-	c(p=3, de_ee='(88.82, 31.333)', tet=3157, te=3.852130549183935e-06, ee=88.82040810503482, de=31.33261980611758)
-	c(p=4, de_ee='(55.818, 15.286)', tet=4112, te=3.263312326298775e-06, ee=55.81805078019983, de=15.28552096994479)
-	c(p=5, de_ee='(43.072, 13.725)', tet=5352, te=2.815435558231426e-06, ee=43.07192794345946, de=13.72460626762404)
-	c(p=6, de_ee='(23.757, 6.6764)', tet=6963, te=2.627466398904754e-06, ee=23.75663871072198, de=6.676379389224888)
-	c(p=7, de_ee='(18.244, 2.6899)', tet=9058, te=2.556789516615076e-06, ee=18.24432955843559, de=2.689925257241697)
-	c(p=8, de_ee='(13.609, 3.0143)', tet=11784, te=2.479721438297358e-06, ee=13.60911073965541, de=3.0142519678252)
-	c(p=9, de_ee='(10.531, 2.7261)', tet=15326, te=2.412122312297581e-06, ee=10.53084548783843, de=2.726077411589931)
-	c(p=10, de_ee='(7.8628, 2.3352)', tet=19932, te=2.355794625716605e-06, ee=7.862794653268102, de=2.3351919715598)
-	c(p=11, de_ee='(5.6898, 1.2783)', tet=25918, te=2.325679845780573e-06, ee=5.68975861012297, de=1.27832789867545)
-	c(p=12, de_ee='(4.2848, 1.2051)', tet=33699, te=2.29765235392716e-06, ee=4.284803370328376, de=1.20513113205422)
-	c(p=13, de_ee='(3.0764, 0.8902)', tet=43818, te=2.277198744710092e-06, ee=3.076401267597205, de=0.8901959942769013)
-	c(p=14, de_ee='(2.2974, 0.59012)', tet=56969, te=2.26376048903606e-06, ee=2.29740830094173, de=0.5901222150788998)
-	c(p=15, de_ee='(1.824, 0.42204)', tet=74067, te=2.254206438295152e-06, ee=1.823998933214356, de=0.422043356052029)
-	c(p=16, de_ee='(1.4281, 0.33395)', tet=96295, te=2.246678623283907e-06, ee=1.428059029435102, de=0.3339452360422945)
-	c(p=17, de_ee='(1.1057, 0.25281)', tet=125195, te=2.240998903266199e-06, ee=1.105700181163106, de=0.2528051835649775)
-	c(p=18, de_ee='(0.84072, 0.17641)', tet=162760, te=2.237045591751634e-06, ee=0.8407187282959225, de=0.176408453783868)
-$end 'SolutionBlock393'
-$begin 'SolutionBlock394'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(906.74, N/A)', tet=2029, te=1.182274935907703e-05, ee=906.7424960700795)
-	c(p=2, de_ee='(117.94, 59.325)', tet=2644, te=4.808951606422043e-06, ee=117.9376819145042, de=59.32459142652868)
-	c(p=3, de_ee='(85.916, 19.014)', tet=3448, te=3.89456397195847e-06, ee=85.91606511817045, de=19.0142823072386)
-	c(p=4, de_ee='(60.866, 13.798)', tet=4488, te=3.35717597942798e-06, ee=60.8655544157625, de=13.79841225872207)
-	c(p=5, de_ee='(37.831, 15.787)', tet=5845, te=2.827161912904567e-06, ee=37.83082877657328, de=15.78749728257379)
-	c(p=6, de_ee='(26.705, 5.3041)', tet=7602, te=2.677205415786956e-06, ee=26.70547156468126, de=5.304135445272376)
-	c(p=7, de_ee='(17.082, 4.331)', tet=9887, te=2.561256123881369e-06, ee=17.08180210075024, de=4.330982270611592)
-	c(p=8, de_ee='(11.958, 2.4785)', tet=12862, te=2.49777454146334e-06, ee=11.95772379704582, de=2.478533162932107)
-	c(p=9, de_ee='(8.7257, 1.6855)', tet=16725, te=2.455674941747653e-06, ee=8.725694021513874, de=1.685484378867234)
-	c(p=10, de_ee='(6.9614, 1.7714)', tet=21747, te=2.412174842536393e-06, ee=6.961378933834111, de=1.771411129043886)
-	c(p=11, de_ee='(5.2083, 1.2704)', tet=28276, te=2.381529584406133e-06, ee=5.208345800082202, de=1.270440997470854)
-	c(p=12, de_ee='(4.0112, 0.9289)', tet=36766, te=2.359407630791181e-06, ee=4.011206375115202, de=0.9288968635872521)
-	c(p=13, de_ee='(2.9664, 0.87258)', tet=47801, te=2.338819874316007e-06, ee=2.966406147586832, de=0.8725815838898131)
-	c(p=14, de_ee='(2.2194, 0.49666)', tet=62145, te=2.327203937399312e-06, ee=2.219440926313679, de=0.4966580387081561)
-	c(p=15, de_ee='(1.7148, 0.48059)', tet=80791, te=2.316019603586664e-06, ee=1.714813218860716, de=0.4805910488939165)
-	c(p=16, de_ee='(1.3037, 0.31264)', tet=105032, te=2.308778815343208e-06, ee=1.303684147494611, de=0.312639333114575)
-	c(p=17, de_ee='(0.99769, 0.2301)', tet=136550, te=2.303466223511589e-06, ee=0.9976879882059404, de=0.230103975154031)
-$end 'SolutionBlock394'
-$begin 'SolutionBlock395'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(429.01, N/A)', tet=2216, te=1.006909889787123e-05, ee=429.0124091391538)
-	c(p=2, de_ee='(114.42, 56.324)', tet=2885, te=4.397751849746269e-06, ee=114.4161590558669, de=56.32427594214984)
-	c(p=3, de_ee='(75.375, 21.442)', tet=3761, te=3.454792742632361e-06, ee=75.37513814845991, de=21.44184436346294)
-	c(p=4, de_ee='(42.484, 9.4867)', tet=4895, te=3.127048062436381e-06, ee=42.48392723191709, de=9.486666917861397)
-	c(p=5, de_ee='(33.14, 8.0439)', tet=6363, te=2.875512398292582e-06, ee=33.14030972283447, de=8.043869461597568)
-	c(p=6, de_ee='(21.448, 6.435)', tet=8277, te=2.690474401406931e-06, ee=21.4481757936988, de=6.434957366051457)
-	c(p=7, de_ee='(15.474, 2.9664)', tet=10758, te=2.610663294044143e-06, ee=15.47392428690736, de=2.966432511718073)
-	c(p=8, de_ee='(11.792, 2.6463)', tet=13993, te=2.541578319131001e-06, ee=11.79156893180077, de=2.646261395360725)
-	c(p=9, de_ee='(8.5858, 2.0408)', tet=18197, te=2.489711041197701e-06, ee=8.585803281177975, de=2.040750723394336)
-	c(p=10, de_ee='(6.8597, 1.3844)', tet=23664, te=2.455242614234612e-06, ee=6.859745961100463, de=1.384434835719252)
-	c(p=11, de_ee='(4.8313, 1.3094)', tet=30767, te=2.423094254421558e-06, ee=4.8312826021498, de=1.309376092882595)
-	c(p=12, de_ee='(3.3834, 1.0097)', tet=40007, te=2.398627857056351e-06, ee=3.383381220946563, de=1.009717113585731)
-	c(p=13, de_ee='(2.7139, 0.51705)', tet=52017, te=2.386225807191998e-06, ee=2.713913315531236, de=0.5170476874046027)
-	c(p=14, de_ee='(2.0457, 0.44798)', tet=67632, te=2.375536097147034e-06, ee=2.045700770269212, de=0.4479756279873354)
-	c(p=15, de_ee='(1.5882, 0.33192)', tet=87927, te=2.367651100542807e-06, ee=1.588169018337513, de=0.3319249332265435)
-	c(p=16, de_ee='(1.2347, 0.28543)', tet=114311, te=2.360893083464409e-06, ee=1.234664579545628, de=0.2854312899754508)
-	c(p=17, de_ee='(0.94275, 0.22049)', tet=148608, te=2.355687472132205e-06, ee=0.9427495198046731, de=0.2204933111399136)
-$end 'SolutionBlock395'
-$begin 'SolutionBlock396'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(463.18, N/A)', tet=2361, te=7.936861169542012e-06, ee=463.18201749315)
-	c(p=2, de_ee='(228.83, 22.781)', tet=3071, te=6.128790668058155e-06, ee=228.828158966556, de=22.7806744109673)
-	c(p=3, de_ee='(65.335, 37.247)', tet=3996, te=3.846011575511642e-06, ee=65.33513984152836, de=37.24681125827696)
-	c(p=4, de_ee='(39.985, 16.537)', tet=5199, te=3.210000152999014e-06, ee=39.98543255762488, de=16.53690869164943)
-	c(p=5, de_ee='(32.231, 7.8117)', tet=6767, te=2.959243869632803e-06, ee=32.23094001165422, de=7.811721850914442)
-	c(p=6, de_ee='(22.964, 6.3222)', tet=8809, te=2.772155710787322e-06, ee=22.96412890382061, de=6.322160899456247)
-	c(p=7, de_ee='(16.595, 4.3951)', tet=11450, te=2.650317141065811e-06, ee=16.59491934716047, de=4.395083914204371)
-	c(p=8, de_ee='(11.486, 2.6164)', tet=14892, te=2.580973745582637e-06, ee=11.48595659388204, de=2.616418782821126)
-	c(p=9, de_ee='(8.22, 2.1302)', tet=19367, te=2.525994964718232e-06, ee=8.219978383437363, de=2.130156533304607)
-	c(p=10, de_ee='(6.3947, 1.3529)', tet=25186, te=2.491819661368123e-06, ee=6.394721242426092, de=1.352944238901968)
-	c(p=11, de_ee='(4.6559, 1.1647)', tet=32747, te=2.462797065288715e-06, ee=4.65592460052427, de=1.164714948250821)
-	c(p=12, de_ee='(3.321, 0.93646)', tet=42579, te=2.439733916998792e-06, ee=3.320976937063219, de=0.9364615791930863)
-	c(p=13, de_ee='(2.4893, 0.52)', tet=55359, te=2.427047365529385e-06, ee=2.489279015251686, de=0.5199973399153768)
-	c(p=14, de_ee='(1.8797, 0.39543)', tet=71972, te=2.417450077722748e-06, ee=1.879663896627602, de=0.3954305936894491)
-	c(p=15, de_ee='(1.5033, 0.30759)', tet=93573, te=2.410014223445471e-06, ee=1.503277681303594, de=0.3075908100770891)
-	c(p=16, de_ee='(1.1724, 0.23975)', tet=121650, te=2.404236306764142e-06, ee=1.172407437079044, de=0.2397461651935284)
-	c(p=17, de_ee='(0.90785, 0.20058)', tet=158151, te=2.39941392034465e-06, ee=0.9078461891415238, de=0.2005787203996538)
-$end 'SolutionBlock396'
-$begin 'SolutionBlock397'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(709.98, N/A)', tet=2694, te=1.132559541983567e-05, ee=709.9835865267178)
-	c(p=2, de_ee='(116.66, 61.299)', tet=3499, te=4.383104995119479e-06, ee=116.6552251122589, de=61.299120861735)
-	c(p=3, de_ee='(48.834, 26.873)', tet=4546, te=3.205234265574762e-06, ee=48.83369072649506, de=26.87297545589847)
-	c(p=4, de_ee='(34.518, 8.8888)', tet=5924, te=2.920326068745134e-06, ee=34.51765241046543, de=8.888841601677377)
-	c(p=5, de_ee='(25.519, 3.7225)', tet=7710, te=2.811615683530865e-06, ee=25.5191182517589, de=3.722542711163125)
-	c(p=6, de_ee='(18.213, 3.5827)', tet=10034, te=2.710884826371516e-06, ee=18.21282322783661, de=3.582668063397978)
-	c(p=7, de_ee='(12.647, 2.3128)', tet=13051, te=2.648187046720544e-06, ee=12.64730519009531, de=2.312816060684248)
-	c(p=8, de_ee='(9.2088, 2.9309)', tet=16974, te=2.570570099563961e-06, ee=9.208771386003512, de=2.930946560315749)
-	c(p=9, de_ee='(6.9104, 1.2674)', tet=22071, te=2.537990919898206e-06, ee=6.91038121192382, de=1.267391216885334)
-	c(p=10, de_ee='(5.354, 1.1473)', tet=28696, te=2.508871515398493e-06, ee=5.354049967678309, de=1.147340767510739)
-	c(p=11, de_ee='(3.8301, 0.8757)', tet=37312, te=2.486901232349823e-06, ee=3.830100537776655, de=0.8757037940693888)
-	c(p=12, de_ee='(2.9037, 0.64228)', tet=48511, te=2.470928370294214e-06, ee=2.903717625004534, de=0.6422797113062532)
-	c(p=13, de_ee='(2.2141, 0.55193)', tet=63068, te=2.4572905758207e-06, ee=2.214147708576751, de=0.5519299805477675)
-	c(p=14, de_ee='(1.6396, 0.35183)', tet=81998, te=2.448645172561033e-06, ee=1.63962772872945, de=0.351826655941155)
-	c(p=15, de_ee='(1.2722, 0.23987)', tet=106607, te=2.442771701328561e-06, ee=1.272219176402916, de=0.2398661634723343)
-	c(p=16, de_ee='(0.99712, 0.20515)', tet=138596, te=2.437760283699206e-06, ee=0.9971227511988203, de=0.2051529263512007)
-$end 'SolutionBlock397'
-$begin 'SolutionBlock398'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(825.8, N/A)', tet=2816, te=1.139808694360189e-05, ee=825.797952460453)
-	c(p=2, de_ee='(169.44, 58.518)', tet=3673, te=4.728150302889026e-06, ee=169.4395210759528, de=58.51803617322741)
-	c(p=3, de_ee='(60.037, 24.807)', tet=4788, te=3.555232203002408e-06, ee=60.0367278283085, de=24.80712381689587)
-	c(p=4, de_ee='(40.123, 11.52)', tet=6228, te=3.145653013296895e-06, ee=40.12281559743919, de=11.5204624147931)
-	c(p=5, de_ee='(27.197, 8.2025)', tet=8100, te=2.887630949060563e-06, ee=27.19737392678774, de=8.202496052350803)
-	c(p=6, de_ee='(20.471, 4.9641)', tet=10535, te=2.744285400738046e-06, ee=20.47058973784453, de=4.964122869272873)
-	c(p=7, de_ee='(12.546, 3.8163)', tet=13699, te=2.639556269129706e-06, ee=12.54558828619951, de=3.816262389479391)
-	c(p=8, de_ee='(8.4592, 2.0511)', tet=17812, te=2.585416389066802e-06, ee=8.459196531720474, de=2.051097780944616)
-	c(p=9, de_ee='(6.8297, 1.0713)', tet=23157, te=2.557719966866928e-06, ee=6.829682100948865, de=1.071255768200301)
-	c(p=10, de_ee='(5.0484, 0.9536)', tet=30111, te=2.533329524992495e-06, ee=5.048448152801427, de=0.953600948907252)
-	c(p=11, de_ee='(3.6495, 0.78015)', tet=39148, te=2.513565880315344e-06, ee=3.649470197482659, de=0.78014504162104)
-	c(p=12, de_ee='(2.7811, 0.60946)', tet=50899, te=2.498246713838068e-06, ee=2.781127756801512, de=0.6094595171444187)
-	c(p=13, de_ee='(2.1086, 0.48694)', tet=66175, te=2.486081746809936e-06, ee=2.108550584318321, de=0.4869401793164891)
-	c(p=14, de_ee='(1.552, 0.3122)', tet=86032, te=2.478320100651781e-06, ee=1.552011494540164, de=0.3122039799421195)
-	c(p=15, de_ee='(1.2124, 0.21974)', tet=111849, te=2.47287435020409e-06, ee=1.212402541914174, de=0.2197355558008148)
-	c(p=16, de_ee='(0.9474, 0.17619)', tet=145409, te=2.468517485156229e-06, ee=0.9473964887921851, de=0.1761862687241519)
-$end 'SolutionBlock398'
-$begin 'SolutionBlock399'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(218.61, N/A)', tet=3337, te=7.225191876837319e-06, ee=218.6122672264316)
-	c(p=2, de_ee='(108.47, 40.602)', tet=4352, te=4.291641918360716e-06, ee=108.4659156478781, de=40.60168931819019)
-	c(p=3, de_ee='(45.083, 22.128)', tet=5651, te=3.342008796820121e-06, ee=45.08311306823431, de=22.1275013061511)
-	c(p=4, de_ee='(33.962, 10.325)', tet=7343, te=2.996950273329215e-06, ee=33.9615701217868, de=10.32488375910993)
-	c(p=5, de_ee='(26.432, 4.1206)', tet=9555, te=2.873457425107118e-06, ee=26.43157153093856, de=4.120617192787552)
-	c(p=6, de_ee='(18.315, 4.3748)', tet=12427, te=2.747749690510232e-06, ee=18.31513536611205, de=4.374790226523003)
-	c(p=7, de_ee='(10.725, 3.482)', tet=16154, te=2.652073609113244e-06, ee=10.72542876824562, de=3.481979516817714)
-	c(p=8, de_ee='(7.6109, 2.1473)', tet=21001, te=2.595125625243811e-06, ee=7.610850238947971, de=2.147300273783652)
-	c(p=9, de_ee='(5.418, 1.0739)', tet=27308, te=2.56725680915883e-06, ee=5.418029511933388, de=1.073890828786487)
-	c(p=10, de_ee='(4.2519, 0.82163)', tet=35509, te=2.546163511685826e-06, ee=4.2518648608182, de=0.8216278713431338)
-	c(p=11, de_ee='(3.2341, 0.62612)', tet=46168, te=2.530221541554513e-06, ee=3.23410613023868, de=0.6261172960081364)
-	c(p=12, de_ee='(2.4764, 0.50808)', tet=60027, te=2.517365894006306e-06, ee=2.476435311560623, de=0.508083870802426)
-	c(p=13, de_ee='(1.8748, 0.40107)', tet=78046, te=2.507269420703426e-06, ee=1.874833815886567, de=0.4010729360765298)
-	c(p=14, de_ee='(1.3733, 0.25294)', tet=101469, te=2.500927518762636e-06, ee=1.373275071390471, de=0.2529405850214149)
-	c(p=15, de_ee='(1.0647, 0.19063)', tet=131916, te=2.496160044610078e-06, ee=1.064699609985706, de=0.1906282415939857)
-	c(p=16, de_ee='(0.82544, 0.16144)', tet=171501, te=2.492130172685843e-06, ee=0.8254353504705103, de=0.1614428503067072)
-$end 'SolutionBlock399'
-$begin 'SolutionBlock400'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(599.41, N/A)', tet=3194, te=1.173234563337222e-05, ee=599.4066821440352)
-	c(p=2, de_ee='(107.21, 57.291)', tet=4159, te=5.010717099488718e-06, ee=107.2105852414784, de=57.29142955662745)
-	c(p=3, de_ee='(47.117, 34.3)', tet=5410, te=3.292048857025197e-06, ee=47.1166793333178, de=34.29984587712785)
-	c(p=4, de_ee='(31.33, 9.9737)', tet=7034, te=2.96370872912061e-06, ee=31.33030296035635, de=9.973731926970425)
-	c(p=5, de_ee='(20.709, 4.6685)', tet=9146, te=2.825348404646762e-06, ee=20.70925579037754, de=4.668485911397309)
-	c(p=6, de_ee='(15.443, 2.9797)', tet=11895, te=2.741161022860797e-06, ee=15.44327979311659, de=2.979716825277362)
-	c(p=7, de_ee='(10.889, 2.1854)', tet=15472, te=2.681256342221606e-06, ee=10.88893731403571, de=2.185376201529068)
-	c(p=8, de_ee='(8.2564, 2.0416)', tet=20117, te=2.626514997653647e-06, ee=8.256390805315959, de=2.041630399374737)
-	c(p=9, de_ee='(6.0134, 1.2058)', tet=26164, te=2.59484492589057e-06, ee=6.013377967798967, de=1.205783016330318)
-	c(p=10, de_ee='(4.3684, 1.0107)', tet=34017, te=2.568619530143817e-06, ee=4.36839318284851, de=1.010672949473161)
-	c(p=11, de_ee='(3.3091, 0.64431)', tet=44231, te=2.552069716739189e-06, ee=3.309055033785826, de=0.6443076995409198)
-	c(p=12, de_ee='(2.5385, 0.53035)', tet=57511, te=2.538534814365621e-06, ee=2.538508350107445, de=0.5303500247188248)
-	c(p=13, de_ee='(1.8981, 0.38025)', tet=74770, te=2.52888196431253e-06, ee=1.898083446466269, de=0.3802528134916988)
-	c(p=14, de_ee='(1.4407, 0.2362)', tet=97210, te=2.522908826642842e-06, ee=1.440748807818679, de=0.2361967760449283)
-	c(p=15, de_ee='(1.0815, 0.20096)', tet=126382, te=2.5178387983305e-06, ee=1.081471019071253, de=0.2009596327382361)
-	c(p=16, de_ee='(0.814, 0.15216)', tet=164307, te=2.514007718722577e-06, ee=0.8140034503680534, de=0.1521574618066521)
-$end 'SolutionBlock400'
-$begin 'SolutionBlock401'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(406.22, N/A)', tet=3178, te=1.063438129716053e-05, ee=406.2199650787398)
-	c(p=2, de_ee='(103.24, 62.244)', tet=4139, te=4.015066257618906e-06, ee=103.2443670152879, de=62.24447717808496)
-	c(p=3, de_ee='(38.313, 19.204)', tet=5381, te=3.244020966009403e-06, ee=38.31318293574043, de=19.20379994094454)
-	c(p=4, de_ee='(33.829, 6.7781)', tet=6996, te=3.024136780062954e-06, ee=33.82924457979426, de=6.77813701731208)
-	c(p=5, de_ee='(20.382, 6.4164)', tet=9098, te=2.830095904061943e-06, ee=20.38188633619887, de=6.416405411297969)
-	c(p=6, de_ee='(15.819, 2.0832)', tet=11835, te=2.771138623357727e-06, ee=15.81920151145983, de=2.083225540858737)
-	c(p=7, de_ee='(11.632, 2.5564)', tet=15392, te=2.700297291178886e-06, ee=11.63247991926652, de=2.556397994013169)
-	c(p=8, de_ee='(8.2245, 2.047)', tet=20015, te=2.645022251045452e-06, ee=8.22447743155166, de=2.046998318074185)
-	c(p=9, de_ee='(5.9953, 1.3733)', tet=26024, te=2.60869882708526e-06, ee=5.99533553177015, de=1.373274797436372)
-	c(p=10, de_ee='(4.4801, 0.8402)', tet=33838, te=2.586780549780921e-06, ee=4.480074234997923, de=0.8401996074353006)
-	c(p=11, de_ee='(3.3763, 0.60662)', tet=43998, te=2.571088644187051e-06, ee=3.376258349438943, de=0.6066191272080839)
-	c(p=12, de_ee='(2.5756, 0.52463)', tet=57208, te=2.557599867312881e-06, ee=2.575608359464885, de=0.5246328983898213)
-	c(p=13, de_ee='(1.9726, 0.36989)', tet=74381, te=2.548139672173801e-06, ee=1.972606862726507, de=0.3698856595977129)
-	c(p=14, de_ee='(1.4771, 0.26656)', tet=96700, te=2.541347381093223e-06, ee=1.477127170648079, de=0.266558821510091)
-	c(p=15, de_ee='(1.1169, 0.18576)', tet=125714, te=2.536626582076408e-06, ee=1.11688358264179, de=0.1857596899950142)
-	c(p=16, de_ee='(0.83083, 0.16208)', tet=163433, te=2.532515211528925e-06, ee=0.8308338353564436, de=0.1620802437589104)
-$end 'SolutionBlock401'
+$begin 'BlockMapName'
+	FileHeader='SolutionBlock1'
+	'SolutionKey(SimSetup=163, Instance=\'SetupDefinition\', Solution=-1, VersionID=919)'='SolutionBlock377'
+	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=164, VersionID=1013)'='SolutionBlock386'
+	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=165, VersionID=1013)'='SolutionBlock387'
+$end 'BlockMapName'
+$begin 'SolutionBlock386'
+	SolutionName='AdaptivePass'
+	SolutionID=164
+	V=1013
+	$begin 'States'
+	$end 'States'
+	$begin 'Definition'
+		SamplingInterpolation=false
+		Frequencies()
+		SolutionType=1
+		CenterFreq=0
+	$end 'Definition'
+$end 'SolutionBlock386'
+$begin 'SolutionBlock387'
+	SolutionName='LastAdaptive'
+	SolutionID=165
+	V=1013
+	$begin 'States'
+	$end 'States'
+	$begin 'Definition'
+		SamplingInterpolation=false
+		Frequencies()
+		SolutionType=1
+		CenterFreq=0
+	$end 'Definition'
+$end 'SolutionBlock387'
+$begin 'SolutionBlock377'
+	SimSetupID=163
+	SimSetupName='Setup1'
+	VersionID=919
+	SolveSetupID=0
+	$begin 'MI'
+	$end 'MI'
+$end 'SolutionBlock377'
+$begin 'ResponseSurfaceCache'
+	ResponseSurfaceCache()
+$end 'ResponseSurfaceCache'
 $begin 'OptimetricsResult1'
 	V=2
 	svi('$Air_Gap', '15mm')
@@ -1081,57 +354,21 @@ $begin 'OptimetricsResult1'
 	var(1.500000000000000e-02, 3.000000000000000e+01, 1.000000000000000e-02, 1.090000000000000e-01, 2.000000000000000e-02, 2.180000000000000e-01, 0.000000000000000e+00, 0.000000000000000e+00, 5.000000000000000e-03, 6.000000000000000e-02, 3.000000000000000e-02, 1.000000000000000e+00, 3.000000000000000e-01, 5.000000000000000e-02, 3.000000000000000e-02, 9.000000000000001e-03)
 	gvs(3.000000000000000e+01, 1.462134598630740e-07, 4.631934925071824e-06)
 $end 'OptimetricsResult1'
-$begin 'ResponseSurfaceCache'
-	ResponseSurfaceCache()
-$end 'ResponseSurfaceCache'
-$begin 'SolutionBlock388'
-	ConvSetupName='ms'
-	MaxPasses='25'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, de_ee='(818.26, N/A)', tet=5128, te=1.313605692844396e-05, ee=818.2600290934921)
-	c(p=2, de_ee='(186.38, 57.599)', tet=6684, te=5.569823269418377e-06, ee=186.3825530222207, de=57.59897129131768)
-	c(p=3, de_ee='(35.561, 42.005)', tet=8680, te=3.230232734739533e-06, ee=35.56082097975528, de=42.00475349953345)
-	c(p=4, de_ee='(18.632, 8.5315)', tet=11291, te=2.954646561245817e-06, ee=18.6321603691713, de=8.531464947708697)
-	c(p=5, de_ee='(11.545, 4.9951)', tet=14682, te=2.807058576923404e-06, ee=11.54467806979447, de=4.995114686752363)
-	c(p=6, de_ee='(8.2261, 2.3688)', tet=19086, te=2.740564904880008e-06, ee=8.226071109127076, de=2.368802439323305)
-	c(p=7, de_ee='(5.9079, 1.6634)', tet=24825, te=2.694979652419395e-06, ee=5.907902700857635, de=1.663352412469462)
-	c(p=8, de_ee='(4.2268, 0.92612)', tet=32285, te=2.670020802447224e-06, ee=4.226815560560806, de=0.9261238744331431)
-	c(p=9, de_ee='(3.1488, 0.68495)', tet=41973, te=2.651732613199022e-06, ee=3.148793445217021, de=0.6849455716389857)
-	c(p=10, de_ee='(2.3009, 0.46475)', tet=54572, te=2.639408644180351e-06, ee=2.300922574099369, de=0.4647515725125668)
-	c(p=11, de_ee='(1.7799, 0.27285)', tet=70951, te=2.632206969998023e-06, ee=1.779863751915172, de=0.2728518070972884)
-	c(p=12, de_ee='(1.4005, 0.18656)', tet=92243, te=2.627296286085165e-06, ee=1.400487071689323, de=0.1865614660560416)
-	c(p=13, de_ee='(1.1042, 0.14746)', tet=119919, te=2.623422026874195e-06, ee=1.104177599580936, de=0.1474618310652495)
-	c(p=14, de_ee='(0.86022, 0.10571)', tet=155900, te=2.620648933961951e-06, ee=0.8602211949128931, de=0.1057051775824283)
-$end 'SolutionBlock388'
+$begin 'OptimetricsResults'
+	'2:0'='OptimetricsResult1'
+$end 'OptimetricsResults'
 $begin '$index$'
 	$begin '$index$'
-		SolutionBlock388(pos=198256, lin=1077, lvl=0)
-		SolutionBlock386(pos=370, lin=1, lvl=0)
-		BlockMapName(pos=3041, lin=72, lvl=0)
-		SolutionBlock387(pos=13860, lin=93, lvl=0)
-		SolutionBlock377(pos=17275, lin=222, lvl=0)
-		SolutionBlock1(pos=21375, lin=360, lvl=0)
-		OptimetricsResults(pos=160612, lin=663, lvl=0)
-		SolutionBlock389(pos=160694, lin=666, lvl=0)
-		SolutionBlock390(pos=163161, lin=694, lvl=0)
-		SolutionBlock391(pos=165505, lin=721, lvl=0)
-		SolutionBlock379(pos=167853, lin=748, lvl=0)
-		SolutionBlock392(pos=170446, lin=777, lvl=0)
-		SolutionBlock393(pos=172683, lin=803, lvl=0)
-		SolutionBlock394(pos=174913, lin=829, lvl=0)
-		SolutionBlock395(pos=177033, lin=854, lvl=0)
-		SolutionBlock396(pos=179157, lin=879, lvl=0)
-		SolutionBlock397(pos=181276, lin=904, lvl=0)
-		SolutionBlock398(pos=183282, lin=928, lvl=0)
-		SolutionBlock399(pos=185287, lin=952, lvl=0)
-		SolutionBlock400(pos=187297, lin=976, lvl=0)
-		SolutionBlock401(pos=189300, lin=1000, lvl=0)
-		OptimetricsResult1(pos=191310, lin=1024, lvl=0)
-		ResponseSurfaceCache(pos=198174, lin=1074, lvl=0)
+		OptimetricsResults(pos=138077, lin=347, lvl=0)
+		BlockMapName(pos=130082, lin=254, lvl=0)
+		SolutionBlock386(pos=130481, lin=260, lvl=0)
+		SolutionBlock387(pos=130734, lin=273, lvl=0)
+		SolutionBlock377(pos=130987, lin=286, lvl=0)
+		SolutionBlock1(pos=370, lin=1, lvl=0)
+		ResponseSurfaceCache(pos=131131, lin=294, lvl=0)
+		OptimetricsResult1(pos=131213, lin=297, lvl=0)
 		$base_index$(pos=0, lin=1, lvl=0)
-		$index$(pos=200043, lin=1099, lvl=0)
+		$index$(pos=138159, lin=350, lvl=0)
 	$end '$index$'
 $end '$index$'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
