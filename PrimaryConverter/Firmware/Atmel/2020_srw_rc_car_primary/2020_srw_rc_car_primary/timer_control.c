@@ -10,10 +10,10 @@
 #include "timer0.h"
 #include "timer2.h"
 
-#define OFFSET	83														//180deg out of phase
+#define OFFSET	43														//180deg out of phase
 
-static volatile uint8_t duty_cycle = 79;
-static volatile uint8_t period = 159; 
+static volatile uint8_t duty_cycle = 39;
+static volatile uint8_t period = 79; 
 
 //timer control is required to synchronize the timers in order to produce PWM signal 
 void timer_control_init()
@@ -22,8 +22,6 @@ void timer_control_init()
 	
 	timer0_init(period, duty_cycle);									//configure timer0
 	timer2_init(period, duty_cycle);									//configure timer2
-	
-	
 	
 	GTCCR = 0;															//release all timers
 	
