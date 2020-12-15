@@ -1,7 +1,7 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000011, hour=000000000013, min=000000000041, sec=000000000057)
+    time(year=000000002020, month=000000000012, day=000000000015, hour=000000000016, min=000000000011, sec=000000000037)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
@@ -54,7 +54,7 @@ $begin 'SolutionBlock1'
 	VersionID=304
 	PostProcess=false
 	LossLess=true
-	NextUniqueID=419
+	NextUniqueID=449
 	MoveBackwards=false
 	$begin 'VariationIDs'
 		Map(V='$box_width=\'45mm\' $coil_diameter=\'8mm\' $P1=\'10mm\' $parameter_1=\'150mm\' $parameter_2=\'30mm\' $track_width=\'300mm\'', ID=87)
