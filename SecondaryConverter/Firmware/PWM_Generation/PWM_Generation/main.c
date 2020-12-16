@@ -8,8 +8,6 @@
 #include <avr/io.h>
 #include "timer.h"
 
-//#define F_CPU 8000000UL
-
 int main(void)
 {
 	//Need to make a duty cycle controlled PWM to drive the MOSFET.
