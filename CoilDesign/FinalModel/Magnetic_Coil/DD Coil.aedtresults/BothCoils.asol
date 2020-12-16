@@ -1,60 +1,20 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000016, hour=000000000013, min=000000000050, sec=000000000018)
+    time(year=000000002020, month=000000000012, day=000000000017, hour=000000000012, min=000000000007, sec=000000000016)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
-    $index$(pos=000000133965, lin=000000000304, lvl=000000000000)
+    $index$(pos=000000137079, lin=000000000380, lvl=000000000000)
   $end '$base_index$'
 $end '$base_index$'
-$begin 'SolutionBlock445'
-	SolutionName='AdaptivePass'
-	SolutionID=1268
-	V=1369
-	$begin 'States'
-	$end 'States'
-	$begin 'Definition'
-		SamplingInterpolation=false
-		Frequencies()
-		SolutionType=1
-		CenterFreq=0
-	$end 'Definition'
-$end 'SolutionBlock445'
-$begin 'BlockMapName'
-	FileHeader='SolutionBlock1'
-	'SolutionKey(SimSetup=1267, Instance=\'SetupDefinition\', Solution=-1, VersionID=1369)'='SolutionBlock447'
-	'SolutionKey(SimSetup=1267, Instance=\'SolutionDefinition\', Solution=1268, VersionID=1369)'='SolutionBlock445'
-	'SolutionKey(SimSetup=1267, Instance=\'SolutionDefinition\', Solution=1269, VersionID=1369)'='SolutionBlock446'
-$end 'BlockMapName'
-$begin 'SolutionBlock446'
-	SolutionName='LastAdaptive'
-	SolutionID=1269
-	V=1369
-	$begin 'States'
-	$end 'States'
-	$begin 'Definition'
-		SamplingInterpolation=false
-		Frequencies()
-		SolutionType=1
-		CenterFreq=0
-	$end 'Definition'
-$end 'SolutionBlock446'
-$begin 'SolutionBlock447'
-	SimSetupID=1267
-	SimSetupName='Setup1'
-	VersionID=1369
-	SolveSetupID=1
-	$begin 'MI'
-	$end 'MI'
-$end 'SolutionBlock447'
 $begin 'SolutionBlock1'
 	ProductName='Maxwell 3D'
 	CircuitName='BothCoils'
-	VersionID=1369
+	VersionID=1438
 	PostProcess=false
 	LossLess=true
-	NextUniqueID=1400
+	NextUniqueID=1481
 	MoveBackwards=false
 	$begin 'VariationIDs'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'109.99999999999999mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'10mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'108.88888888888889mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'109.99999999999999mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'10mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=705)
@@ -223,6 +183,7 @@ $begin 'SolutionBlock1'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'69.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'180mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'69.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=760)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'69.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'180mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'69.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=767)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'69.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'6\' $P1=\'10mm\' $parameter_1=\'60mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'30mm\' $parameter_5=\'180mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'69.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'30mm\' P_2=\'50mm\' Parameter_3=\'109mm\' Parameter_4=\'30mm\'', ID=768)
+		Map(V='$Air_Gap=\'15mm\' $box_width=\'84.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'70mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'102.77777777777777mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'35mm\' $Y_displacement=\'35mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'84.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' I_pt_post=\'20A\' P_1=\'70mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1475)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'84.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'70mm\' $parameter_2=\'30mm\' $Parameter_3=\'109mm\' $Parameter_4=\'20mm\' $parameter_5=\'104.44444444444443mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'84.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' I_pt_post=\'20A\' P_1=\'70mm\' P_2=\'30mm\' Parameter_3=\'109mm\' Parameter_4=\'20mm\'', ID=1350)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'89.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'10mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'108.88888888888889mm\' $Parameter_6=\'109mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'89.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'10mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=777)
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'89.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'10mm\' $Parameter_3=\'109mm\' $Parameter_4=\'10mm\' $parameter_5=\'108.88888888888889mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'89.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'10mm\' Parameter_3=\'109mm\' Parameter_4=\'10mm\'', ID=778)
@@ -303,24 +264,140 @@ $begin 'SolutionBlock1'
 	$end 'VariationIDs'
 	$begin 'LinkedDataList'
 	$end 'LinkedDataList'
+	$begin 'InitialMeshes'
+		M(VID=1475, Ver=1438, Dir='DV1475_V1438.imesh/')
+	$end 'InitialMeshes'
 	$begin 'MI'
+		$begin 'SubData'
+			ID=0
+			MI(VID=1475, Ver=1438, Dir='DV1475_MI0_V1438.sd/')
+		$end 'SubData'
 	$end 'MI'
 $end 'SolutionBlock1'
-$begin 'OptimetricsResults'
-$end 'OptimetricsResults'
+$begin 'BlockMapName'
+	FileHeader='SolutionBlock1'
+	'SolutionKey(SimSetup=1267, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'84.999999999999986mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'10\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'70mm\\\' $parameter_2=\\\'30mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'20mm\\\' $parameter_5=\\\'102.77777777777777mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'35mm\\\' $Y_displacement=\\\'35mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'84.999999999999986mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' I_pt_post=\\\'20A\\\' P_1=\\\'70mm\\\' P_2=\\\'30mm\\\' Parameter_3=\\\'109mm\\\' Parameter_4=\\\'20mm\\\'\', Solution=-3, VersionID=1438)'='SolutionBlock505'
+	'SolutionKey(SimSetup=1267, Instance=\'SetupDefinition\', Solution=-1, VersionID=1438)'='SolutionBlock504'
+	'SolutionKey(SimSetup=1267, Instance=\'SolutionDefinition\', Solution=1268, VersionID=1438)'='SolutionBlock502'
+	'SolutionKey(SimSetup=1267, Instance=\'SolutionDefinition\', Solution=1269, VersionID=1438)'='SolutionBlock503'
+$end 'BlockMapName'
+$begin 'SolutionBlock504'
+	SimSetupID=1267
+	SimSetupName='Setup1'
+	VersionID=1438
+	SolveSetupID=1
+	$begin 'CurrMeshes'
+		IDDblMap(1478, -1)
+		$begin 'DataMap'
+			VID=1475
+			Ver=1438
+			M(DblID=1478, Dir='DV1475_S1267_V1438.cmesh1478/')
+		$end 'DataMap'
+	$end 'CurrMeshes'
+	$begin 'LastPassNumbers'
+		LP(VID=1475, Ver=1438, P=1)
+	$end 'LastPassNumbers'
+	$begin 'Profiles'
+		P(VID=1475, Ver=1438, File='DV1475_S1267_V1438.profile')
+	$end 'Profiles'
+	$begin 'MI'
+		$begin 'SubData'
+			ID=0
+			MI(VID=1475, Ver=1438, Dir='DV1475_S1267_MI0_V1438.sd/')
+		$end 'SubData'
+	$end 'MI'
+$end 'SolutionBlock504'
+$begin 'SolutionBlock502'
+	SolutionName='AdaptivePass'
+	SolutionID=1268
+	V=1438
+	$begin 'States'
+		F(VID=1475, Ver=1438)
+	$end 'States'
+	$begin 'Definition'
+		SamplingInterpolation=false
+		Frequencies()
+		SolutionType=1
+		CenterFreq=0
+	$end 'Definition'
+	$begin 'PD'
+		NextUniqueID=35
+		MoveBackwards=false
+		$begin 'SubData'
+			ID=0
+			Ver=27
+			PD(VID=1475, Ver=27, File='DV1475_SOL1268_PD0_V27.sd')
+		$end 'SubData'
+	$end 'PD'
+	$begin 'NFSP'
+		$begin 'SubData'
+			ID=10
+			NFSP(VID=1475, Ver=1438, File='DV1475_SOL1268_NFSP10_V1438.sd')
+		$end 'SubData'
+	$end 'NFSP'
+$end 'SolutionBlock502'
+$begin 'SolutionBlock503'
+	SolutionName='LastAdaptive'
+	SolutionID=1269
+	V=1438
+	$begin 'States'
+		F(VID=1475, Ver=1438)
+	$end 'States'
+	$begin 'Definition'
+		SamplingInterpolation=false
+		Frequencies()
+		SolutionType=1
+		CenterFreq=0
+	$end 'Definition'
+	$begin 'Fields'
+		IDDblMap(1480, 100000)
+		$begin 'DataMap'
+			VID=1475
+			Ver=1438
+			Field(DblID=1480, Dir='DV1475_SOL1269_V1438.Field1480/')
+		$end 'DataMap'
+	$end 'Fields'
+	$begin 'PD'
+		NextUniqueID=35
+		MoveBackwards=false
+		$begin 'SubData'
+			ID=0
+			Ver=27
+			PD(VID=1475, Ver=27, File='DV1475_SOL1269_PD0_V27.sd')
+		$end 'SubData'
+	$end 'PD'
+	$begin 'NFSP'
+		$begin 'SubData'
+			ID=10
+			NFSP(VID=1475, Ver=1438, File='DV1475_SOL1269_NFSP10_V1438.sd')
+		$end 'SubData'
+	$end 'NFSP'
+$end 'SolutionBlock503'
+$begin 'SolutionBlock505'
+	ConvSetupName='ms'
+	MaxPasses='10'
+	MinPasses='2'
+	ConvTarget='(1, 1)'
+	ConvTargetConsecPasses='N/A'
+	ConvCurrentConsecPasses='N/A'
+	c(p=1, te=3.382535074049084e-06, ee=419.4223034150621, de_ee='(419.42, N/A)', tet=1640)
+$end 'SolutionBlock505'
 $begin 'ResponseSurfaceCache'
 	ResponseSurfaceCache()
 $end 'ResponseSurfaceCache'
+$begin 'OptimetricsResults'
+$end 'OptimetricsResults'
 $begin '$index$'
 	$begin '$index$'
-		ResponseSurfaceCache(pos=133883, lin=301, lvl=0)
-		SolutionBlock445(pos=370, lin=1, lvl=0)
-		BlockMapName(pos=624, lin=14, lvl=0)
-		SolutionBlock446(pos=1029, lin=20, lvl=0)
-		SolutionBlock447(pos=1283, lin=33, lvl=0)
-		SolutionBlock1(pos=1429, lin=41, lvl=0)
-		OptimetricsResults(pos=133829, lin=299, lvl=0)
+		OptimetricsResults(pos=137025, lin=378, lvl=0)
+		SolutionBlock505(pos=136671, lin=366, lvl=0)
+		BlockMapName(pos=133547, lin=267, lvl=0)
+		SolutionBlock502(pos=135306, lin=300, lvl=0)
+		SolutionBlock503(pos=135900, lin=329, lvl=0)
+		SolutionBlock504(pos=134706, lin=274, lvl=0)
+		SolutionBlock1(pos=370, lin=1, lvl=0)
+		ResponseSurfaceCache(pos=136943, lin=375, lvl=0)
 		$base_index$(pos=0, lin=1, lvl=0)
-		$index$(pos=133965, lin=304, lvl=0)
+		$index$(pos=137079, lin=380, lvl=0)
 	$end '$index$'
 $end '$index$'
