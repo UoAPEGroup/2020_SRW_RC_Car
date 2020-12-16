@@ -6,12 +6,19 @@
  */ 
 
 #include <avr/io.h>
-#include <timer.h>
+#include "timer.h"
+
+#define F_CPU 16000000UL
 
 int main(void)
 {
-    
 	//Need to make a duty cycle controlled PWM to drive the MOSFET.
+	//Also develop the PI controller
+	
+	//Configuring PD5 as output for the PWM.
+	DDRD |= (1<<PD5);
+	
+	timer0_init();
 	
 	
     while (1) 
