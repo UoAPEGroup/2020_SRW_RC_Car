@@ -100,7 +100,7 @@ $begin 'InterrogationCache'
 		$begin '22484'
 			$begin 'BoundingBox'
 				Low[3: -35, 25.000000000000004, 15]
-				High[3: -35, 45, 26]
+				High[3: -35, 45, 16.5]
 				Exact=true
 				Valid=true
 			$end 'BoundingBox'
