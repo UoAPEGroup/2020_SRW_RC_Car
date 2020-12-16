@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include "timer.h"
 
-#define F_CPU 16000000UL
+//#define F_CPU 16000000UL
 
 int main(void)
 {
@@ -16,7 +16,7 @@ int main(void)
 	//Also develop the PI controller
 	
 	//Configuring PD5 as output for the PWM.
-	DDRD |= (1<<PD5);
+	DDRD |= (1<<PD6);
 	
 	timer0_init();
 	
