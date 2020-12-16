@@ -7,3 +7,4 @@ opts.SelectedVariableNames = [2:8];
 opts.DataRange = '2:217';
 M = readtable('ParametricSetup2_Result.xlsx', opts);
 
+table2array
