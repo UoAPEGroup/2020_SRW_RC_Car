@@ -1,5 +1,0 @@
-opts = detectImportOptions('ParametricSetup2_Result.xlsx');
-opts.Sheet = 'ParametricSetup2_Result';
-opts.SelectedVariableNames = '1:;
-opts.DataRange = '2:217';
-M = readmatrix('ParametricSetup2_Result.xlsx', opts);
