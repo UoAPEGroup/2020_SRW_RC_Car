@@ -14,6 +14,6 @@ void timer2_init(uint8_t period, uint8_t duty_cycle)
 	TCCR2B |= (1 << WGM22);
 	TCCR2B |= (1 << CS20);						//Clock select no prescaling
 	
-	OCR2A = period;								//Actual count required for 150 kHz = 53.33
-	OCR2B = duty_cycle;							//Duty cycle = 50%
+	OCR2A = period;								
+	OCR2B = duty_cycle;							
 }
