@@ -1,7 +1,7 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000016, hour=000000000013, min=000000000050, sec=000000000017)
+    time(year=000000002020, month=000000000012, day=000000000017, hour=000000000012, min=000000000007, sec=000000000015)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
@@ -23,7 +23,7 @@ $begin 'SolutionBlock21'
 		CenterFreq=0
 	$end 'Definition'
 	$begin 'PAR'
-		NextUniqueID=21
+		NextUniqueID=22
 		MoveBackwards=false
 		$begin 'SubData'
 			ID=0
@@ -76,7 +76,7 @@ $begin 'SolutionBlock22'
 		$end 'DataMap'
 	$end 'Fields'
 	$begin 'PAR'
-		NextUniqueID=21
+		NextUniqueID=22
 		MoveBackwards=false
 		$begin 'SubData'
 			ID=0
@@ -126,7 +126,7 @@ $begin 'SolutionBlock1'
 	VersionID=208
 	PostProcess=false
 	LossLess=true
-	NextUniqueID=625
+	NextUniqueID=665
 	MoveBackwards=false
 	$begin 'VariationIDs'
 		Map(V='$Air_Gap=\'15mm\' $box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\'', ID=334)
@@ -146,24 +146,6 @@ $begin 'SolutionBlock1'
 		$end 'SubData'
 	$end 'MI'
 $end 'SolutionBlock1'
-$begin 'SolutionBlock25'
-	ConvSetupName='ms'
-	MaxPasses='10'
-	MinPasses='2'
-	ConvTarget='(1, 1)'
-	ConvTargetConsecPasses='N/A'
-	ConvCurrentConsecPasses='N/A'
-	c(p=1, te=9.79558884171847e-06, de_ee='(1392.9, N/A)', ee=1392.947917770667, tet=1221)
-	c(de=76.32398531623848, p=2, te=2.31920505252617e-06, de_ee='(134.08, 76.324)', ee=134.0819843231413, tet=1593)
-	c(de=18.38215952032205, p=3, te=1.892885080167441e-06, de_ee='(54.303, 18.382)', ee=54.30314008063421, tet=2077)
-	c(de=6.560959694977883, p=4, te=1.768693652985405e-06, de_ee='(49.47, 6.561)', ee=49.46967200970538, tet=2711)
-	c(de=4.112100499862617, p=5, te=1.695963192439954e-06, de_ee='(37.732, 4.1121)', ee=37.73180726806734, tet=3526)
-	c(de=6.311233498052232, p=6, te=1.588926995324047e-06, de_ee='(21.08, 6.3112)', ee=21.07985072863561, tet=4593)
-	c(de=3.48066596701943, p=7, te=1.533621754157019e-06, de_ee='(16.748, 3.4807)', ee=16.74752854935962, tet=5979)
-	c(de=2.32514748454311, p=8, te=1.497962786517831e-06, de_ee='(13.095, 2.3251)', ee=13.09481990499609, tet=7781)
-	c(de=2.84594748972124, p=9, te=1.455331552197969e-06, de_ee='(9.1036, 2.8459)', ee=9.103625283144607, tet=10121)
-	c(de=1.302811589038753, p=10, te=1.436371324076996e-06, de_ee='(6.1728, 1.3028)', ee=6.172758816943177, tet=13165)
-$end 'SolutionBlock25'
 $begin 'SolutionBlock24'
 	ConvSetupName='ms'
 	MaxPasses='10'
@@ -182,15 +164,33 @@ $begin 'SolutionBlock24'
 	c(te=1.455331552197969e-06, de=2.845947489721183, de_ee='(9.1036, 2.8459)', p=9, tet=10121, ee=9.103625283144616)
 	c(te=1.436371324076995e-06, de=1.30281158903884, de_ee='(6.1728, 1.3028)', p=10, tet=13165, ee=6.172758816943165)
 $end 'SolutionBlock24'
+$begin 'SolutionBlock25'
+	ConvSetupName='ms'
+	MaxPasses='10'
+	MinPasses='2'
+	ConvTarget='(1, 1)'
+	ConvTargetConsecPasses='N/A'
+	ConvCurrentConsecPasses='N/A'
+	c(p=1, te=9.79558884171847e-06, de_ee='(1392.9, N/A)', ee=1392.947917770667, tet=1221)
+	c(de=76.32398531623848, p=2, te=2.31920505252617e-06, de_ee='(134.08, 76.324)', ee=134.0819843231413, tet=1593)
+	c(de=18.38215952032205, p=3, te=1.892885080167441e-06, de_ee='(54.303, 18.382)', ee=54.30314008063421, tet=2077)
+	c(de=6.560959694977883, p=4, te=1.768693652985405e-06, de_ee='(49.47, 6.561)', ee=49.46967200970538, tet=2711)
+	c(de=4.112100499862617, p=5, te=1.695963192439954e-06, de_ee='(37.732, 4.1121)', ee=37.73180726806734, tet=3526)
+	c(de=6.311233498052232, p=6, te=1.588926995324047e-06, de_ee='(21.08, 6.3112)', ee=21.07985072863561, tet=4593)
+	c(de=3.48066596701943, p=7, te=1.533621754157019e-06, de_ee='(16.748, 3.4807)', ee=16.74752854935962, tet=5979)
+	c(de=2.32514748454311, p=8, te=1.497962786517831e-06, de_ee='(13.095, 2.3251)', ee=13.09481990499609, tet=7781)
+	c(de=2.84594748972124, p=9, te=1.455331552197969e-06, de_ee='(9.1036, 2.8459)', ee=9.103625283144607, tet=10121)
+	c(de=1.302811589038753, p=10, te=1.436371324076996e-06, de_ee='(6.1728, 1.3028)', ee=6.172758816943177, tet=13165)
+$end 'SolutionBlock25'
 $begin '$index$'
 	$begin '$index$'
-		SolutionBlock24(pos=7287, lin=157, lvl=0)
+		SolutionBlock25(pos=7289, lin=157, lvl=0)
 		SolutionBlock21(pos=370, lin=1, lvl=0)
 		BlockMapName(pos=1095, lin=33, lvl=0)
 		SolutionBlock22(pos=2787, lin=41, lvl=0)
 		SolutionBlock23(pos=3593, lin=79, lvl=0)
 		SolutionBlock1(pos=4415, lin=113, lvl=0)
-		SolutionBlock25(pos=5996, lin=139, lvl=0)
+		SolutionBlock24(pos=5996, lin=139, lvl=0)
 		$base_index$(pos=0, lin=1, lvl=0)
 		$index$(pos=8580, lin=175, lvl=0)
 	$end '$index$'

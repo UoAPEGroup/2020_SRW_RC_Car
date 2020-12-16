@@ -1,7 +1,7 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000016, hour=000000000013, min=000000000050, sec=000000000018)
+    time(year=000000002020, month=000000000012, day=000000000017, hour=000000000012, min=000000000007, sec=000000000015)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
@@ -22,7 +22,7 @@ $begin 'SolutionBlock24'
 		CenterFreq=0
 	$end 'Definition'
 	$begin 'PAR'
-		NextUniqueID=23
+		NextUniqueID=24
 		MoveBackwards=false
 		$begin 'SubData'
 			ID=0
@@ -66,7 +66,7 @@ $begin 'SolutionBlock25'
 		$end 'DataMap'
 	$end 'Fields'
 	$begin 'PAR'
-		NextUniqueID=23
+		NextUniqueID=24
 		MoveBackwards=false
 		$begin 'SubData'
 			ID=0
@@ -107,7 +107,7 @@ $begin 'SolutionBlock1'
 	VersionID=286
 	PostProcess=false
 	LossLess=true
-	NextUniqueID=637
+	NextUniqueID=677
 	MoveBackwards=false
 	$begin 'VariationIDs'
 		Map(V='$box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\'', ID=316)
