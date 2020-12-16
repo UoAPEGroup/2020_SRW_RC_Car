@@ -19,26 +19,27 @@
 #define MIN_VOLTAGE 5
 #define STOP 0
 
-
 int main(void)
 {
     /* Replace with your application code */
-	
+
 	//set output pins
-	DDRD |= (1 << 6);
-	DDRD |= (1 << 5);
-	//Set to forward mode
+	DDRD |= (1 << 3)|(1 << 5);
+
 	//stop all the timers
 	GTCCR = (1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC); 
-	//initalise timers
-	timer0_init(); 
+	
+	//initialize timers
+	timer0_init(79,39);  // (period,duty_cycle)
+	timer2_init(79,39);
+	
 	GTCCR = 0; 
+	
+	TCNT0 = 0;
+	TCNT2 = 83;
 	
     while (1)
     {
-		_delay_ms(200);
-		PORTD ^= (1 << 5); 
-		
     }
 }
 
