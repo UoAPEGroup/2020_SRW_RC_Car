@@ -12,7 +12,9 @@
 #include <stdint.h>
 #include <avr/interrupt.h>
 
-timer0_init();
-timer2_init();
+timer0_init(uint8_t period, uint8_t duty_cycle);
+timer1_init();
+timer2_init(uint8_t period, uint8_t duty_cycle);
+
 
 #endif /* TIMER_H_ */
