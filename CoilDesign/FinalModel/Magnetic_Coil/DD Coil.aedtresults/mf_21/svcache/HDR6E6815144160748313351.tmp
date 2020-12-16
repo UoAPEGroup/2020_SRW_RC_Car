@@ -1,6 +1,6 @@
 SimValueCacheVersionID=1
 $begin 'SimValueInfos'
-	NextUniqueID=19
+	NextUniqueID=20
 	MoveBackwards=false
 	$begin 'SimValue'
 		ID=0
@@ -151,6 +151,14 @@ $begin 'SimValueInfos'
 		$begin 'SimValueParams'
 			QuantityName='Matrix1.MagFlux(Lpt_A)'
 			ValueState(152, 22, 1, 2)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=19
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.CplCoef(Lst,Lst)'
+			ValueState(90, 15, 1, 1)
 			MatrixSize(0, 0)
 		$end 'SimValueParams'
 	$end 'SimValue'
