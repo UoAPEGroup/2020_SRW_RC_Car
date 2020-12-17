@@ -4,11 +4,15 @@
  * Created: 16/12/2020 10:13:38 am
  *  Author: achu072
  */ 
-#include "adc.h"
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define ARRAY_SIZE 10
+#include "adc.h"
+#include "led.h"
+
+#define ARRAY_SIZE		10
+#define COUNTER_OFFSET	11
 
 //global variables
 static volatile uint8_t adc_read_count = 0;
@@ -31,9 +35,11 @@ void adc_init()
 	ADCSRB |= ((1 << ADTS2) | (1 << ADTS0));							//start conversion on timer1 overflow
 }
 
-//ADC conversion complete ISR
+//ADC conversion complete ISR		(TEST: top to bottom ~11us)
 ISR(ADC_vect)
 {	
+	//led_on();
+	
 	if (adc_read_count < 10) {
 		TIMER1_COMPB_CLR;
 		temp1_adc[adc_read_count] = ADC;								
@@ -45,7 +51,7 @@ ISR(ADC_vect)
 		adc_read_count++;
 	} else if ((adc_read_count > 10) && (adc_read_count < 21)) {
 		TIMER1_COMPB_CLR;
-		temp2_adc[adc_read_count - 11] = ADC;
+		temp2_adc[adc_read_count - COUNTER_OFFSET] = ADC;
 		adc_read_count++;
 	} else if (adc_read_count == 21) {
 		TIMER1_COMPB_CLR;
@@ -54,7 +60,7 @@ ISR(ADC_vect)
 		adc_read_count++;
 	} else if ((adc_read_count > 21) && (adc_read_count < 32)) {
 		TIMER1_COMPB_CLR;
-		temp3_adc[adc_read_count - 22] = ADC;
+		temp3_adc[adc_read_count - COUNTER_OFFSET * 2] = ADC;
 		adc_read_count++;
 	} else if (adc_read_count == 32) {
 		TIMER1_COMPB_CLR;
@@ -63,7 +69,7 @@ ISR(ADC_vect)
 		adc_read_count++;
 	} else if ((adc_read_count > 32) && (adc_read_count < 43)) {
 		TIMER1_COMPB_CLR;
-		isens_adc[adc_read_count - 33] = ADC;
+		isens_adc[adc_read_count - COUNTER_OFFSET * 3] = ADC;
 		adc_read_count++;
 	} else if (adc_read_count == 43) {
 		TIMER1_COMPB_CLR;
@@ -72,12 +78,14 @@ ISR(ADC_vect)
 		adc_read_count++;
 	} else if ((adc_read_count > 43) && (adc_read_count < 54)) {
 		TIMER1_COMPB_CLR;
-		vsens_adc[adc_read_count - 44] = ADC;
+		vsens_adc[adc_read_count - COUNTER_OFFSET * 4] = ADC;
 		adc_read_count++;
 	} else if (adc_read_count == 54) {
 		TIMER1_COMPB_CLR;
 		ADC_CH_CLR;
 		ADC_CH_TEMP1;
 		adc_read_count = 0;
-	} 
+	}
+	
+	//led_off(); 
 }

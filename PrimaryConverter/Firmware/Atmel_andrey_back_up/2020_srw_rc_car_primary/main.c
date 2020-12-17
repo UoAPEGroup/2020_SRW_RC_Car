@@ -5,27 +5,30 @@
  * Author : Andrey Chukhraev
  */ 
 
+#include "common.h"
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
+
+#include "io.h"
 #include "timer_control.h"
 #include "adc.h"
-
-#define F_CPU 8000000UL
+#include "usart0.h"
 
 int main(void)
 {
-	//IO set up
-	DDRD |= ((1 << DDD3) | (1 << DDD5));								//set PD3 and PD5 as output for PWM testing
-	DDRC &= ~((1 << DDC5) | (1 << DDC4) | (1 << DDC3) | (1 << DDC2));	//set PC5, PC4, PC3, PC2 and PE2 as inputs to ADC
-	DDRE &= ~(1 << DDE2);
-	
+	io_init();
 	timer_control_set_duty(26);
 	timer_control_init();
 	adc_init();
+	usart0_init(9600);
 	sei();
 	
     while (1) 
     {
-    }
+		usart0_transmit_data(1, 2, 3, 4, 5);
+		_delay_ms(500);
+	}
 }
 
