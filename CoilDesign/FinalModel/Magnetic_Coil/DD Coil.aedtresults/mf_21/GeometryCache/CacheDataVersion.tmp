@@ -1,5 +1,5 @@
 $begin 'CacheDataVersion'
-	DataVersion=118
+	DataVersion=-1
 $end 'CacheDataVersion'
 $begin 'VariableValues'
 	$P1='10mm'
@@ -15,8 +15,8 @@ $begin 'VariableValues'
 	$Num_Ferrites='10'
 	$track_length='1000mm'
 	$Air_Gap='15mm'
-	$X_displacement='35mm'
-	$Y_displacement='35mm'
+	$X_displacement='45mm'
+	$Y_displacement='0mm'
 	Parameter_3='$Parameter_3'
 	Parameter_4='$Parameter_4'
 	b1_y='50mm'

@@ -11,6 +11,7 @@
 
 void timer_control_init();
 void timer_control_set_duty(uint8_t duty_cycle_input);
+void timer_control_set_duty_on_user(uint8_t instruction);
 
 
 
