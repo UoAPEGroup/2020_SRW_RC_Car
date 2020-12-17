@@ -22,6 +22,11 @@ ISR(ADC_vect) {
 	data_array[count] = (int32_t)data * REF_VOLTAGE/RESOLUTION; //Convert to actual voltage value
 	count++; //Increment array slot
 	
+	if(count == 100) {
+		//Do PID calculations/make function call to PID
+		count = 0;
+	}
+	
 }
 
 void adc_init() {
