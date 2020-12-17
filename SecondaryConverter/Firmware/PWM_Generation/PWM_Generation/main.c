@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include "timer.h"
+#include "adc.h"
 
 int main(void)
 {
@@ -16,7 +17,7 @@ int main(void)
 	//Configuring PD5 as output for the PWM.
 	DDRD |= (1<<PD6);
 	
-	timer0_init(50); //Made the PWM duty Cycle controlled. 0 to 100.
+	timer0_init(80); //Made the PWM duty Cycle controlled. 0 to 100.
 	
 	
     while (1) 
