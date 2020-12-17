@@ -35,11 +35,12 @@ int main(void)
 	//initialize timers
 	timer0_init(periodHalf,dutyLHalf);  // PWm that controls the left FET driver
 	timer2_init(periodHalf,dutyRHalf);  // PWM that controls the right FET driver
-	
-	GTCCR = 0;   // start all timers
+
 	
 	TCNT0 = 0;   // setting offset
 	TCNT2 = offset;  // setting offset(set to period to)
+
+	GTCCR = 0;   // start all timers
 
     // Vout = Vin * ((dutyL - dutyR)/period)	
 	
