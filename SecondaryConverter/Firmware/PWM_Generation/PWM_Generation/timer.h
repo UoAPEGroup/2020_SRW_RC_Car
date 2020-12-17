@@ -10,7 +10,7 @@
 #define TIMER_H_
 
 
-void timer0_init();
+void timer0_init(uint8_t dutyCycle);
 
 
 #endif /* TIMER_H_ */
