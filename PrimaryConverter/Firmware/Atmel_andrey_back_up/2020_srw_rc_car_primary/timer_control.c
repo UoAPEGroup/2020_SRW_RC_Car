@@ -7,11 +7,12 @@
 
 #include <avr/io.h>
 #include <stdint.h>
+
 #include "timer0.h"
 #include "timer1.h"
 #include "timer2.h"
 
-#define OFFSET	34														//180deg out of phase
+#define OFFSET				34											//180deg out of phase (26 + 4 * 2)													
 
 static volatile uint8_t duty_cycle = 0;
 static volatile uint8_t period = 53; 
@@ -32,8 +33,26 @@ void timer_control_init()
 	TCNT2 = OFFSET;														//set value for timer2
 }
 
-//set duty cycle
 void timer_control_set_duty(uint8_t duty_cycle_input)
 {
 	duty_cycle = duty_cycle_input;
+}
+
+//1->0; 2->13; 3->26
+void timer_control_set_duty_on_user(uint8_t instruction)
+{
+	switch (instruction) {
+		case 1:
+			OCR0B = 0;
+			OCR2B = 0;
+			break;
+		case 2:
+			OCR0B = 13;
+			OCR2B = 13;
+			break;
+		case 3:
+			OCR0B = 26;
+			OCR2B = 26;
+			break;
+	}
 }

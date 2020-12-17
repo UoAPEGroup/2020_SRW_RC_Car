@@ -9,8 +9,6 @@
 #ifndef TIMER2_H_
 #define TIMER2_H_
 
-#include <stdint.h>
-
 void timer2_init(uint8_t period, uint8_t duty_cycle);
 
 
