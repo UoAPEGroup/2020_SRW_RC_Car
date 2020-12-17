@@ -18,16 +18,21 @@ static volatile uint8_t count = 0;
 
 ISR(ADC_vect) {
 	
-	int16_t data = ADC;
-	data_array[count] = (int32_t)data * REF_VOLTAGE/RESOLUTION;
-	count++;
+	int16_t data = ADC; //Grab data from ADC
+	data_array[count] = (int32_t)data * REF_VOLTAGE/RESOLUTION; //Convert to actual voltage value
+	count++; //Increment array slot
+	
+	if(count == 100) {
+		//Do PID calculations/make function call to PID
+		count = 0;
+	}
 	
 }
 
 void adc_init() {
-	ADMUX = 0b01000000;
-	ADCSRA |= (1<<ADEN);
-	ADCSRA |= (1<<ADSC);
-	ADCSRA |= (1<<ADATE);
-	ADCSRA |= (1<<ADIE);
+	ADMUX = 0b01000000; //Set reference voltage to external
+	ADCSRA |= (1<<ADEN); //Start ADC
+	ADCSRA |= (1<<ADSC); //Start first conversion
+	ADCSRA |= (1<<ADATE); //Set autotrigger (freerunning)
+	ADCSRA |= (1<<ADIE); // Set interrupt enable
 }
