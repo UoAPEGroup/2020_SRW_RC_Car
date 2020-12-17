@@ -33,12 +33,13 @@ void timer_control_init()
 	TCNT2 = OFFSET;														//set value for timer2
 }
 
+//set duty cycle for PWM
 void timer_control_set_duty(uint8_t duty_cycle_input)
 {
 	duty_cycle = duty_cycle_input;
 }
 
-//1->0; 2->13; 3->26
+//set duty cycle according to user input via usart0 (1->0/0%; 2->13/25%; 3->26/50%)
 void timer_control_set_duty_on_user(uint8_t instruction)
 {
 	switch (instruction) {

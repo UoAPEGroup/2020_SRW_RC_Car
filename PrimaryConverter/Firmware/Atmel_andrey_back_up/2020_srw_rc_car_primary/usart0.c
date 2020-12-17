@@ -43,6 +43,7 @@ void usart0_transmit_byte(uint8_t byte)
 	UDR0 = byte;
 }
 
+//transmit string
 void usart0_transmit_string(char *string)
 {
 	for (uint8_t i = 0; i < strlen(string); i++) {
@@ -50,15 +51,10 @@ void usart0_transmit_string(char *string)
 	}
 }
 
-ISR(USART0_RX_vect) {
-	uint8_t temp_rx = UDR0 - ASCII_OFFSET;
-	
-	timer_control_set_duty_on_user(temp_rx);
-}
-
+//transmit formatted data 
 void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32_t isens, uint32_t vsens)
 {
-	char buffer_temp1[TX_BUFFER];
+	char buffer_temp1[TX_BUFFER];						
 	char buffer_temp2[TX_BUFFER];
 	char buffer_temp3[TX_BUFFER];
 	char buffer_isens[TX_BUFFER];
@@ -75,4 +71,11 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 	usart0_transmit_string(buffer_temp3);
 	usart0_transmit_string(buffer_isens);
 	usart0_transmit_string(buffer_vsens);
+}
+
+//on receive complete interrupt
+ISR(USART0_RX_vect) {
+	uint8_t instruction = UDR0 - ASCII_OFFSET;			//get instruction from usart0 on user TX
+	
+	timer_control_set_duty_on_user(instruction);		//set duty cycle 
 }
