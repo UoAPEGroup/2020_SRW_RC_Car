@@ -39,7 +39,7 @@ void timer_control_set_duty(uint8_t duty_cycle_input)
 	duty_cycle = duty_cycle_input;
 }
 
-//set duty cycle on user TX via usart0 (1->0: 0%; 2->13: 25%; 3->26: 50%)
+//set duty cycle on user TX via usart0
 void timer_control_set_duty_on_user(uint8_t instruction)
 {
 	switch (instruction) {
@@ -48,10 +48,18 @@ void timer_control_set_duty_on_user(uint8_t instruction)
 			OCR2B = 0;
 			break;
 		case 2:
+			OCR0B = 6;
+			OCR2B = 6;
+			break;
+		case 3:
 			OCR0B = 13;
 			OCR2B = 13;
 			break;
-		case 3:
+		case 4:
+			OCR0B = 18;
+			OCR2B = 18;
+			break;
+		case 5:
 			OCR0B = 26;
 			OCR2B = 26;
 			break;
