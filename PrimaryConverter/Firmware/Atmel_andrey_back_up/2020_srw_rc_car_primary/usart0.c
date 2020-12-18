@@ -17,7 +17,6 @@
 #include "timer_control.h"
 
 #define TX_BUFFER		20
-#define ASCII_OFFSET	48
 
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
@@ -75,7 +74,7 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 
 //on receive complete interrupt
 ISR(USART0_RX_vect) {
-	uint8_t instruction = UDR0 - ASCII_OFFSET;			//get instruction from usart0 on user TX
+	uint8_t instruction = UDR0;							//get instruction from usart0 on user TX
 	
 	timer_control_set_duty_on_user(instruction);		//set duty cycle 
 }
