@@ -29,3 +29,16 @@ timer2_init(uint8_t period, uint8_t duty_cycle) {
 	OCR2A = period;
 	OCR2B = duty_cycle;
 }
+
+timer1_init() {
+	
+	//TCCR1A |= (1 << WGM12);
+	
+	//Set timer1 to 64 prescaler, CTC mode with OCR1A as TOP
+	TCCR1B |= (1 << CS10) | (1 << WGM12);
+	
+	//Set the period of sampling to 0.5ms
+	OCR1A = 4000;
+	OCR1B = 2000;
+	
+}

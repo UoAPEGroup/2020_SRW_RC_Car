@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include "timer.h"
+#include "adc.h"
 #define F_CPU 8000000UL
 #include <util/delay.h>
 #include <avr/io.h>
@@ -19,8 +20,16 @@
 #define MIN_VOLTAGE 5
 #define STOP 0
 
+
+
 int main(void)
 {
+	//Using GIPO to check
+	DDRD |= (1 << 0);
+	
+	//initialize the ADC 
+	adc_init();
+	
 	uint8_t periodHalf = 27;
 	uint8_t dutyLHalf = 13;
 	uint8_t dutyRHalf = 13;
@@ -35,15 +44,19 @@ int main(void)
 	//initialize timers
 	timer0_init(periodHalf,dutyLHalf);  // PWm that controls the left FET driver
 	timer2_init(periodHalf,dutyRHalf);  // PWM that controls the right FET driver
-
+	
+	
+	
+	GTCCR = 0;   // start all timers
 	
 	TCNT0 = 0;   // setting offset
 	TCNT2 = offset;  // setting offset(set to period to)
 
-	GTCCR = 0;   // start all timers
-
     // Vout = Vin * ((dutyL - dutyR)/period)	
 	
+	timer1_init();
+	
+	sei(); 
     while (1)
     {
     }
