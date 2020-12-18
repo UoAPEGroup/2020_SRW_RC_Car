@@ -1,13 +1,47 @@
 $begin '$base_index$'
   $begin 'properties'
     all_levels=000000000000
-    time(year=000000002020, month=000000000012, day=000000000017, hour=000000000015, min=000000000019, sec=000000000015)
+    time(year=000000002020, month=000000000012, day=000000000018, hour=000000000016, min=000000000059, sec=000000000026)
     version=000000000000
   $end 'properties'
   $begin '$base_index$'
     $index$(pos=000000008580, lin=000000000175, lvl=000000000000)
   $end '$base_index$'
 $end '$base_index$'
+$begin 'SolutionBlock1'
+	ProductName='Maxwell 3D'
+	CircuitName='PrimaryCoilFerrites'
+	VersionID=208
+	PostProcess=false
+	LossLess=true
+	NextUniqueID=905
+	MoveBackwards=false
+	$begin 'VariationIDs'
+		Map(V='$Air_Gap=\'15mm\' $box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\'', ID=334)
+		Map(V='$box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\'', ID=238)
+	$end 'VariationIDs'
+	$begin 'LinkedDataList'
+	$end 'LinkedDataList'
+	$begin 'InitialMeshes'
+		M(VID=238, Ver=208, Dir='DV238_V208.imesh/')
+		M(VID=334, Ver=208, Dir='DV334_V208.imesh/')
+	$end 'InitialMeshes'
+	$begin 'MI'
+		$begin 'SubData'
+			ID=0
+			MI(VID=238, Ver=208, Dir='DV238_MI0_V208.sd/')
+			MI(VID=334, Ver=208, Dir='DV334_MI0_V208.sd/')
+		$end 'SubData'
+	$end 'MI'
+$end 'SolutionBlock1'
+$begin 'BlockMapName'
+	FileHeader='SolutionBlock1'
+	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'49.999999999999986mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'10\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'100mm\\\' $parameter_2=\\\'50mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'40mm\\\' $parameter_5=\\\'100mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'49.999999999999986mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'50mm\\\' P_2=\\\'50mm\\\' Parameter_3=\\\'109mm\\\'\', Solution=-3, VersionID=208)'='SolutionBlock25'
+	'SolutionKey(SimSetup=163, Instance=\'$box_width=\\\'49.999999999999986mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'10\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'100mm\\\' $parameter_2=\\\'50mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'40mm\\\' $parameter_5=\\\'100mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'49.999999999999986mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'50mm\\\' P_2=\\\'50mm\\\' Parameter_3=\\\'109mm\\\'\', Solution=-3, VersionID=208)'='SolutionBlock24'
+	'SolutionKey(SimSetup=163, Instance=\'SetupDefinition\', Solution=-1, VersionID=208)'='SolutionBlock23'
+	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=164, VersionID=208)'='SolutionBlock21'
+	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=165, VersionID=208)'='SolutionBlock22'
+$end 'BlockMapName'
 $begin 'SolutionBlock21'
 	SolutionName='AdaptivePass'
 	SolutionID=164
@@ -23,7 +57,7 @@ $begin 'SolutionBlock21'
 		CenterFreq=0
 	$end 'Definition'
 	$begin 'PAR'
-		NextUniqueID=26
+		NextUniqueID=28
 		MoveBackwards=false
 		$begin 'SubData'
 			ID=0
@@ -40,14 +74,6 @@ $begin 'SolutionBlock21'
 		$end 'SubData'
 	$end 'NFSP'
 $end 'SolutionBlock21'
-$begin 'BlockMapName'
-	FileHeader='SolutionBlock1'
-	'SolutionKey(SimSetup=163, Instance=\'$Air_Gap=\\\'15mm\\\' $box_width=\\\'49.999999999999986mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'10\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'100mm\\\' $parameter_2=\\\'50mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'40mm\\\' $parameter_5=\\\'100mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' $X_displacement=\\\'0mm\\\' $Y_displacement=\\\'0mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'49.999999999999986mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'50mm\\\' P_2=\\\'50mm\\\' Parameter_3=\\\'109mm\\\'\', Solution=-3, VersionID=208)'='SolutionBlock25'
-	'SolutionKey(SimSetup=163, Instance=\'$box_width=\\\'49.999999999999986mm\\\' $coil_diameter=\\\'5mm\\\' $Num_Ferrites=\\\'10\\\' $P1=\\\'10mm\\\' $parameter_1=\\\'100mm\\\' $parameter_2=\\\'50mm\\\' $Parameter_3=\\\'109mm\\\' $Parameter_4=\\\'40mm\\\' $parameter_5=\\\'100mm\\\' $Parameter_6=\\\'218mm\\\' $track_length=\\\'1000mm\\\' $track_width=\\\'300mm\\\' b1_y=\\\'50mm\\\' box1width=\\\'30mm\\\' box2width=\\\'49.999999999999986mm\\\' coil_diameter=\\\'5mm\\\' height_above_coil=\\\'9mm\\\' P_1=\\\'50mm\\\' P_2=\\\'50mm\\\' Parameter_3=\\\'109mm\\\'\', Solution=-3, VersionID=208)'='SolutionBlock24'
-	'SolutionKey(SimSetup=163, Instance=\'SetupDefinition\', Solution=-1, VersionID=208)'='SolutionBlock23'
-	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=164, VersionID=208)'='SolutionBlock21'
-	'SolutionKey(SimSetup=163, Instance=\'SolutionDefinition\', Solution=165, VersionID=208)'='SolutionBlock22'
-$end 'BlockMapName'
 $begin 'SolutionBlock22'
 	SolutionName='LastAdaptive'
 	SolutionID=165
@@ -76,7 +102,7 @@ $begin 'SolutionBlock22'
 		$end 'DataMap'
 	$end 'Fields'
 	$begin 'PAR'
-		NextUniqueID=26
+		NextUniqueID=28
 		MoveBackwards=false
 		$begin 'SubData'
 			ID=0
@@ -120,32 +146,6 @@ $begin 'SolutionBlock23'
 		$end 'SubData'
 	$end 'MI'
 $end 'SolutionBlock23'
-$begin 'SolutionBlock1'
-	ProductName='Maxwell 3D'
-	CircuitName='PrimaryCoilFerrites'
-	VersionID=208
-	PostProcess=false
-	LossLess=true
-	NextUniqueID=825
-	MoveBackwards=false
-	$begin 'VariationIDs'
-		Map(V='$Air_Gap=\'15mm\' $box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' $X_displacement=\'0mm\' $Y_displacement=\'0mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\'', ID=334)
-		Map(V='$box_width=\'49.999999999999986mm\' $coil_diameter=\'5mm\' $Num_Ferrites=\'10\' $P1=\'10mm\' $parameter_1=\'100mm\' $parameter_2=\'50mm\' $Parameter_3=\'109mm\' $Parameter_4=\'40mm\' $parameter_5=\'100mm\' $Parameter_6=\'218mm\' $track_length=\'1000mm\' $track_width=\'300mm\' b1_y=\'50mm\' box1width=\'30mm\' box2width=\'49.999999999999986mm\' coil_diameter=\'5mm\' height_above_coil=\'9mm\' P_1=\'50mm\' P_2=\'50mm\' Parameter_3=\'109mm\'', ID=238)
-	$end 'VariationIDs'
-	$begin 'LinkedDataList'
-	$end 'LinkedDataList'
-	$begin 'InitialMeshes'
-		M(VID=238, Ver=208, Dir='DV238_V208.imesh/')
-		M(VID=334, Ver=208, Dir='DV334_V208.imesh/')
-	$end 'InitialMeshes'
-	$begin 'MI'
-		$begin 'SubData'
-			ID=0
-			MI(VID=238, Ver=208, Dir='DV238_MI0_V208.sd/')
-			MI(VID=334, Ver=208, Dir='DV334_MI0_V208.sd/')
-		$end 'SubData'
-	$end 'MI'
-$end 'SolutionBlock1'
 $begin 'SolutionBlock25'
 	ConvSetupName='ms'
 	MaxPasses='10'
@@ -185,11 +185,11 @@ $end 'SolutionBlock24'
 $begin '$index$'
 	$begin '$index$'
 		SolutionBlock24(pos=7287, lin=157, lvl=0)
-		SolutionBlock21(pos=370, lin=1, lvl=0)
-		BlockMapName(pos=1095, lin=33, lvl=0)
-		SolutionBlock22(pos=2787, lin=41, lvl=0)
-		SolutionBlock23(pos=3593, lin=79, lvl=0)
-		SolutionBlock1(pos=4415, lin=113, lvl=0)
+		BlockMapName(pos=1951, lin=27, lvl=0)
+		SolutionBlock21(pos=3643, lin=35, lvl=0)
+		SolutionBlock22(pos=4368, lin=67, lvl=0)
+		SolutionBlock23(pos=5174, lin=105, lvl=0)
+		SolutionBlock1(pos=370, lin=1, lvl=0)
 		SolutionBlock25(pos=5996, lin=139, lvl=0)
 		$base_index$(pos=0, lin=1, lvl=0)
 		$index$(pos=8580, lin=175, lvl=0)

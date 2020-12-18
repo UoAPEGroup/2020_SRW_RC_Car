@@ -1,6 +1,6 @@
 SimValueCacheVersionID=1
 $begin 'SimValueInfos'
-	NextUniqueID=5
+	NextUniqueID=6
 	MoveBackwards=false
 	$begin 'SimValue'
 		ID=0
@@ -38,6 +38,14 @@ $begin 'SimValueInfos'
 		ID=4
 		$begin 'SimValueParams'
 			QuantityName='Matrix1.CplCoef(Lpt_B,Lpt_A)'
+			ValueState(90, 15, 1, 1)
+			MatrixSize(0, 0)
+		$end 'SimValueParams'
+	$end 'SimValue'
+	$begin 'SimValue'
+		ID=5
+		$begin 'SimValueParams'
+			QuantityName='Matrix1.CplCoef(Lpt_A,Lpt_A)'
 			ValueState(90, 15, 1, 1)
 			MatrixSize(0, 0)
 		$end 'SimValueParams'
