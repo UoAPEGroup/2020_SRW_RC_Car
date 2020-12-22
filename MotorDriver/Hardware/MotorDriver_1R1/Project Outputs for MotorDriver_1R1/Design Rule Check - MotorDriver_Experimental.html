@@ -1,0 +1,551 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD20\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">22/12/2020</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">4:26:20 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc" class="file"><acronym title="C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc">C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">68</td></tr>
+</table>
+</td>
+</table><a name="IDPEEWY13GZSZBFKPNWBZC0L02XGALUTHTUWXANYETMMGT4AJJSZTJ"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTFMBEVD0HCMKKV0REQJCMVLASHSRWCW0I02CLCITLECVQHTAT3EI">Clearance Constraint (Gap=11.811mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5XAKFTZVN4NDCSH04EZMAMOR4BZL45VBLZCKCLD4OLU0Z3ICYBGL">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID3HP4JGHCVSUSFW3IPMZEA3HOMPINN5GBOKZEWEJT4L4H3PQGT4GJ">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEP5BB33HYAVQN3PIKRLAP2WEHIRNP4FF5CKPCZMJ1ZTDKMOM3SXF">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQFXZ2R2IOPKRPBQIF4UL0KHSHLI04RZE3QF5ZYP1ITYZTIVY5H5">Width Constraint (Min=11.811mil) (Max=39.37mil) (Preferred=19.685mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2FOQARWPXSNFPJQGAKM2KF5GBBU1PMX3X432QRBKC41D4J1RCOAI">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPLCNDD1FQ0P4BTEQJWT0LTN55FN54RWF4TZ3PBOXJQQ4QT2S2LBH">Hole Size Constraint (Min=19.685mil) (Max=393.701mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXBMSS22B2XIGF1RDQFQJEHCVDNS0PDILFJPAYIOAFMIL01GNSM5H">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL0KGIZZ23SVFPVLL0JW5GAJAMDM4RKFIXTHX5KRWHG2IVKPPE5B">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">62</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPPRH5DXMWJAZNOUWVGYUQTXWSNOSAA3U3RECINPBXFJC3CBPSQTF">Silk To Solder Mask (Clearance=3.937mil) (IsPad),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQQRIMKHHWOJWYYA1EJRTG4DVMVLBPJPWKIPB0DII0GE3MHRJUJH">Silk to Silk (Clearance=3.937mil) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4TE0GDBGT1CGKUYJ3YLJ1DYGVHGH4MQOK3NLV4IZTN4LSGLTJ3YN">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBUJZDKHYXNDCIVZ00HXTBSZARESJ3SQXLVYJ10PC2QQQIGCXNRGK">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID00OVD5K01TCYIZ1FZPIFLM1KDCC0MH0JOCGXHQL5BCQKSTX1TYKN">Height Constraint (Min=0mil) (Max=3937.008mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">68</td>
+</tr>
+</table><br><a name="IDL0KGIZZ23SVFPVLL0JW5GAJAMDM4RKFIXTHX5KRWHG2IVKPPE5B"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1876.375mil|Location2.X=1887.625mil|Location1.Y=2333.186mil|Location2.Y=2344.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1876.375mil|Location2.X=1887.625mil|Location1.Y=2333.186mil|Location2.Y=2344.436mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.85mil &lt; 10mil) Between Pad C11-1(869.008mil,749.736mil) on Top Layer And Via (882mil,829.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.85mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2023.166mil|Location2.X=2034.416mil|Location1.Y=2234.111mil|Location2.Y=2245.361mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2023.166mil|Location2.X=2034.416mil|Location1.Y=2234.111mil|Location2.Y=2245.361mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.418mil &lt; 10mil) Between Pad C11-2(994.992mil,749.736mil) on Top Layer And Via (1052mil,709.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.418mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2898.647mil|Location2.X=2909.897mil|Location1.Y=3415.099mil|Location2.Y=3426.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2898.647mil|Location2.X=2909.897mil|Location1.Y=3415.099mil|Location2.Y=3426.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.614mil &lt; 10mil) Between Pad C14-2(1865mil,1871.299mil) on Top Layer And Pad C15-2(2040mil,1940mil) on Top Layer [Top Solder] Mask Sliver [3.614mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2505.572mil|Location2.X=2516.822mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2505.572mil|Location2.X=2516.822mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (5.071mil &lt; 10mil) Between Pad C16-1(1536.85mil,1720mil) on Top Layer And Pad C24-1(1536.85mil,1640mil) on Top Layer [Top Solder] Mask Sliver [5.071mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2611.871mil|Location2.X=2623.121mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2611.871mil|Location2.X=2623.121mil|Location1.Y=3204.375mil|Location2.Y=3215.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (5.071mil &lt; 10mil) Between Pad C16-2(1643.15mil,1720mil) on Top Layer And Pad C24-2(1643.15mil,1640mil) on Top Layer [Top Solder] Mask Sliver [5.071mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1864.821mil|Location2.X=1876.071mil|Location1.Y=3401.733mil|Location2.Y=3412.983mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1864.821mil|Location2.X=1876.071mil|Location1.Y=3401.733mil|Location2.Y=3412.983mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.626mil &lt; 10mil) Between Pad C20-1(1005mil,1930.394mil) on Top Layer And Via (865mil,1845mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.626mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2639.375mil|Location2.X=2650.625mil|Location1.Y=3122.643mil|Location2.Y=3133.893mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2639.375mil|Location2.X=2650.625mil|Location1.Y=3122.643mil|Location2.Y=3133.893mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.536mil &lt; 10mil) Between Pad C24-2(1643.15mil,1640mil) on Top Layer And Via (1645mil,1575mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.536mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1537.643mil|Location2.X=1548.893mil|Location1.Y=2222.8mil|Location2.Y=2234.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1537.643mil|Location2.X=1548.893mil|Location1.Y=2222.8mil|Location2.Y=2234.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.536mil &lt; 10mil) Between Pad C34-1(585mil,701.85mil) on Top Layer And Via (520mil,698.425mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.536mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2374.375mil|Location2.X=2385.625mil|Location1.Y=4034.276mil|Location2.Y=4045.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2374.375mil|Location2.X=2385.625mil|Location1.Y=4034.276mil|Location2.Y=4045.526mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.197mil &lt; 10mil) Between Pad C35-2(1380mil,2483.15mil) on Top Layer And Via (1380mil,2530mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.197mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2485.1mil|Location2.X=2496.35mil|Location1.Y=2405.829mil|Location2.Y=2417.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2485.1mil|Location2.X=2496.35mil|Location1.Y=2405.829mil|Location2.Y=2417.079mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.575mil &lt; 10mil) Between Pad Q4-8(1532mil,899.736mil) on Top Layer And Via (1467mil,879.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.575mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2237.403mil|Location2.X=2248.653mil|Location1.Y=3049.375mil|Location2.Y=3060.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2237.403mil|Location2.X=2248.653mil|Location1.Y=3049.375mil|Location2.Y=3060.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (5.945mil &lt; 10mil) Between Pad R15-1(1212.433mil,1509.736mil) on Top Layer And Via (1265mil,1525mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [5.945mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1149.375mil|Location2.X=1160.625mil|Location1.Y=2657.347mil|Location2.Y=2668.597mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1149.375mil|Location2.X=1160.625mil|Location1.Y=2657.347mil|Location2.Y=2668.597mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.945mil &lt; 10mil) Between Pad R16-2(155mil,1164.567mil) on Top Layer And Via (155mil,1110mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.945mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2428.403mil|Location2.X=2439.653mil|Location1.Y=2309.111mil|Location2.Y=2320.361mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2428.403mil|Location2.X=2439.653mil|Location1.Y=2309.111mil|Location2.Y=2320.361mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.945mil &lt; 10mil) Between Pad R3-2(1402.433mil,784.736mil) on Top Layer And Via (1457mil,784.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.945mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1681.375mil|Location2.X=1692.625mil|Location1.Y=2057.216mil|Location2.Y=2068.466mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1681.375mil|Location2.X=1692.625mil|Location1.Y=2057.216mil|Location2.Y=2068.466mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.209mil &lt; 10mil) Between Pad R5-1(665mil,564.567mil) on Top Layer And Via (687mil,509.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.209mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1876.375mil|Location2.X=1887.625mil|Location1.Y=1864.84mil|Location2.Y=1876.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1876.375mil|Location2.X=1887.625mil|Location1.Y=1864.84mil|Location2.Y=1876.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.457mil &lt; 10mil) Between Pad U1-11(882mil,374.736mil) on Top Layer And Via (882mil,319.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.457mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1930.077mil|Location2.X=1941.327mil|Location1.Y=1862.989mil|Location2.Y=1874.239mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1930.077mil|Location2.X=1941.327mil|Location1.Y=1862.989mil|Location2.Y=1874.239mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.159mil &lt; 10mil) Between Pad U1-12(932mil,374.736mil) on Top Layer And Via (935.702mil,316.034mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.159mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.375mil|Location2.X=1987.625mil|Location1.Y=2079.623mil|Location2.Y=2090.873mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1976.375mil|Location2.X=1987.625mil|Location1.Y=2079.623mil|Location2.Y=2090.873mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.024mil &lt; 10mil) Between Pad U1-2(982mil,589.303mil) on Top Layer And Via (982mil,534.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.024mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.375mil|Location2.X=1787.625mil|Location1.Y=2148.166mil|Location2.Y=2159.416mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1776.375mil|Location2.X=1787.625mil|Location1.Y=2148.166mil|Location2.Y=2159.416mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.89mil &lt; 10mil) Between Pad U1-6(782mil,589.303mil) on Top Layer And Via (782mil,644.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.89mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1876.375mil|Location2.X=1887.625mil|Location1.Y=2374.84mil|Location2.Y=2386.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1876.375mil|Location2.X=1887.625mil|Location1.Y=2374.84mil|Location2.Y=2386.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (3.457mil &lt; 10mil) Between Pad U2-11(882mil,884.736mil) on Top Layer And Via (882mil,829.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.457mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1724.375mil|Location2.X=1735.625mil|Location1.Y=2658.298mil|Location2.Y=2669.548mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1724.375mil|Location2.X=1735.625mil|Location1.Y=2658.298mil|Location2.Y=2669.548mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.154mil &lt; 10mil) Between Pad U2-7(732mil,1099.303mil) on Top Layer And Via (730mil,1155mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.154mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1794.125mil|Location2.X=1805.375mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1794.125mil|Location2.X=1805.375mil|Location1.Y=3294.375mil|Location2.Y=3305.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.5mil &lt; 10mil) Between Pad U3-5(772mil,1769.736mil) on Top Layer And Via (820mil,1770mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.5mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1764.966mil|Location2.X=1776.216mil|Location1.Y=3121.743mil|Location2.Y=3132.993mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1764.966mil|Location2.X=1776.216mil|Location1.Y=3121.743mil|Location2.Y=3132.993mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.736mil &lt; 10mil) Between Pad U3-8(772mil,1619.736mil) on Top Layer And Via (770.591mil,1575mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.736mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2584.65mil|Location2.Y=2595.9mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2584.65mil|Location2.Y=2595.9mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-1(612.205mil,1044.527mil) on Top Layer And Pad U5-2(612.205mil,1076.023mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1488.47mil|Location2.X=1499.72mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1488.47mil|Location2.X=1499.72mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-10(509.843mil,1335.866mil) on Top Layer And Pad U5-11(478.347mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1519.966mil|Location2.X=1531.216mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1519.966mil|Location2.X=1531.216mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-10(509.843mil,1335.866mil) on Top Layer And Pad U5-9(541.339mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1456.974mil|Location2.X=1468.224mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1456.974mil|Location2.X=1468.224mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-11(478.347mil,1335.866mil) on Top Layer And Pad U5-12(446.851mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1425.478mil|Location2.X=1436.728mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1425.478mil|Location2.X=1436.728mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-12(446.851mil,1335.866mil) on Top Layer And Pad U5-13(415.355mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.982mil|Location2.X=1405.232mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.982mil|Location2.X=1405.232mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-13(415.355mil,1335.866mil) on Top Layer And Pad U5-14(383.859mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1362.486mil|Location2.X=1373.736mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1362.486mil|Location2.X=1373.736mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-14(383.859mil,1335.866mil) on Top Layer And Pad U5-15(352.363mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.989mil|Location2.X=1342.239mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.989mil|Location2.X=1342.239mil|Location1.Y=2808.997mil|Location2.Y=2820.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-15(352.363mil,1335.866mil) on Top Layer And Pad U5-16(320.866mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2773.627mil|Location2.Y=2784.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2773.627mil|Location2.Y=2784.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-17(250mil,1265mil) on Top Layer And Pad U5-18(250mil,1233.504mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2742.131mil|Location2.Y=2753.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2742.131mil|Location2.Y=2753.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-18(250mil,1233.504mil) on Top Layer And Pad U5-19(250mil,1202.008mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2710.635mil|Location2.Y=2721.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2710.635mil|Location2.Y=2721.885mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-19(250mil,1202.008mil) on Top Layer And Pad U5-20(250mil,1170.512mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2616.146mil|Location2.Y=2627.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2616.146mil|Location2.Y=2627.396mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-2(612.205mil,1076.023mil) on Top Layer And Pad U5-3(612.205mil,1107.519mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2679.139mil|Location2.Y=2690.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2679.139mil|Location2.Y=2690.389mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-20(250mil,1170.512mil) on Top Layer And Pad U5-21(250mil,1139.015mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2647.642mil|Location2.Y=2658.892mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2647.642mil|Location2.Y=2658.892mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-21(250mil,1139.015mil) on Top Layer And Pad U5-22(250mil,1107.519mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1300.497mil|Location2.X=1311.747mil|Location1.Y=2656.265mil|Location2.Y=2667.515mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1300.497mil|Location2.X=1311.747mil|Location1.Y=2656.265mil|Location2.Y=2667.515mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.756mil &lt; 10mil) Between Pad U5-21(250mil,1139.015mil) on Top Layer And Via (330mil,1131.89mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.756mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2616.146mil|Location2.Y=2627.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2616.146mil|Location2.Y=2627.396mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-22(250mil,1107.519mil) on Top Layer And Pad U5-23(250mil,1076.023mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2584.65mil|Location2.Y=2595.9mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1193.131mil|Location2.X=1204.381mil|Location1.Y=2584.65mil|Location2.Y=2595.9mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-23(250mil,1076.023mil) on Top Layer And Pad U5-24(250mil,1044.527mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1300.497mil|Location2.X=1311.747mil|Location1.Y=2599.375mil|Location2.Y=2610.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1300.497mil|Location2.X=1311.747mil|Location1.Y=2599.375mil|Location2.Y=2610.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.756mil &lt; 10mil) Between Pad U5-23(250mil,1076.023mil) on Top Layer And Via (330mil,1075mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.756mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.989mil|Location2.X=1342.239mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.989mil|Location2.X=1342.239mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-25(320.866mil,973.661mil) on Top Layer And Pad U5-26(352.362mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1362.485mil|Location2.X=1373.735mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1362.485mil|Location2.X=1373.735mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-26(352.362mil,973.661mil) on Top Layer And Pad U5-27(383.858mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.981mil|Location2.X=1405.231mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.981mil|Location2.X=1405.231mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-27(383.858mil,973.661mil) on Top Layer And Pad U5-28(415.354mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1425.477mil|Location2.X=1436.727mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1425.477mil|Location2.X=1436.727mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-28(415.354mil,973.661mil) on Top Layer And Pad U5-29(446.851mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1456.974mil|Location2.X=1468.224mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1456.974mil|Location2.X=1468.224mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-29(446.851mil,973.661mil) on Top Layer And Pad U5-30(478.347mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2647.642mil|Location2.Y=2658.892mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2647.642mil|Location2.Y=2658.892mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-3(612.205mil,1107.519mil) on Top Layer And Pad U5-4(612.205mil,1139.015mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1488.47mil|Location2.X=1499.72mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1488.47mil|Location2.X=1499.72mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-30(478.347mil,973.661mil) on Top Layer And Pad U5-31(509.843mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1484.375mil|Location2.X=1495.625mil|Location1.Y=2442.583mil|Location2.Y=2453.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1484.375mil|Location2.X=1495.625mil|Location1.Y=2442.583mil|Location2.Y=2453.833mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.417mil &lt; 10mil) Between Pad U5-30(478.347mil,973.661mil) on Top Layer And Via (490mil,895mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.417mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1519.966mil|Location2.X=1531.216mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1519.966mil|Location2.X=1531.216mil|Location1.Y=2446.792mil|Location2.Y=2458.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-31(509.843mil,973.661mil) on Top Layer And Pad U5-32(541.339mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1491.011mil|Location2.X=1502.261mil|Location1.Y=2442.206mil|Location2.Y=2453.456mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1491.011mil|Location2.X=1502.261mil|Location1.Y=2442.206mil|Location2.Y=2453.456mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.551mil &lt; 10mil) Between Pad U5-31(509.843mil,973.661mil) on Top Layer And Via (490mil,895mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.551mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1518.554mil|Location2.X=1529.804mil|Location1.Y=2444.774mil|Location2.Y=2456.024mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1518.554mil|Location2.X=1529.804mil|Location1.Y=2444.774mil|Location2.Y=2456.024mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.368mil &lt; 10mil) Between Pad U5-31(509.843mil,973.661mil) on Top Layer And Via (541.339mil,906.339mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.368mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2679.138mil|Location2.Y=2690.388mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2679.138mil|Location2.Y=2690.388mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-4(612.205mil,1139.015mil) on Top Layer And Pad U5-5(612.205mil,1170.511mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2710.634mil|Location2.Y=2721.884mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2710.634mil|Location2.Y=2721.884mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-5(612.205mil,1170.511mil) on Top Layer And Pad U5-6(612.205mil,1202.007mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1552.028mil|Location2.X=1563.278mil|Location1.Y=2704.375mil|Location2.Y=2715.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1552.028mil|Location2.X=1563.278mil|Location1.Y=2704.375mil|Location2.Y=2715.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.617mil &lt; 10mil) Between Pad U5-5(612.205mil,1170.511mil) on Top Layer And Via (535.344mil,1180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.617mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2742.131mil|Location2.Y=2753.381mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2742.131mil|Location2.Y=2753.381mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-6(612.205mil,1202.007mil) on Top Layer And Pad U5-7(612.205mil,1233.504mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1551.361mil|Location2.X=1562.611mil|Location1.Y=2712.936mil|Location2.Y=2724.186mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1551.361mil|Location2.X=1562.611mil|Location1.Y=2712.936mil|Location2.Y=2724.186mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.549mil &lt; 10mil) Between Pad U5-6(612.205mil,1202.007mil) on Top Layer And Via (535.344mil,1180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.549mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2773.627mil|Location2.Y=2784.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1555.336mil|Location2.X=1566.586mil|Location1.Y=2773.627mil|Location2.Y=2784.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.748mil &lt; 10mil) Between Pad U5-7(612.205mil,1233.504mil) on Top Layer And Pad U5-8(612.205mil,1265mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2460.456mil|Location2.X=2471.706mil|Location1.Y=2986.614mil|Location2.Y=2997.864mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2460.456mil|Location2.X=2471.706mil|Location1.Y=2986.614mil|Location2.Y=2997.864mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.13mil &lt; 10mil) Between Pad U6-10(1443.15mil,1449.528mil) on Top Layer And Via (1480mil,1480mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.13mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.882mil|Location2.X=2432.132mil|Location1.Y=3024.552mil|Location2.Y=3035.802mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2420.882mil|Location2.X=2432.132mil|Location1.Y=3024.552mil|Location2.Y=3035.802mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (5.131mil &lt; 10mil) Between Pad U6-11(1415.591mil,1477.087mil) on Top Layer And Via (1435mil,1520mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [5.131mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2380.142mil|Location2.X=2391.392mil|Location1.Y=3023.257mil|Location2.Y=3034.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2380.142mil|Location2.X=2391.392mil|Location1.Y=3023.257mil|Location2.Y=3034.507mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.177mil &lt; 10mil) Between Pad U6-12(1395.906mil,1477.087mil) on Top Layer And Via (1381.461mil,1518.504mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.177mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2613.875mil|Location2.X=2625.125mil|Location1.Y=2244.111mil|Location2.Y=2255.361mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2613.875mil|Location2.X=2625.125mil|Location1.Y=2244.111mil|Location2.Y=2255.361mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7mil &lt; 10mil) Between Via (1597mil,719.736mil) from Top Layer to Bottom Layer And Via (1642mil,719.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7mil] / [Bottom Solder] Mask Sliver [7mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1506.512mil|Location2.X=1517.762mil|Location1.Y=2704.221mil|Location2.Y=2715.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1506.512mil|Location2.X=1517.762mil|Location1.Y=2704.221mil|Location2.Y=2715.471mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.414mil &lt; 10mil) Between Via (488.931mil,1179.691mil) from Top Layer to Bottom Layer And Via (535.344mil,1180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.414mil] / [Bottom Solder] Mask Sliver [8.414mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDPPRH5DXMWJAZNOUWVGYUQTXWSNOSAA3U3RECINPBXFJC3CBPSQTF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=3.937mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2738.181mil|Location2.X=2741.806mil|Location1.Y=3168.188mil|Location2.Y=3171.812mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2738.181mil|Location2.X=2741.806mil|Location1.Y=3168.188mil|Location2.Y=3171.812mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 3.937mil) Between Pad C13-2(1756.85mil,1660mil) on Top Layer And Text "C24" (1680.013mil,1625.005mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2398.183mil|Location2.X=2401.807mil|Location1.Y=3788.201mil|Location2.Y=3791.825mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2398.183mil|Location2.X=2401.807mil|Location1.Y=3788.201mil|Location2.Y=3791.825mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 3.937mil) Between Pad C17-2(1295mil,2229.606mil) on Top Layer And Text "C35" (1370.005mil,2339.987mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2530.957mil|Location2.X=2534.582mil|Location1.Y=3320.184mil|Location2.Y=3323.809mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2530.957mil|Location2.X=2534.582mil|Location1.Y=3320.184mil|Location2.Y=3323.809mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 3.937mil) Between Pad U4-3(1540mil,1860mil) on Top Layer And Text "C16" (1512.776mil,1767.005mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDQQRIMKHHWOJWYYA1EJRTG4DVMVLBPJPWKIPB0DII0GE3MHRJUJH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=3.937mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1925.698mil|Location2.X=1929.323mil|Location1.Y=3119.803mil|Location2.Y=3123.428mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1925.698mil|Location2.X=1929.323mil|Location1.Y=3119.803mil|Location2.Y=3123.428mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 3.937mil) Between Text "R11" (927.51mil,1560.005mil) on Top Overlay And Track (807mil,1594.736mil)(947mil,1594.736mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1942.425mil|Location2.X=1946.049mil|Location1.Y=3120.009mil|Location2.Y=3123.634mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1942.425mil|Location2.X=1946.049mil|Location1.Y=3120.009mil|Location2.Y=3123.634mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 3.937mil) Between Text "R11" (927.51mil,1560.005mil) on Top Overlay And Track (947mil,1594.736mil)(947mil,1794.736mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDBUJZDKHYXNDCIVZ00HXTBSZARESJ3SQXLVYJ10PC2QQQIGCXNRGK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Board Clearance Constraint (Gap=0mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4953.667mil|Location2.X=4961.333mil|Location1.Y=3553.592mil|Location2.Y=3561.259mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Experimental.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4953.667mil|Location2.X=4961.333mil|Location1.Y=3553.592mil|Location2.Y=3561.259mil|Absolute=True">Board Outline Clearance(Outline Edge): (Collision &lt; 10mil) Between Board Edge And Text "Rules:
+Try to keep 0.5mm (19.685 mil) clearance
+0.4mm (15.748 mil) needed for some SMT pads
+0.3mm (11.811 mil) needed for QFM" (2670mil,1770mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
