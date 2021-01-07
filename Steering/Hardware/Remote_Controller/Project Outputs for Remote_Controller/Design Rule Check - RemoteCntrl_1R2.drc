@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : F:\Git\2020-srw-rc-car\Steering\Hardware\Remote_Controller\RemoteCntrl_1R2.PcbDoc
-Date     : 19/12/2020
-Time     : 9:12:23 p.m.
+Date     : 6/01/2021
+Time     : 5:59:13 p.m.
 
 Processing Rule : Clearance Constraint (Gap=0.3mm) (All),(All)
 Rule Violations :0
@@ -28,8 +28,7 @@ Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (
 Rule Violations :0
 
 Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=8mm) (All)
-   Violation between Hole Size Constraint: (9.1mm > 8mm) Via (109.22mm,84.582mm) from Top Layer to Bottom Layer Actual Hole Size = 9.1mm
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
 Rule Violations :0
@@ -141,6 +140,6 @@ Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (Al
 Rule Violations :0
 
 
-Violations Detected : 92
+Violations Detected : 91
 Waived Violations : 0
-Time Elapsed        : 00:00:01
+Time Elapsed        : 00:00:02
