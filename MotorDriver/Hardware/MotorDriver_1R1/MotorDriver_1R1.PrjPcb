@@ -162,6 +162,10 @@ DocumentUniqueId=
 DocumentPath=Project Outputs for MotorDriver_1R1\Design Rule Check - MotorDriver_Experimental.html
 DItemRevisionGUID=
 
+[GeneratedDocument2]
+DocumentPath=Project Outputs for MotorDriver_1R1\Design Rule Check - MotorDriver_Final_V1.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0

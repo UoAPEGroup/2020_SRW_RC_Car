@@ -1,0 +1,125 @@
+Protel Design System Design Rule Check
+PCB File : C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Final_V1.0.PcbDoc
+Date     : 8/01/2021
+Time     : 1:29:07 PM
+
+Processing Rule : Clearance Constraint (Gap=11.811mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=11.811mil) (Max=39.37mil) (Preferred=19.685mil) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=19.685mil) (Max=393.701mil) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=10mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=10mil) (All),(All)
+   Violation between Minimum Solder Mask Sliver Constraint: (3.85mil < 10mil) Between Pad C11-1(869.008mil,749.736mil) on Top Layer And Via (882mil,829.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.85mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.418mil < 10mil) Between Pad C11-2(994.992mil,749.736mil) on Top Layer And Via (1052mil,709.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.418mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.732mil < 10mil) Between Pad C13-1(1853.15mil,1705mil) on Top Layer And Pad C14-1(1865mil,1776.85mil) on Top Layer [Top Solder] Mask Sliver [8.732mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (5.071mil < 10mil) Between Pad C16-1(1536.85mil,1720mil) on Top Layer And Pad C24-1(1536.85mil,1640mil) on Top Layer [Top Solder] Mask Sliver [5.071mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (5.071mil < 10mil) Between Pad C16-2(1643.15mil,1720mil) on Top Layer And Pad C24-2(1643.15mil,1640mil) on Top Layer [Top Solder] Mask Sliver [5.071mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.626mil < 10mil) Between Pad C20-1(1005mil,1930.394mil) on Top Layer And Via (865mil,1845mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.626mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.536mil < 10mil) Between Pad C24-2(1643.15mil,1640mil) on Top Layer And Via (1645mil,1575mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.536mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.536mil < 10mil) Between Pad C34-1(585mil,701.85mil) on Top Layer And Via (520mil,698.425mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.536mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (2.197mil < 10mil) Between Pad C35-2(1380mil,2483.15mil) on Top Layer And Via (1380mil,2530mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.197mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (9.575mil < 10mil) Between Pad Q4-8(1532mil,899.736mil) on Top Layer And Via (1467mil,879.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.575mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (5.945mil < 10mil) Between Pad R15-1(1212.433mil,1509.736mil) on Top Layer And Via (1265mil,1525mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [5.945mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.945mil < 10mil) Between Pad R16-2(155mil,1164.567mil) on Top Layer And Via (155mil,1110mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.945mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.945mil < 10mil) Between Pad R3-2(1402.433mil,784.736mil) on Top Layer And Via (1457mil,784.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.945mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.209mil < 10mil) Between Pad R5-1(665mil,564.567mil) on Top Layer And Via (687mil,509.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.209mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (3.457mil < 10mil) Between Pad U1-11(882mil,374.736mil) on Top Layer And Via (882mil,319.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.457mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.159mil < 10mil) Between Pad U1-12(932mil,374.736mil) on Top Layer And Via (935.702mil,316.034mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.159mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (3.024mil < 10mil) Between Pad U1-2(982mil,589.303mil) on Top Layer And Via (982mil,534.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.024mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (3.89mil < 10mil) Between Pad U1-6(782mil,589.303mil) on Top Layer And Via (782mil,644.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.89mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (3.457mil < 10mil) Between Pad U2-11(882mil,884.736mil) on Top Layer And Via (882mil,829.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [3.457mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (4.154mil < 10mil) Between Pad U2-7(732mil,1099.303mil) on Top Layer And Via (730mil,1155mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.154mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (2.5mil < 10mil) Between Pad U3-5(772mil,1769.736mil) on Top Layer And Via (820mil,1770mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.5mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (6.736mil < 10mil) Between Pad U3-8(772mil,1619.736mil) on Top Layer And Via (770.591mil,1575mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.736mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-1(612.205mil,1044.527mil) on Top Layer And Pad U5-2(612.205mil,1076.023mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-10(509.843mil,1335.866mil) on Top Layer And Pad U5-11(478.347mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-10(509.843mil,1335.866mil) on Top Layer And Pad U5-9(541.339mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-11(478.347mil,1335.866mil) on Top Layer And Pad U5-12(446.851mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-12(446.851mil,1335.866mil) on Top Layer And Pad U5-13(415.355mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-13(415.355mil,1335.866mil) on Top Layer And Pad U5-14(383.859mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-14(383.859mil,1335.866mil) on Top Layer And Pad U5-15(352.363mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-15(352.363mil,1335.866mil) on Top Layer And Pad U5-16(320.866mil,1335.866mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-17(250mil,1265mil) on Top Layer And Pad U5-18(250mil,1233.504mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-18(250mil,1233.504mil) on Top Layer And Pad U5-19(250mil,1202.008mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-19(250mil,1202.008mil) on Top Layer And Pad U5-20(250mil,1170.512mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-2(612.205mil,1076.023mil) on Top Layer And Pad U5-3(612.205mil,1107.519mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-20(250mil,1170.512mil) on Top Layer And Pad U5-21(250mil,1139.015mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-21(250mil,1139.015mil) on Top Layer And Pad U5-22(250mil,1107.519mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (9.756mil < 10mil) Between Pad U5-21(250mil,1139.015mil) on Top Layer And Via (330mil,1131.89mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.756mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-22(250mil,1107.519mil) on Top Layer And Pad U5-23(250mil,1076.023mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-23(250mil,1076.023mil) on Top Layer And Pad U5-24(250mil,1044.527mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (9.756mil < 10mil) Between Pad U5-23(250mil,1076.023mil) on Top Layer And Via (330mil,1075mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.756mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-25(320.866mil,973.661mil) on Top Layer And Pad U5-26(352.362mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-26(352.362mil,973.661mil) on Top Layer And Pad U5-27(383.858mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-27(383.858mil,973.661mil) on Top Layer And Pad U5-28(415.354mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-28(415.354mil,973.661mil) on Top Layer And Pad U5-29(446.851mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-29(446.851mil,973.661mil) on Top Layer And Pad U5-30(478.347mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-3(612.205mil,1107.519mil) on Top Layer And Pad U5-4(612.205mil,1139.015mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-30(478.347mil,973.661mil) on Top Layer And Pad U5-31(509.843mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.417mil < 10mil) Between Pad U5-30(478.347mil,973.661mil) on Top Layer And Via (490mil,895mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.417mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-31(509.843mil,973.661mil) on Top Layer And Pad U5-32(541.339mil,973.661mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (9.552mil < 10mil) Between Pad U5-31(509.843mil,973.661mil) on Top Layer And Via (490mil,895mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.551mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (6.368mil < 10mil) Between Pad U5-31(509.843mil,973.661mil) on Top Layer And Via (541.339mil,906.339mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.368mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-4(612.205mil,1139.015mil) on Top Layer And Pad U5-5(612.205mil,1170.511mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-5(612.205mil,1170.511mil) on Top Layer And Pad U5-6(612.205mil,1202.007mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (6.617mil < 10mil) Between Pad U5-5(612.205mil,1170.511mil) on Top Layer And Via (535.344mil,1180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.617mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-6(612.205mil,1202.007mil) on Top Layer And Pad U5-7(612.205mil,1233.504mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.549mil < 10mil) Between Pad U5-6(612.205mil,1202.007mil) on Top Layer And Via (535.344mil,1180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.549mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.748mil < 10mil) Between Pad U5-7(612.205mil,1233.504mil) on Top Layer And Pad U5-8(612.205mil,1265mil) on Top Layer [Top Solder] Mask Sliver [7.748mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7.13mil < 10mil) Between Pad U6-10(1443.15mil,1449.528mil) on Top Layer And Via (1480mil,1480mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.13mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (5.131mil < 10mil) Between Pad U6-11(1415.591mil,1477.087mil) on Top Layer And Via (1435mil,1520mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [5.131mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (2.177mil < 10mil) Between Pad U6-12(1395.906mil,1477.087mil) on Top Layer And Via (1381.461mil,1518.504mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.177mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (7mil < 10mil) Between Via (1597mil,719.736mil) from Top Layer to Bottom Layer And Via (1642mil,719.736mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7mil] / [Bottom Solder] Mask Sliver [7mil]
+   Violation between Minimum Solder Mask Sliver Constraint: (8.415mil < 10mil) Between Via (488.931mil,1179.691mil) from Top Layer to Bottom Layer And Via (535.344mil,1180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.414mil] / [Bottom Solder] Mask Sliver [8.414mil]
+Rule Violations :62
+
+Processing Rule : Silk To Solder Mask (Clearance=3.937mil) (IsPad),(All)
+   Violation between Silk To Solder Mask Clearance Constraint: (2.605mil < 3.937mil) Between Pad U4-1(1740mil,1860mil) on Top Layer And Text "C13" (1722.512mil,1755.005mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [2.605mil]
+Rule Violations :1
+
+Processing Rule : Silk to Silk (Clearance=3.937mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mil) (All)
+Rule Violations :0
+
+Processing Rule : Board Clearance Constraint (Gap=0mil) (All)
+   Violation between Board Outline Clearance(Outline Edge): (Collision < 10mil) Between Board Edge And Text "Notes:
+QFM current sensor is a BIG bottleneck in layout and current flow. Sadly unavoidable?
+
+Not happy with MCU placement and Vin sensor, but space limitations require it? It leaves Vin very vulnerable to noise! However, no room for traverse on bottom layer.
+
+Space limitations sadly mean board must be very compact. How will we mount? Leave vias for bolts? Worst case we can just tap holes once PCB manufactured.
+" (2665mil,445mil) on Top Layer 
+   Violation between Board Outline Clearance(Outline Edge): (Collision < 10mil) Between Board Edge And Text "Rules:
+Try to keep 0.5mm (19.685 mil) clearance
+0.4mm (15.748 mil) needed for some SMT pads
+0.3mm (11.811 mil) needed for QFM" (2670mil,1982.253mil) on Top Layer 
+Rule Violations :2
+
+Processing Rule : Height Constraint (Min=0mil) (Max=3937.008mil) (Prefered=500mil) (All)
+Rule Violations :0
+
+
+Violations Detected : 65
+Waived Violations : 0
+Time Elapsed        : 00:00:01
