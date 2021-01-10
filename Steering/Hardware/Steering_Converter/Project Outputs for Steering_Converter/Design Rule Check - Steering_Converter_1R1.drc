@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : F:\Git\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_1R1.PcbDoc
 Date     : 7/01/2021
-Time     : 2:40:39 p.m.
+Time     : 2:52:05 p.m.
 
 Processing Rule : Clearance Constraint (Gap=0.5mm) (All),(All)
 Rule Violations :0
@@ -79,4 +79,4 @@ Rule Violations :0
 
 Violations Detected : 31
 Waived Violations : 0
-Time Elapsed        : 00:00:02
+Time Elapsed        : 00:00:01
