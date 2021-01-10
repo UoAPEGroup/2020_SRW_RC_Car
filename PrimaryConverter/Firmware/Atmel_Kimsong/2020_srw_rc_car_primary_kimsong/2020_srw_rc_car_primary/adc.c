@@ -7,8 +7,22 @@
 
 #include "adc.h"
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
+//ADC read counters
+uint8_t voltage_counter = 0;
+uint8_t current_counter = 0;
+uint8_t temp1_counter = 0;
+uint8_t temp2_counter = 0;
+uint8_t temp3_counter = 0;
+
+//ADC transfer booleans
+bool adc_full[ADC_used] = {false}; //set all booleans to false 
+
+//ADC read arrays
+uint8_t adc_voltage[SAMPLING_SIZE];
+uint8_t adc_current[SAMPLING_SIZE];
+uint8_t adc_temp1[SAMPLING_SIZE];
+uint8_t adc_temp2[SAMPLING_SIZE];
+uint8_t adc_temp3[SAMPLING_SIZE];
 
 ISR(ADC_vect) {
 	if (voltage_counter < SAMPLING_SIZE) {
@@ -63,6 +77,12 @@ uint16_t adc_read(uint8_t channel) {
 
 //convert the raw adc value to original value by multiplying with Vstep in mV
 uint32_t adc_convert(uint16_t raw_ADC) {  
-	uint32_t original_V = raw_ADC*(3300/1024);  //reference voltage 3300mV (Vcc), amplitude interval 2^10 = 1024
+	uint32_t original_V = raw_ADC*(V_ref/A_int);  //reference voltage, amplitude interval
 	return original_V;							
+}
+
+void transmit_adc_average(uint8_t bool_arr[], uint8_t adc0_arr[], uint8_t adc1_arr[], uint8_t adc2_arr[], uint8_t adc3_arr[], uint8_t adc4_arr[],) {
+	if (bool_arr[0] == true) {
+		
+	}
 }
