@@ -134,6 +134,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="functions.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="functions.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -141,6 +153,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer0.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer1.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer2.c">

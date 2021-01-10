@@ -17,6 +17,7 @@
 #define ADC_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 //ADC read counters
 uint8_t voltage_counter = 0;
@@ -24,6 +25,13 @@ uint8_t current_counter = 0;
 uint8_t temp1_counter = 0;
 uint8_t temp2_counter = 0;
 uint8_t temp3_counter = 0;
+
+//ADC transfer booleans
+bool adc0_full = false;
+bool adc1_full = false;
+bool adc2_full = false;
+bool adc3_full = false;
+bool adc4_full = false;
 
 //ADC read arrays
 uint8_t adc_voltage[SAMPLING_SIZE];

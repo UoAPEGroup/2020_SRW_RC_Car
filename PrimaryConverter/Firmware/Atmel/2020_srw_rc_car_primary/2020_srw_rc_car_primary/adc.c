@@ -24,11 +24,11 @@ ISR(ADC_vect) {
 		temp1_counter++;
 	}
 	else if (temp2_counter < SAMPLING_SIZE) {
-		adc_temp2[temp1_counter] = adc_convert(adc_read(ADC3));
+		adc_temp2[temp2_counter] = adc_convert(adc_read(ADC3));
 		temp2_counter++;
 	}
 	else if (temp3_counter < SAMPLING_SIZE) {
-		adc_temp3[temp1_counter] = adc_convert(adc_read(ADC4));
+		adc_temp3[temp3_counter] = adc_convert(adc_read(ADC4));
 		temp3_counter++;
 	}
 	//reset all counters to 0
@@ -49,7 +49,7 @@ void adc_init() {
 	ADCSRA |= (1<<ADIE); //ADC interrupt enabled
 	ADCSRA |= (1<<ADPS2) | (1<<ADPS0); //ADC prescaler = 32, system clock = 8Mhz, adc clock = 250kHz
 	
-	ADCSRB |= (1<<ADTS2) | (1<<ADTS1); //ADC auto trigger source = Timer/Counter1 overflow
+	ADCSRB |= (1<<ADTS2) | (1<<ADTS0); //ADC auto trigger source = Timer/Counter1 compare match B
 	
 	sei(); //enable global interrupt
 }
