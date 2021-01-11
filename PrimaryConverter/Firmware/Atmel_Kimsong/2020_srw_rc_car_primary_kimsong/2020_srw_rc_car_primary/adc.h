@@ -30,6 +30,7 @@ void adc_init();
 uint16_t adc_read(uint8_t channel);
 uint32_t adc_convert(uint16_t raw_ADC); //convert the raw adc value to original value by multiplying with Vstep
 
-void transmit_adc_average(uint8_t arr[]); //get and then transmit the average value from the array of adc readings
+void adc_readings_average(); //calculate the average values from their respective array of adc readings
+void get_adc_averages(uint8_t *arr[]); //get the array of average values from the adc readings
 
 #endif /* ADC_H_ */

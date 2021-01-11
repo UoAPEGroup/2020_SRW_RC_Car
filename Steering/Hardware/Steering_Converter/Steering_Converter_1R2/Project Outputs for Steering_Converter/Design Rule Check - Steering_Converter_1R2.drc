@@ -1,12 +1,12 @@
 Protel Design System Design Rule Check
-PCB File : F:\Git\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_1R2\Steering_Converter_1R2.PcbDoc
-Date     : 11/01/2021
-Time     : 6:27:05 p.m.
+PCB File : \\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_1R2\Steering_Converter_1R2.PcbDoc
+Date     : 12/01/2021
+Time     : 10:58:36 am
 
 Processing Rule : Clearance Constraint (Gap=0.5mm) (All),(All)
 Rule Violations :0
 
-Processing Rule : Clearance Constraint (Gap=0.4mm) (InNamedPolygon('3V3_L01_P001') Or InNamedPolygon('GND_L02_P003')),(All)
+Processing Rule : Clearance Constraint (Gap=0.4mm) (InNamedPolygon('NONET_L01_P001') Or InNamedPolygon('GND_L02_P003')),(All)
 Rule Violations :0
 
 Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
@@ -45,14 +45,7 @@ Rule Violations :0
 Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
 Rule Violations :0
 
-Waived Violations Of Rule : Silk To Solder Mask (Clearance=0.2mm) (IsPad),(All)
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.15mm < 0.2mm) Between Pad C1-1(167.005mm,52.236mm) on Top Layer And Track (166.005mm,52.686mm)(166.005mm,53.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]Waived by Neil Patil at 10/01/2021 9:59:56 a.m.Capacitor footprint
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.15mm < 0.2mm) Between Pad C1-1(167.005mm,52.236mm) on Top Layer And Track (168.005mm,52.686mm)(168.005mm,53.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]Waived by Neil Patil at 10/01/2021 9:59:56 a.m.Capacitor footprint
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.15mm < 0.2mm) Between Pad C1-2(167.005mm,53.936mm) on Top Layer And Track (166.005mm,52.686mm)(166.005mm,53.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]Waived by Neil Patil at 10/01/2021 9:59:56 a.m.Capacitor footprint
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.15mm < 0.2mm) Between Pad C1-2(167.005mm,53.936mm) on Top Layer And Track (168.005mm,52.686mm)(168.005mm,53.486mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]Waived by Neil Patil at 10/01/2021 9:59:56 a.m.Capacitor footprint
-Waived Violations :4
-
 
 Violations Detected : 0
-Waived Violations : 4
-Time Elapsed        : 00:00:02
+Waived Violations : 0
+Time Elapsed        : 00:00:01
