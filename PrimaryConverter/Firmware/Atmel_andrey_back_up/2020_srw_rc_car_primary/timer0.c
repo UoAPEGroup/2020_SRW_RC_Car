@@ -17,3 +17,8 @@ void timer0_init(uint8_t period, uint8_t duty_cycle)
 	OCR0A = period;								
 	OCR0B = duty_cycle;							
 }
+
+void timer0_set_OCR0B(uint8_t value)
+{
+	OCR0B = value;
+}

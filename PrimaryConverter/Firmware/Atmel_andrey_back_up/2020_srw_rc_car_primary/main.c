@@ -19,7 +19,6 @@
 int main(void)
 {
 	io_init();
-	//timer_control_set_duty(26);
 	timer_control_init();
 	adc_init();
 	usart0_init(9600);
@@ -27,8 +26,8 @@ int main(void)
 	
     while (1) 
     {
-		usart0_transmit_data(1, 2, 3, 4, 5);
-		_delay_ms(500);
+		//usart0_transmit_data(1, 2, 3, 4, 5);
+		//_delay_ms(500);
 	}
 }
 
