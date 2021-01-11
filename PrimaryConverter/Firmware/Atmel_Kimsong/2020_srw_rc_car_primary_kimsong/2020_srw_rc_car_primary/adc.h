@@ -5,6 +5,11 @@
  *  Author: Kimsong Lor
  */ 
 
+#define V_ref 3300 //reference voltage 3300mV (Vcc)
+#define A_int 1024 //amplitude interval 2^10 = 1024
+
+#define ADC_used 5 //number of adc channels in use
+
 #define ADC0 0 //adc channel 0
 #define ADC1 1 //adc channel 1
 #define ADC2 2 //adc channel 2
@@ -18,30 +23,13 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-
-//ADC read counters
-uint8_t voltage_counter = 0;
-uint8_t current_counter = 0;
-uint8_t temp1_counter = 0;
-uint8_t temp2_counter = 0;
-uint8_t temp3_counter = 0;
-
-//ADC transfer booleans
-bool adc0_full = false;
-bool adc1_full = false;
-bool adc2_full = false;
-bool adc3_full = false;
-bool adc4_full = false;
-
-//ADC read arrays
-uint8_t adc_voltage[SAMPLING_SIZE];
-uint8_t adc_current[SAMPLING_SIZE];
-uint8_t adc_temp1[SAMPLING_SIZE];
-uint8_t adc_temp2[SAMPLING_SIZE];
-uint8_t adc_temp3[SAMPLING_SIZE];
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
 void adc_init();
 uint16_t adc_read(uint8_t channel);
 uint32_t adc_convert(uint16_t raw_ADC); //convert the raw adc value to original value by multiplying with Vstep
+
+void transmit_adc_average(uint8_t arr[]); //get and then transmit the average value from the array of adc readings
 
 #endif /* ADC_H_ */

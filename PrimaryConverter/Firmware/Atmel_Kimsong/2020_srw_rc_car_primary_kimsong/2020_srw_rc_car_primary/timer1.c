@@ -5,6 +5,8 @@
  *  Author: Kimsong Lor
  */ 
 
+#include "timer1.h"
+
 ISR(TIMER1_COMPB_vect) {
 	;
 }
