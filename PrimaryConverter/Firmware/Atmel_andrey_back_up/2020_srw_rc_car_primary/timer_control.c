@@ -39,9 +39,3 @@ void timer_control_set_duty_on_user(uint8_t duty_cycle)
 		timer0_set_OCR0B(calc_make_OCRnB(period, duty_cycle));
 		timer2_set_OCR2B(calc_make_OCRnB(period, duty_cycle));	
 }
-
-//TEST
-uint8_t get_duty()
-{
-	return duty_cycle;
-}

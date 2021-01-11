@@ -12,9 +12,5 @@
 void timer_control_init();
 void timer_control_set_duty_on_user(uint8_t duty_cycle);
 
-//TEST 
-uint8_t get_duty();
-
-
 
 #endif /* TIMER_CONTROL_H_ */

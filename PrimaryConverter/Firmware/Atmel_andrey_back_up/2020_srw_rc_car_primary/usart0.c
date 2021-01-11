@@ -18,10 +18,10 @@
 #include "calc.h"
 
 #define TX_BUFFER		20
-#define RX_BUFFER		3
+#define RX_BUFFER		4
 
 static volatile uint8_t RX_counter  = 0;
-static char RX_data_buffer[RX_BUFFER];
+static volatile uint8_t RX_data_buffer[RX_BUFFER];
 
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
@@ -83,12 +83,13 @@ ISR(USART0_RX_vect) {
 	RX_counter++;		
 	
 	if (RX_counter > 2) {
+		RX_counter = 0;
 		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
 		timer_control_set_duty_on_user(duty_cycle);							//set duty cycle
-		RX_counter = 0;
+		
+		//TEST_PRINT 
 		char test[100];
-		uint8_t duty = get_duty();
-		sprintf(test, "duty cycle = %ld; OCR0B = %ld; OCR2B = %ld\n\r", duty, OCR0B, OCR2B);
+		sprintf(test, "buffer = %d%d%d\n\rduty cycle = %ld\n\rOCR0B = %ld\n\rOCR2B = %ld\n\r", RX_data_buffer[0], RX_data_buffer[1], RX_data_buffer[2], duty_cycle, OCR0B, OCR2B);
 		usart0_transmit_string(test);
 	}
 }
