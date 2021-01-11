@@ -37,9 +37,7 @@ void adc_init()
 
 //ADC conversion complete ISR		(TEST: top to bottom ~11us)
 ISR(ADC_vect)
-{	
-	//led_on();
-	
+{
 	if (adc_read_count < 10) {
 		TIMER1_COMPB_CLR;
 		temp1_adc[adc_read_count] = ADC;								
@@ -86,6 +84,4 @@ ISR(ADC_vect)
 		ADC_CH_TEMP1;
 		adc_read_count = 0;
 	}
-	
-	//led_off(); 
 }

@@ -10,9 +10,10 @@
 #define TIMER_CONTROL_H_
 
 void timer_control_init();
-void timer_control_set_duty(uint8_t duty_cycle_input);
-void timer_control_set_duty_on_user(uint8_t instruction);
+void timer_control_set_duty_on_user(uint8_t duty_cycle);
 
+//TEST 
+uint8_t get_duty();
 
 
 

@@ -15,21 +15,26 @@
 
 #include "usart0.h"
 #include "timer_control.h"
+#include "calc.h"
 
 #define TX_BUFFER		20
+#define RX_BUFFER		3
+
+static volatile uint8_t RX_counter  = 0;
+static char RX_data_buffer[RX_BUFFER];
 
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
 {
-	UCSR0A |= 0x00;									//clear all bits
-	UCSR0B |= (1 << RXCIE0);						//enable RX complete interrupt
-	//UCSR0B |= (1 << TXCIE0);						//enable TX complete interrupt
-	//UCSR0B |= (1 << UDRIE0);						//enable TX data register empty interrupt
-	UCSR0B |= (1 << RXEN0);							//receiver enable
-	UCSR0B |= (1 << TXEN0);							//transmitter enable
-	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));		//8-bit packet size
-	UCSR0C &= ~(1 << UCPOL0);						//clear polarity bit - not used
-	UBRR0 = F_CPU / (16 * BAUD) - 1;				//set UBRR
+	UCSR0A |= 0x00;															//clear all bits
+	UCSR0B |= (1 << RXCIE0);												//enable RX complete interrupt
+	//UCSR0B |= (1 << TXCIE0);												//enable TX complete interrupt
+	//UCSR0B |= (1 << UDRIE0);												//enable TX data register empty interrupt
+	UCSR0B |= (1 << RXEN0);													//receiver enable
+	UCSR0B |= (1 << TXEN0);													//transmitter enable
+	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));								//8-bit packet size
+	UCSR0C &= ~(1 << UCPOL0);												//clear polarity bit - not used
+	UBRR0 = F_CPU / (16 * BAUD) - 1;										//set UBRR
 }
 
 //transmit one byte of data
@@ -74,7 +79,16 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 
 //on receive complete interrupt
 ISR(USART0_RX_vect) {
-	uint8_t instruction = UDR0;							//get instruction from usart0 on user TX
+	RX_data_buffer[RX_counter] = UDR0;										//record byte from usart0 on user TX
+	RX_counter++;		
 	
-	timer_control_set_duty_on_user(instruction);		//set duty cycle 
+	if (RX_counter > 2) {
+		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
+		timer_control_set_duty_on_user(duty_cycle);							//set duty cycle
+		RX_counter = 0;
+		char test[100];
+		uint8_t duty = get_duty();
+		sprintf(test, "duty cycle = %ld; OCR0B = %ld; OCR2B = %ld\n\r", duty, OCR0B, OCR2B);
+		usart0_transmit_string(test);
+	}
 }

@@ -10,6 +10,7 @@
 #define TIMER2_H_
 
 void timer2_init(uint8_t period, uint8_t duty_cycle);
+void timer2_set_OCR2B(uint8_t value);
 
 
 
