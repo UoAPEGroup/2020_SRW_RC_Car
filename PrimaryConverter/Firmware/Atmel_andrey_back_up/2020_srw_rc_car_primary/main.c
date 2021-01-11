@@ -26,8 +26,9 @@ int main(void)
 	
     while (1) 
     {
-		//usart0_transmit_data(1, 2, 3, 4, 5);
-		//_delay_ms(500);
+		usart0_transmit_data(1, 2, 3, 4, 5);
+		usart0_transmit_pwmtest();
+		_delay_ms(1000);
 	}
 }
 

@@ -19,6 +19,7 @@
 
 #define TX_BUFFER		20
 #define RX_BUFFER		4
+#define ASCII_OFF		48
 
 static volatile uint8_t RX_counter  = 0;
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
@@ -77,6 +78,27 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 	usart0_transmit_string(buffer_vsens);
 }
 
+//transmit test data for generated PWM waves
+void usart0_transmit_pwmtest()
+{
+	char test_message[100];
+	sprintf(test_message,	"***	PWM_TEST	***\n\r"
+							"RX_BUF		= %d%d%d\n\r"
+							"DUTY_CYC	= %d\n\r"
+							"OCR0B		= %d\n\r"
+							"OCR2B		= %d\n\r"
+							"***	TEST_END	***\n\r",
+				
+							RX_data_buffer[0] - ASCII_OFF, 
+							RX_data_buffer[1] - ASCII_OFF, 
+							RX_data_buffer[2] - ASCII_OFF, 
+							timer_control_get_duty(), 
+							OCR0B, 
+							OCR2B);
+							
+	usart0_transmit_string(test_message);
+}
+
 //on receive complete interrupt
 ISR(USART0_RX_vect) {
 	RX_data_buffer[RX_counter] = UDR0;										//record byte from usart0 on user TX
@@ -86,10 +108,5 @@ ISR(USART0_RX_vect) {
 		RX_counter = 0;
 		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
 		timer_control_set_duty_on_user(duty_cycle);							//set duty cycle
-		
-		//TEST_PRINT 
-		char test[100];
-		sprintf(test, "buffer = %d%d%d\n\rduty cycle = %ld\n\rOCR0B = %ld\n\rOCR2B = %ld\n\r", RX_data_buffer[0], RX_data_buffer[1], RX_data_buffer[2], duty_cycle, OCR0B, OCR2B);
-		usart0_transmit_string(test);
 	}
 }
