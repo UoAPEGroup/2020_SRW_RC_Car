@@ -26,9 +26,11 @@ int main(void)
 	
     while (1) 
     {
-		usart0_transmit_data(1, 2, 3, 4, 5);
-		usart0_transmit_pwmtest();
-		_delay_ms(1000);
+		if (usart0_get_TX_flag()) {
+			usart0_clr_TX_flag();
+			usart0_transmit_data(1, 2, 3, 4, 5);
+			usart0_transmit_pwmtest();	
+		}
 	}
 }
 

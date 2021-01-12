@@ -9,7 +9,6 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -23,6 +22,7 @@
 
 static volatile uint8_t RX_counter  = 0;
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
+static volatile bool usart0_TX_flag = false;
 
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
@@ -56,7 +56,7 @@ void usart0_transmit_string(char *string)
 	}
 }
 
-//transmit formatted data 
+//transmit formatted ADC data 
 void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32_t isens, uint32_t vsens)
 {
 	char buffer_temp1[TX_BUFFER];						
@@ -71,6 +71,7 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 	sprintf(buffer_isens, "ISENS:	%ld\n\r", isens);
 	sprintf(buffer_vsens, "VSENS:	%ld\n\r\n\r", vsens);
 	
+	usart0_transmit_string("ADC_DATA\n\r--------\n\r");
 	usart0_transmit_string(buffer_temp1);
 	usart0_transmit_string(buffer_temp2);
 	usart0_transmit_string(buffer_temp3);
@@ -81,13 +82,13 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 //transmit test data for generated PWM waves
 void usart0_transmit_pwmtest()
 {
-	char test_message[100];
-	sprintf(test_message,	"***	PWM_TEST	***\n\r"
+	char test_message[500];
+	sprintf(test_message,	"PWM_TEST\n\r"
+							"--------\n\r"
 							"RX_BUF		= %d%d%d\n\r"
 							"DUTY_CYC	= %d\n\r"
 							"OCR0B		= %d\n\r"
-							"OCR2B		= %d\n\r"
-							"***	TEST_END	***\n\r",
+							"OCR2B		= %d\n\r\n\r",
 				
 							RX_data_buffer[0] - ASCII_OFF, 
 							RX_data_buffer[1] - ASCII_OFF, 
@@ -97,6 +98,22 @@ void usart0_transmit_pwmtest()
 							OCR2B);
 							
 	usart0_transmit_string(test_message);
+}
+
+//set, clear,get usart0 TX flag
+void usart0_set_TX_flag()
+{
+	usart0_TX_flag = true;
+}
+
+void usart0_clr_TX_flag()
+{
+	usart0_TX_flag = false;	
+}
+
+bool usart0_get_TX_flag()
+{
+	return usart0_TX_flag;
 }
 
 //on receive complete interrupt

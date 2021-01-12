@@ -10,6 +10,7 @@
 #include "timer0.h"
 #include "timer1.h"
 #include "timer2.h"
+#include "timer3.h"
 #include "calc.h"
 
 #define OFFSET	34														//180deg out of phase (26 + 4 * 2)													
@@ -25,12 +26,14 @@ void timer_control_init()
 	timer0_init(period, duty_cycle);									//configure timer0
 	timer1_init();
 	timer2_init(period, duty_cycle);									//configure timer2
+	timer3_init();
 	
 	GTCCR = 0;															//release all timers
 	
 	TCNT0 = 0;															//set value for timer0
 	TCNT1 = 0;															//set value for timer1
 	TCNT2 = OFFSET;														//set value for timer2
+	TCNT3 = 0;															//set value for timer3
 }
 
 //set duty cycle on user TX via usart0
