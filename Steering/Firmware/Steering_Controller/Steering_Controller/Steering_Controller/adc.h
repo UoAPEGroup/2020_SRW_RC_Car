@@ -10,8 +10,8 @@
 #define ADC_H_
 
 #include "global.h"
-#include "stdint.h"
 
+void adc_init();
 
 
 #endif /* ADC_H_ */

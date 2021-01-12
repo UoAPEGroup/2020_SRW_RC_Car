@@ -13,5 +13,4 @@ void timer1_init()
 	TCCR1B |= (1 << CS10);					//no prescale
 	
 	OCR1A = 799;							//period = 1/8MHz * (799 + 1) = 0.1ms					
-	OCR1B = 399;
 }

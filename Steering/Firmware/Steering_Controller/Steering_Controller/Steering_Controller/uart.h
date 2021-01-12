@@ -12,8 +12,7 @@
 #include "global.h"
 
 void uart_init();
-
-
+void tx_debug();
 
 
 #endif /* UART_H_ */
