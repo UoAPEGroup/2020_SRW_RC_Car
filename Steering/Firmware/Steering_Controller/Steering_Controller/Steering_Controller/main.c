@@ -9,16 +9,18 @@
 #include "adc.h"
 #include "timer.h"
 #include "uart.h"
+#include "control.h"
 #include "instructions_macros.h"
 
-char test;
+
 
 ISR(USART0_RX_vect){
-	test = UDR0;
-	if (test == 97){
+	input_data = UDR0;
+	if (input_data == STATIONARY){
 		PORTB ^= (1<<5);
 	}
-	tx_debug();
+	tx_debug(input_data);
+	read_data(input_data);
 }
 
 int main(void)

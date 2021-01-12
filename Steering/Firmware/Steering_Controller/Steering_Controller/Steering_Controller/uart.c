@@ -14,3 +14,7 @@ void uart_init(){
 	UBRR0 = 51; // 9600 BAUD RATE
 	UCSR0C = (1 << 2)|(1 << 1); // 8 Bit Frame 
 }
+
+void tx_debug(char output){
+	UDR0 = output;
+}
