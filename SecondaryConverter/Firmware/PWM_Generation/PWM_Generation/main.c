@@ -14,7 +14,7 @@ int main(void)
 	//Need to make a duty cycle controlled PWM to drive the MOSFET.
 	//Also develop the PI controller
 	
-	//Configuring PD5 as output for the PWM.
+	//Configuring PD6 as output for the PWM.
 	DDRD |= (1<<PD6);
 	
 	timer0_init(80); //Made the PWM duty Cycle controlled. 0 to 100.
