@@ -9,6 +9,7 @@
 #include "adc.h"
 #include "timer.h"
 #include "uart.h"
+#include "instructions_macros.h"
 
 char test;
 
