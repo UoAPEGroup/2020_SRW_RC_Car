@@ -32,7 +32,7 @@ void adc_init()
 	ADCSRA |= (1 << ADATE);												//enable auto-triggering
 	ADCSRA |= (1 << ADIE);												//enable conversion complete interrupt
 	ADCSRA |= ((1 << ADPS2) | (1 << ADPS0));							//set /32 prescaler -> ADC clk = 250kHz
-	ADCSRB |= ((1 << ADTS2) | (1 << ADTS0));							//start conversion on timer1 overflow
+	ADCSRB |= ((1 << ADTS2) | (1 << ADTS0));							//start conversion on timer1 OCR1B
 }
 
 //ADC conversion complete ISR		(TEST: top to bottom ~11us)
