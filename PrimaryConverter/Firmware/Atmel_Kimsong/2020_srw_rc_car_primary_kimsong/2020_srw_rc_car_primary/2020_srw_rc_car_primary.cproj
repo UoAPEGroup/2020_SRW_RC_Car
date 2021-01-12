@@ -140,6 +140,9 @@
     <Compile Include="adc.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="common.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="functions.c">
       <SubType>compile</SubType>
     </Compile>
@@ -171,6 +174,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer_control.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usart0.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usart0.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

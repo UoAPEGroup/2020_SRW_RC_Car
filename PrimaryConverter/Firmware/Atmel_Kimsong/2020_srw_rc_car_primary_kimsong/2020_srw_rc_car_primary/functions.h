@@ -10,6 +10,6 @@
 
 #include <stdint.h>
 
-uint8_t calc_average(uint8_t arr[]); //calculate the average value of the values in an array
+uint32_t calc_average(uint32_t arr[]); //calculate the average value of the values in an array
 
 #endif /* FUNCTIONS_H_ */

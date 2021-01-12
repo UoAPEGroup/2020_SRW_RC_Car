@@ -1,0 +1,7 @@
+TYPE			INSTRUCTION			HEX	BIN
+PWM TIM CONTROL		set duty cycle to 0%		0x31	1		
+PWM TIM CONTROL		set duty cycle to 11%		0x32	2
+PWM TIM CONTROL		set duty cycle to 25%		0x33	3
+PWM TIM CONTROL		set duty cycle to 35%		0x34	4
+PWM TIM CONTROL		set duty cycle to 50%		0x35	5
+

@@ -7,6 +7,7 @@
 
 #include "adc.h"
 #include "functions.h"
+#include "usart0.h"
 
 //ADC read counters
 volatile uint8_t voltage_counter = 0;
@@ -19,12 +20,12 @@ volatile uint8_t temp3_counter = 0;
 bool adc_full[ADC_used] = {false}; //set all booleans to false 
 
 //ADC read arrays
-uint8_t adc_voltage[SAMPLING_SIZE];
-uint8_t adc_current[SAMPLING_SIZE];
-uint8_t adc_temp1[SAMPLING_SIZE];
-uint8_t adc_temp2[SAMPLING_SIZE];
-uint8_t adc_temp3[SAMPLING_SIZE];
-uint8_t adc_averages[ADC_used] = {0};
+uint32_t adc_voltage[SAMPLING_SIZE]; //mV
+uint32_t adc_current[SAMPLING_SIZE]; //mA
+uint32_t adc_temp1[SAMPLING_SIZE]; //mV
+uint32_t adc_temp2[SAMPLING_SIZE]; //mV
+uint32_t adc_temp3[SAMPLING_SIZE]; //mV
+uint32_t adc_averages[ADC_used] = {0};
 
 ISR(ADC_vect) {
 	if (voltage_counter < SAMPLING_SIZE) {
@@ -121,9 +122,9 @@ void adc_readings_average() {
 	}
 }
 
-void get_adc_averages(uint8_t *arr[]) {
+void get_adc_averages(uint32_t arr[]) {
 	adc_readings_average();
 	for (uint8_t i = 0; i < ADC_used; i++) {
-		*arr[i] = adc_averages[i];
+		arr[i] = adc_averages[i];
 	}
 }

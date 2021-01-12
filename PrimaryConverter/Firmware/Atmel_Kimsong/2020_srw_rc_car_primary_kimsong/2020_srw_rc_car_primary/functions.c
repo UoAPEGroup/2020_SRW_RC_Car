@@ -8,11 +8,11 @@
 #include "functions.h"
 #include "adc.h"
 
-uint8_t calc_average(uint8_t arr[]) {
-	uint16_t temp = 0;
+uint32_t calc_average(uint32_t arr[]) {
+	uint32_t temp = 0;
 	for(uint8_t i = 0; i < SAMPLING_SIZE; i++) {
 		temp = temp + arr[i];
 	}
-	uint8_t result = (uint8_t)(temp/SAMPLING_SIZE);
+	uint32_t result = (uint32_t)(temp/SAMPLING_SIZE);
 	return result;
 }

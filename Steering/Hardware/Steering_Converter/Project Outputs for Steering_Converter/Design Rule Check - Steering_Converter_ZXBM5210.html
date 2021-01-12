@@ -1,0 +1,661 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD20\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">16/12/2020</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10:36:24 am</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc" class="file"><acronym title="\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc">\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">107</td></tr>
+</table>
+</td>
+</table><a name="ID0EL3ONRQ2ZRQIJUSU1UZZBZNAPR02JSO2VB2MEJKEVB0CF3DF1VH"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2FJSPNDMO2J0H5X32QABRMIB5GANMXF0T4TNBYNBTE1YQWY52ORO">Clearance Constraint (Gap=0.5mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOQS2GSHKMXNXKXSA424NQVOW0DT4BW00HVPTLAC4WW32KTVCAICB">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIGCNWH3ATQ2RJDSSULHFY10EJJ3X3RPG3FWK02EAAK5KCV2QTXEE">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDD42OXLY5PRSUMBZ5TPBKR1A0TEU3ANPAWOQDTMB0DWT3UEZ42A0G">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWE0LTF1ABBF1LI3AFZV43PJAOHUUUJKFLTDXLREXUCNLH13TG4RN">Width Constraint (Min=0.4mm) (Max=0.4mm) (Preferred=0.4mm) (All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFNOZEIV33VVSCKRJ5OOERKSFBEQ3N45TJXVJCJT5BUTPKHGMSOK">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDH3JNVHJNW3IYLFUFOYH2ZDJQLNG0PVMSIAUKRCBCPDLZJDORUHBN">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDCR2OS4BWLT1K50OTRVNR4VVSF3DGOAW4BEESSF2OGC3YFJ5D0JJ">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDC3VSQGRUFNV0PBAQDQABQE1TIY0ZHFZW5QOHBMSEVDPJ3JNVV0M">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">40</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJE23Q1QPIZJOFNXFRZTTOOOLGCRTPAKURIXYUQMKNXRZPKIFLEQO">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">61</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMRT21UDGQTDEJLTN4QFKJ40R3EERPOAX2WKKIHOQSYJYUYNH335M">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">5</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDF4KEPUFGNKC0PVRQLOC1N1OIRP4A3JNFHVE1KBGW1WXLER1YUBXN">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHOKUM30Q1U1LLYD1W43FG4TYRLHHDMLW1UB1IAI4G0VR5ILBAGKL">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">107</td>
+</tr>
+</table><br><a name="IDWE0LTF1ABBF1LI3AFZV43PJAOHUUUJKFLTDXLREXUCNLH13TG4RN"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=0.4mm) (Max=0.4mm) (Preferred=0.4mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5763.658mil|Location2.X=5801.76mil|Location1.Y=1143.658mil|Location2.Y=1166.342mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5763.658mil|Location2.X=5801.76mil|Location1.Y=1143.658mil|Location2.Y=1166.342mil|Absolute=True">Width Constraint: Track (146.558mm,29.337mm)(146.812mm,29.337mm) on Bottom Layer Actual Width = 0.5mm, Target Width = 0.4mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDC3VSQGRUFNV0PBAQDQABQE1TIY0ZHFZW5QOHBMSEVDPJ3JNVV0M"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5655.91mil|Location2.X=5667.16mil|Location1.Y=2080.847mil|Location2.Y=2092.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5655.91mil|Location2.X=5667.16mil|Location1.Y=2080.847mil|Location2.Y=2092.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C10-1(142.953mm,53.848mm) on Top Layer And Pad C10-2(144.653mm,53.848mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5385.91mil|Location2.X=5397.16mil|Location1.Y=1370.848mil|Location2.Y=1382.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5385.91mil|Location2.X=5397.16mil|Location1.Y=1370.848mil|Location2.Y=1382.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C1-1(137.795mm,35.814mm) on Top Layer And Pad C1-2(136.095mm,35.814mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5937.84mil|Location2.X=5949.09mil|Location1.Y=2150.847mil|Location2.Y=2162.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5937.84mil|Location2.X=5949.09mil|Location1.Y=2150.847mil|Location2.Y=2162.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C11-1(151.814mm,55.626mm) on Top Layer And Pad C11-2(150.114mm,55.626mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6300.847mil|Location2.X=6312.097mil|Location1.Y=1982.84mil|Location2.Y=1994.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6300.847mil|Location2.X=6312.097mil|Location1.Y=1982.84mil|Location2.Y=1994.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C12-1(161.036mm,51.357mm) on Bottom Layer And Pad C12-2(161.036mm,49.657mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5859.375mil|Location2.X=5870.625mil|Location1.Y=1240.848mil|Location2.Y=1252.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5859.375mil|Location2.X=5870.625mil|Location1.Y=1240.848mil|Location2.Y=1252.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C13-1(148.121mm,32.512mm) on Top Layer And Pad C13-2(149.821mm,32.512mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6054.375mil|Location2.X=6065.625mil|Location1.Y=1435.848mil|Location2.Y=1447.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6054.375mil|Location2.X=6065.625mil|Location1.Y=1435.848mil|Location2.Y=1447.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C2-1(154.774mm,37.465mm) on Top Layer And Pad C2-2(153.074mm,37.465mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6052.84mil|Location2.X=6064.09mil|Location1.Y=1345.848mil|Location2.Y=1357.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6052.84mil|Location2.X=6064.09mil|Location1.Y=1345.848mil|Location2.Y=1357.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C3-1(154.735mm,35.179mm) on Top Layer And Pad C3-2(153.035mm,35.179mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6060.91mil|Location2.X=6072.16mil|Location1.Y=1245.848mil|Location2.Y=1257.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6060.91mil|Location2.X=6072.16mil|Location1.Y=1245.848mil|Location2.Y=1257.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C4-1(154.94mm,32.639mm) on Top Layer And Pad C4-2(153.24mm,32.639mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5883.351mil|Location2.X=5894.601mil|Location1.Y=1585.659mil|Location2.Y=1596.909mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5883.351mil|Location2.X=5894.601mil|Location1.Y=1585.659mil|Location2.Y=1596.909mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C5-1(150.43mm,41.27mm) on Top Layer And Pad C5-2(148.73mm,41.27mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6089.375mil|Location2.X=6100.625mil|Location1.Y=1575.848mil|Location2.Y=1587.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6089.375mil|Location2.X=6100.625mil|Location1.Y=1575.848mil|Location2.Y=1587.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C6-1(155.663mm,41.021mm) on Top Layer And Pad C6-2(153.963mm,41.021mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5759.375mil|Location2.X=5770.625mil|Location1.Y=2200.847mil|Location2.Y=2212.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5759.375mil|Location2.X=5770.625mil|Location1.Y=2200.847mil|Location2.Y=2212.097mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C7-1(145.581mm,56.896mm) on Bottom Layer And Pad C7-2(147.281mm,56.896mm) on Bottom Layer [Bottom Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5729.375mil|Location2.X=5740.625mil|Location1.Y=1585.848mil|Location2.Y=1597.098mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5729.375mil|Location2.X=5740.625mil|Location1.Y=1585.848mil|Location2.Y=1597.098mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad C8-1(144.819mm,41.275mm) on Top Layer And Pad C8-2(146.519mm,41.275mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5963.863mil|Location2.X=5975.113mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5963.863mil|Location2.X=5975.113mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-1(152.025mm,53.087mm) on Top Layer And Pad U1-2(151.225mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1966.304mil|Location2.Y=1977.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1966.304mil|Location2.Y=1977.554mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-10(144.625mm,50.487mm) on Top Layer And Pad U1-11(144.625mm,49.687mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1997.8mil|Location2.Y=2009.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1997.8mil|Location2.Y=2009.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-10(144.625mm,50.487mm) on Top Layer And Pad U1-9(144.625mm,51.287mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1934.808mil|Location2.Y=1946.058mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1934.808mil|Location2.Y=1946.058mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-11(144.625mm,49.687mm) on Top Layer And Pad U1-12(144.625mm,48.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1903.312mil|Location2.Y=1914.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1903.312mil|Location2.Y=1914.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-12(144.625mm,48.887mm) on Top Layer And Pad U1-13(144.625mm,48.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1871.816mil|Location2.Y=1883.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1871.816mil|Location2.Y=1883.066mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-13(144.625mm,48.087mm) on Top Layer And Pad U1-14(144.625mm,47.287mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1840.32mil|Location2.Y=1851.57mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1840.32mil|Location2.Y=1851.57mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-14(144.625mm,47.287mm) on Top Layer And Pad U1-15(144.625mm,46.487mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1808.824mil|Location2.Y=1820.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5637.028mil|Location2.X=5648.278mil|Location1.Y=1808.824mil|Location2.Y=1820.074mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-15(144.625mm,46.487mm) on Top Layer And Pad U1-16(144.625mm,45.687mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5774.886mil|Location2.X=5786.136mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5774.886mil|Location2.X=5786.136mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-17(146.425mm,43.887mm) on Top Layer And Pad U1-18(147.225mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5806.382mil|Location2.X=5817.632mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5806.382mil|Location2.X=5817.632mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-18(147.225mm,43.887mm) on Top Layer And Pad U1-19(148.025mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5837.878mil|Location2.X=5849.128mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5837.878mil|Location2.X=5849.128mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-19(148.025mm,43.887mm) on Top Layer And Pad U1-20(148.825mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5932.367mil|Location2.X=5943.617mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5932.367mil|Location2.X=5943.617mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-2(151.225mm,53.087mm) on Top Layer And Pad U1-3(150.425mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5869.375mil|Location2.X=5880.625mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5869.375mil|Location2.X=5880.625mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-20(148.825mm,43.887mm) on Top Layer And Pad U1-21(149.625mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5900.871mil|Location2.X=5912.121mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5900.871mil|Location2.X=5912.121mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-21(149.625mm,43.887mm) on Top Layer And Pad U1-22(150.425mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5932.367mil|Location2.X=5943.617mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5932.367mil|Location2.X=5943.617mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-22(150.425mm,43.887mm) on Top Layer And Pad U1-23(151.225mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5963.863mil|Location2.X=5975.113mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5963.863mil|Location2.X=5975.113mil|Location1.Y=1670.965mil|Location2.Y=1682.215mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-23(151.225mm,43.887mm) on Top Layer And Pad U1-24(152.025mm,43.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1808.823mil|Location2.Y=1820.073mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1808.823mil|Location2.Y=1820.073mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-25(153.825mm,45.687mm) on Top Layer And Pad U1-26(153.825mm,46.487mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1840.319mil|Location2.Y=1851.569mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1840.319mil|Location2.Y=1851.569mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-26(153.825mm,46.487mm) on Top Layer And Pad U1-27(153.825mm,47.287mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1871.815mil|Location2.Y=1883.065mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1871.815mil|Location2.Y=1883.065mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-27(153.825mm,47.287mm) on Top Layer And Pad U1-28(153.825mm,48.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1903.312mil|Location2.Y=1914.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1903.312mil|Location2.Y=1914.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-28(153.825mm,48.087mm) on Top Layer And Pad U1-29(153.825mm,48.887mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1934.808mil|Location2.Y=1946.058mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1934.808mil|Location2.Y=1946.058mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-29(153.825mm,48.887mm) on Top Layer And Pad U1-30(153.825mm,49.687mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5900.871mil|Location2.X=5912.121mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5900.871mil|Location2.X=5912.121mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-3(150.425mm,53.087mm) on Top Layer And Pad U1-4(149.625mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1966.304mil|Location2.Y=1977.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1966.304mil|Location2.Y=1977.554mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-30(153.825mm,49.687mm) on Top Layer And Pad U1-31(153.825mm,50.487mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1997.8mil|Location2.Y=2009.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5999.233mil|Location2.X=6010.483mil|Location1.Y=1997.8mil|Location2.Y=2009.05mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-31(153.825mm,50.487mm) on Top Layer And Pad U1-32(153.825mm,51.287mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5869.375mil|Location2.X=5880.625mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5869.375mil|Location2.X=5880.625mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-4(149.625mm,53.087mm) on Top Layer And Pad U1-5(148.825mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5837.879mil|Location2.X=5849.129mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5837.879mil|Location2.X=5849.129mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-5(148.825mm,53.087mm) on Top Layer And Pad U1-6(148.025mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5806.383mil|Location2.X=5817.633mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5806.383mil|Location2.X=5817.633mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-6(148.025mm,53.087mm) on Top Layer And Pad U1-7(147.225mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5774.887mil|Location2.X=5786.137mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5774.887mil|Location2.X=5786.137mil|Location1.Y=2033.17mil|Location2.Y=2044.42mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.197mm &lt; 0.254mm) Between Pad U1-7(147.225mm,53.087mm) on Top Layer And Pad U1-8(146.425mm,53.087mm) on Top Layer [Top Solder] Mask Sliver [0.197mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJE23Q1QPIZJOFNXFRZTTOOOLGCRTPAKURIXYUQMKNXRZPKIFLEQO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5992.584mil|Location2.X=6003.834mil|Location1.Y=1384.572mil|Location2.Y=1395.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5992.584mil|Location2.X=6003.834mil|Location1.Y=1384.572mil|Location2.Y=1395.822mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.061mm &lt; 0.254mm) Between Arc (152.074mm,35.311mm) on Top Overlay And Pad C3-2(153.035mm,35.179mm) on Top Layer [Top Overlay] to [Top Solder] clearance [0.061mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5648.036mil|Location2.X=5659.286mil|Location1.Y=2081.895mil|Location2.Y=2093.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5648.036mil|Location2.X=5659.286mil|Location1.Y=2081.895mil|Location2.Y=2093.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C10-1(142.953mm,53.848mm) on Top Layer And Track (143.403mm,52.848mm)(144.203mm,52.848mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5648.036mil|Location2.X=5659.286mil|Location1.Y=2146.855mil|Location2.Y=2158.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5648.036mil|Location2.X=5659.286mil|Location1.Y=2146.855mil|Location2.Y=2158.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C10-1(142.953mm,53.848mm) on Top Layer And Track (143.403mm,54.848mm)(144.203mm,54.848mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5663.784mil|Location2.X=5675.034mil|Location1.Y=2081.895mil|Location2.Y=2093.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5663.784mil|Location2.X=5675.034mil|Location1.Y=2081.895mil|Location2.Y=2093.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C10-2(144.653mm,53.848mm) on Top Layer And Track (143.403mm,52.848mm)(144.203mm,52.848mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5663.784mil|Location2.X=5675.034mil|Location1.Y=2146.855mil|Location2.Y=2158.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5663.784mil|Location2.X=5675.034mil|Location1.Y=2146.855mil|Location2.Y=2158.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C10-2(144.653mm,53.848mm) on Top Layer And Track (143.403mm,54.848mm)(144.203mm,54.848mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.784mil|Location2.X=5405.034mil|Location1.Y=1371.895mil|Location2.Y=1383.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.784mil|Location2.X=5405.034mil|Location1.Y=1371.895mil|Location2.Y=1383.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C1-1(137.795mm,35.814mm) on Top Layer And Track (136.545mm,34.814mm)(137.345mm,34.814mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.784mil|Location2.X=5405.034mil|Location1.Y=1436.855mil|Location2.Y=1448.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5393.784mil|Location2.X=5405.034mil|Location1.Y=1436.855mil|Location2.Y=1448.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C1-1(137.795mm,35.814mm) on Top Layer And Track (136.545mm,36.814mm)(137.345mm,36.814mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.458mil|Location2.X=5966.125mil|Location1.Y=2203.057mil|Location2.Y=2210.723mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.458mil|Location2.X=5966.125mil|Location1.Y=2203.057mil|Location2.Y=2210.723mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C11-1(151.814mm,55.626mm) on Top Layer And Track (140.082mm,56.055mm)(156.082mm,56.055mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5945.714mil|Location2.X=5956.964mil|Location1.Y=2151.895mil|Location2.Y=2163.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5945.714mil|Location2.X=5956.964mil|Location1.Y=2151.895mil|Location2.Y=2163.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C11-1(151.814mm,55.626mm) on Top Layer And Track (150.564mm,54.626mm)(151.364mm,54.626mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5945.714mil|Location2.X=5956.964mil|Location1.Y=2216.855mil|Location2.Y=2228.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5945.714mil|Location2.X=5956.964mil|Location1.Y=2216.855mil|Location2.Y=2228.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C11-1(151.814mm,55.626mm) on Top Layer And Track (150.564mm,56.626mm)(151.364mm,56.626mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5891.529mil|Location2.X=5899.195mil|Location1.Y=2203.057mil|Location2.Y=2210.723mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5891.529mil|Location2.X=5899.195mil|Location1.Y=2203.057mil|Location2.Y=2210.723mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C11-2(150.114mm,55.626mm) on Top Layer And Track (140.082mm,56.055mm)(156.082mm,56.055mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5929.966mil|Location2.X=5941.216mil|Location1.Y=2151.895mil|Location2.Y=2163.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5929.966mil|Location2.X=5941.216mil|Location1.Y=2151.895mil|Location2.Y=2163.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C11-2(150.114mm,55.626mm) on Top Layer And Track (150.564mm,54.626mm)(151.364mm,54.626mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5929.966mil|Location2.X=5941.216mil|Location1.Y=2216.855mil|Location2.Y=2228.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5929.966mil|Location2.X=5941.216mil|Location1.Y=2216.855mil|Location2.Y=2228.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C11-2(150.114mm,55.626mm) on Top Layer And Track (150.564mm,56.626mm)(151.364mm,56.626mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5378.036mil|Location2.X=5389.286mil|Location1.Y=1371.895mil|Location2.Y=1383.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5378.036mil|Location2.X=5389.286mil|Location1.Y=1371.895mil|Location2.Y=1383.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C1-2(136.095mm,35.814mm) on Top Layer And Track (136.545mm,34.814mm)(137.345mm,34.814mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5378.036mil|Location2.X=5389.286mil|Location1.Y=1436.855mil|Location2.Y=1448.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5378.036mil|Location2.X=5389.286mil|Location1.Y=1436.855mil|Location2.Y=1448.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C1-2(136.095mm,35.814mm) on Top Layer And Track (136.545mm,36.814mm)(137.345mm,36.814mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6301.895mil|Location2.X=6313.145mil|Location1.Y=1990.714mil|Location2.Y=2001.964mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6301.895mil|Location2.X=6313.145mil|Location1.Y=1990.714mil|Location2.Y=2001.964mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C12-1(161.036mm,51.357mm) on Bottom Layer And Track (160.036mm,50.107mm)(160.036mm,50.907mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6366.855mil|Location2.X=6378.105mil|Location1.Y=1990.714mil|Location2.Y=2001.964mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6366.855mil|Location2.X=6378.105mil|Location1.Y=1990.714mil|Location2.Y=2001.964mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C12-1(161.036mm,51.357mm) on Bottom Layer And Track (162.036mm,50.107mm)(162.036mm,50.907mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6301.895mil|Location2.X=6313.145mil|Location1.Y=1974.966mil|Location2.Y=1986.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6301.895mil|Location2.X=6313.145mil|Location1.Y=1974.966mil|Location2.Y=1986.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C12-2(161.036mm,49.657mm) on Bottom Layer And Track (160.036mm,50.107mm)(160.036mm,50.907mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6366.855mil|Location2.X=6378.105mil|Location1.Y=1967.092mil|Location2.Y=1978.342mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6366.855mil|Location2.X=6378.105mil|Location1.Y=1967.092mil|Location2.Y=1978.342mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C12-2(161.036mm,49.657mm) on Bottom Layer And Track (162.036mm,50.107mm)(162.036mm,50.907mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5851.501mil|Location2.X=5862.751mil|Location1.Y=1241.895mil|Location2.Y=1253.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5851.501mil|Location2.X=5862.751mil|Location1.Y=1241.895mil|Location2.Y=1253.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C13-1(148.121mm,32.512mm) on Top Layer And Track (148.571mm,31.512mm)(149.371mm,31.512mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5851.501mil|Location2.X=5862.751mil|Location1.Y=1306.855mil|Location2.Y=1318.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5851.501mil|Location2.X=5862.751mil|Location1.Y=1306.855mil|Location2.Y=1318.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C13-1(148.121mm,32.512mm) on Top Layer And Track (148.571mm,33.512mm)(149.371mm,33.512mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5867.249mil|Location2.X=5878.499mil|Location1.Y=1241.895mil|Location2.Y=1253.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5867.249mil|Location2.X=5878.499mil|Location1.Y=1241.895mil|Location2.Y=1253.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C13-2(149.821mm,32.512mm) on Top Layer And Track (148.571mm,31.512mm)(149.371mm,31.512mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5867.249mil|Location2.X=5878.499mil|Location1.Y=1306.855mil|Location2.Y=1318.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5867.249mil|Location2.X=5878.499mil|Location1.Y=1306.855mil|Location2.Y=1318.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C13-2(149.821mm,32.512mm) on Top Layer And Track (148.571mm,33.512mm)(149.371mm,33.512mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6062.249mil|Location2.X=6073.499mil|Location1.Y=1436.895mil|Location2.Y=1448.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6062.249mil|Location2.X=6073.499mil|Location1.Y=1436.895mil|Location2.Y=1448.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C2-1(154.774mm,37.465mm) on Top Layer And Track (153.524mm,36.465mm)(154.324mm,36.465mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6062.249mil|Location2.X=6073.499mil|Location1.Y=1501.855mil|Location2.Y=1513.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6062.249mil|Location2.X=6073.499mil|Location1.Y=1501.855mil|Location2.Y=1513.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C2-1(154.774mm,37.465mm) on Top Layer And Track (153.524mm,38.465mm)(154.324mm,38.465mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6046.501mil|Location2.X=6057.751mil|Location1.Y=1436.895mil|Location2.Y=1448.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6046.501mil|Location2.X=6057.751mil|Location1.Y=1436.895mil|Location2.Y=1448.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C2-2(153.074mm,37.465mm) on Top Layer And Track (153.524mm,36.465mm)(154.324mm,36.465mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6046.501mil|Location2.X=6057.751mil|Location1.Y=1501.855mil|Location2.Y=1513.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6046.501mil|Location2.X=6057.751mil|Location1.Y=1501.855mil|Location2.Y=1513.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C2-2(153.074mm,37.465mm) on Top Layer And Track (153.524mm,38.465mm)(154.324mm,38.465mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6060.714mil|Location2.X=6071.964mil|Location1.Y=1346.895mil|Location2.Y=1358.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6060.714mil|Location2.X=6071.964mil|Location1.Y=1346.895mil|Location2.Y=1358.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C3-1(154.735mm,35.179mm) on Top Layer And Track (153.485mm,34.179mm)(154.285mm,34.179mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6060.714mil|Location2.X=6071.964mil|Location1.Y=1411.855mil|Location2.Y=1423.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6060.714mil|Location2.X=6071.964mil|Location1.Y=1411.855mil|Location2.Y=1423.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C3-1(154.735mm,35.179mm) on Top Layer And Track (153.485mm,36.179mm)(154.285mm,36.179mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6044.966mil|Location2.X=6056.216mil|Location1.Y=1346.895mil|Location2.Y=1358.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6044.966mil|Location2.X=6056.216mil|Location1.Y=1346.895mil|Location2.Y=1358.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C3-2(153.035mm,35.179mm) on Top Layer And Track (153.485mm,34.179mm)(154.285mm,34.179mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6044.966mil|Location2.X=6056.216mil|Location1.Y=1411.855mil|Location2.Y=1423.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6044.966mil|Location2.X=6056.216mil|Location1.Y=1411.855mil|Location2.Y=1423.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C3-2(153.035mm,35.179mm) on Top Layer And Track (153.485mm,36.179mm)(154.285mm,36.179mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6068.784mil|Location2.X=6080.034mil|Location1.Y=1246.895mil|Location2.Y=1258.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6068.784mil|Location2.X=6080.034mil|Location1.Y=1246.895mil|Location2.Y=1258.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C4-1(154.94mm,32.639mm) on Top Layer And Track (153.69mm,31.639mm)(154.49mm,31.639mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6068.784mil|Location2.X=6080.034mil|Location1.Y=1311.855mil|Location2.Y=1323.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6068.784mil|Location2.X=6080.034mil|Location1.Y=1311.855mil|Location2.Y=1323.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C4-1(154.94mm,32.639mm) on Top Layer And Track (153.69mm,33.639mm)(154.49mm,33.639mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6053.036mil|Location2.X=6064.286mil|Location1.Y=1246.895mil|Location2.Y=1258.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6053.036mil|Location2.X=6064.286mil|Location1.Y=1246.895mil|Location2.Y=1258.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C4-2(153.24mm,32.639mm) on Top Layer And Track (153.69mm,31.639mm)(154.49mm,31.639mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6053.036mil|Location2.X=6064.286mil|Location1.Y=1311.855mil|Location2.Y=1323.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6053.036mil|Location2.X=6064.286mil|Location1.Y=1311.855mil|Location2.Y=1323.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C4-2(153.24mm,32.639mm) on Top Layer And Track (153.69mm,33.639mm)(154.49mm,33.639mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5946.423mil|Location2.X=5957.673mil|Location1.Y=1587.867mil|Location2.Y=1601.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5946.423mil|Location2.X=5957.673mil|Location1.Y=1587.867mil|Location2.Y=1601.043mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.223mm &lt; 0.254mm) Between Pad C5-1(150.43mm,41.27mm) on Top Layer And Text "C5" (151.353mm,39.732mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.223mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5891.226mil|Location2.X=5902.476mil|Location1.Y=1586.707mil|Location2.Y=1597.957mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5891.226mil|Location2.X=5902.476mil|Location1.Y=1586.707mil|Location2.Y=1597.957mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C5-1(150.43mm,41.27mm) on Top Layer And Track (149.18mm,40.27mm)(149.98mm,40.27mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5891.226mil|Location2.X=5902.476mil|Location1.Y=1651.667mil|Location2.Y=1662.917mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5891.226mil|Location2.X=5902.476mil|Location1.Y=1651.667mil|Location2.Y=1662.917mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C5-1(150.43mm,41.27mm) on Top Layer And Track (149.18mm,42.27mm)(149.98mm,42.27mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5875.477mil|Location2.X=5886.727mil|Location1.Y=1586.707mil|Location2.Y=1597.957mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5875.477mil|Location2.X=5886.727mil|Location1.Y=1586.707mil|Location2.Y=1597.957mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C5-2(148.73mm,41.27mm) on Top Layer And Track (149.18mm,40.27mm)(149.98mm,40.27mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5875.477mil|Location2.X=5886.727mil|Location1.Y=1651.667mil|Location2.Y=1662.917mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5875.477mil|Location2.X=5886.727mil|Location1.Y=1651.667mil|Location2.Y=1662.917mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C5-2(148.73mm,41.27mm) on Top Layer And Track (149.18mm,42.27mm)(149.98mm,42.27mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6097.249mil|Location2.X=6108.499mil|Location1.Y=1576.895mil|Location2.Y=1588.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6097.249mil|Location2.X=6108.499mil|Location1.Y=1576.895mil|Location2.Y=1588.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C6-1(155.663mm,41.021mm) on Top Layer And Track (154.413mm,40.021mm)(155.213mm,40.021mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6097.249mil|Location2.X=6108.499mil|Location1.Y=1641.855mil|Location2.Y=1653.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6097.249mil|Location2.X=6108.499mil|Location1.Y=1641.855mil|Location2.Y=1653.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C6-1(155.663mm,41.021mm) on Top Layer And Track (154.413mm,42.021mm)(155.213mm,42.021mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6081.501mil|Location2.X=6092.751mil|Location1.Y=1576.895mil|Location2.Y=1588.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6081.501mil|Location2.X=6092.751mil|Location1.Y=1576.895mil|Location2.Y=1588.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C6-2(153.963mm,41.021mm) on Top Layer And Track (154.413mm,40.021mm)(155.213mm,40.021mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6081.501mil|Location2.X=6092.751mil|Location1.Y=1641.855mil|Location2.Y=1653.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6081.501mil|Location2.X=6092.751mil|Location1.Y=1641.855mil|Location2.Y=1653.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C6-2(153.963mm,41.021mm) on Top Layer And Track (154.413mm,42.021mm)(155.213mm,42.021mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5751.501mil|Location2.X=5762.751mil|Location1.Y=2201.895mil|Location2.Y=2213.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5751.501mil|Location2.X=5762.751mil|Location1.Y=2201.895mil|Location2.Y=2213.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C7-1(145.581mm,56.896mm) on Bottom Layer And Track (146.031mm,55.896mm)(146.831mm,55.896mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5751.501mil|Location2.X=5762.751mil|Location1.Y=2266.855mil|Location2.Y=2278.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5751.501mil|Location2.X=5762.751mil|Location1.Y=2266.855mil|Location2.Y=2278.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C7-1(145.581mm,56.896mm) on Bottom Layer And Track (146.031mm,57.896mm)(146.831mm,57.896mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5767.249mil|Location2.X=5778.499mil|Location1.Y=2201.895mil|Location2.Y=2213.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5767.249mil|Location2.X=5778.499mil|Location1.Y=2201.895mil|Location2.Y=2213.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C7-2(147.281mm,56.896mm) on Bottom Layer And Track (146.031mm,55.896mm)(146.831mm,55.896mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5767.249mil|Location2.X=5778.499mil|Location1.Y=2266.855mil|Location2.Y=2278.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5767.249mil|Location2.X=5778.499mil|Location1.Y=2266.855mil|Location2.Y=2278.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C7-2(147.281mm,56.896mm) on Bottom Layer And Track (146.031mm,57.896mm)(146.831mm,57.896mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5721.501mil|Location2.X=5732.751mil|Location1.Y=1586.895mil|Location2.Y=1598.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5721.501mil|Location2.X=5732.751mil|Location1.Y=1586.895mil|Location2.Y=1598.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C8-1(144.819mm,41.275mm) on Top Layer And Track (145.269mm,40.275mm)(146.069mm,40.275mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5721.501mil|Location2.X=5732.751mil|Location1.Y=1651.855mil|Location2.Y=1663.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5721.501mil|Location2.X=5732.751mil|Location1.Y=1651.855mil|Location2.Y=1663.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C8-1(144.819mm,41.275mm) on Top Layer And Track (145.269mm,42.275mm)(146.069mm,42.275mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5737.249mil|Location2.X=5748.499mil|Location1.Y=1586.895mil|Location2.Y=1598.145mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5737.249mil|Location2.X=5748.499mil|Location1.Y=1586.895mil|Location2.Y=1598.145mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C8-2(146.519mm,41.275mm) on Top Layer And Track (145.269mm,40.275mm)(146.069mm,40.275mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5737.249mil|Location2.X=5748.499mil|Location1.Y=1651.855mil|Location2.Y=1663.105mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5737.249mil|Location2.X=5748.499mil|Location1.Y=1651.855mil|Location2.Y=1663.105mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.15mm &lt; 0.254mm) Between Pad C8-2(146.519mm,41.275mm) on Top Layer And Track (145.269mm,42.275mm)(146.069mm,42.275mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.15mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6205.753mil|Location2.X=6217.003mil|Location1.Y=1976.934mil|Location2.Y=1988.184mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6205.753mil|Location2.X=6217.003mil|Location1.Y=1976.934mil|Location2.Y=1988.184mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad R1-1(158.369mm,49.657mm) on Bottom Layer And Track (157.769mm,50.557mm)(158.969mm,50.557mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6255.588mil|Location2.X=6269.142mil|Location1.Y=1992.581mil|Location2.Y=2003.831mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6255.588mil|Location2.X=6269.142mil|Location1.Y=1992.581mil|Location2.Y=2003.831mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.216mm &lt; 0.254mm) Between Pad R1-2(158.369mm,51.457mm) on Bottom Layer And Track (157.769mm,50.557mm)(158.969mm,50.557mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.216mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6097.148mil|Location2.X=6108.398mil|Location1.Y=1733.316mil|Location2.Y=1746.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6097.148mil|Location2.X=6108.398mil|Location1.Y=1733.316mil|Location2.Y=1746.838mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.216mm &lt; 0.254mm) Between Pad R2-1(155.713mm,43.561mm) on Top Layer And Track (154.813mm,42.961mm)(154.813mm,44.161mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.216mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6081.501mil|Location2.X=6092.751mil|Location1.Y=1685.753mil|Location2.Y=1697.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6081.501mil|Location2.X=6092.751mil|Location1.Y=1685.753mil|Location2.Y=1697.003mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.2mm &lt; 0.254mm) Between Pad R2-2(153.913mm,43.561mm) on Top Layer And Track (154.813mm,42.961mm)(154.813mm,44.161mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5648.384mil|Location2.X=5659.634mil|Location1.Y=1781.636mil|Location2.Y=1792.886mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5648.384mil|Location2.X=5659.634mil|Location1.Y=1781.636mil|Location2.Y=1792.886mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.181mm &lt; 0.254mm) Between Pad U1-16(144.625mm,45.687mm) on Top Layer And Text "U1" (143.612mm,44.431mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.181mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5940.241mil|Location2.X=5951.491mil|Location1.Y=2136.363mil|Location2.Y=2147.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5940.241mil|Location2.X=5951.491mil|Location1.Y=2136.363mil|Location2.Y=2147.613mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.239mm &lt; 0.254mm) Between Pad U1-2(151.225mm,53.087mm) on Top Layer And Track (150.564mm,54.626mm)(151.364mm,54.626mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.239mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6065.414mil|Location2.X=6073.081mil|Location1.Y=1794.822mil|Location2.Y=1802.489mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6065.414mil|Location2.X=6073.081mil|Location1.Y=1794.822mil|Location2.Y=1802.489mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-25(153.825mm,45.687mm) on Top Layer And Text "R2" (154.147mm,44.812mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5924.493mil|Location2.X=5935.743mil|Location1.Y=2136.363mil|Location2.Y=2147.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5924.493mil|Location2.X=5935.743mil|Location1.Y=2136.363mil|Location2.Y=2147.613mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.239mm &lt; 0.254mm) Between Pad U1-3(150.425mm,53.087mm) on Top Layer And Track (150.564mm,54.626mm)(151.364mm,54.626mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.239mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.385mil|Location2.X=5969.635mil|Location1.Y=1550.933mil|Location2.Y=1562.183mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5958.385mil|Location2.X=5969.635mil|Location1.Y=1550.933mil|Location2.Y=1562.183mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad U3-4(150.749mm,39.116mm) on Top Layer And Text "C5" (151.353mm,39.732mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMRT21UDGQTDEJLTN4QFKJ40R3EERPOAX2WKKIHOQSYJYUYNH335M"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6492.773mil|Location2.X=6504.023mil|Location1.Y=1764.867mil|Location2.Y=1776.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6492.773mil|Location2.X=6504.023mil|Location1.Y=1764.867mil|Location2.Y=1776.117mil|Absolute=True">Silk To Silk Clearance Constraint: (0.079mm &lt; 0.254mm) Between Text "4" (165.459mm,45.085mm) on Top Overlay And Track (161.141mm,44.831mm)(166.221mm,44.831mm) on Top Overlay Silk Text to Silk Clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6382.277mil|Location2.X=6393.527mil|Location1.Y=1764.867mil|Location2.Y=1776.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6382.277mil|Location2.X=6393.527mil|Location1.Y=1764.867mil|Location2.Y=1776.117mil|Absolute=True">Silk To Silk Clearance Constraint: (0.079mm &lt; 0.254mm) Between Text "8" (162.919mm,45.085mm) on Top Overlay And Track (161.141mm,44.831mm)(166.221mm,44.831mm) on Top Overlay Silk Text to Silk Clearance [0.079mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6051.008mil|Location2.X=6062.258mil|Location1.Y=2192.168mil|Location2.Y=2203.418mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6051.008mil|Location2.X=6062.258mil|Location1.Y=2192.168mil|Location2.Y=2203.418mil|Absolute=True">Silk To Silk Clearance Constraint: (0.208mm &lt; 0.254mm) Between Text "C11" (153.439mm,54.845mm) on Top Overlay And Track (140.082mm,56.055mm)(156.082mm,56.055mm) on Top Overlay Silk Text to Silk Clearance [0.208mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6083.88mil|Location2.X=6095.13mil|Location1.Y=1564.569mil|Location2.Y=1575.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6083.88mil|Location2.X=6095.13mil|Location1.Y=1564.569mil|Location2.Y=1575.819mil|Absolute=True">Silk To Silk Clearance Constraint: (0.076mm &lt; 0.254mm) Between Text "C6" (154.274mm,38.97mm) on Top Overlay And Track (154.413mm,40.021mm)(155.213mm,40.021mm) on Top Overlay Silk Text to Silk Clearance [0.076mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6330.895mil|Location2.X=6342.145mil|Location1.Y=1448.137mil|Location2.Y=1459.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=\\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Steering_Converter\Steering_Converter_ZXBM5210.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6330.895mil|Location2.X=6342.145mil|Location1.Y=1448.137mil|Location2.Y=1459.387mil|Absolute=True">Silk To Silk Clearance Constraint: (0.187mm &lt; 0.254mm) Between Text "P5" (160.779mm,36.926mm) on Top Overlay And Track (161.141mm,34.671mm)(161.141mm,44.831mm) on Top Overlay Silk Text to Silk Clearance [0.187mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

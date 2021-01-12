@@ -5,22 +5,23 @@
  * Author : Andrey Chukhraev
  */ 
 
-#include <avr/io.h>
-#include "timer_control.h"
+#include "common.h"
+#include "usart0.h"
 #include "adc.h"
 #include "timer1.h"
 
-#define F_CPU 16000000UL
+#include <avr/io.h>
 
 int main(void)
 {
-	//IO set up
-	DDRD |= ((1 << DDD3) | (1 << DDD5));					//Set PD3 and PD5 as output for PWM testing
+	uint32_t adc_averages[] = {0};
 	
-	timer_control_init();
+	timer1_init();
+	void adc_init();
+	usart0_init(9600);
 	
-    while (1) 
-    {
+    while (1) {
+		usart0_transmit_data(get_adc_averages(adc_averages)); //needs check
     }
 }
 
