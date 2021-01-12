@@ -6,3 +6,8 @@
  */ 
 
 #include "adc.h"
+
+void adc_init(){
+	ADMUX |= (1 << MUX0); // ADC Channel 1
+	ADCSRA |= (1 << ADIE); // ADC Complete Interrupt 
+}

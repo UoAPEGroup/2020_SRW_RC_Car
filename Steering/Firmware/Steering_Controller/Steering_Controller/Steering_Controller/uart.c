@@ -6,7 +6,6 @@
  */ 
 
 #include "uart.h"
-#include "avr/io.h"
 
 void uart_init(){
 	UCSR0B |= (1 << RXCIE0); // RX Complete Interrupt Enable
