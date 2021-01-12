@@ -9,7 +9,7 @@
 #include "adc.h"
 #include "timer.h"
 #include "uart.h"
-#include "util/delay.h"
+#include "instructions_macros.h"
 
 char test;
 
@@ -18,8 +18,7 @@ ISR(USART0_RX_vect){
 	if (test == 97){
 		PORTB ^= (1<<5);
 	}
-	//_delay_ms(1000);
-	UDR0 = test;
+	tx_debug();
 }
 
 int main(void)

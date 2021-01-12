@@ -11,9 +11,13 @@
 
 #include "global.h"
 
-void adc_init();
+#define AREF 3300
+#define ADC_RES 1024
 
-void adc_read();
-void adc_convert();
+void adc_init();
+uint32_t adc_convert(uint16_t adc_val);
+
+uint16_t adc_read(uint8_t channel);
+
 
 #endif /* ADC_H_ */
