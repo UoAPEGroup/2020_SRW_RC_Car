@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Final_V1.0.PcbDoc
 Date     : 12/01/2021
-Time     : 2:10:23 PM
+Time     : 2:22:44 PM
 
 Processing Rule : Clearance Constraint (Gap=11.811mil) (All),(All)
 Rule Violations :0
@@ -66,4 +66,4 @@ Rule Violations :0
 
 Violations Detected : 9
 Waived Violations : 0
-Time Elapsed        : 00:00:01
+Time Elapsed        : 00:00:02
