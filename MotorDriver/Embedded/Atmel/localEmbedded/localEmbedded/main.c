@@ -26,7 +26,7 @@ int main(void)
 	uint8_t offset = 0;
 
 	//set output pins
-	DDRD |= (1 << DDD3)|(1 << DDD5);
+	DDRD |= (1 << DDD3)|(1 << DDD5)|(1 << DDD1);
 
 	//stop all the timers
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
