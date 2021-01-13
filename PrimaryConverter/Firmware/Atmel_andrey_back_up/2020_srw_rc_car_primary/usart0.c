@@ -21,8 +21,10 @@
 #define ASCII_OFF		48
 
 static volatile uint8_t RX_counter  = 0;
-static volatile uint8_t RX_data_buffer[RX_BUFFER];
 static volatile bool usart0_TX_flag = false;
+
+static volatile uint8_t RX_data_buffer[RX_BUFFER];
+
 
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
@@ -86,7 +88,7 @@ void usart0_transmit_pwmtest()
 	sprintf(test_message,	"PWM_TEST\n\r"
 							"--------\n\r"
 							"RX_BUF		= %d%d%d\n\r"
-							"DUTY_CYC	= %d\n\r"
+							"DUTY_CYC	= %d%%\n\r"
 							"OCR0B		= %d\n\r"
 							"OCR2B		= %d\n\r\n\r",
 				
@@ -124,6 +126,7 @@ ISR(USART0_RX_vect) {
 	if (RX_counter > 2) {
 		RX_counter = 0;
 		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
+		timer_control_update_current_duty(duty_cycle);
 		timer_control_set_duty_on_user(duty_cycle);							//set duty cycle
 	}
 }

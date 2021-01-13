@@ -9,7 +9,7 @@
 #ifndef TIMER0_H_
 #define TIMER0_H_
 
-void timer0_init(uint8_t period, uint8_t duty_cycle);
+void timer0_init(uint8_t period);
 void timer0_set_OCR0B(uint8_t value);
 
 
