@@ -8,58 +8,68 @@
 #include "control.h"
 
 void read_data() {
-	set_direction();
+	set_direction(); 
 	set_speed();
 	toggle_st_int();
 	set_turn_state();
 }
 
 void set_direction(){
-	if (input_data & (1 << 3)){ 
+	if (BACKWARD_H){ 
 		DRT_BCK;
+		tx_debug(48);
 	}
 	else{
 		DRT_FWD;
+		tx_debug(49);
 	}
 }
 
 void set_speed(){
 	switch (input_data){
 		/*
-		case (1 << 0):
+		case LOW_H:
 		set_low_speed();
 		break;
 		*/
-		case (1 << 1):
+		case MED_H:
 		set_med_speed();
+		tx_debug(50);
 		break;
 		
-		case (1 << 2):
+		case HIGH_H:
 		set_high_speed();
+		tx_debug(51);
 		break;
 		
 		default:
 		set_no_speed();
+		tx_debug(52);
 		break;
 	}
 }
 
 void set_turn_set(){
 	// RIGHT TURN
-	if(input_data & (1 << 4)){
-		if(input_data & (1 << 5)){
+	if(RIGHT_H){
+		if(HALF_TURN_H){
 			turn_state = RIGHT_HALF;
+			tx_debug(54);
 		} 
-		else if (input_data & (1 << 6)){
+		else if (FULL_TURN_H){
 			turn_state = RIGHT_FULL;
 		}
 	} // LEFT TURN
 	else{
-		if(input_data & (1 << 5)){
+		if(HALF_TURN_H){
 			turn_state = LEFT_HALF;
-		}
-		else if (input_data & (1 << 6)){
+		}`
+		else if (FULL_TURN_H){
 			turn_state = LEFT_FULL;
+		}
+		else{
+			tx_debug(55);
+			turn_state = STRAIGHT;
 		}
 	}
 }
