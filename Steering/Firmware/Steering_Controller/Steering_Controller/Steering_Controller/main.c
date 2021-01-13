@@ -12,15 +12,10 @@
 #include "control.h"
 #include "instructions_macros.h"
 
-
-
 ISR(USART0_RX_vect){
 	input_data = UDR0;
-	if (input_data == STATIONARY){
-		PORTB ^= (1<<5);
-	}
 	tx_debug(input_data);
-	read_data(input_data);
+	read_data();
 }
 
 int main(void)
@@ -30,9 +25,8 @@ int main(void)
 	
 	DDRB |= (1 << 5);
 	PORTB |= (1 << 5);
-    while (1) 
-    {
-		
+
+    while (1) {
     }
 }
 

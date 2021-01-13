@@ -7,7 +7,7 @@
 
 #include <avr/io.h>
 
-void timer2_init(uint8_t period, uint8_t duty_cycle) 
+void timer2_init(uint8_t period) 
 {
 	TCCR2A |= (1 << COM0B1);					//Clear OC2B on compare match
 	TCCR2A |= ((1 << WGM21) | (1 << WGM20));	//Fast PWM with TOP = OCR2A
@@ -15,7 +15,7 @@ void timer2_init(uint8_t period, uint8_t duty_cycle)
 	TCCR2B |= (1 << CS20);						//Clock select no prescaling
 	
 	OCR2A = period;								
-	OCR2B = duty_cycle;							
+	OCR2B = 0;							
 }
 
 void timer2_set_OCR2B(uint8_t value)

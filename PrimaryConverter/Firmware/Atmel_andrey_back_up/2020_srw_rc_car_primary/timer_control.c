@@ -15,7 +15,7 @@
 
 #define OFFSET	34														//180deg out of phase (26 + 4 * 2)													
 
-static volatile uint8_t duty_cycle = 0;									//initialise timers with 0% duty cycle
+static volatile uint8_t current_duty_cycle = 0;									//initialise timers with 0% duty cycle
 static volatile uint8_t period = 53; 
 
 //synchronize timers
@@ -23,9 +23,9 @@ void timer_control_init()
 {
 	GTCCR |= ((1 << TSM) | (1 << PSRASY) | (1 << PSRSYNC));				//halt all timers
 	
-	timer0_init(period, duty_cycle);									//configure timer0
+	timer0_init(period);												//configure timer0
 	timer1_init();
-	timer2_init(period, duty_cycle);									//configure timer2
+	timer2_init(period);												//configure timer2
 	timer3_init();
 	
 	GTCCR = 0;															//release all timers
@@ -46,5 +46,11 @@ void timer_control_set_duty_on_user(uint8_t duty_cycle)
 //get current duty cycle
 uint8_t timer_control_get_duty()
 {
-	return duty_cycle;
+	return current_duty_cycle;
+}
+
+//manually set duty cycle variable before timer_control_init()
+void timer_control_update_current_duty(uint8_t value) 
+{
+	current_duty_cycle = value;
 }

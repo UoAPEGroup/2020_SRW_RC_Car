@@ -15,6 +15,29 @@
 
 void read_data(char input_data);
 
-void set_forward_left(char input_data);
+void set_direction();
+void set_speed();
+void set_turn_state();
+
+void toggle_st_int();
+
+
+void set_no_speed();
+void set_low_speed();
+void set_med_speed();
+void set_high_speed();
+
+// SPEED BITS
+#define LOW_H (input_data & (1 << 1))
+#define MED_H (input_data & (1 << 1))
+#define HIGH_H (input_data & (1 << 2))
+
+// DIRECTION BITS
+#define BACKWARD_H (input_data & (1 << 3))
+
+// TURN BITS
+#define RIGHT_H (input_data & (1 << 4))
+#define HALF_TURN_H (input_data & (1 << 5))
+#define FULL_TURN_H (input_data & (1 << 6))
 
 #endif /* CONTROL_H_ */
