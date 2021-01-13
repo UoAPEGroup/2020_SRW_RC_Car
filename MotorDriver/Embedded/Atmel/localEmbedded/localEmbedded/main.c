@@ -8,6 +8,7 @@
 #include <avr/io.h>
 #include "timer.h"
 #include "Calculations.h"
+#include "adc.h"
 #define F_CPU 8000000UL
 #include <util/delay.h>
 #include <stdlib.h>
@@ -23,6 +24,8 @@
 
 int main(void)
 {
+	//turn on global interrupts
+	sei();
 	uint8_t offset = 0;
 
 	//set output pins
@@ -36,13 +39,17 @@ int main(void)
 	updateDutyCycle();
 	
 	
-// 	//initialize timers
-// 	timer0_init(returnPeriodHalf(),returnDutyLHalf());  // PWm that controls the left FET driver
-// 	timer2_init(returnPeriodHalf(),returnDutyRHalf());  // PWM that controls the right FET driver
+	//initialize timers
+	timer0_init(returnPeriodHalf(),returnDutyLHalf());  // PWm that controls the left FET driver
+	timer2_init(returnPeriodHalf(),returnDutyRHalf());  // PWM that controls the right FET driver
+	timer1_init();
+
 	
-		//initialize timers
-		timer0_init(26,13);  // PWm that controls the left FET driver
-		timer2_init(26,13);  // PWM that controls the right FET driver
+// 		//initialize timers
+// 		timer0_init(26,13);  // PWm that controls the left FET driver
+// 		timer2_init(26,16);  // PWM that controls the right FET driver
+// 		timer1_init();
+		
 
 	
 	TCNT0 = 0;   // setting offset
@@ -51,6 +58,8 @@ int main(void)
 	GTCCR = 0;   // start all timers
 
     // Vout = Vin * ((dutyL - dutyR)/period)	
+		//initalize the adc
+	adc_init();
 	
     while (1)
     {
