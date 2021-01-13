@@ -36,9 +36,13 @@ int main(void)
 	updateDutyCycle();
 	
 	
-	//initialize timers
-	timer0_init(returnPeriodHalf(),returnDutyLHalf());  // PWm that controls the left FET driver
-	timer2_init(returnPeriodHalf(),returnDutyRHalf());  // PWM that controls the right FET driver
+// 	//initialize timers
+// 	timer0_init(returnPeriodHalf(),returnDutyLHalf());  // PWm that controls the left FET driver
+// 	timer2_init(returnPeriodHalf(),returnDutyRHalf());  // PWM that controls the right FET driver
+	
+		//initialize timers
+		timer0_init(26,13);  // PWm that controls the left FET driver
+		timer2_init(26,13);  // PWM that controls the right FET driver
 
 	
 	TCNT0 = 0;   // setting offset
