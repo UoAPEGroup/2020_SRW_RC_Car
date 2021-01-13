@@ -15,6 +15,22 @@
 
 void read_data(char input_data);
 
+/*
 void set_forward_left(char input_data);
+*/
+
+void set_direction();
+void set_speed();
+void set_turn_state();
+
+void toggle_st_int();
+
+
+void set_no_speed();
+void set_low_speed();
+void set_med_speed();
+void set_high_speed();
+
+
 
 #endif /* CONTROL_H_ */

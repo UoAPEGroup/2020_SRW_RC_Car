@@ -9,6 +9,10 @@
 #ifndef GLOBAL_H_
 #define GLOBAL_H_
 
+#include <avr/io.h>
+#include <stdint.h>
+#include <avr/interrupt.h>
+
 // Global Variables
 #define F_CPU 8000000UL
 #define BAUD_RATE 9600
@@ -16,11 +20,13 @@
 #define ADC_RES 1024
 
 // STATE Definitions
-#define STATIONARY_STR 0
-#define LEFT_HALF 1
-#define LEFT_FULL 2
-#define RIGHT_HALF 3
-#define RIGHT_FULL 4
+#define STATIONARY_STATE 0
+
+#define STRAIGHT 1
+#define LEFT_HALF 2
+#define LEFT_FULL 3
+#define RIGHT_HALF 4
+#define RIGHT_FULL 5
 
 // Motor Controller 
 #define STATE_INT_H PORTC |= (1 << PC5)
@@ -36,9 +42,8 @@
 #define SPD_1_L PORTC &=~ (1 << PC3)
 
 char input_data;
+uint8_t system_state;
+uint8_t turn_state;
 
-#include <avr/io.h>
-#include <stdint.h>
-#include <avr/interrupt.h>
 
 #endif /* GLOBAL_H_ */
