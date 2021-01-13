@@ -19,6 +19,7 @@
 #define TX_BUFFER		20
 #define RX_BUFFER		4
 #define ASCII_OFF		48
+#define NEWLINE			10
 
 static volatile uint8_t RX_counter  = 0;
 static volatile bool usart0_TX_flag = false;
@@ -123,7 +124,7 @@ ISR(USART0_RX_vect) {
 	RX_data_buffer[RX_counter] = UDR0;										//record byte from usart0 on user TX
 	RX_counter++;		
 	
-	if (RX_counter > 2) {
+	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {
 		RX_counter = 0;
 		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
 		timer_control_update_current_duty(duty_cycle);
