@@ -10,7 +10,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-timer0_init(uint8_t period, uint8_t duty_cycle) {
+void timer0_init(uint8_t period, uint8_t duty_cycle) {
 	
 	//Phase Correct PWM, clear OC0B on compare match(inverting)
 	TCCR0A |= (1 << COM0B1)|(1 << WGM00);
@@ -21,7 +21,7 @@ timer0_init(uint8_t period, uint8_t duty_cycle) {
 	
 }
 
-timer2_init(uint8_t period, uint8_t duty_cycle) {
+void timer2_init(uint8_t period, uint8_t duty_cycle) {
 	//Phase Correct PWM, clear OC2B on compare match(inverting)
 	TCCR2A |= (1 << COM2B1)|(1 << WGM20);
 	TCCR2B |= (1 << WGM22)|(1 << CS20);
@@ -30,7 +30,7 @@ timer2_init(uint8_t period, uint8_t duty_cycle) {
 	OCR2B = duty_cycle;
 }
 
-timer1_init() {
+void timer1_init() {
 	
 	//TCCR1A |= (1 << WGM12);
 	
