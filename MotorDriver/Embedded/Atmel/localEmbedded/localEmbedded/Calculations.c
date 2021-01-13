@@ -36,18 +36,21 @@ uint8_t returnPeriodHalf(){
 }
 
 void updateDutyCycle(){
+	
+		//if the input voltage to the H-bridge is greater than the voltage wanted across the motor:
 		if(dutyCycleVoltage > Vout){
 			
-			dutyCycleNum = (PERIODHALF*Vout)/dutyCycleVoltage;
+			dutyCycleNum = (PERIODHALF*Vout)/dutyCycleVoltage; //calculate the on time of the final wave across the motor
 			
 			if (forward){
-				dutyLHalf = (PERIODHALF/2) + (dutyCycleNum/2);
-				dutyRHalf = (PERIODHALF/2) - (dutyCycleNum/2);
+				dutyLHalf = (PERIODHALF/2) + (dutyCycleNum/2); //set the on time of left fets
+				dutyRHalf = (PERIODHALF/2) - (dutyCycleNum/2); //set the on time of the right fets
 				}else{
-				dutyLHalf = (PERIODHALF/2) - (dutyCycleNum/2);
-				dutyRHalf = (PERIODHALF/2) + (dutyCycleNum/2);
+				dutyLHalf = (PERIODHALF/2) - (dutyCycleNum/2); //set on time of the left fets
+				dutyRHalf = (PERIODHALF/2) + (dutyCycleNum/2); //sset the on time of the right fets
 			}
-			}else{
+			
+		}else{
 				//set the duty cycle to maximum
 				dutyLHalf = PERIODHALF - 1;
 				dutyRHalf = 1;
