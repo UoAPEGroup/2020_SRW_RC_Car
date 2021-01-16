@@ -12,6 +12,6 @@
 #include "global.h"
 
 void adc_init();
-
+void adc_start();
 
 #endif /* ADC_H_ */

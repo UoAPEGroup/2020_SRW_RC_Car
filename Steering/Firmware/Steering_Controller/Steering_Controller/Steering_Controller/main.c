@@ -10,6 +10,7 @@
 #include "timer.h"
 #include "uart.h"
 #include "control.h"
+#include "led.h"
 #include "instructions_macros.h"
 
 ISR(USART0_RX_vect){
@@ -20,13 +21,14 @@ ISR(USART0_RX_vect){
 
 int main(void)
 {
+	led_init();
     uart_init();
 	sei();
-	
-	DDRB |= (1 << 5);
-	PORTB |= (1 << 5);
-
     while (1) {
-    }
+		while (system_state == STATIONARY);
+		
+		if(system_state == ACTIVE_STATE){
+			adc_start();
+		}
 }
 

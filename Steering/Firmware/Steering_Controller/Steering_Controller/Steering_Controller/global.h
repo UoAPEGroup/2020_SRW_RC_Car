@@ -21,6 +21,7 @@
 
 // STATE Definitions
 #define STATIONARY_STATE 0
+#define ACTIVE_STATE 1
 
 #define STRAIGHT 1
 #define LEFT_HALF 2
