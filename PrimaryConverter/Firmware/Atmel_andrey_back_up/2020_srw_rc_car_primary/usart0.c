@@ -121,10 +121,10 @@ bool usart0_get_TX_flag()
 
 //on receive complete interrupt
 ISR(USART0_RX_vect) {
-	RX_data_buffer[RX_counter] = UDR0;										//record byte from usart0 on user TX
-	RX_counter++;		
+	RX_data_buffer[RX_counter] = UDR0;										//read byte from usart0 on user TX into buffer
+	RX_counter++;															//increment counter, await next byte	
 	
-	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {
+	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {						//NEWLINE = end of message
 		RX_counter = 0;
 		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
 		timer_control_update_current_duty(duty_cycle);
