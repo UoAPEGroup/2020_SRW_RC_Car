@@ -17,9 +17,14 @@
 #include "calc.h"
 
 #define TX_BUFFER		20
-#define RX_BUFFER		4
+#define RX_BUFFER		20
 #define ASCII_OFF		48
 #define NEWLINE			10
+
+//RX command macros & specifiers
+#define RX_CMD_SPEC				RX_data_buffer[0]							//read first byte to determine user command specifier
+#define DUTY_CYCLE_CHANGE		0x44										//0x44 = D -> duty cycle set value
+
 
 static volatile uint8_t RX_counter  = 0;
 static volatile bool usart0_TX_flag = false;
@@ -126,8 +131,12 @@ ISR(USART0_RX_vect) {
 	
 	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {						//NEWLINE = end of message
 		RX_counter = 0;
-		uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
-		timer_control_update_current_duty(duty_cycle);
-		timer_control_set_duty_on_user(duty_cycle);							//set duty cycle
+		
+		switch (RX_CMD_SPEC) {
+			case DUTY_CYCLE_CHANGE:
+				uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
+				timer_control_update_current_duty(duty_cycle);
+				timer_control_set_duty_on_user(duty_cycle);
+		}
 	}
 }

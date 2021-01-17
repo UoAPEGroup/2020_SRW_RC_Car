@@ -7,28 +7,30 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <math.h>
 
 #include "calc.h"
 
-#define ASCII_OFF 48
+#define ASCII_OFF		48
+#define NEWLINE			10
+#define 1_DIGIT_CUTOFF	67
+#define 2_DIGIT_CUTOFF	124
+#define DUTY_DIGIT_1	2
+#define DUTY_DIGIT_2	3
+#define DUTY_DIGIT_3	4
 
 //calculate duty cycle from maximum of 3 digits received from user
 uint8_t calc_make_duty_cycle(uint8_t *buffer) 
 {
 	uint8_t duty_cycle = 0;
 	
-	for (uint8_t i = 0; i < 3; i++) {
-		switch (i) {
-			case 0:
-				duty_cycle += (buffer[i] - ASCII_OFF) * 100;
-				break;
-			case 1:
-				duty_cycle += (buffer[i] - ASCII_OFF) * 10;
-				break;
-			case 2:
-				duty_cycle += buffer[i] - ASCII_OFF;
-				break;	
-		}
+	for (uint8_t i = 0; i < strlen(buffer); i++) {
+		if (buffer[i] != NEWLINE) {
+			switch () {
+				case DUTY_DIGIT_1:
+					duty cycle 
+			}
+			
 	}
 	
 	return duty_cycle;
