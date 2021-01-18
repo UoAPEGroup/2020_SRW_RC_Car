@@ -16,18 +16,25 @@
 #include "timer_control.h"
 #include "calc.h"
 
+//macros for buffer size
 #define TX_BUFFER		20
 #define RX_BUFFER		20
+
+//macros for ASCII chars
 #define ASCII_OFF		48
 #define NEWLINE			10
+#define PERCENT			37
 
-//RX command macros & specifiers
-#define RX_CMD_SPEC				RX_data_buffer[0]							//read first byte to determine user command specifier
-#define DUTY_CYCLE_CHANGE		0x44										//0x44 = D -> duty cycle set value
+//macros for user commands on RX
+#define READ_USER_CMD			RX_data_buffer[0]						//read first byte in RX buffer to determine user command
 
-
+#define DUTY_CYCLE_CHANGE		68										//68 = D -> adjust duty cycle, followed by 0-100%
+#define BEGIN_TX_DATA			66										//80 = B -> begin TX of system data
+#define END_TX_DATA				69										//83 = E -> end TX of system data		 
+						
 static volatile uint8_t RX_counter  = 0;
-static volatile bool usart0_TX_flag = false;
+static volatile bool usart0_TX_flag = false;							//flag set by timer1 every 1s
+static volatile bool usart0_TX_data_flag = false;						//TX data if flag is set
 
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
 
@@ -37,8 +44,6 @@ void usart0_init(uint32_t BAUD)
 {
 	UCSR0A |= 0x00;															//clear all bits
 	UCSR0B |= (1 << RXCIE0);												//enable RX complete interrupt
-	//UCSR0B |= (1 << TXCIE0);												//enable TX complete interrupt
-	//UCSR0B |= (1 << UDRIE0);												//enable TX data register empty interrupt
 	UCSR0B |= (1 << RXEN0);													//receiver enable
 	UCSR0B |= (1 << TXEN0);													//transmitter enable
 	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));								//8-bit packet size
@@ -90,22 +95,26 @@ void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32
 //transmit test data for generated PWM waves
 void usart0_transmit_pwmtest()
 {
-	char test_message[500];
+	char test_message[100];
 	sprintf(test_message,	"PWM_TEST\n\r"
 							"--------\n\r"
-							"RX_BUF		= %d%d%d\n\r"
 							"DUTY_CYC	= %d%%\n\r"
 							"OCR0B		= %d\n\r"
 							"OCR2B		= %d\n\r\n\r",
-				
-							RX_data_buffer[0] - ASCII_OFF, 
-							RX_data_buffer[1] - ASCII_OFF, 
-							RX_data_buffer[2] - ASCII_OFF, 
+							 
 							timer_control_get_duty(), 
 							OCR0B, 
 							OCR2B);
 							
 	usart0_transmit_string(test_message);
+}
+
+//echo user command
+void usart0_echo_user_command()
+{
+	usart0_transmit_string("USER_CMD_ECHO:	");
+	usart0_transmit_string(RX_data_buffer);
+	usart0_transmit_string("\n\r");
 }
 
 //set, clear,get usart0 TX flag
@@ -124,6 +133,30 @@ bool usart0_get_TX_flag()
 	return usart0_TX_flag;
 }
 
+//set, clear,get usart0 TX data flag
+void usart0_set_TX_data_flag()
+{
+	usart0_TX_data_flag = true;
+}
+
+void usart0_clr_TX_data_flag()
+{
+	usart0_TX_data_flag = false;
+}
+
+bool usart0_get_TX_data_flag()
+{
+	return usart0_TX_data_flag;
+}
+
+//clear RX buffer to all zeros
+void usart0_clr_RX_buffer()
+{
+	for (uint8_t i = 0; i < RX_BUFFER; i++) {
+		RX_data_buffer[i] = 0;
+	}	
+}
+
 //on receive complete interrupt
 ISR(USART0_RX_vect) {
 	RX_data_buffer[RX_counter] = UDR0;										//read byte from usart0 on user TX into buffer
@@ -131,12 +164,22 @@ ISR(USART0_RX_vect) {
 	
 	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {						//NEWLINE = end of message
 		RX_counter = 0;
+		usart0_echo_user_command();
 		
-		switch (RX_CMD_SPEC) {
-			case DUTY_CYCLE_CHANGE:
+		switch (READ_USER_CMD) {
+			case DUTY_CYCLE_CHANGE:;
 				uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
 				timer_control_update_current_duty(duty_cycle);
 				timer_control_set_duty_on_user(duty_cycle);
+				break;
+			case BEGIN_TX_DATA:
+				usart0_set_TX_data_flag();
+				break;
+			case END_TX_DATA:
+				usart0_clr_TX_data_flag();
+				break;
 		}
+		
+		usart0_clr_RX_buffer();
 	}
 }

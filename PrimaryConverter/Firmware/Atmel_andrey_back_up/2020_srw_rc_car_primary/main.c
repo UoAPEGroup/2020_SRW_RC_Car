@@ -28,8 +28,10 @@ int main(void)
     {
 		if (usart0_get_TX_flag()) {
 			usart0_clr_TX_flag();
-			usart0_transmit_data(1, 2, 3, 4, 5);
-			usart0_transmit_pwmtest();	
+				if (usart0_get_TX_data_flag()) {
+					usart0_transmit_data(1, 2, 3, 4, 5);
+					usart0_transmit_pwmtest();
+				}
 		}
 	}
 }

@@ -164,6 +164,12 @@
     <Compile Include="instructions_macros.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="led.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
