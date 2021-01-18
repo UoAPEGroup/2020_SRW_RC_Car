@@ -16,8 +16,13 @@ void usart0_transmit_byte(uint8_t byte);
 void usart0_transmit_string(char *string);
 void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32_t isens, uint32_t vsens);
 void usart0_transmit_pwmtest();
+void usart0_echo_user_command();
+void usart0_clr_RX_buffer();
 void usart0_set_TX_flag();
 void usart0_clr_TX_flag();
 bool usart0_get_TX_flag();
+void usart0_set_TX_data_flag();
+void usart0_clr_TX_data_flag();
+bool usart0_get_TX_data_flag();
 
 #endif /* USART0_H_ */

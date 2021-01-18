@@ -13,7 +13,9 @@
 #include "instructions_macros.h"
 #include "uart.h"
 
-void read_data(char input_data);
+void pin_init();
+
+void read_data();
 
 void set_direction();
 void set_speed();

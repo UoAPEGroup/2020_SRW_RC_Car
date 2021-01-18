@@ -21,14 +21,16 @@ ISR(USART0_RX_vect){
 
 int main(void)
 {
+	pin_init();
 	led_init();
     uart_init();
 	sei();
     while (1) {
 		while (system_state == STATIONARY);
-		
-		if(system_state == ACTIVE_STATE){
+	
+		/*if(system_state == ACTIVE_STATE){
 			adc_start();
-		}
+		}*/
+	}
 }
 

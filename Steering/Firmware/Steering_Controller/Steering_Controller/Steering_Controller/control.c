@@ -6,12 +6,18 @@
  */ 
 
 #include "control.h"
+#include "led.h"
+
+void pin_init(){
+	DDRC |= (1 << PORTC5)|(1 << PORTC2)|(1 << PORTC1);
+}
 
 void read_data() {
+	//led_toggle();
 	set_direction(); 
 	set_speed();
 	toggle_st_int();
-	set_turn_state();
+	//set_turn_state();
 }
 
 void set_direction(){
@@ -24,19 +30,30 @@ void set_direction(){
 }
 
 void set_speed(){
+		
+	if (MED_H){
+		set_med_speed();
+	}
+	else if (HIGH_H){
+		set_high_speed();
+	}
+	else{
+		set_no_speed();
+	}
+	/*
 	switch (input_data){
-		case MED_H:
+		case (MED_H):
 		set_med_speed();
 		break;
 		
-		case HIGH_H:
+		case (HIGH_H):
 		set_high_speed();
 		break;
 		
 		default:
-		set_no_speed();
+		
 		break;
-	}
+	}*/
 }
 
 void set_turn_set(){
@@ -63,13 +80,13 @@ void set_turn_set(){
 }
 
 void toggle_st_int(){
-	STATE_INT_H;
-	STATE_INT_L;
+	STATE_INT_TOGGLE;
 }
 
 void set_no_speed(){
 	SPD_0_L;
 	SPD_1_L;
+	led_toggle();
 	toggle_st_int();
 }
 
