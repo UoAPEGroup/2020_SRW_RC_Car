@@ -15,7 +15,7 @@
 
 #define OFFSET	34														//180deg out of phase (26 + 4 * 2)													
 
-static volatile uint8_t current_duty_cycle = 0;									//initialise timers with 0% duty cycle
+static volatile uint8_t current_duty_cycle = 0;							//initialise timers with 0% duty cycle
 static volatile uint8_t period = 53; 
 
 //synchronize timers
@@ -39,8 +39,8 @@ void timer_control_init()
 //set duty cycle on user TX via usart0
 void timer_control_set_duty_on_user(uint8_t duty_cycle)
 {												
-		timer0_set_OCR0B(calc_make_OCRnB(period, duty_cycle));
-		timer2_set_OCR2B(calc_make_OCRnB(period, duty_cycle));	
+	timer0_set_OCR0B(calc_make_OCRnB(period, duty_cycle));
+	timer2_set_OCR2B(calc_make_OCRnB(period, duty_cycle));	
 }
 
 //get current duty cycle
@@ -49,7 +49,7 @@ uint8_t timer_control_get_duty()
 	return current_duty_cycle;
 }
 
-//manually set duty cycle variable before timer_control_init()
+//manually set duty cycle variable, will affect the PWM *ONLY* if used before timer_control_init()
 void timer_control_update_current_duty(uint8_t value) 
 {
 	current_duty_cycle = value;
