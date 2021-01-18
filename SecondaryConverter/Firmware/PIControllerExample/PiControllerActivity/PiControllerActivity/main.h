@@ -13,7 +13,7 @@ void calculatePiVals(uint16_t);
 void adcInit();
 void timerInit();
 void pwmInit();
-void setPWM(uint32_t);
+void setPWM(uint16_t);
 
 
 
