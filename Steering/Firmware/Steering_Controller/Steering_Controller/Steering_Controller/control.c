@@ -10,14 +10,15 @@
 
 void pin_init(){
 	DDRC |= (1 << PORTC5)|(1 << PORTC2)|(1 << PORTC1);
+	STATE_INT_L;
 }
 
 void read_data() {
 	//led_toggle();
 	set_direction(); 
 	set_speed();
-	toggle_st_int();
-	//set_turn_state();
+	STATE_INT_TOGGLE;
+	set_turn_state();
 }
 
 void set_direction(){
@@ -79,33 +80,24 @@ void set_turn_set(){
 	}
 }
 
-void toggle_st_int(){
-	STATE_INT_TOGGLE;
-}
-
 void set_no_speed(){
 	SPD_0_L;
 	SPD_1_L;
-	led_toggle();
-	toggle_st_int();
 }
 
 void set_low_speed(){
 	SPD_0_H;
 	SPD_1_L;
-	toggle_st_int();
 }
 
 void set_med_speed(){
 	SPD_0_L;
 	SPD_1_H;
-	toggle_st_int();
 }
 
 void set_high_speed(){
 	SPD_0_H;
 	SPD_1_H;
-	toggle_st_int();
 }
 
 
