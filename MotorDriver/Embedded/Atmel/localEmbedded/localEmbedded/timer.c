@@ -10,23 +10,23 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void timer0_init(uint8_t period, uint8_t duty_cycle) {
+void timer0_init(uint8_t periodHalf, uint8_t duty_cycle) {
 	
 	//Phase Correct PWM, clear OC0B on compare match(inverting)
 	TCCR0A |= (1 << COM0B1)|(1 << WGM00);
 	TCCR0B |= (1 << WGM02)|(1 << CS00);
 	
-	OCR0A = period;
+	OCR0A = periodHalf;
 	OCR0B = duty_cycle;
 	
 }
 
-void timer2_init(uint8_t period, uint8_t duty_cycle) {
+void timer2_init(uint8_t periodHalf, uint8_t duty_cycle) {
 	//Phase Correct PWM, clear OC2B on compare match(inverting)
 	TCCR2A |= (1 << COM2B1)|(1 << WGM20);
 	TCCR2B |= (1 << WGM22)|(1 << CS20);
 	
-	OCR2A = period;
+	OCR2A = periodHalf;
 	OCR2B = duty_cycle;
 }
 

@@ -36,13 +36,13 @@ int main(void)
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
 	
 	setSpeedGrade(MID_VOLTAGE);
-	setDutyCycleVoltage(500);
+	setInputV(700);
 	updateDutyCycle();
 	
 	
 	//initialize timers
-	timer0_init(returnPeriodHalf(),returnDutyLHalf());  // PWm that controls the left FET driver
-	timer2_init(returnPeriodHalf(),returnDutyRHalf());  // PWM that controls the right FET driver
+	timer0_init(returnPeriodHalf(),returnLeftOnTime());  // PWm that controls the left FET driver
+	timer2_init(returnPeriodHalf(),returnRightOnTime());  // PWM that controls the right FET driver
 	timer1_init();
 
 	
