@@ -1,9 +1,12 @@
 Protel Design System Design Rule Check
-PCB File : \\files.auckland.ac.nz\myhome\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Final_V1.0.PcbDoc
-Date     : 13/01/2021
-Time     : 4:50:53 pm
+PCB File : C:\Users\OEM\Documents\GitHub\2020-srw-rc-car\MotorDriver\Hardware\MotorDriver_1R1\MotorDriver_Final_V1.0.PcbDoc
+Date     : 16/01/2021
+Time     : 9:36:56 PM
 
-Processing Rule : Clearance Constraint (Gap=7.5mil) (All),(All)
+Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.19mm) (InComponent('U6')),(All)
 Rule Violations :0
 
 Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
@@ -15,53 +18,41 @@ Rule Violations :0
 Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
 Rule Violations :0
 
-Processing Rule : Width Constraint (Min=10mil) (Max=39.37mil) (Preferred=19.685mil) (All)
+Processing Rule : Width Constraint (Min=0.2mm) (Max=1mm) (Preferred=0.5mm) (All)
 Rule Violations :0
 
-Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
 Rule Violations :0
 
-Processing Rule : Hole Size Constraint (Min=19.685mil) (Max=393.701mil) (All)
+Processing Rule : Hole Size Constraint (Min=0.5mm) (Max=10mm) (All)
 Rule Violations :0
 
-Processing Rule : Hole To Hole Clearance (Gap=10mil) (All),(All)
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
 Rule Violations :0
 
-Processing Rule : Minimum Solder Mask Sliver (Gap=7.5mil) (All),(All)
-   Violation between Minimum Solder Mask Sliver Constraint: (6.071mil < 7.5mil) Between Pad C5-1(1378.15mil,828mil) on Top Layer And Pad C7-1(1377.15mil,747mil) on Top Layer [Top Solder] Mask Sliver [6.071mil]
-   Violation between Minimum Solder Mask Sliver Constraint: (6.071mil < 7.5mil) Between Pad C5-2(1271.85mil,828mil) on Top Layer And Pad C7-2(1270.85mil,747mil) on Top Layer [Top Solder] Mask Sliver [6.071mil]
-   Violation between Minimum Solder Mask Sliver Constraint: (6.654mil < 7.5mil) Between Pad Q2-1(1510mil,1125.736mil) on Top Layer And Via (1456.004mil,1091.004mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.654mil]
-   Violation between Minimum Solder Mask Sliver Constraint: (6.754mil < 7.5mil) Between Pad Q2-8(1356.736mil,1199.736mil) on Top Layer And Via (1456.004mil,1091.004mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.754mil]
-   Violation between Minimum Solder Mask Sliver Constraint: (6.877mil < 7.5mil) Between Pad Q4-8(1715mil,1070mil) on Top Layer And Via (1826.732mil,974mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.877mil]
-Rule Violations :5
+Processing Rule : Minimum Solder Mask Sliver (Gap=0.19mm) (All),(All)
+   Violation between Minimum Solder Mask Sliver Constraint: (0.154mm < 0.19mm) Between Pad C5-1(35.005mm,21.031mm) on Top Layer And Pad C7-1(34.98mm,18.974mm) on Top Layer [Top Solder] Mask Sliver [0.154mm]
+   Violation between Minimum Solder Mask Sliver Constraint: (0.154mm < 0.19mm) Between Pad C5-2(32.305mm,21.031mm) on Top Layer And Pad C7-2(32.28mm,18.974mm) on Top Layer [Top Solder] Mask Sliver [0.154mm]
+   Violation between Minimum Solder Mask Sliver Constraint: (0.12mm < 0.19mm) Between Pad Q2-1(38.354mm,28.594mm) on Top Layer And Via (37.059mm,27.711mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.12mm]
+   Violation between Minimum Solder Mask Sliver Constraint: (0.175mm < 0.19mm) Between Pad Q4-8(43.561mm,27.178mm) on Top Layer And Via (46.399mm,24.74mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.175mm]
+Rule Violations :4
 
-Processing Rule : Silk To Solder Mask (Clearance=3.937mil) (IsPad),(All)
+Processing Rule : Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)
 Rule Violations :0
 
-Processing Rule : Silk to Silk (Clearance=3.937mil) (All),(All)
+Processing Rule : Silk to Silk (Clearance=0.1mm) (All),(All)
 Rule Violations :0
 
-Processing Rule : Net Antennae (Tolerance=0mil) (All)
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
 Rule Violations :0
 
-Processing Rule : Board Clearance Constraint (Gap=0mil) (All)
-   Violation between Board Outline Clearance(Outline Edge): (Collision < 10mil) Between Board Edge And Text "Notes:
-QFM current sensor is a BIG bottleneck in layout and current flow. Sadly unavoidable?
+Processing Rule : Board Clearance Constraint (Gap=0mm) (All)
+Rule Violations :0
 
-Not happy with MCU placement and Vin sensor, but space limitations require it? It leaves Vin very vulnerable to noise! However, no room for traverse on bottom layer.
-
-Space limitations sadly mean board must be very compact. How will we mount? Leave vias for bolts? Worst case we can just tap holes once PCB manufactured.
-" (2585mil,1385mil) on Top Layer 
-   Violation between Board Outline Clearance(Outline Edge): (Collision < 10mil) Between Board Edge And Text "Rules:
-Try to keep 0.5mm (19.685 mil) clearance
-0.4mm (15.748 mil) needed for some SMT pads
-0.3mm (11.811 mil) needed for QFM" (380mil,2795mil) on Top Layer 
-Rule Violations :2
-
-Processing Rule : Height Constraint (Min=0mil) (Max=3937.008mil) (Prefered=500mil) (All)
+Processing Rule : Height Constraint (Min=0mm) (Max=100mm) (Prefered=12.7mm) (All)
 Rule Violations :0
 
 
-Violations Detected : 7
+Violations Detected : 4
 Waived Violations : 0
-Time Elapsed        : 00:00:01
+Time Elapsed        : 00:00:02

@@ -41,3 +41,7 @@ Project\ Logs
 *.map
 *.srec
 *.atsuo
+
+## Ignore ANSYS Electronics files
+*.aedtresults
+*.asol

@@ -13,22 +13,22 @@
 #include "instructions_macros.h"
 #include "uart.h"
 
-void read_data(char input_data);
+void pin_init();
+
+void read_data();
 
 void set_direction();
 void set_speed();
 void set_turn_state();
 
-void toggle_st_int();
-
-
+// SPEED CONTROL FUNCTIONS
 void set_no_speed();
 void set_low_speed();
 void set_med_speed();
 void set_high_speed();
 
 // SPEED BITS
-#define LOW_H (input_data & (1 << 1))
+#define LOW_H (input_data & (1 << 0))
 #define MED_H (input_data & (1 << 1))
 #define HIGH_H (input_data & (1 << 2))
 
@@ -39,5 +39,6 @@ void set_high_speed();
 #define RIGHT_H (input_data & (1 << 4))
 #define HALF_TURN_H (input_data & (1 << 5))
 #define FULL_TURN_H (input_data & (1 << 6))
+
 
 #endif /* CONTROL_H_ */

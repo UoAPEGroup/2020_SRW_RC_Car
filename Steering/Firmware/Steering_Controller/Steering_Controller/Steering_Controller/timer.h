@@ -11,6 +11,7 @@
 
 #include "global.h"
 
+void timer0_init();
 
 
 #endif /* TIMER_H_ */

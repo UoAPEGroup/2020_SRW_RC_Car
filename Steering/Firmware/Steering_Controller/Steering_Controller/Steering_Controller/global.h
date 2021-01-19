@@ -21,6 +21,7 @@
 
 // STATE Definitions
 #define STATIONARY_STATE 0
+#define ACTIVE_STATE 1
 
 #define STRAIGHT 1
 #define LEFT_HALF 2
@@ -31,6 +32,9 @@
 // Motor Controller 
 #define STATE_INT_H PORTC |= (1 << PC5)
 #define STATE_INT_L PORTC &=~ (1 << PC5)
+
+// STATE INTERRUPT TRIGGER
+#define STATE_INT_TOGGLE PORTC ^= (1 << PC5)
 
 #define DRT_FWD PORTC |= (1 << PC4)
 #define DRT_BCK PORTC &=~ (1 << PC4)
