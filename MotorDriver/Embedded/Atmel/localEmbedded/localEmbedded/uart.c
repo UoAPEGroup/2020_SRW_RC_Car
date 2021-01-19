@@ -12,10 +12,15 @@
 
 // this function initialises the UART
 
-void uart_init() {
-	UCSR0A = 0b00000000;
-	UCSR0B = 0b00001000;
-	UCSR0C = 0b00000110;
+
+void uart_init(uint16_t baudRate) {
+	
+	//enable transmit
+	UCSR0B = (1 << TXEN0);
+	
+	//set to 8n1 no parity
+	UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+	
 	UBRR0 = 4;
 }
 
