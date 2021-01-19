@@ -7,10 +7,12 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
+#include "Calculations.h"
+
 
 static volatile uint16_t checkADC = 0;
 
-static volatile uint8_t channelReading = 0; //change the 
+static volatile uint8_t channelReading = 0; //change the ADC channel to read from
 
 ISR(ADC_vect) {
 	
@@ -18,23 +20,23 @@ ISR(ADC_vect) {
 	TIFR1 |= (1 << OCF1B);
 	
 	//toggle led
-	PORTD ^= (1 << 0);
+	PORTD ^= (1 << 1);
 	
 	switch (channelReading) {
 		
 		case 0:
-		//take and store the ADC value setCurrentVoltage (or whichever function)
+		//read and store the current values
+			addCurrent(ADC);
 			ADMUX &= 0xF0;
-			ADMUX |= (1 << MUX0);
-			
+			ADMUX |= (1 << MUX0); //switch to reading from adc channel 1 (voltage)
 			channelReading = 1;
 		break;
 		
 		case 1:
-		//take and store the ADC currentValues (or whichever function)
+		//read and store the voltage values
+			addVoltage(ADC);
 			ADMUX &= 0xF0;
-			ADMUX &= ~(1 << MUX1);
-		
+			ADMUX &= ~(1 << MUX1); //switch to reading from adc channel 0 (current)
 			channelReading = 0;
 		break;
 	}

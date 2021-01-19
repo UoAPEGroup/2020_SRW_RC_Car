@@ -30,6 +30,7 @@ int main(void)
 
 	//set output pins
 	DDRD |= (1 << DDD3)|(1 << DDD5)|(1 << DDD1);
+	DDRB |= (1 << DDB1);
 
 	//stop all the timers
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
@@ -58,7 +59,8 @@ int main(void)
 	GTCCR = 0;   // start all timers
 
     // Vout = Vin * ((dutyL - dutyR)/period)	
-		//initalize the adc
+	
+	//initalize the adc
 	adc_init();
 	
     while (1)

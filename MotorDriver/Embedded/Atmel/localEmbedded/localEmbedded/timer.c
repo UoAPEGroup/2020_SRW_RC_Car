@@ -31,14 +31,14 @@ void timer2_init(uint8_t period, uint8_t duty_cycle) {
 }
 
 void timer1_init() {
-	
-	//TCCR1A |= (1 << WGM12);
+	//Toggle oc1a on compare match
+	TCCR1A |= (1 << COM1A0);
 	
 	//Set timer1 to 64 prescaler, CTC mode with OCR1A as TOP
-	TCCR1B |= (1 << CS10) | (1 << WGM12);
+	TCCR1B |= (1 << CS10) | (1 << WGM12) | (1 << CS11);
 	
 	//Set the period of sampling to 0.5ms
-	OCR1A = 4000;
-	OCR1B = 2000;
+	OCR1A = 63;
+	OCR1B = 40;
 	
 }
