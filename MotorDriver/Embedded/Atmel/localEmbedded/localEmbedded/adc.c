@@ -20,7 +20,7 @@ ISR(ADC_vect) {
 	TIFR1 |= (1 << OCF1B);
 	
 	//toggle led
-	PORTD ^= (1 << 1);
+	//PORTD ^= (1 << 1);
 	
 	switch (channelReading) {
 		

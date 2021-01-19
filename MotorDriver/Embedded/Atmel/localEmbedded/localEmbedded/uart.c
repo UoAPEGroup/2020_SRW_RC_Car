@@ -10,18 +10,18 @@
 #include <stdint.h>
 #include <stdio.h>
 
-// this function initialises the UART
-
-
+#define ARRAYSIZE 10
+// this function initializes the UART
 void uart_init(uint16_t baudRate) {
 	
 	//enable transmit
-	UCSR0B = (1 << TXEN0);
+	UCSR0B |= (1 << TXEN0);
 	
 	//set to 8n1 no parity
-	UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
-	
-	UBRR0 = 4;
+	UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
+			
+	//calculate the UBBR0 value required for the provided baudRate
+	UBRR0 = 8000000/((uint32_t) 16 * baudRate) - 1;
 }
 
 
@@ -35,3 +35,17 @@ void uart_transmit(uint8_t data){
 		UDR0 = data;
 	}
 }
+
+//transmit multi-character data to uart using char array
+void send_data(char data[]) {
+	uint8_t count = 0;
+	while (count < strlen(data) ) {
+		uart_transmit(data[count]);
+		count++;
+	}
+	
+	//and the transmission with a newline
+	
+	uart_transmit(13);
+	uart_transmit(10);
+};

@@ -9,6 +9,9 @@
 #ifndef CALCULATIONS_H_
 #define CALCULATIONS_H_
 
+#include <stdint.h>
+#include <stdbool.h>
+
 //variables
 static volatile uint8_t finalOnTime;
 static volatile uint8_t leftOnTime;
@@ -35,6 +38,7 @@ void setInputV(uint16_t vinD);
 void setSpeedGrade(uint16_t speed);
 void addCurrent(uint16_t adcCurrentReading);
 void addVoltage(uint16_t adcVoltageReading);
+uint16_t adcConvert(uint16_t adcValue);
 
 
 #endif /* CALCULATIONS_H_ */
