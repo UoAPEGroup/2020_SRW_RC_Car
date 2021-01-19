@@ -42,6 +42,7 @@ int main(void)
 	
 	setSpeedGrade(MID_VOLTAGE);
 	setInputV(700);
+	setDirection(false);
 	updateDutyCycle();
 	
 	

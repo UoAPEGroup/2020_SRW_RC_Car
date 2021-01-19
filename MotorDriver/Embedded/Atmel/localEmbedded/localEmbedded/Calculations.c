@@ -21,7 +21,7 @@ static volatile uint16_t inputV; //input voltage to the H-bridge
 static volatile uint16_t recentInputV; //most recent voltage reading into the H-bridge
 static volatile uint16_t recentInputI; //most recent current reading into the H-bridge
 static volatile uint16_t speedGrade; //voltage wanted across motor, set with setSpeedGrade
-static volatile uint8_t forward = 1; //determines whether the car is moving forward or backward
+static volatile bool forward; //determines whether the car is moving forward or backward
 
 //store adc readings of voltage and current (taken every ms)
 static volatile uint16_t voltageValues[ARRAY_SIZE];
@@ -72,7 +72,7 @@ void updateDutyCycle(){
 			
 			finalOnTime = (PERIODHALF*speedGrade)/inputV; //calculate the on time of the final wave across the motor
 			
-			if (forward == 1){
+			if (forward){
 				leftOnTime = (PERIODHALF/2) + (finalOnTime/2); //set the on time of left fets
 				rightOnTime = (PERIODHALF/2) - (finalOnTime/2); //set the on time of the right fets
 				}else{
@@ -82,8 +82,14 @@ void updateDutyCycle(){
 			
 		}else{
 				//set the duty cycle to maximum
-				leftOnTime = PERIODHALF - 1;
-				rightOnTime = 1;
+				if(forward){
+					leftOnTime = PERIODHALF - 1;
+					rightOnTime = 1;
+				}else{
+					leftOnTime = 1;
+					rightOnTime = PERIODHALF - 1;
+				}
+				
 			}
 }
 void setInputV(uint16_t vinD) {
@@ -92,6 +98,10 @@ void setInputV(uint16_t vinD) {
 
 void setSpeedGrade(uint16_t speed){
 	speedGrade = speed;
+}
+
+void setDirection(bool setForward){
+	forward = setForward;
 }
 
 uint8_t returnLeftOnTime(){

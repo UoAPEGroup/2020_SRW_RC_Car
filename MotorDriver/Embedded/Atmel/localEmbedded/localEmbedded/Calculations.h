@@ -36,6 +36,7 @@ uint8_t returnPeriodHalf();
 void updateDutyCycle();
 void setInputV(uint16_t vinD);
 void setSpeedGrade(uint16_t speed);
+void setDirection(bool forward);
 void addCurrent(uint16_t adcCurrentReading);
 void addVoltage(uint16_t adcVoltageReading);
 uint16_t adcConvert(uint16_t adcValue);
