@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Bluetooth_Module_1R1.PrjPcb]
+   Generated File[BLE_Module_1R1.TXT]
+   Generated File[BLE_Module_1R1.LDP]
+   Generated File[BLE_Module_1R1.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 8:22:33 PM On 20/01/2021

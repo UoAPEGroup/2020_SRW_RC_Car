@@ -19,8 +19,7 @@ static volatile uint8_t leftOnTime; //on time of the left mosfets(in number of c
 static volatile uint8_t rightOnTime; //on time of the right mosfets(in number of counts)
 
 static volatile uint16_t inputV; //input voltage to the H-bridge
-static volatile uint16_t recentInputV; //most recent voltage reading into the H-bridge
-static volatile uint16_t recentInputI; //most recent current reading into the H-bridge
+static volatile uint16_t inputI; //most recent current reading into the H-bridge
 static volatile uint16_t speedGrade; //voltage wanted across motor, set with setSpeedGrade
 static volatile bool forward; //determines whether the car is moving forward or backward
 
@@ -94,12 +93,6 @@ void updateDutyCycle(){
 			}
 }
 
-void compareAndSetInputV(uint16_t newVin){
-	recentInputV = newVin;
-	if((newVin-inputV) >= TOLERANCE){
-		inputV = newVin;
-	} 
-}
 
 void setInputV(uint16_t vinD) {
 	inputV = vinD;

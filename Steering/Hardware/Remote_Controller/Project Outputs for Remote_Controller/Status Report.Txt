@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Remote_Controller.PrjPcb]
+   Generated File[RemoteCntrl_1R3.TXT]
+   Generated File[RemoteCntrl_1R3.LDP]
+   Generated File[RemoteCntrl_1R3.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 8:34:23 PM On 20/01/2021
