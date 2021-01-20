@@ -34,6 +34,7 @@ uint8_t returnLeftOnTime();
 uint8_t returnRightOnTime();
 uint8_t returnPeriodHalf();
 void updateDutyCycle();
+void compareAndSetInputV(uint16_t newVin);
 void setInputV(uint16_t vinD);
 void setSpeedGrade(uint16_t speed);
 void setDirection(bool forward);

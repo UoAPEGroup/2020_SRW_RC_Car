@@ -41,8 +41,9 @@ int main(void)
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
 	
 	setSpeedGrade(MID_VOLTAGE);
-	setInputV(700);
-	setDirection(false);
+	/*compareAndSetInputV(1050);*/
+	setInputV(1072);
+	setDirection(false); // true = forward, false = backward
 	updateDutyCycle();
 	
 	

@@ -7,9 +7,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 
 #define PERIODHALF 26 //half of the counts for the period
-#define TOLERANCE 500
+#define TOLERANCE 100
 #define ARRAY_SIZE 10
 
 //declare variables
@@ -73,15 +74,15 @@ void updateDutyCycle(){
 			finalOnTime = (PERIODHALF*speedGrade)/inputV; //calculate the on time of the final wave across the motor
 			
 			if (forward){
-				leftOnTime = (PERIODHALF/2) + (finalOnTime/2); //set the on time of left fets
-				rightOnTime = (PERIODHALF/2) - (finalOnTime/2); //set the on time of the right fets
+				leftOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of left fets
+				rightOnTime = (PERIODHALF - finalOnTime)/2; //set the on time of the right fets
 				}else{
-				leftOnTime = (PERIODHALF/2) - (finalOnTime/2); //set on time of the left fets
-				rightOnTime = (PERIODHALF/2) + (finalOnTime/2); //sset the on time of the right fets
+				leftOnTime = (PERIODHALF - finalOnTime)/2; //set on time of the left fets
+				rightOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of the right fets
 				}
 			
 		}else{
-				//set the duty cycle to maximum
+				//set the duty cycle to maximum if the input voltage to the H-bridge is less or equal than the voltage wanted across the motor:
 				if(forward){
 					leftOnTime = PERIODHALF - 1;
 					rightOnTime = 1;
@@ -92,6 +93,14 @@ void updateDutyCycle(){
 				
 			}
 }
+
+void compareAndSetInputV(uint16_t newVin){
+	recentInputV = newVin;
+	if((newVin-inputV) >= TOLERANCE){
+		inputV = newVin;
+	} 
+}
+
 void setInputV(uint16_t vinD) {
 	inputV = vinD;
 }
