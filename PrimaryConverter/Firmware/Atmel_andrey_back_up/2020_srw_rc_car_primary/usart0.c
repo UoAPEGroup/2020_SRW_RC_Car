@@ -35,9 +35,9 @@
 #define HALT					72										//72 = H -> halt all timers, system awaits reset command
 						
 static volatile uint8_t RX_counter  = 0;
-static volatile bool usart0_TX_timer_flag = false;							//flag set by timer1 every 1s
-static volatile bool usart0_TX_send_data_flag = false;						//TX data if flag is set
-static volatile bool usart0_TX_send_reset_flag = false;						//TX reset confirmation
+static volatile bool usart0_TX_timer_flag = false;						//flag set by timer1 every 1s
+static volatile bool usart0_TX_send_data_flag = false;					//TX data if flag is set
+static volatile bool usart0_TX_send_reset_flag = false;					//TX reset confirmation
 
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
 
@@ -45,13 +45,13 @@ static volatile uint8_t RX_data_buffer[RX_BUFFER];
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
 {
-	UCSR0A |= 0x00;															//clear all bits
-	UCSR0B |= (1 << RXCIE0);												//enable RX complete interrupt
-	UCSR0B |= (1 << RXEN0);													//receiver enable
-	UCSR0B |= (1 << TXEN0);													//transmitter enable
-	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));								//8-bit packet size
-	UCSR0C &= ~(1 << UCPOL0);												//clear polarity bit - not used
-	UBRR0 = F_CPU / (16 * BAUD) - 1;										//set UBRR
+	UCSR0A |= 0x00;														//clear all bits
+	UCSR0B |= (1 << RXCIE0);											//enable RX complete interrupt
+	UCSR0B |= (1 << RXEN0);												//receiver enable
+	UCSR0B |= (1 << TXEN0);												//transmitter enable
+	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));							//8-bit packet size
+	UCSR0C &= ~(1 << UCPOL0);											//clear polarity bit - not used
+	UBRR0 = F_CPU / (16 * BAUD) - 1;									//set UBRR
 }
 
 //transmit one byte of data
@@ -218,10 +218,10 @@ void usart0_clr_RX_buffer()
 
 //on receive complete interrupt
 ISR(USART0_RX_vect) {
-	RX_data_buffer[RX_counter] = UDR0;										//read byte from usart0 on user TX into buffer
-	RX_counter++;															//increment counter, await next byte	
+	RX_data_buffer[RX_counter] = UDR0;									//read byte from usart0 on user TX into buffer
+	RX_counter++;														//increment counter, await next byte	
 	
-	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {						//NEWLINE = end of message
+	if (RX_data_buffer[RX_counter - 1] == NEWLINE) {					//NEWLINE = end of message
 		RX_counter = 0;
 		usart0_echo_user_command();
 		
