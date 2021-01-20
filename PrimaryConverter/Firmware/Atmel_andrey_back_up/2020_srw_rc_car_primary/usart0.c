@@ -30,11 +30,14 @@
 
 #define DUTY_CYCLE_CHANGE		68										//68 = D -> adjust duty cycle, followed by 0-100%
 #define BEGIN_TX_DATA			66										//80 = B -> begin TX of system data
-#define END_TX_DATA				69										//83 = E -> end TX of system data		 
+#define END_TX_DATA				69										//83 = E -> end TX of system data
+#define RESET					82										//82 = R -> reset system to restart PWM timers		 
+#define HALT					72										//72 = H -> halt all timers, system awaits reset command
 						
 static volatile uint8_t RX_counter  = 0;
-static volatile bool usart0_TX_flag = false;							//flag set by timer1 every 1s
-static volatile bool usart0_TX_data_flag = false;						//TX data if flag is set
+static volatile bool usart0_TX_timer_flag = false;							//flag set by timer1 every 1s
+static volatile bool usart0_TX_send_data_flag = false;						//TX data if flag is set
+static volatile bool usart0_TX_send_reset_flag = false;						//TX reset confirmation
 
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
 
@@ -109,6 +112,38 @@ void usart0_transmit_pwmtest()
 	usart0_transmit_string(test_message);
 }
 
+//transmit message on system start up and reset
+void usart0_transmit_reset_msg()
+{
+	char reset_message[300];
+	sprintf(reset_message,	"SRW2020 RC CAR PRIMARY CONTROLLER V1\n\r"
+							"------------------------------------\n\r"
+							"AVAILABLE USR CMDS:\n\r"
+							"-------------------\n\r"
+							"DXXX%%	-> set duty cycle to X%%\n\r"
+							"B	-> begin TX of data\n\r"
+							"E	-> end TX of data\n\r"
+							"R	-> reset system\n\r\n\r");
+							
+	usart0_transmit_string(reset_message);
+}
+
+//transmit halt message
+void usart0_transmit_halt_msg()
+{
+	char halt_message[300];
+	sprintf(halt_message,	"**********\n\r"
+							"*WARNING!*\n\r"
+							"**********\n\r"
+							"---------------------------\n\r"
+							"USER INITIATED HALT CMD	\n\r\n\r"
+							"ALL SYSTEMS STOPPED		\n\r\n\r"
+							"ENTER R TO RESTART SYSTEM	\n\r"
+							"---------------------------\n\r\n\r");
+		
+	usart0_transmit_string(halt_message);
+}
+
 //echo user command
 void usart0_echo_user_command()
 {
@@ -117,36 +152,60 @@ void usart0_echo_user_command()
 	usart0_transmit_string("\n\r");
 }
 
-//set, clear,get usart0 TX flag
-void usart0_set_TX_flag()
+//set, clear, get usart0 TX timer flag
+void usart0_set_TX_timer_flag()
 {
-	usart0_TX_flag = true;
+	usart0_TX_timer_flag = true;
 }
 
-void usart0_clr_TX_flag()
+void usart0_clr_TX_timer_flag()
 {
-	usart0_TX_flag = false;	
+	usart0_TX_timer_flag = false;	
 }
 
-bool usart0_get_TX_flag()
+bool usart0_get_TX_timer_flag()
 {
-	return usart0_TX_flag;
+	return usart0_TX_timer_flag;
 }
 
-//set, clear,get usart0 TX data flag
-void usart0_set_TX_data_flag()
+//set, clear, get usart0 TX send data flag
+void usart0_set_TX_send_data_flag()
 {
-	usart0_TX_data_flag = true;
+	usart0_TX_send_data_flag = true;
 }
 
-void usart0_clr_TX_data_flag()
+void usart0_clr_TX_send_data_flag()
 {
-	usart0_TX_data_flag = false;
+	usart0_TX_send_data_flag = false;
 }
 
-bool usart0_get_TX_data_flag()
+bool usart0_get_TX_send_data_flag()
 {
-	return usart0_TX_data_flag;
+	return usart0_TX_send_data_flag;
+}
+
+//set, clear, get usart0 TX send reset flag
+void usart0_set_TX_send_reset_flag()
+{
+	usart0_TX_send_reset_flag = true;
+}
+
+void usart0_clr_TX_send_reset_flag()
+{
+	usart0_TX_send_reset_flag = false;
+}
+
+bool usart0_get_TX_send_reset_flag()
+{
+	return usart0_TX_send_reset_flag;
+}
+
+//clear all TX flags on halt
+void usart0_clr_TX_all_flags()
+{
+	usart0_clr_TX_send_data_flag();
+	usart0_clr_TX_send_reset_flag();
+	usart0_clr_TX_timer_flag();
 }
 
 //clear RX buffer to all zeros
@@ -173,11 +232,20 @@ ISR(USART0_RX_vect) {
 				timer_control_set_duty_on_user(duty_cycle);
 				break;
 			case BEGIN_TX_DATA:
-				usart0_set_TX_data_flag();
+				usart0_set_TX_send_data_flag();
 				break;
 			case END_TX_DATA:
-				usart0_clr_TX_data_flag();
+				usart0_clr_TX_send_data_flag();
 				break;
+			case RESET:
+				usart0_set_TX_send_reset_flag();
+				usart0_clr_TX_send_data_flag();
+				timer_control_init();
+				break;
+			case HALT:
+				timer_control_halt();
+				usart0_clr_TX_all_flags();
+				usart0_transmit_halt_msg();
 		}
 		
 		usart0_clr_RX_buffer();

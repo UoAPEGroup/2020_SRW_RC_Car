@@ -34,6 +34,14 @@ void timer_control_init()
 	TCNT1 = 0;															//set value for timer1
 	TCNT2 = OFFSET;														//set value for timer2
 	TCNT3 = 0;															//set value for timer3
+	
+	timer_control_update_current_duty(0);
+}
+
+//halt PWM timers
+void timer_control_halt()
+{
+	GTCCR |= ((1 << TSM) | (1 << PSRASY) | (1 << PSRSYNC));				//halt all timers
 }
 
 //set duty cycle on user TX via usart0
