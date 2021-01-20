@@ -40,6 +40,7 @@ ISR(INT0_vect) {
 			setSpeedGrade(MID_VOLTAGE);
 		}	
 	}
+	
 	else {
 		
 		//if (01) then:
