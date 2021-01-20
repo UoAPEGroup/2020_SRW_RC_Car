@@ -16,3 +16,11 @@ uint32_t calc_average(uint32_t arr[]) {
 	uint32_t result = (uint32_t)(temp/SAMPLING_SIZE);
 	return result;
 }
+
+uint32_t calc_mA(uint32_t mV) { //needs update
+	return 0;
+}
+
+uint32_t cal_temp(uint32_t mV) { //needs update
+	return 0;
+}

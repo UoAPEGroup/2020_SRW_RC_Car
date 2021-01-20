@@ -17,11 +17,12 @@ int main(void)
 	uint32_t adc_averages[] = {0};
 	
 	timer1_init();
-	void adc_init();
+	adc_init();
 	usart0_init(9600);
 	
     while (1) {
-		usart0_transmit_data(get_adc_averages(adc_averages)); //needs check
+		get_adc_averages(adc_averages);
+		usart0_transmit_data(adc_averages); //needs check
     }
 }
 

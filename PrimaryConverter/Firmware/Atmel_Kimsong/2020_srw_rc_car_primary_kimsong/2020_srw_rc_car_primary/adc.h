@@ -8,13 +8,19 @@
 #define V_ref 3300 //reference voltage 3300mV (Vcc)
 #define A_int 1024 //amplitude interval 2^10 = 1024
 
+#define rated_V 3000 //3000mV
+#define rated_C 3000 //3000mV (needs changes)
+#define rated_T1 3000 //3000mV (needs changes)
+#define rated_T2 3000 //3000mV (needs changes)
+#define rated_T3 3000 //3000mV (needs changes)
+
 #define ADC_used 5 //number of adc channels in use
 
-#define ADC0 0 //adc channel 0
-#define ADC1 1 //adc channel 1
-#define ADC2 2 //adc channel 2
-#define ADC3 3 //adc channel 3
-#define ADC4 4 //adc channel 4
+#define ADC_V 0 //adc channel 0, voltage
+#define ADC_C 1 //adc channel 1, current
+#define ADC_T1 2 //adc channel 2, temp1
+#define ADC_T2 3 //adc channel 3, temp2
+#define ADC_T3 4 //adc channel 4, temp3
 
 #define SAMPLING_SIZE 10
 
@@ -28,7 +34,8 @@
 
 void adc_init();
 uint16_t adc_read(uint8_t channel);
-uint32_t adc_convert(uint16_t raw_ADC); //convert the raw adc value to original value by multiplying with Vstep
+uint32_t adc_convert_mV(uint16_t raw_ADC); //convert the raw adc value to original value by multiplying with Vstep
+void reset_counters();
 
 void adc_readings_average(); //calculate the average values from their respective array of adc readings
 void get_adc_averages(uint32_t arr[]); //get the array of average values from the adc readings
