@@ -7,9 +7,10 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 
 #define PERIODHALF 26 //half of the counts for the period
-#define TOLERANCE 500
+#define TOLERANCE 100
 #define ARRAY_SIZE 10
 
 //declare variables
@@ -18,8 +19,7 @@ static volatile uint8_t leftOnTime; //on time of the left mosfets(in number of c
 static volatile uint8_t rightOnTime; //on time of the right mosfets(in number of counts)
 
 static volatile uint16_t inputV; //input voltage to the H-bridge
-static volatile uint16_t recentInputV; //most recent voltage reading into the H-bridge
-static volatile uint16_t recentInputI; //most recent current reading into the H-bridge
+static volatile uint16_t inputI; //most recent current reading into the H-bridge
 static volatile uint16_t speedGrade; //voltage wanted across motor, set with setSpeedGrade
 static volatile bool forward; //determines whether the car is moving forward or backward
 
@@ -73,15 +73,15 @@ void updateDutyCycle(){
 			finalOnTime = (PERIODHALF*speedGrade)/inputV; //calculate the on time of the final wave across the motor
 			
 			if (forward){
-				leftOnTime = (PERIODHALF/2) + (finalOnTime/2); //set the on time of left fets
-				rightOnTime = (PERIODHALF/2) - (finalOnTime/2); //set the on time of the right fets
+				leftOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of left fets
+				rightOnTime = (PERIODHALF - finalOnTime)/2; //set the on time of the right fets
 				}else{
-				leftOnTime = (PERIODHALF/2) - (finalOnTime/2); //set on time of the left fets
-				rightOnTime = (PERIODHALF/2) + (finalOnTime/2); //sset the on time of the right fets
+				leftOnTime = (PERIODHALF - finalOnTime)/2; //set on time of the left fets
+				rightOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of the right fets
 				}
 			
 		}else{
-				//set the duty cycle to maximum
+				//set the duty cycle to maximum if the input voltage to the H-bridge is less or equal than the voltage wanted across the motor:
 				if(forward){
 					leftOnTime = PERIODHALF - 1;
 					rightOnTime = 1;
@@ -92,6 +92,8 @@ void updateDutyCycle(){
 				
 			}
 }
+
+
 void setInputV(uint16_t vinD) {
 	inputV = vinD;
 }
