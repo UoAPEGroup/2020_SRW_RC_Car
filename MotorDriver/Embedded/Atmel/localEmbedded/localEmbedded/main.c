@@ -62,12 +62,13 @@ int main(void)
 	uart_init(9600);
 	char hello[10];
 	
-	uint16_t checkADC = adcConvert(930);
 	
-	sprintf(hello, "%lu", checkADC);
+	
 	
     while (1)
     {
+		uint16_t checkSpeedGrade = returnSpeedGrade();
+		sprintf(hello, "%u", checkSpeedGrade);
 		send_data(hello);
     }
 }

@@ -117,3 +117,7 @@ uint8_t returnRightOnTime(){
 uint8_t returnPeriodHalf(){
 	return PERIODHALF;
 }
+
+uint16_t returnSpeedGrade() {
+	return speedGrade;
+}

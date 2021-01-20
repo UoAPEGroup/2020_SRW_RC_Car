@@ -33,6 +33,8 @@ extern volatile bool arrayFull;
 uint8_t returnLeftOnTime();
 uint8_t returnRightOnTime();
 uint8_t returnPeriodHalf();
+uint16_t returnSpeedGrade();
+
 void updateDutyCycle();
 void setInputV(uint16_t vinD);
 void setSpeedGrade(uint16_t speed);
