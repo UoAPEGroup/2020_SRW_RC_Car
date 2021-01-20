@@ -18,7 +18,7 @@ static volatile uint8_t leftOnTime;
 static volatile uint8_t rightOnTime;
 
 static volatile uint16_t inputV;
-static volatile uint16_t recentInputV;
+static volatile uint16_t inputI;
 static volatile uint16_t speedGrade;
 
 static volatile uint16_t voltageValues;
@@ -34,7 +34,6 @@ uint8_t returnLeftOnTime();
 uint8_t returnRightOnTime();
 uint8_t returnPeriodHalf();
 void updateDutyCycle();
-void compareAndSetInputV(uint16_t newVin);
 void setInputV(uint16_t vinD);
 void setSpeedGrade(uint16_t speed);
 void setDirection(bool forward);
