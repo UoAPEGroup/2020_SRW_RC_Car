@@ -1,0 +1,6 @@
+DRC Rules Export File for PCB: E:\Duleepa\GitHub\2020-srw-rc-car\PrimaryConverter\Hardware\Primary_Converter\PrimaryConverterSch-PCB.PcbDoc
+RuleKind=Width|RuleName=Gate_Trace_Width|Scope=Board|Minimum=39.37
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Main_Width|Scope=Board|Minimum=15.70
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=15.75
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

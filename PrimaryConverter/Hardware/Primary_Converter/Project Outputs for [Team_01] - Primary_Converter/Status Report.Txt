@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [[Team_01] - Primary_Converter.PrjPcb]
+   Generated File[PrimaryConverterSch-PCB.TXT]
+   Generated File[PrimaryConverterSch-PCB.LDP]
+   Generated File[PrimaryConverterSch-PCB.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 8:05:50 PM On 20/01/2021

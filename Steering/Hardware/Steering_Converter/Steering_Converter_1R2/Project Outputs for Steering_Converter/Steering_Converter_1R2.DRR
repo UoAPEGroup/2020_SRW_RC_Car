@@ -1,0 +1,18 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: Steering_Converter_1R2.PcbDoc   20/01/2021  8:29:11 PM
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : Steering_Converter_1R2.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      16mil (0.399mm)                                           Round             20        PTH        0.00inch (0.00mm)
+T2      24mil (0.599mm)                                           Round             4         PTH        0.00inch (0.00mm)
+T3      35mil (0.899mm)                                           Round             29        PTH        0.00inch (0.00mm)
+T4      39mil (1.001mm)                                           Round             2         PTH        0.00inch (0.00mm)
+T5      47mil (1.199mm)                                           Round             2         PTH        0.00inch (0.00mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              57
+
+Total Processing Time (hh:mm:ss) : 00:00:00
