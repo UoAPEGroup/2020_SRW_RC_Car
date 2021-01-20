@@ -40,9 +40,9 @@ int main(void)
 	//stop all the timers
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
 	
-	setSpeedGrade(MID_VOLTAGE);
-	setInputV(700);
-	setDirection(false);
+	setSpeedGrade(MIN_VOLTAGE);
+	setInputV(1000);
+	setDirection(true); // true = forward, false = backward
 	updateDutyCycle();
 	
 	
