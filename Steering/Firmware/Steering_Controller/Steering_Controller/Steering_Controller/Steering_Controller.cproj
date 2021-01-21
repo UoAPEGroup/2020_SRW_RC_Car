@@ -173,6 +173,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="steering.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="steering.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="timer.c">
       <SubType>compile</SubType>
     </Compile>

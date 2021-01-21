@@ -37,7 +37,7 @@
 static volatile uint8_t RX_counter  = 0;
 static volatile bool usart0_TX_timer_flag = false;						//flag set by timer1 every 1s
 static volatile bool usart0_TX_send_data_flag = false;					//TX data if flag is set
-static volatile bool usart0_TX_send_reset_flag = false;					//TX reset confirmation
+static volatile bool usart0_TX_reset_flag = false;						//TX reset confirmation
 static volatile bool usart0_TX_system_active_flag = false;				//system active flag set on start up by user input at INT0
 
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
@@ -210,19 +210,19 @@ bool usart0_get_TX_send_data_flag()
 }
 
 //set, clear, get usart0 TX send reset flag
-void usart0_set_TX_send_reset_flag()
+void usart0_set_TX_reset_flag()
 {
-	usart0_TX_send_reset_flag = true;
+	usart0_TX_reset_flag = true;
 }
 
-void usart0_clr_TX_send_reset_flag()
+void usart0_clr_TX_reset_flag()
 {
-	usart0_TX_send_reset_flag = false;
+	usart0_TX_reset_flag = false;
 }
 
-bool usart0_get_TX_send_reset_flag()
+bool usart0_get_TX_reset_flag()
 {
-	return usart0_TX_send_reset_flag;
+	return usart0_TX_reset_flag;
 }
 
 //set, clear, get usart0 TX system active flag
@@ -245,7 +245,7 @@ bool usart0_get_TX_system_active_flag()
 void usart0_clr_TX_all_flags()
 {
 	usart0_clr_TX_send_data_flag();
-	usart0_clr_TX_send_reset_flag();
+	usart0_clr_TX_reset_flag();
 	usart0_clr_TX_timer_flag();
 }
 
@@ -280,7 +280,7 @@ ISR(USART0_RX_vect) {
 					usart0_clr_TX_send_data_flag();
 					break;
 				case RESET:
-					usart0_set_TX_send_reset_flag();
+					usart0_set_TX_reset_flag();
 					usart0_clr_TX_send_data_flag();
 					timer_control_init();
 					break;

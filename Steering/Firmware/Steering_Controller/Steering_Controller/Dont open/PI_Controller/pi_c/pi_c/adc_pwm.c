@@ -15,7 +15,7 @@ double adc_read(){
 	}
 	double adc_val = ((ADCL << 0) | (ADCH << 8));
 	
-	return (adc_val * 5000)/(1023);
+	return (adc_val * 3300)/(1024);
 }
 
 void analog_write(double value){
