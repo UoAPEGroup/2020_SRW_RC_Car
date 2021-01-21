@@ -12,9 +12,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAX_VOLTAGE 950
-#define MID_VOLTAGE 700
-#define MIN_VOLTAGE 500
+#define MAX_VOLTAGE 9500
+#define MID_VOLTAGE 7000
+#define MIN_VOLTAGE 5000
 #define STOP 0
 
 

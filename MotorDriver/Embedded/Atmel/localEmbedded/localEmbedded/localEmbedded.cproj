@@ -187,6 +187,12 @@
     <Compile Include="uart.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="watchdog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="watchdog.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

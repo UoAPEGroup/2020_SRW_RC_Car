@@ -11,10 +11,14 @@
 
 #define PERIODHALF 26 //half of the counts for the period
 #define TOLERANCE 100
-#define ARRAY_SIZE 10
+#define ADC_ARRAY_SIZE 10
+#define BL_ARRAY_SIZE 100
+#define VCC_MV 3300
+#define RESOLUTION 1024
 #define CURRENT_OPAMP_GAIN 1470
 #define CURRENT_SENSOR_GAIN_MV 400
 #define CURRENT_SENSOR_OFFSET_MV 250
+#define VOLTAGE_VD_MV 3703
 
 //declare variables
 static volatile uint8_t finalOnTime; //on time of the wave through the motor(in number of counts)
@@ -23,55 +27,104 @@ static volatile uint8_t rightOnTime; //on time of the right mosfets(in number of
 
 static volatile uint16_t inputV; //input voltage to the H-bridge
 static volatile uint16_t inputI; //most recent current reading into the H-bridge
+static volatile uint16_t averageV; //average voltage across one second, to be sent out via bluetooth
+static volatile uint16_t averageI; //average current across one second, to be sent out via bluetooth
+
 static volatile uint16_t speedGrade; //voltage wanted across motor, set with setSpeedGrade
 static volatile bool forward; //determines whether the car is moving forward or backward
 
 //store adc readings of voltage and current (taken every ms)
-static volatile uint16_t voltageValues[ARRAY_SIZE];
-static volatile uint16_t currentValues[ARRAY_SIZE];
+static volatile uint16_t voltageValues[ADC_ARRAY_SIZE];
+static volatile uint16_t currentValues[ADC_ARRAY_SIZE];
 
 //store calculated current and voltage values over the last second (last ten average values)
-static volatile uint16_t recentVoltageValues[ARRAY_SIZE];
-static volatile uint16_t recentCurrentValues[ARRAY_SIZE];
+static volatile uint16_t recentVoltageValues[BL_ARRAY_SIZE];
+static volatile uint16_t recentCurrentValues[BL_ARRAY_SIZE];
 
 //FLAGS
 extern volatile bool arrayFull = false;
+extern volatile bool sendData = false;
 
 //counters
 
-static volatile uint8_t count = 0;
+static volatile uint8_t ADCReadingsCount = 0;
+static volatile uint8_t recentValuesCount = 0;
 
 //store adc current and voltage readings in arrays
 
 void addCurrent(uint16_t adcCurrentReading) {
-	currentValues[count] = adcCurrentReading;
+	currentValues[ADCReadingsCount] = adcCurrentReading;
 }
 
 void addVoltage(uint16_t adcVoltageReading) {
-	 voltageValues[count] = adcVoltageReading;	
-	 count++;
+	 voltageValues[ADCReadingsCount] = adcVoltageReading;	
+	 ADCReadingsCount++;
 	 //reset count when array fills up
-	 if (count == 10) {
-		count = 0;
+	 if (ADCReadingsCount == 10) {
+		ADCReadingsCount = 0;
 		arrayFull = true;
 	}
 }
 
 //returns the result of an ADC conversion in millivolts
 uint16_t adcConvert(uint16_t adcValue) {
-	uint16_t convertedValue = ((uint32_t)adcValue * 3300)/1024;
+	uint16_t convertedValue = ((uint32_t)adcValue * VCC_MV)/RESOLUTION;
 	
 	return convertedValue;
 }
 
 void convertVoltageAndCurrent() {
-	//assuming range being read is 0 - 5A 
+	//assuming range being read is 0 - 5A, convert back to original current value
+	uint32_t totalC = 0;
+	uint32_t totalV = 0;
+	inputI = 0;
 	
+	//take the average of ten current readings and ten voltage readings
+	for (uint8_t i = 0; i < 10; i++) {
+		
+		inputI = (((uint32_t)adcConvert(currentValues[i]) * 1000)/CURRENT_OPAMP_GAIN); //undo OpAmp gain
+		inputI -= CURRENT_SENSOR_OFFSET_MV; //undo current sensor offset
+		inputI = ((uint32_t)inputI * 1000)/CURRENT_SENSOR_GAIN_MV; //undo current sensor gain
+		
+		totalC += inputI;
+		
+		totalV += ((uint32_t)adcConvert(voltageValues[i]) * (VOLTAGE_VD_MV))/1000; //undo voltage divider gain
+
+		}
+		
+	inputI = totalC/ADC_ARRAY_SIZE;
+	inputV = totalV/ADC_ARRAY_SIZE;
 	
+	//store recent current/voltage values in an array
+	recentCurrentValues[recentValuesCount] = inputI;
+	recentVoltageValues[recentValuesCount] = inputV;
+	
+	recentValuesCount++;
+	
+	//after one second 
+	if (recentValuesCount == BL_ARRAY_SIZE) {
+		sendData = true;
+		recentValuesCount = 0;
+	}
 	
 }
 
+void averageVoltageAndCurrent() {
+	uint32_t totalAverageV = 0;
+	uint32_t totalAverageI = 0;
+	
+	for (uint8_t i = 0; i < BL_ARRAY_SIZE; i++) {
+		totalAverageV += (recentVoltageValues[i]);
+		totalAverageI += (recentCurrentValues[i]);
+	}
+	
+	averageV = totalAverageV/BL_ARRAY_SIZE;
+	averageI = totalAverageI/BL_ARRAY_SIZE;
+
+}
+
 void updateDutyCycle(){
+
 	
 		//if the input voltage to the H-bridge is greater than the voltage wanted across the motor:
 		if(inputV > speedGrade){
@@ -126,4 +179,20 @@ uint8_t returnPeriodHalf(){
 
 uint16_t returnSpeedGrade() {
 	return speedGrade;
+}
+
+uint16_t returnInputI() {
+	return inputI;
+}
+
+uint16_t returnInputV() {
+	return inputV;
+}
+
+uint16_t returnAvgV() {
+	return averageV;
+}
+
+uint16_t returnAvgI() {
+	return averageI;
 }

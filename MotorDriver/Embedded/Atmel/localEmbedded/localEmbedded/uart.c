@@ -41,6 +41,7 @@ void uart_transmit(uint8_t data){
 //transmit multi-character data to uart using char array
 void send_data(char data[]) {
 	uint8_t count = 0;
+	
 	while (count < strlen(data) ) {
 		uart_transmit(data[count]);
 		count++;
