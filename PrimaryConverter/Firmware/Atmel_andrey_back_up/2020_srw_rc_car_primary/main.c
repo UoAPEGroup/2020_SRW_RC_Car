@@ -19,12 +19,12 @@
 int main(void)
 {
 	io_init();
-	timer_control_init();
+	//timer_control_init();
 	adc_init();
 	usart0_init(9600);
 	sei();
 	
-	usart0_transmit_reset_msg();
+	usart0_transmit_start_up_msg();
 	
     while (1) 
     {			
