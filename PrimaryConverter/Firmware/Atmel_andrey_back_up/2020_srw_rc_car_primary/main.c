@@ -28,8 +28,8 @@ int main(void)
 	
     while (1) 
     {			
-		if (usart0_get_TX_send_reset_flag()) {
-			usart0_clr_TX_send_reset_flag();
+		if (usart0_get_TX_reset_flag	()) {
+			usart0_clr_TX_reset_flag();
 			usart0_transmit_reset_msg();
 		} else if (usart0_get_TX_timer_flag()) {
 			usart0_clr_TX_timer_flag();

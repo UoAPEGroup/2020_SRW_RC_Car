@@ -35,7 +35,7 @@ void adc_init()
 	ADCSRB |= ((1 << ADTS2) | (1 << ADTS0));							//start conversion on timer1 OCR1B
 }
 
-//ADC conversion complete ISR		(TEST: top to bottom ~11us)
+//ADC conversion complete ISR
 ISR(ADC_vect)
 {
 	if (adc_read_count < 10) {
