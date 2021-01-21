@@ -18,7 +18,7 @@ void read_data() {
 	set_direction(); 
 	set_speed();
 	STATE_INT_TOGGLE;
-	set_turn_state();
+	//set_turn_state();
 }
 
 void set_direction(){
@@ -41,20 +41,6 @@ void set_speed(){
 	else{
 		set_no_speed();
 	}
-	/*
-	switch (input_data){
-		case (MED_H):
-		set_med_speed();
-		break;
-		
-		case (HIGH_H):
-		set_high_speed();
-		break;
-		
-		default:
-		
-		break;
-	}*/
 }
 
 void set_turn_set(){

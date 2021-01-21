@@ -36,8 +36,8 @@
 // STATE INTERRUPT TRIGGER
 #define STATE_INT_TOGGLE PORTC ^= (1 << PC5)
 
-#define DRT_FWD PORTC |= (1 << PC4)
-#define DRT_BCK PORTC &=~ (1 << PC4)
+#define DRT_FWD PORTC &=~ (1 << PC4)
+#define DRT_BCK PORTC |= (1 << PC4)
 
 #define SPD_0_H PORTC |= (1 << PC2)
 #define SPD_0_L PORTC &=~ (1 << PC2)

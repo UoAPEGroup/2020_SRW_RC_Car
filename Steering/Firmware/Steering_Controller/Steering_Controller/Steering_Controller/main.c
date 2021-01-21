@@ -12,6 +12,7 @@
 #include "control.h"
 #include "led.h"
 #include "instructions_macros.h"
+#include "steering.h"
 
 ISR(USART0_RX_vect){
 	input_data = UDR0;
@@ -25,12 +26,13 @@ int main(void)
 	led_init();
     uart_init();
 	sei();
+	system_state = ACTIVE_STATE;
     while (1) {
-		while (system_state == STATIONARY);
-	
-		/*if(system_state == ACTIVE_STATE){
-			adc_start();
-		}*/
+		//while (system_state == STATIONARY);
+		if(system_state == ACTIVE_STATE){
+			turn_start();
+		}
+		led_toggle();
 	}
 }
 
