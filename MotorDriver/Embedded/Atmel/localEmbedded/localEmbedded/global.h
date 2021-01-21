@@ -17,8 +17,6 @@
 #define MIN_VOLTAGE 500
 #define STOP 0
 
-void check();
-
 
 
 #endif /* GLOBAL_H_ */

@@ -12,6 +12,9 @@
 #define PERIODHALF 26 //half of the counts for the period
 #define TOLERANCE 100
 #define ARRAY_SIZE 10
+#define CURRENT_OPAMP_GAIN 1470
+#define CURRENT_SENSOR_GAIN_MV 400
+#define CURRENT_SENSOR_OFFSET_MV 250
 
 //declare variables
 static volatile uint8_t finalOnTime; //on time of the wave through the motor(in number of counts)
@@ -62,6 +65,9 @@ uint16_t adcConvert(uint16_t adcValue) {
 }
 
 void convertVoltageAndCurrent() {
+	//assuming range being read is 0 - 5A 
+	
+	
 	
 }
 

@@ -5,6 +5,5 @@
  *  Author: Earlene
  */ 
 
-#include "Calculations.h"
 #include <stdint.h>
 #include <stdbool.h> 

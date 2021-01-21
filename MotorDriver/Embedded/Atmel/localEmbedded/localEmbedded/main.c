@@ -11,6 +11,7 @@
 #include "adc.h"
 #include "uart.h"
 #include "interrupt.h"
+#include "global.h"
 
 //#define F_CPU 800000UL
 //#include <util/delay.h>
@@ -19,12 +20,6 @@
 #include <avr/interrupt.h>
 #include <stdbool.h>
 #include <stdio.h>
-
-//in cV(centiVolt)
-#define MAX_VOLTAGE 950
-#define MID_VOLTAGE 700
-#define MIN_VOLTAGE 500
-#define STOP 0
 
 int main(void)
 {
@@ -61,9 +56,7 @@ int main(void)
 	
 	uart_init(9600);
 	char hello[10];
-	
-	
-	
+
 	
     while (1)
     {
