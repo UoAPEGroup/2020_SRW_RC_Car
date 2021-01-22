@@ -9,8 +9,8 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define PERIODHALF 26 //half of the counts for the period
-#define TOLERANCE 100
+#define PERIODHALF 132 //half of the counts for the period 30kHz
+
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 100
 #define VCC_MV 3300
@@ -129,7 +129,7 @@ void updateDutyCycle(){
 		//if the input voltage to the H-bridge is greater than the voltage wanted across the motor:
 		if(inputV > speedGrade){
 			
-			finalOnTime = (PERIODHALF*speedGrade)/inputV; //calculate the on time of the final wave across the motor
+			finalOnTime = ((uint32_t)PERIODHALF*speedGrade)/inputV; //calculate the on time of the final wave across the motor
 			
 			if (forward){
 				leftOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of left fets

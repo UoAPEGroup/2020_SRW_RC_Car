@@ -51,3 +51,5 @@ void send_data(char data[]) {
 	uart_transmit(13);
 	uart_transmit(10);
 };
+
+//identify format of output
