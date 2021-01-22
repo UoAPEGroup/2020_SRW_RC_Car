@@ -13,10 +13,12 @@
 ///////////////		MAIN		///////////////
 int main(void)
 {
-	Init_PWM(100,200);
+	//Init_PWM(50, 100);
+	//
+	//OCR0A = 100;
+	//OCR0B = 50;
 	
-	OCR0A = 200;
-	OCR0B = 50;
+	Init_PWM_Fixed_Top(50);
 	
     ///////////////		LOOP		///////////////
     while (1) 

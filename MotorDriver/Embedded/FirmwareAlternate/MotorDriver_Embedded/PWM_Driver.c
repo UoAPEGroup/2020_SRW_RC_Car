@@ -52,6 +52,20 @@ void Init_PWM(uint8_t Duty_Cycle_Percentage, uint8_t Max_Period)
 }
 
 
+void Init_PWM_Fixed_Top(uint8_t Duty_Cycle_Percentage)
+{
+	DDRD |= (1 << PD6);						// set OC0A pin to output
+	
+	TCCR0A |= (1 << COM0A1);				// clear OC0A on compare up-count, set on down-count
+	TCCR0A |= (1 << WGM00);					// set mode as PWM phase correct (overflow as top)
+	
+	OCR0A = Find_Duty_Cycle_Period(Duty_Cycle_Percentage, 255);		// COMPARE
+	
+	TCCR0B |= (1 << CS02);		// prescaler of 1024
+	//TCCR0B |= (1 << CS00)|(1 << CS02);		// prescaler of 1024
+}
+
+
 
 
 
@@ -60,7 +74,7 @@ uint8_t Find_Duty_Cycle_Period(uint8_t Duty_Cycle_Percentage, uint8_t Max_Period
 {
 	if (Duty_Cycle_Percentage > 100) {Duty_Cycle_Percentage = 100;}
 	
-	uint8_t Duty_Cycle_Period = (uint8_t)(((uint16_t)(Max_Period) * (Duty_Cycle_Percentage))/100);
+	uint8_t Duty_Cycle_Period = (uint8_t)((((uint16_t)Max_Period) * Duty_Cycle_Percentage)/100);
 	
 	
 	if (Duty_Cycle_Period >= Max_Period) {
