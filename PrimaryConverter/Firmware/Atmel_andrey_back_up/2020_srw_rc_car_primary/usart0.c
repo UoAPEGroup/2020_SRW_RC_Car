@@ -125,7 +125,7 @@ void usart0_transmit_reset_msg()
 							"B	-> begin TX of data\n\r"
 							"E	-> end TX of data\n\r"
 							"R	-> reset system\n\r"
-							"H	-> halt system\n\r");
+							"H	-> halt system\n\r\n\r");
 							
 	usart0_transmit_string(reset_message);
 }

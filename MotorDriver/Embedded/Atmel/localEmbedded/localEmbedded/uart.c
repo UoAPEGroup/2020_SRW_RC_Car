@@ -11,6 +11,8 @@
 #include <stdio.h>
 
 #define ARRAYSIZE 10
+#define F_CPU 8000000
+
 // this function initializes the UART
 void uart_init(uint16_t baudRate) {
 	
@@ -21,7 +23,7 @@ void uart_init(uint16_t baudRate) {
 	UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00);
 			
 	//calculate the UBBR0 value required for the provided baudRate
-	UBRR0 = 8000000/((uint32_t) 16 * baudRate) - 1;
+	UBRR0 = F_CPU/((uint32_t) 16 * baudRate) - 1;
 }
 
 
@@ -39,13 +41,13 @@ void uart_transmit(uint8_t data){
 //transmit multi-character data to uart using char array
 void send_data(char data[]) {
 	uint8_t count = 0;
+	
 	while (count < strlen(data) ) {
 		uart_transmit(data[count]);
 		count++;
 	}
 	
-	//and the transmission with a newline
-	
+	//end the transmission with a newline
 	uart_transmit(13);
 	uart_transmit(10);
 };

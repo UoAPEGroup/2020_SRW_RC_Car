@@ -11,6 +11,8 @@
 #include "adc.h"
 #include "uart.h"
 #include "interrupt.h"
+#include "global.h"
+#include "watchdog.h"
 
 //#define F_CPU 800000UL
 //#include <util/delay.h>
@@ -20,17 +22,15 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-//in cV(centiVolt)
-#define MAX_VOLTAGE 950
-#define MID_VOLTAGE 700
-#define MIN_VOLTAGE 500
-#define STOP 0
-
 int main(void)
 {
-	//turn on global interrupts
-	interrupt_init();
-	sei();
+	watchdog_init(); //initialize the watchdog timer
+	adc_init(); //initialize the adc
+	interrupt_init(); //initialize the interrupt
+	uart_init(9600); //initialize the uart
+	
+	
+	sei(); //turn on global interrupts
 	uint8_t offset = 0;
 	
 	//set output pins
@@ -41,10 +41,9 @@ int main(void)
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
 	
 	setSpeedGrade(MIN_VOLTAGE);
-	setInputV(1000);
+	setInputV(10000);
 	setDirection(true); // true = forward, false = backward
 	updateDutyCycle();
-	
 	
 	//initialize timers
 	timer0_init(returnPeriodHalf(),returnLeftOnTime());  // PWm that controls the left FET driver
@@ -56,20 +55,48 @@ int main(void)
 
 	GTCCR = 0;   // start all timers
 	
-	//initalize the adc
-	adc_init();
-	
-	uart_init(9600);
 	char hello[10];
-	
-	
-	
 	
     while (1)
     {
-		uint16_t checkSpeedGrade = returnSpeedGrade();
-		sprintf(hello, "%u", checkSpeedGrade);
-		send_data(hello);
+		if (arrayFull) {
+		
+		//turn off adc by turning off timer1
+		TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12);
+			
+		//do calculations
+		convertVoltageAndCurrent();
+		
+		//print on terminal to verify
+		//uint16_t inputV = returnInputV();
+		//sprintf(hello, "%u", inputV);
+		//send_data(hello);
+		
+		//uint16_t inputI = returnInputI();
+		//sprintf(hello, "%u", inputI);
+		//send_data(hello);
+		
+		//turn on timer1 and set flag
+		arrayFull = false;
+		TCCR1B |= (1 << CS10) | (1 << CS11);
+		
+		}
+		
+		if (sendData) {
+			
+			averageVoltageAndCurrent();
+			
+			uint16_t inputV = returnAvgV();
+			sprintf(hello, "%u", inputV);
+			send_data(hello);
+					
+			uint16_t inputI = returnAvgI();
+			sprintf(hello, "%u", inputI);
+			send_data(hello);
+			
+			sendData = false;
+		}
+		
     }
 }
 

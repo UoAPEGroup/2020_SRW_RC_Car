@@ -24,16 +24,21 @@ static volatile uint16_t speedGrade;
 static volatile uint16_t voltageValues;
 static volatile uint16_t currentValues;
 
-static volatile uint8_t count = 0;
+static volatile uint8_t ADCReadingsCount = 0;
 
 //FLAGS
 extern volatile bool arrayFull;
+extern volatile bool sendData;
 
 //functions
 uint8_t returnLeftOnTime();
 uint8_t returnRightOnTime();
 uint8_t returnPeriodHalf();
 uint16_t returnSpeedGrade();
+uint16_t returnInputI();
+uint16_t returnInputV();
+uint16_t returnAvgV();
+uint16_t returnAvgI();
 
 void updateDutyCycle();
 void setInputV(uint16_t vinD);
@@ -41,6 +46,9 @@ void setSpeedGrade(uint16_t speed);
 void setDirection(bool forward);
 void addCurrent(uint16_t adcCurrentReading);
 void addVoltage(uint16_t adcVoltageReading);
+void convertVoltageAndCurrent();
+void averageVoltageAndCurrent();
+
 uint16_t adcConvert(uint16_t adcValue);
 
 
