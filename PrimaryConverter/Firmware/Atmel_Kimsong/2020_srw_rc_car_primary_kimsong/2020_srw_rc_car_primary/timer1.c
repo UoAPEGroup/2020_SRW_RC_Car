@@ -13,10 +13,11 @@ ISR(TIMER1_COMPB_vect) {
 
 void timer1_init() {
 	TCCR1B |= (1<<WGM12); //CTC mode OCR1A as top
-	TCCR1B |= (1<<CS11) | (1<<CS10); //64 prescaling
+	//TCCR1B |= (1<<CS11) | (1<<CS10); //64 prescaling
+	TCCR1B |= (1<<CS10); //no prescaling
 	
 	TIMSK1 |= (1<<OCIE1B); //Timer/Counter1, Output Compare B Match Interrupt Enable
 	
-	OCR1A = 52; 
-	OCR1B = 51; //0.1us trigger timing, compare match B
+	OCR1A = 8; //placeholder number greater than compare match B
+	OCR1B = 7; //1us trigger timing, compare match B
 }
