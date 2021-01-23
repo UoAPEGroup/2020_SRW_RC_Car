@@ -22,14 +22,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+
 int main(void)
 {
 	watchdog_init(); //initialize the watchdog timer
 	adc_init(); //initialize the adc
 	interrupt_init(); //initialize the interrupt
 	uart_init(9600); //initialize the uart
-	
-	
+		
 	sei(); //turn on global interrupts
 	uint8_t offset = 0;
 	
@@ -46,8 +46,8 @@ int main(void)
 	updateDutyCycle();
 	
 	//initialize timers
-	timer0_init(returnPeriodHalf(),returnLeftOnTime());  // PWm that controls the left FET driver
-	timer2_init(returnPeriodHalf(),returnRightOnTime());  // PWM that controls the right FET driver
+	timer0_init(returnFinalPeriod(),returnLeftOnTime());  // PWm that controls the left FET driver
+	timer2_init(returnFinalPeriod(),returnRightOnTime());  // PWM that controls the right FET driver
 	timer1_init();
 	
 	TCNT0 = 0;   // setting offset
@@ -59,26 +59,35 @@ int main(void)
 	
     while (1)
     {
-		if (arrayFull) {
-		
-		//turn off adc by turning off timer1
-		TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12);
+		if (arrayFull) {//if 10 adc readings of current and voltage have been taken (i.e., roughly 10.5 ms)
 			
-		//do calculations
-		convertVoltageAndCurrent();
+			//check that the remote is still in contact and sending valid signals 
+			if (interruptCount >= REQUIRED_INTERRUPT_COUNT) {
+				interruptCount = 0;
+				lostRemoteConnection = false;
+			}
+			else { //if contact is lost, stop the car
+				lostRemoteConnection = true; //set lost remote connection flag to true
+				setSpeedGrade(STOP);
+				interruptCount = 0;
+			}
+			
+			TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12); //turn off adc by turning off timer1
+			 
+			convertVoltageAndCurrent(); //convert adc readings into original values 
 		
-		//print on terminal to verify
-		//uint16_t inputV = returnInputV();
-		//sprintf(hello, "%u", inputV);
-		//send_data(hello);
+			//print on terminal to verify
+			//uint16_t inputV = returnInputV();
+			//sprintf(hello, "%u", inputV);
+			//send_data(hello);
+			updateDutyCycle();
+			//uint16_t inputI = returnInputI();
+			//sprintf(hello, "%u", inputI);
+			//send_data(hello);
 		
-		//uint16_t inputI = returnInputI();
-		//sprintf(hello, "%u", inputI);
-		//send_data(hello);
-		
-		//turn on timer1 and set flag
-		arrayFull = false;
-		TCCR1B |= (1 << CS10) | (1 << CS11);
+			//turn on timer1 and set flag
+			arrayFull = false;
+			TCCR1B |= (1 << CS10) | (1 << CS11);
 		
 		}
 		

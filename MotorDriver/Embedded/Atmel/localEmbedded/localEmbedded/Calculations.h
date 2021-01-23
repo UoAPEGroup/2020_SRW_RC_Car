@@ -33,7 +33,7 @@ extern volatile bool sendData;
 //functions
 uint8_t returnLeftOnTime();
 uint8_t returnRightOnTime();
-uint8_t returnPeriodHalf();
+uint8_t returnFinalPeriod();
 uint16_t returnSpeedGrade();
 uint16_t returnInputI();
 uint16_t returnInputV();

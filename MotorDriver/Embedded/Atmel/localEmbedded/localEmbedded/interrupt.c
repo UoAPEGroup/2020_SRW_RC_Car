@@ -11,6 +11,8 @@
 #include "Calculations.h"
 #include "global.h"
 
+static volatile uint8_t interruptCount = 0;
+
 ISR(INT0_vect) {
 	
 	DDRB |= (1 << DDB0);
@@ -28,32 +30,38 @@ ISR(INT0_vect) {
 	
 	//read the speed pins and set the speed grade accordingly
 	
-	if ((PINC & (1 << PINC4)) == (1 << PINC4)) {
-		
-		//if (11) then:
-		if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
-			setSpeedGrade(MAX_VOLTAGE);
-		}
-		
-		//if (10) then:
-		else {
-			setSpeedGrade(MID_VOLTAGE);
-		}	
-	}
+	if (!lostRemoteConnection && !overCurrent && !overVoltage) {
 	
-	else {
+		if ((PINC & (1 << PINC4)) == (1 << PINC4)) {
 		
-		//if (01) then:
-		if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
-			setSpeedGrade(MIN_VOLTAGE);
+			//if (11) then:
+			if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
+				setSpeedGrade(MAX_VOLTAGE);
+			}
+		
+			//if (10) then:
+			else {
+				setSpeedGrade(MID_VOLTAGE);
+			}	
 		}
-		
-		//if (00) then:
+	
 		else {
-			setSpeedGrade(STOP);
+		
+			//if (01) then:
+			if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
+				setSpeedGrade(MIN_VOLTAGE);
+			}
+		
+			//if (00) then:
+			else {
+				setSpeedGrade(STOP);
+			}
+		
 		}
 		
-	}
+		}
+		
+	interruptCount++;
 	
 }
 

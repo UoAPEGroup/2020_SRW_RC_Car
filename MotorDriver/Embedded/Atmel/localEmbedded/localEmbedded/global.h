@@ -17,6 +17,9 @@
 #define MIN_VOLTAGE 5000
 #define STOP 0
 
+extern volatile bool lostRemoteConnection;
+extern volatile bool overCurrent;
+extern volatile bool overVoltage;
 
 
 #endif /* GLOBAL_H_ */

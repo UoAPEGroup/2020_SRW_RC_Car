@@ -11,6 +11,7 @@
 
 void interrupt_init();
 
+static volatile uint8_t interruptCount;
 
 
 #endif /* INTERRUPT_H_ */

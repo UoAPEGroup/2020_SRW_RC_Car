@@ -7,3 +7,7 @@
 
 #include <stdint.h>
 #include <stdbool.h> 
+
+extern volatile bool lostRemoteConnection = true;
+extern volatile bool overCurrent = true;
+extern volatile bool overVoltage = true;

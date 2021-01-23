@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define PERIODHALF 132 //half of the counts for the period 30kHz
+#define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 100
@@ -129,24 +129,24 @@ void updateDutyCycle(){
 		//if the input voltage to the H-bridge is greater than the voltage wanted across the motor:
 		if(inputV > speedGrade){
 			
-			finalOnTime = ((uint32_t)PERIODHALF*speedGrade)/inputV; //calculate the on time of the final wave across the motor
+			finalOnTime = ((uint32_t)PERIOD_MOTOR*speedGrade)/inputV; //calculate the on time of the final wave across the motor
 			
 			if (forward){
-				leftOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of left fets
-				rightOnTime = (PERIODHALF - finalOnTime)/2; //set the on time of the right fets
+				leftOnTime = (PERIOD_MOTOR + finalOnTime)/2; //set the on time of left fets
+				rightOnTime = (PERIOD_MOTOR - finalOnTime)/2; //set the on time of the right fets
 				}else{
-				leftOnTime = (PERIODHALF - finalOnTime)/2; //set on time of the left fets
-				rightOnTime = (PERIODHALF + finalOnTime)/2; //set the on time of the right fets
+				leftOnTime = (PERIOD_MOTOR - finalOnTime)/2; //set on time of the left fets
+				rightOnTime = (PERIOD_MOTOR + finalOnTime)/2; //set the on time of the right fets
 				}
 			
 		}else{
 				//set the duty cycle to maximum if the input voltage to the H-bridge is less or equal than the voltage wanted across the motor:
 				if(forward){
-					leftOnTime = PERIODHALF - 1;
+					leftOnTime = PERIOD_MOTOR - 1;
 					rightOnTime = 1;
 				}else{
 					leftOnTime = 1;
-					rightOnTime = PERIODHALF - 1;
+					rightOnTime = PERIOD_MOTOR - 1;
 				}
 				
 			}
@@ -173,8 +173,8 @@ uint8_t returnRightOnTime(){
 	return rightOnTime;
 }
 
-uint8_t returnPeriodHalf(){
-	return PERIODHALF;
+uint8_t returnFinalPeriod(){
+	return PERIOD_MOTOR;
 }
 
 uint16_t returnSpeedGrade() {
