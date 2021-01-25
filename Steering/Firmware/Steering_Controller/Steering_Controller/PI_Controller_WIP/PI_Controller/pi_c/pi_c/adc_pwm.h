@@ -14,6 +14,6 @@
 
 double adc_read();
 
-void analog_write(double value);
+void analog_write(int16_t value);
 
 #endif /* ADC_PWM_H_ */

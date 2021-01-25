@@ -8,10 +8,9 @@
 #include "setup.h"
 
 void pwm_init() {
-	TCCR0A |= (1 << COM0A0);
-
+	TCCR0A |= (1 << COM0A1);
+	TCCR0A |= (1 << WGM01);
 	TCCR0A |= (1 << WGM00);
-	TCCR0B |= (1 << WGM02);
 	TCCR0B |= (1 << CS02);
 	
 }
@@ -21,6 +20,8 @@ void led_init(){
 }
 
 void adc_init(){
-	ADCSRA |= (1 << ADIE); // ADC Complete Interrupt
+	ADMUX |= (1 << MUX1);
+	ADCSRA |= (1 << ADEN);
+	
 	ADCSRA |= (1 << ADPS2)|(1 << ADPS1);
 }
