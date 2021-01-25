@@ -1,0 +1,24 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [Free Documents]
+   Generated File[Steering_Converter_1R2.GTO]
+   Generated File[Steering_Converter_1R2.GTS]
+   Generated File[Steering_Converter_1R2.GTL]
+   Generated File[Steering_Converter_1R2.GBL]
+   Generated File[Steering_Converter_1R2.GBS]
+   Generated File[Steering_Converter_1R2.GBO]
+   Generated File[Steering_Converter_1R2.GM1]
+   Generated File[Steering_Converter_1R2.GM10]
+   Generated File[Steering_Converter_1R2.GM12]
+   Generated File[Steering_Converter_1R2.GM13]
+   Generated File[Steering_Converter_1R2.GM15]
+   Generated File[Steering_Converter_1R2.GKO]
+   Generated File[Steering_Converter_1R2.RUL]
+   Generated File[Steering_Converter_1R2.EXTREP]
+   Generated File[Steering_Converter_1R2.REP]
+
+
+Files Generated   : 15
+Documents Printed : 0
+
+Finished Output Generation At 10:43:15 p.m. On 20/01/2021
