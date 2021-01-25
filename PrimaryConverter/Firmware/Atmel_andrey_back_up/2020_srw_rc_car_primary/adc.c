@@ -35,6 +35,32 @@ void adc_init()
 	ADCSRB |= ((1 << ADTS2) | (1 << ADTS0));							//start conversion on timer1 OCR1B
 }
 
+//getters for ADC data
+uint32_t adc_get_vsens()
+{
+	return (vsens_adc[0] * 5000) / 1024;
+}
+
+uint32_t adc_get_isens()
+{
+	return (isens_adc[0] * 5000) / 1024;
+}
+
+uint32_t adc_get_temp1()
+{
+	return (temp1_adc[0] * 5000) / 1024;
+}
+
+uint32_t adc_get_temp2()
+{
+	return (temp2_adc[0] * 5000) / 1024;
+}
+
+uint32_t adc_get_temp3()
+{
+	return (temp3_adc[0] * 5000) / 1024;
+}
+
 //ADC conversion complete ISR
 ISR(ADC_vect)
 {

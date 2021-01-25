@@ -20,10 +20,10 @@ void io_init()
 	DDRD |= (1 << DDD3);						//PWM for RHS
 	
 	//set up ADC input pins
-	DDRC &= ~(1 << DDC5);						//temp1 -> ADC2						 
-	DDRC &= ~(1 << DDC4);						//temp2 -> ADC3
-	DDRC &= ~(1 << DDC3);						//temp3 -> ADC4
-	DDRC &= ~(1 << DDC2);						//isens -> ADC5
+	DDRC &= ~(1 << DDC5);						//isens -> ADC2						 
+	DDRC &= ~(1 << DDC4);						//temp3 -> ADC3
+	DDRC &= ~(1 << DDC3);						//temp2 -> ADC4
+	DDRC &= ~(1 << DDC2);						//temp1 -> ADC5
 	DDRE &= ~(1 << DDE2);						//vsens -> ADC6
 	
 	//set up external interrupt on INT0

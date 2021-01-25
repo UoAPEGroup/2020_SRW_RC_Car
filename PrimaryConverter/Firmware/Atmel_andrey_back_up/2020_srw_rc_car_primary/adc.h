@@ -22,6 +22,11 @@
 #define TIMER1_COMPB_CLR		TIFR1 |= (1 << OCF1B)									//clear timer1 overflow flag						
 
 void adc_init();
+uint32_t adc_get_vsens();
+uint32_t adc_get_isens();
+uint32_t adc_get_temp1();
+uint32_t adc_get_temp2();
+uint32_t adc_get_temp3();
 
 
 #endif /* ADC_H_ */
