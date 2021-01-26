@@ -40,14 +40,17 @@ int main(void)
 	//stop all the timers
 	GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
 	
-	setSpeedGrade(MIN_VOLTAGE);
-	setInputV(10000);
-	setDirection(true); // true = forward, false = backward
-	updateDutyCycle();
-	
+// 	setSpeedGrade(STOP);
+// 	setInputV(10000);
+// 	setDirection(true); // true = forward, false = backward
+// 	updateDutyCycle();
+// 	
+// 	//initialize timers
+// 	timer0_init(returnFinalPeriod(),returnLeftOnTime());  // PWm that controls the left FET driver
+// 	timer2_init(returnFinalPeriod(),returnRightOnTime());  // PWM that controls the right FET driver
 	//initialize timers
-	timer0_init(returnFinalPeriod(),returnLeftOnTime());  // PWm that controls the left FET driver
-	timer2_init(returnFinalPeriod(),returnRightOnTime());  // PWM that controls the right FET driver
+	//timer0_init(132, 62);  // PWm that controls the left FET driver
+	//timer2_init(132, 20); // PWM that controls the right FET driver
 	timer1_init();
 	
 	TCNT0 = 0;   // setting offset
@@ -80,7 +83,18 @@ int main(void)
 			//uint16_t inputV = returnInputV();
 			//sprintf(hello, "%u", inputV);
 			//send_data(hello);
-			updateDutyCycle();
+			GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); //stop timers
+			//updateDutyCycle(); //update duty cycle
+			
+			timer0_init(132, 52);  // PWm that controls the left FET driver
+			timer2_init(132, 98);  // PWM that controls the right FET driver
+			//timer1_init();
+			
+			TCNT0 = 0;   // setting offset
+			TCNT2 = offset;  
+
+			GTCCR = 0; //start the timers
+			
 			//uint16_t inputI = returnInputI();
 			//sprintf(hello, "%u", inputI);
 			//send_data(hello);

@@ -14,7 +14,7 @@ static volatile uint16_t checkADC = 0;
 
 static volatile uint8_t channelReading = 0; //change the ADC channel to read from
 
-ISR(ADC_vect) {
+ISR(ADC_vect) { 
 	
 	//clear timer1 compare match B flag
 	TIFR1 |= (1 << OCF1B);

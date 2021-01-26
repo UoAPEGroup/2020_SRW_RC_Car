@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
+#include "global.h"
 
 #define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
 
@@ -25,8 +26,9 @@ static volatile uint8_t finalOnTime; //on time of the wave through the motor(in 
 static volatile uint8_t leftOnTime; //on time of the left mosfets(in number of counts)
 static volatile uint8_t rightOnTime; //on time of the right mosfets(in number of counts)
 
-static volatile uint16_t inputV; //input voltage to the H-bridge
+static volatile uint16_t inputV; //most recent input voltage to the H-bridge
 static volatile uint16_t inputI; //most recent current reading into the H-bridge
+static volatile uint16_t motorI; //most recent current flowing through the motor
 static volatile uint16_t averageV; //average voltage across one second, to be sent out via bluetooth
 static volatile uint16_t averageI; //average current across one second, to be sent out via bluetooth
 
@@ -95,6 +97,24 @@ void convertVoltageAndCurrent() {
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
+	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle?
+	
+	if (inputI >= 3000) {
+		overCurrent = true;
+		setSpeedGrade(STOP);
+	}
+	else {
+		overCurrent = false;
+	}
+	
+	if (inputV >= 20000) {
+		overVoltage = true;
+		setSpeedGrade(STOP);
+	}
+	else {
+		overVoltage = false;
+	}
+	  
 	//store recent current/voltage values in an array
 	recentCurrentValues[recentValuesCount] = inputI;
 	recentVoltageValues[recentValuesCount] = inputV;
@@ -150,6 +170,10 @@ void updateDutyCycle(){
 				}
 				
 			}
+			
+		//calculate current flowing through motor using the inverse of the duty cycle
+		//motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
+		
 }
 
 
