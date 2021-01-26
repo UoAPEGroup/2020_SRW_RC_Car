@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
-PCB File : \\files.auckland.ac.nz\myhome\Desktop\Electeng\2020-srw-rc-car\Steering\Hardware\Remote_Controller\RemoteCntrl_1R3.PcbDoc
-Date     : 12/01/2021
-Time     : 10:39:09 am
+PCB File : F:\Git\2020-srw-rc-car\Steering\Hardware\Remote_Controller\RemoteCntrl_1R3.PcbDoc
+Date     : 16/01/2021
+Time     : 10:28:23 p.m.
 
 Processing Rule : Clearance Constraint (Gap=0.3mm) (All),(All)
 Rule Violations :0
@@ -49,10 +49,10 @@ Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (Al
 Rule Violations :0
 
 Waived Violations Of Rule : Silk To Solder Mask (Clearance=0.145mm) (IsPad),(All)
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C4-1(128.778mm,85.466mm) on Top Layer And Track (127.841mm,73.661mm)(127.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:07:55 pmWould require changes across the board
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C4-2(128.778mm,83.566mm) on Top Layer And Track (127.841mm,73.661mm)(127.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:08:08 pmWould require changes across the board
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C7-1(120.904mm,76.901mm) on Top Layer And Track (121.841mm,73.661mm)(121.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:08:01 pmWould require changes across the board
-   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C7-2(120.904mm,78.801mm) on Top Layer And Track (121.841mm,73.661mm)(121.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:08:04 pmWould require changes across the board
+   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C4-1(128.778mm,85.466mm) on Top Layer And Track (127.841mm,73.661mm)(127.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:07:55 p.m.Would require changes across the board
+   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C4-2(128.778mm,83.566mm) on Top Layer And Track (127.841mm,73.661mm)(127.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:08:08 p.m.Would require changes across the board
+   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C7-1(120.904mm,76.901mm) on Top Layer And Track (121.841mm,73.661mm)(121.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:08:01 p.m.Would require changes across the board
+   Waived Violation between Silk To Solder Mask Clearance Constraint: (0.06mm < 0.145mm) Between Pad C7-2(120.904mm,78.801mm) on Top Layer And Track (121.841mm,73.661mm)(121.841mm,89.661mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.06mm]Waived by Neil Patil at 10/01/2021 3:08:04 p.m.Would require changes across the board
 Waived Violations :4
 
 
