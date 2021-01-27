@@ -110,7 +110,7 @@ ISR(ADC_vect) {
 			TIMER1_COMPB_CLR;
 			ADC_DISABLE;
 			adc_full = true;
-			set_adc_average();
+			adc_set_averages();
 		}
 	}
 }
@@ -141,7 +141,7 @@ uint32_t adc_convert_mV(uint16_t raw_ADC) {
 	return original_V;							
 }
 
-void reset_counters() {
+void adc_reset_counters() {
 	//reset all counters to 0
 	voltage_counter = 0;
 	current_counter = 0;
@@ -150,7 +150,7 @@ void reset_counters() {
 	temp3_counter = 0;
 }
 
-void set_adc_average() {
+void adc_set_averages() {
 	if (adc_full == true) {
 		adc_averages[0] = calc_make_average(adc_voltage);
 		adc_averages[1] = calc_make_average(adc_current);
@@ -160,14 +160,14 @@ void set_adc_average() {
 		
 		//set adc_full back to false to get new adc readings
 		adc_full = false;
-		reset_counters();
+		adc_reset_counters();
 		ADC_ENABLE;
 		led_on();
 	}
 }
 
-void get_adc_averages(uint32_t *arr) {
-	//set_adc_average();
+void adc_get_averages(uint32_t *arr) {
+	//adc_set_averages();
 	for (uint8_t i = 0; i < ADC_used; i++) {
 		
 		arr[i] = adc_averages[i];

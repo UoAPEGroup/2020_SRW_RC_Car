@@ -79,7 +79,7 @@ void usart0_transmit_data()
 {
 	uint32_t averages[5] = {0};
 		
-	get_adc_averages(averages);
+	adc_get_averages(averages);
 	
 	char buffer_temp1[TX_BUFFER];						
 	char buffer_temp2[TX_BUFFER];
