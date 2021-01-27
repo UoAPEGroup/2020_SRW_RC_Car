@@ -149,6 +149,12 @@
     <Compile Include="common.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="functions.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="functions.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="io.c">
       <SubType>compile</SubType>
     </Compile>

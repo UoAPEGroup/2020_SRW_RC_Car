@@ -15,6 +15,7 @@
 #include "usart0.h"
 #include "timer_control.h"
 #include "calc.h"
+#include "adc.h"
 
 //macros for buffer size
 #define TX_BUFFER		20
@@ -74,19 +75,23 @@ void usart0_transmit_string(char *string)
 }
 
 //transmit formatted ADC data 
-void usart0_transmit_data(uint32_t temp1, uint32_t temp2, uint32_t temp3, uint32_t isens, uint32_t vsens)
+void usart0_transmit_data()
 {
+	uint32_t averages[5] = {0};
+		
+	get_adc_averages(averages);
+	
 	char buffer_temp1[TX_BUFFER];						
 	char buffer_temp2[TX_BUFFER];
 	char buffer_temp3[TX_BUFFER];
 	char buffer_isens[TX_BUFFER];
 	char buffer_vsens[TX_BUFFER];
 	
-	sprintf(buffer_temp1, "TEMP1:	%ld mV\n\r", temp1);
-	sprintf(buffer_temp2, "TEMP2:	%ld mV\n\r", temp2);
-	sprintf(buffer_temp3, "TEMP3:	%ld mV\n\r", temp3);
-	sprintf(buffer_isens, "ISENS:	%ld mV\n\r", isens);
-	sprintf(buffer_vsens, "VSENS:	%ld mV\n\r\n\r", vsens);
+	sprintf(buffer_temp1, "TEMP1:	%ld mV\n\r", averages[2]);
+	sprintf(buffer_temp2, "TEMP2:	%ld mV\n\r", averages[3]);
+	sprintf(buffer_temp3, "TEMP3:	%ld mV\n\r", averages[4]);
+	sprintf(buffer_isens, "ISENS:	%ld mV\n\r", averages[1]);
+	sprintf(buffer_vsens, "VSENS:	%ld mV\n\r\n\r", averages[0]);
 	
 	usart0_transmit_string("ADC_DATA\n\r--------\n\r");
 	usart0_transmit_string(buffer_temp1);

@@ -34,7 +34,7 @@ int main(void)
 		} else if (usart0_get_TX_timer_flag()) {
 			usart0_clr_TX_timer_flag();
 			if (usart0_get_TX_send_data_flag()) {
-				usart0_transmit_data(adc_get_temp1(), adc_get_temp2(), adc_get_temp3(), adc_get_isens(), adc_get_vsens());
+				usart0_transmit_data();
 				usart0_transmit_pwmtest();
 			}
 		}
