@@ -1,113 +1,177 @@
 /*
  * adc.c
  *
- * Created: 16/12/2020 10:13:38 am
- *  Author: achu072
+ * Created: 12/10/2020 9:55:45 AM
+ * Author: Kimsong Lor
  */ 
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
-
 #include "adc.h"
+#include "functions.h"
+#include "usart0.h"
 #include "led.h"
 
-#define ARRAY_SIZE		10
-#define COUNTER_OFFSET	11
+//ADC read counters
+volatile uint8_t voltage_counter = 0;
+volatile uint8_t current_counter = 0;
+volatile uint8_t temp1_counter = 0;
+volatile uint8_t temp2_counter = 0;
+volatile uint8_t temp3_counter = 0;
 
-//global variables
-static volatile uint8_t adc_read_count = 0;
+//ADC transfer booleans
+bool adc_full = false; //set all booleans to false 
 
-static volatile uint32_t temp1_adc[ARRAY_SIZE];
-static volatile uint32_t temp2_adc[ARRAY_SIZE];
-static volatile uint32_t temp3_adc[ARRAY_SIZE];
-static volatile uint32_t isens_adc[ARRAY_SIZE];
-static volatile uint32_t vsens_adc[ARRAY_SIZE];
+//ADC read arrays
+uint32_t adc_voltage[SAMPLING_SIZE]; //mV
+uint32_t adc_current[SAMPLING_SIZE]; //mA
+uint32_t adc_temp1[SAMPLING_SIZE]; //mV
+uint32_t adc_temp2[SAMPLING_SIZE]; //mV
+uint32_t adc_temp3[SAMPLING_SIZE]; //mV
+uint32_t adc_averages[ADC_used] = {0}; // voltage[0], current[1], temp1[2], temp2[3], temp3[4]
 
-//initial set up of ADC
-void adc_init()
-{
-	ADMUX |= (1 << REFS0);												//select AVcc reference
-	ADC_CH_TEMP1;														//start reading from TEMP1
-	ADC_ENABLE;															//enable ADC
-	ADCSRA |= (1 << ADATE);												//enable auto-triggering
-	ADCSRA |= (1 << ADIE);												//enable conversion complete interrupt
-	ADCSRA |= ((1 << ADPS2) | (1 << ADPS0));							//set /32 prescaler -> ADC clk = 250kHz
-	ADCSRB |= ((1 << ADTS2) | (1 << ADTS0));							//start conversion on timer1 OCR1B
+ISR(ADC_vect) {
+	if (adc_full == false) {
+		if (voltage_counter < SAMPLING_SIZE) {
+			TIMER1_COMPB_CLR;
+			adc_voltage[voltage_counter] = adc_convert_mV(ADC);
+			//check for rated value and cut (check max value)
+			if (adc_voltage[voltage_counter] >= rated_V) {
+				reset_counters(); 
+				//call PWM shutdown function
+			}
+			voltage_counter++;
+			
+			if (voltage_counter == 10) {
+				ADC_CH_CLR;
+				ADC_CH_ISENS1;
+			}
+		}
+		else if (current_counter < SAMPLING_SIZE) {
+			TIMER1_COMPB_CLR;
+			adc_current[current_counter] = adc_convert_mV(ADC); //conversion for mA, needs adjustment
+			//check for rated value and cut
+			if (adc_voltage[voltage_counter] >= rated_C) {
+				reset_counters(); 
+				//call PWM shutdown function
+			}
+			current_counter++;
+			
+			if (current_counter == 10) {
+				ADC_CH_CLR;
+				ADC_CH_TEMP1;
+			}
+		}
+		else if (temp1_counter < SAMPLING_SIZE) {
+			TIMER1_COMPB_CLR;
+			adc_temp1[temp1_counter] = adc_convert_mV(ADC); //conversion for temp different, needs adjustment
+			//check for rated value and cut
+			if (adc_voltage[voltage_counter] >= rated_T1) {
+				reset_counters(); 
+				//call PWM shutdown function
+			}
+			temp1_counter++;
+			
+			if (temp1_counter == 10) {
+				ADC_CH_CLR;
+				ADC_CH_TEMP2;
+			}
+		}
+		else if (temp2_counter < SAMPLING_SIZE) {
+			TIMER1_COMPB_CLR;
+			adc_temp2[temp2_counter] = adc_convert_mV(ADC); //conversion for temp different, needs adjustment
+			//check for rated value and cut
+			if (adc_voltage[voltage_counter] >= rated_T2) {
+				reset_counters(); 
+				//call PWM shutdown function
+			}
+			temp2_counter++;
+			
+			if (temp2_counter == 10) {
+				ADC_CH_CLR;
+				ADC_CH_TEMP3;
+			}
+		}
+		else if (temp3_counter < SAMPLING_SIZE) {
+			TIMER1_COMPB_CLR;
+			adc_temp3[temp3_counter] = adc_convert_mV(ADC); //conversion for temp different, needs adjustment
+			//check for rated value and cut
+			if (adc_voltage[voltage_counter] >= rated_T3) {
+				reset_counters(); 
+				//call PWM shutdown function
+			}
+			temp3_counter++;
+			
+			if (temp3_counter == 10) {
+				ADC_CH_CLR;
+				ADC_CH_VSENS1;
+			}
+		}
+		else {
+			TIMER1_COMPB_CLR;
+			//flag for processing
+			ADC_DISABLE;
+			adc_full = true;
+			set_adc_average();
+			led_on();
+		}
+	}
 }
 
-//getters for ADC data
-uint32_t adc_get_vsens()
-{
-	return (vsens_adc[0] * 5000) / 1024;
+void adc_init() {
+	ADMUX |= (1<<REFS0); //Reference voltage selected to be AVCC
+	
+	ADCSRA |= (1<<ADEN); //ADC enabled
+	ADC_CH_VSENS1;		//set start channel to vsens
+	ADCSRA |= (1<<ADATE); //ADC auto trigger enabled
+	ADCSRA |= (1<<ADIE); //ADC interrupt enabled
+	ADCSRA |= (1<<ADPS2) | (1<<ADPS0); //ADC prescaler = 32, system clock = 8Mhz, adc clock = 250kHz
+	
+	ADCSRB |= (1<<ADTS2) | (1<<ADTS0); //ADC auto trigger source = Timer/Counter1 compare match B
+	
+	sei(); //enable global interrupt
 }
 
-uint32_t adc_get_isens()
-{
-	return (isens_adc[0] * 5000) / 1024;
+uint16_t adc_read(uint8_t channel) {
+	ADMUX &= ~( (1<<MUX3) | (1<<MUX2) | (1<<MUX1) | (1<<MUX0) ); //clearing MUX register
+	ADMUX |= channel; //select the adc channel
+	
+	return ADC; //return the ADC value from the ADCL and ADCH registers
 }
 
-uint32_t adc_get_temp1()
-{
-	return (temp1_adc[0] * 5000) / 1024;
+//convert the raw adc value to original value by multiplying with Vstep in mV
+uint32_t adc_convert_mV(uint16_t raw_ADC) {  
+	uint32_t original_V = (raw_ADC*V_ref)/A_int;  //reference voltage, amplitude interval
+	return original_V;							
 }
 
-uint32_t adc_get_temp2()
-{
-	return (temp2_adc[0] * 5000) / 1024;
+void reset_counters() {
+	//reset all counters to 0
+	voltage_counter = 0;
+	current_counter = 0;
+	temp1_counter = 0;
+	temp2_counter = 0;
+	temp3_counter = 0;
 }
 
-uint32_t adc_get_temp3()
-{
-	return (temp3_adc[0] * 5000) / 1024;
+void set_adc_average() {
+	if (adc_full == true) {
+		adc_averages[ADC_V] = calc_average(adc_voltage);
+		adc_averages[ADC_C] = calc_average(adc_current);
+		adc_averages[ADC_T1] = calc_average(adc_temp1);
+		adc_averages[ADC_T2] = calc_average(adc_temp2);
+		adc_averages[ADC_T3] = calc_average(adc_temp3);
+		
+		//set adc_full back to false to get new adc readings
+		adc_full = false;
+		ADC_ENABLE;
+	}
 }
 
-//ADC conversion complete ISR
-ISR(ADC_vect)
-{
-	if (adc_read_count < 10) {
-		TIMER1_COMPB_CLR;
-		temp1_adc[adc_read_count] = ADC;								
-		adc_read_count++;
-	} else if (adc_read_count == 10) {
-		TIMER1_COMPB_CLR;
-		ADC_CH_CLR;
-		ADC_CH_TEMP2;													
-		adc_read_count++;
-	} else if ((adc_read_count > 10) && (adc_read_count < 21)) {
-		TIMER1_COMPB_CLR;
-		temp2_adc[adc_read_count - COUNTER_OFFSET] = ADC;
-		adc_read_count++;
-	} else if (adc_read_count == 21) {
-		TIMER1_COMPB_CLR;
-		ADC_CH_CLR;
-		ADC_CH_TEMP3;
-		adc_read_count++;
-	} else if ((adc_read_count > 21) && (adc_read_count < 32)) {
-		TIMER1_COMPB_CLR;
-		temp3_adc[adc_read_count - COUNTER_OFFSET * 2] = ADC;
-		adc_read_count++;
-	} else if (adc_read_count == 32) {
-		TIMER1_COMPB_CLR;
-		ADC_CH_CLR;
-		ADC_CH_ISENS1;
-		adc_read_count++;
-	} else if ((adc_read_count > 32) && (adc_read_count < 43)) {
-		TIMER1_COMPB_CLR;
-		isens_adc[adc_read_count - COUNTER_OFFSET * 3] = ADC;
-		adc_read_count++;
-	} else if (adc_read_count == 43) {
-		TIMER1_COMPB_CLR;
-		ADC_CH_CLR;
-		ADC_CH_VSENS1;
-		adc_read_count++;
-	} else if ((adc_read_count > 43) && (adc_read_count < 54)) {
-		TIMER1_COMPB_CLR;
-		vsens_adc[adc_read_count - COUNTER_OFFSET * 4] = ADC;
-		adc_read_count++;
-	} else if (adc_read_count == 54) {
-		TIMER1_COMPB_CLR;
-		ADC_CH_CLR;
-		ADC_CH_TEMP1;
-		adc_read_count = 0;
+void get_adc_averages(uint32_t *arr) {
+	//set_adc_average();
+	for (uint8_t i = 0; i < ADC_used; i++) {
+		
+		
+		
+		arr[i] = adc_averages[i];
 	}
 }

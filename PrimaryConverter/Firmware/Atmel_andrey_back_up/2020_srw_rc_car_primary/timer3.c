@@ -23,6 +23,6 @@ void timer3_init()
 
 ISR(TIMER3_OVF_vect)
 {
-	led_toggle();								//led used for testing transmission frequency
+	//led_toggle();								//led used for testing transmission frequency
 	usart0_set_TX_timer_flag();						//set flag to transmit data every 1s
 }

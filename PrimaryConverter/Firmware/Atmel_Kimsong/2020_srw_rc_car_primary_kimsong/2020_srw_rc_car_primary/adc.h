@@ -8,16 +8,16 @@
 #define V_ref 3300 //reference voltage 3300mV (Vcc)
 #define A_int 1024 //amplitude interval 2^10 = 1024
 
-#define rated_V 3000 //3000mV
-#define rated_C 3000 //3000mV (needs changes)
-#define rated_T1 3000 //3000mV (needs changes)
-#define rated_T2 3000 //3000mV (needs changes)
-#define rated_T3 3000 //3000mV (needs changes)
+#define rated_V 1000 //3000mV
+#define rated_C 1000 //3000mV (needs changes)
+#define rated_T1 1000 //3000mV (needs changes)
+#define rated_T2 1000 //3000mV (needs changes)
+#define rated_T3 1000 //3000mV (needs changes)
 
 #define ADC_used 5 //number of adc channels in use
 
-#define ADC_V 0 //adc channel 0, voltage
-#define ADC_C 1 //adc channel 1, current
+#define ADC_V 6 //adc channel 6, voltage
+#define ADC_C 5 //adc channel 5, current
 #define ADC_T1 2 //adc channel 2, temp1
 #define ADC_T2 3 //adc channel 3, temp2
 #define ADC_T3 4 //adc channel 4, temp3
