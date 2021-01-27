@@ -6,7 +6,7 @@
  */ 
 
 #include "adc.h"
-#include "functions.h"
+#include "calc.h"
 #include "usart0.h"
 #include "led.h"
 
@@ -152,11 +152,11 @@ void reset_counters() {
 
 void set_adc_average() {
 	if (adc_full == true) {
-		adc_averages[0] = calc_average(adc_voltage);
-		adc_averages[1] = calc_average(adc_current);
-		adc_averages[2] = calc_average(adc_temp1);
-		adc_averages[3] = calc_average(adc_temp2);
-		adc_averages[4] = calc_average(adc_temp3);
+		adc_averages[0] = calc_make_average(adc_voltage);
+		adc_averages[1] = calc_make_average(adc_current);
+		adc_averages[2] = calc_make_average(adc_temp1);
+		adc_averages[3] = calc_make_average(adc_temp2);
+		adc_averages[4] = calc_make_average(adc_temp3);
 		
 		//set adc_full back to false to get new adc readings
 		adc_full = false;
