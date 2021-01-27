@@ -12,13 +12,15 @@
 #include "global.h"
 #include "adc_pwm.h"
 
+#define MAX_LIMIT 5000
+#define MIN_LIMIT 0
 
 float k_p;
 float k_i;
 
 volatile int16_t error;
 int16_t prevError;
-int16_t sampling_t;
+float sampling_t;
 volatile int16_t input; 
 volatile int16_t output;
 volatile int16_t integrator;
