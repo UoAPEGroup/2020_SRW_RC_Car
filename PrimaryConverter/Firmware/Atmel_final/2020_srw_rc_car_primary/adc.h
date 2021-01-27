@@ -25,6 +25,12 @@
 
 #define SAMPLING_SIZE 10
 
+#define VOLTAGE_POS	0
+#define CURRENT_POS	1
+#define TEMP1_POS	2
+#define TEMP2_POS	3
+#define TEMP3_POS	4
+
 #define TIMER1_COMPB_CLR TIFR1 |= (1 << OCF1B)										//clear timer1 overflow flag
 
 #define ADC_CH_CLR			ADMUX &= ~((1 << MUX2) | (1 << MUX1) | (1 << MUX0))		//ADC0 -> clear MUX[2:0]
@@ -46,11 +52,19 @@
 
 void adc_init();
 uint16_t adc_read(uint8_t channel);
-uint32_t adc_convert_mV(uint16_t raw_ADC);											//convert the raw adc value to original value by multiplying with Vstep
+void adc_convert_all();																//convert the raw adc value to original value by multiplying with Vstep
 void adc_reset_counters();
 
-void adc_make_averages();															//calculate the average values from their respective array of adc readings
-void adc_get_averages(uint32_t *arr);												//get the array of average values from the adc readings
-void adc_set_averages();															//fill array of ADC average values
+void adc_make_averages();
+																					//calculate the average values from their respective array of adc readings
+uint32_t adc_get_avg_voltage();														//getters for average values
+uint32_t adc_get_avg_current();
+uint32_t adc_get_avg_temp1();
+uint32_t adc_get_avg_temp2();
+uint32_t adc_get_avg_temp3();
+
+void adc_make_averages();															//fill array of ADC average values
+bool adc_get_full_flag();
+void adc_clr_full_flag();
 
 #endif /* ADC_H_ */

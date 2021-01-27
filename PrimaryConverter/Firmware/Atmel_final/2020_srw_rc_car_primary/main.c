@@ -12,6 +12,7 @@
 #include <util/delay.h>
 
 #include "io.h"
+#include "led.h"
 #include "timer_control.h"
 #include "adc.h"
 #include "usart0.h"
@@ -19,7 +20,6 @@
 int main(void)
 {
 	io_init();
-	//timer_control_init();
 	adc_init();
 	usart0_init(9600);
 	sei();
@@ -27,8 +27,15 @@ int main(void)
 	usart0_transmit_start_up_msg();
 	
     while (1) 
-    {			
-		if (usart0_get_TX_reset_flag	()) {
+    {	
+		if (adc_get_full_flag()) {
+			led_on();
+			adc_clr_full_flag();
+			adc_convert_all();
+			adc_make_averages();
+		}		
+		
+		if (usart0_get_TX_reset_flag()) {
 			usart0_clr_TX_reset_flag();
 			usart0_transmit_reset_msg();
 		} else if (usart0_get_TX_timer_flag()) {
