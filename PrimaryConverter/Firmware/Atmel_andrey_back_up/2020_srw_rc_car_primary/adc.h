@@ -19,19 +19,19 @@
 #define ADC_V 6 //adc channel 6, voltage
 #define ADC_C 5 //adc channel 5, current
 #define ADC_T1 2 //adc channel 2, temp1
-#define ADC_T2 3 //adc channel 3, temp2
-#define ADC_T3 4 //adc channel 4, temp3
+#define ADC_T2 4 //adc channel 4, temp2
+#define ADC_T3 3 //adc channel 3, temp3
 
 #define SAMPLING_SIZE 10
 
 #define TIMER1_COMPB_CLR TIFR1 |= (1 << OCF1B)	//clear timer1 overflow flag
 
 #define ADC_CH_CLR				ADMUX &= ~((1 << MUX2) | (1 << MUX1) | (1 << MUX0))		//ADC0 -> clear MUX[2:0]
-#define ADC_CH_TEMP1			ADMUX |= (1 << MUX1)									//ADC2
+#define ADC_CH_ISENS			ADMUX |= (1 << MUX1)									//ADC2
 #define ADC_CH_TEMP2			ADMUX |= ((1 << MUX1) | (1 << MUX0))					//ADC3
 #define ADC_CH_TEMP3			ADMUX |= (1 << MUX2)									//ADC4
-#define ADC_CH_ISENS1			ADMUX |= ((1 << MUX2) | (1 << MUX0))					//ADC5
-#define ADC_CH_VSENS1			ADMUX |= ((1 << MUX2) | (1 << MUX1))					//ADC6
+#define ADC_CH_TEMP1			ADMUX |= ((1 << MUX2) | (1 << MUX0))					//ADC5
+#define ADC_CH_VSENS			ADMUX |= ((1 << MUX2) | (1 << MUX1))					//ADC6
 #define ADC_ENABLE				ADCSRA |= (1 << ADEN)									//enable ADC
 #define ADC_DISABLE				ADCSRA &= ~(1 << ADEN)									//disable ADC
 

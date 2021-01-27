@@ -42,7 +42,7 @@ ISR(ADC_vect) {
 			
 			if (voltage_counter == 10) {
 				ADC_CH_CLR;
-				ADC_CH_ISENS1;
+				ADC_CH_ISENS;
 			}
 		}
 		else if (current_counter < SAMPLING_SIZE) {
@@ -102,7 +102,7 @@ ISR(ADC_vect) {
 			
 			if (temp3_counter == 10) {
 				ADC_CH_CLR;
-				ADC_CH_VSENS1;
+				ADC_CH_VSENS;
 			}
 		}
 		else {
@@ -120,14 +120,12 @@ void adc_init() {
 	ADMUX |= (1<<REFS0); //Reference voltage selected to be AVCC
 	
 	ADCSRA |= (1<<ADEN); //ADC enabled
-	ADC_CH_VSENS1;		//set start channel to vsens
+	ADC_CH_VSENS;		//set start channel to vsens
 	ADCSRA |= (1<<ADATE); //ADC auto trigger enabled
 	ADCSRA |= (1<<ADIE); //ADC interrupt enabled
 	ADCSRA |= (1<<ADPS2) | (1<<ADPS0); //ADC prescaler = 32, system clock = 8Mhz, adc clock = 250kHz
 	
 	ADCSRB |= (1<<ADTS2) | (1<<ADTS0); //ADC auto trigger source = Timer/Counter1 compare match B
-	
-	sei(); //enable global interrupt
 }
 
 uint16_t adc_read(uint8_t channel) {
@@ -162,6 +160,7 @@ void set_adc_average() {
 		
 		//set adc_full back to false to get new adc readings
 		adc_full = false;
+		reset_counters();
 		ADC_ENABLE;
 	}
 }
