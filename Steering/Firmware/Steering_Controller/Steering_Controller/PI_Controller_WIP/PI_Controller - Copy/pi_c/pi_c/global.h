@@ -19,5 +19,4 @@
 #include <util/delay.h>
 
 
-
 #endif /* GLOBAL_H_ */
