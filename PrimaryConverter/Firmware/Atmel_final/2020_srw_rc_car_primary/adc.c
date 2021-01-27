@@ -108,11 +108,11 @@ uint16_t adc_read(uint8_t channel) {
 //amended by Andrey
 void adc_convert_all() {  
 	for (uint8_t i = 0; i < SAMPLING_SIZE; i++) {
-		adc_voltage_conv[i] = (adc_voltage[i] * V_ref) / A_int;
-		adc_current_conv[i] = (adc_current[i] * V_ref) / A_int;
-		adc_temp1_conv[i] = (adc_temp1[i] * V_ref) / A_int;
-		adc_temp2_conv[i] = (adc_temp2[i] * V_ref) / A_int;
-		adc_temp3_conv[i] = (adc_temp3[i] * V_ref) / A_int;
+		adc_voltage_conv[i] = ((uint32_t)adc_voltage[i] * V_ref) / A_int;
+		adc_current_conv[i] = ((uint32_t)adc_current[i] * V_ref) / A_int;
+		adc_temp1_conv[i] = ((uint32_t)adc_temp1[i] * V_ref) / A_int;
+		adc_temp2_conv[i] = ((uint32_t)adc_temp2[i] * V_ref) / A_int;
+		adc_temp3_conv[i] = ((uint32_t)adc_temp3[i] * V_ref) / A_int;
 	}							
 }
 
@@ -152,7 +152,7 @@ void adc_make_averages() {
 uint32_t adc_get_avg_voltage()
 {
 	return adc_averages[VOLTAGE_POS];
-}	
+}
 
 uint32_t adc_get_avg_current()
 {

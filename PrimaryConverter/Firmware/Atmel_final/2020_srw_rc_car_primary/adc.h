@@ -5,7 +5,7 @@
  *  Author: Kimsong Lor
  */ 
 
-#define V_ref		3300															//reference voltage 3300mV (Vcc)
+#define V_ref		5000															//reference voltage 3300mV (Vcc)
 #define A_int		1024															//amplitude interval 2^10 = 1024
 
 //threshold values for protection -> trigger halt
