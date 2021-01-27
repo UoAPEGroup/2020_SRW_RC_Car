@@ -2,7 +2,7 @@
  * timer_control.h
  *
  * Created: 9/12/2020 1:24:39 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 

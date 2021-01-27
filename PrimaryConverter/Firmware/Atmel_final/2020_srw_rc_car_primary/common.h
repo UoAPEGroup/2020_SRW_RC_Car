@@ -2,7 +2,7 @@
  * common.h
  *
  * Created: 17/12/2020 12:40:43 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev & Kimsong Lor
  */ 
 
 

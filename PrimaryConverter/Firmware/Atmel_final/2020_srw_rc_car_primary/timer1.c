@@ -2,7 +2,7 @@
  * timer1.c
  *
  * Created: 16/12/2020 10:14:26 am
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 #include <avr/io.h>

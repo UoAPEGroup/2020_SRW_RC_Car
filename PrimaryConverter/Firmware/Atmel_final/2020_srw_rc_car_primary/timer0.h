@@ -2,7 +2,7 @@
  * timer0.h
  *
  * Created: 9/12/2020 12:03:00 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 

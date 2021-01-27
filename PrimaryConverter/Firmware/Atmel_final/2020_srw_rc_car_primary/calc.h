@@ -2,7 +2,7 @@
  * calc.h
  *
  * Created: 11/01/2021 11:25:13 am
- *  Author: achu072
+ *  Author: Andrey Chukhraev & Kimsong Lor
  */ 
 
 

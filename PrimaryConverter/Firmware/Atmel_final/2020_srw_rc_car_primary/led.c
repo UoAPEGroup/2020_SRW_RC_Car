@@ -2,7 +2,7 @@
  * led.c
  *
  * Created: 17/12/2020 11:03:55 am
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 #include <avr/io.h>

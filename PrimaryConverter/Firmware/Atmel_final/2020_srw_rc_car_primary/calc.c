@@ -2,7 +2,7 @@
  * calc.c
  *
  * Created: 11/01/2021 11:25:03 am
- *  Author: achu072
+ *  Author: Andrey Chukhraev & Kimsong Lor
  */ 
 
 #include <stdint.h>

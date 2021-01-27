@@ -2,7 +2,7 @@
  * timer3.h
  *
  * Created: 12/01/2021 1:14:35 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 

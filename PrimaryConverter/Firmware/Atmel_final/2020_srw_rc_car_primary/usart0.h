@@ -2,7 +2,7 @@
  * usart0.h
  *
  * Created: 16/12/2020 4:00:44 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 

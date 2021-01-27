@@ -2,7 +2,7 @@
  * timer3.c
  *
  * Created: 12/01/2021 1:14:22 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 #include <avr/io.h>

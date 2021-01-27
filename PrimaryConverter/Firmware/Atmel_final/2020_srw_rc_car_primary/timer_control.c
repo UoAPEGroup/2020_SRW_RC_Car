@@ -2,7 +2,7 @@
  * timer_control.c
  *
  * Created: 9/12/2020 1:24:24 pm
- *  Author: achu072
+ *  Author: Andrey Chukhraev
  */ 
 
 #include <avr/io.h>
