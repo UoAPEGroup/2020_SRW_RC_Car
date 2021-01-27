@@ -13,7 +13,7 @@ uint32_t calc_average(uint32_t *arr) {
 	for(uint8_t i = 0; i < SAMPLING_SIZE; i++) {
 		temp = temp + arr[i];
 	}
-	uint32_t result = (uint32_t)(temp/SAMPLING_SIZE);
+	uint32_t result = (temp/SAMPLING_SIZE);
 	return result;
 }
 

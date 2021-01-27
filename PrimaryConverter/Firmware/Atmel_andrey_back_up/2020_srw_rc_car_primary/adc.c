@@ -34,10 +34,10 @@ ISR(ADC_vect) {
 			TIMER1_COMPB_CLR;
 			adc_voltage[voltage_counter] = adc_convert_mV(ADC);
 			//check for rated value and cut (check max value)
-			if (adc_voltage[voltage_counter] >= rated_V) {
+			/*if (adc_voltage[voltage_counter] >= rated_V) {
 				reset_counters(); 
 				//call PWM shutdown function
-			}
+			}*/
 			voltage_counter++;
 			
 			if (voltage_counter == 10) {
@@ -49,12 +49,12 @@ ISR(ADC_vect) {
 			TIMER1_COMPB_CLR;
 			adc_current[current_counter] = adc_convert_mV(ADC); //conversion for mA, needs adjustment
 			//check for rated value and cut
-			if (adc_voltage[voltage_counter] >= rated_C) {
+			/*if (adc_voltage[voltage_counter] >= rated_C) {
 				reset_counters(); 
 				//call PWM shutdown function
-			}
+			}*/
 			current_counter++;
-			
+
 			if (current_counter == 10) {
 				ADC_CH_CLR;
 				ADC_CH_TEMP1;
@@ -64,12 +64,12 @@ ISR(ADC_vect) {
 			TIMER1_COMPB_CLR;
 			adc_temp1[temp1_counter] = adc_convert_mV(ADC); //conversion for temp different, needs adjustment
 			//check for rated value and cut
-			if (adc_voltage[voltage_counter] >= rated_T1) {
+			/*if (adc_voltage[voltage_counter] >= rated_T1) {
 				reset_counters(); 
 				//call PWM shutdown function
-			}
+			}*/
 			temp1_counter++;
-			
+
 			if (temp1_counter == 10) {
 				ADC_CH_CLR;
 				ADC_CH_TEMP2;
@@ -79,12 +79,12 @@ ISR(ADC_vect) {
 			TIMER1_COMPB_CLR;
 			adc_temp2[temp2_counter] = adc_convert_mV(ADC); //conversion for temp different, needs adjustment
 			//check for rated value and cut
-			if (adc_voltage[voltage_counter] >= rated_T2) {
+			/*if (adc_voltage[voltage_counter] >= rated_T2) {
 				reset_counters(); 
 				//call PWM shutdown function
-			}
+			}*/
 			temp2_counter++;
-			
+
 			if (temp2_counter == 10) {
 				ADC_CH_CLR;
 				ADC_CH_TEMP3;
@@ -94,24 +94,23 @@ ISR(ADC_vect) {
 			TIMER1_COMPB_CLR;
 			adc_temp3[temp3_counter] = adc_convert_mV(ADC); //conversion for temp different, needs adjustment
 			//check for rated value and cut
-			if (adc_voltage[voltage_counter] >= rated_T3) {
+			/*if (adc_voltage[voltage_counter] >= rated_T3) {
 				reset_counters(); 
 				//call PWM shutdown function
-			}
+			}*/
 			temp3_counter++;
-			
+
 			if (temp3_counter == 10) {
 				ADC_CH_CLR;
 				ADC_CH_VSENS;
 			}
 		}
 		else {
-			TIMER1_COMPB_CLR;
 			//flag for processing
+			TIMER1_COMPB_CLR;
 			ADC_DISABLE;
 			adc_full = true;
 			set_adc_average();
-			led_on();
 		}
 	}
 }
@@ -137,7 +136,8 @@ uint16_t adc_read(uint8_t channel) {
 
 //convert the raw adc value to original value by multiplying with Vstep in mV
 uint32_t adc_convert_mV(uint16_t raw_ADC) {  
-	uint32_t original_V = (raw_ADC*V_ref)/A_int;  //reference voltage, amplitude interval
+	uint32_t original_V = raw_ADC*V_ref;  //reference voltage, amplitude interval
+	original_V = original_V/A_int;
 	return original_V;							
 }
 
@@ -152,24 +152,23 @@ void reset_counters() {
 
 void set_adc_average() {
 	if (adc_full == true) {
-		adc_averages[ADC_V] = calc_average(adc_voltage);
-		adc_averages[ADC_C] = calc_average(adc_current);
-		adc_averages[ADC_T1] = calc_average(adc_temp1);
-		adc_averages[ADC_T2] = calc_average(adc_temp2);
-		adc_averages[ADC_T3] = calc_average(adc_temp3);
+		adc_averages[0] = calc_average(adc_voltage);
+		adc_averages[1] = calc_average(adc_current);
+		adc_averages[2] = calc_average(adc_temp1);
+		adc_averages[3] = calc_average(adc_temp2);
+		adc_averages[4] = calc_average(adc_temp3);
 		
 		//set adc_full back to false to get new adc readings
 		adc_full = false;
 		reset_counters();
 		ADC_ENABLE;
+		led_on();
 	}
 }
 
 void get_adc_averages(uint32_t *arr) {
 	//set_adc_average();
 	for (uint8_t i = 0; i < ADC_used; i++) {
-		
-		
 		
 		arr[i] = adc_averages[i];
 	}
