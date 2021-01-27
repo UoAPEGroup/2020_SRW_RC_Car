@@ -17,11 +17,11 @@ int main(void)
 	led_init();
 	pwm_init();
 	adc_init();
-	setup();
     /* Replace with your application code */
     while (1) {
 		//analog_write(4000);
 		//adc_1 = adc_read();
+		setup();
 		loop();
 		
     }
