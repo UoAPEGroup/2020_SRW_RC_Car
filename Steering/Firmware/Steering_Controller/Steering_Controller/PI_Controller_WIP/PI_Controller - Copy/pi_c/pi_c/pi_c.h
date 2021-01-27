@@ -21,12 +21,12 @@ int16_t prevError;
 int16_t sampling_t;
 volatile int16_t input; 
 volatile int16_t output;
-volatile int16_t integrator;
+int16_t integrator;
 volatile int16_t output_1;
 int16_t setPoint;
 
 void setup();
 void loop();
-int16_t computePID(uint16_t input);
+uint16_t computePID(uint16_t input);
 
 #endif /* PI_C_H_ */

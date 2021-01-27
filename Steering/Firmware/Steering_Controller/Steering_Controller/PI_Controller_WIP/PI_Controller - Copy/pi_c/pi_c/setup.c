@@ -12,7 +12,8 @@ void pwm_init() {
 	TCCR0A |= (1 << WGM01);
 	TCCR0A |= (1 << WGM00);
 	TCCR0B |= (1 << CS02);
-	OCR0A = 0;
+	//TCCR0B |= (1 << CS00);
+	
 }
 
 void led_init(){
