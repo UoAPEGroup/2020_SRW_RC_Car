@@ -11,8 +11,9 @@
 
 #include <stdint.h>
 
-void uart_init(uint16_t baudRate);
+void uart_init(uint32_t baudRate);
 void uart_transmit(uint8_t data);
 void send_data(char data[]);
+void uart_transmit_string(char *string);
 
 #endif /* UART_H_ */

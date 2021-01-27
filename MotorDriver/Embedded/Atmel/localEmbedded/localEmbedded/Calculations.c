@@ -14,7 +14,7 @@
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 100
-#define VCC_MV 3300
+#define VCC_MV 5000
 #define RESOLUTION 1024
 #define CURRENT_OPAMP_GAIN 1470
 #define CURRENT_SENSOR_GAIN_MV 400
@@ -44,8 +44,8 @@ static volatile uint16_t recentVoltageValues[BL_ARRAY_SIZE];
 static volatile uint16_t recentCurrentValues[BL_ARRAY_SIZE];
 
 //FLAGS
-extern volatile bool arrayFull = false;
-extern volatile bool sendData = false;
+volatile bool arrayFull = false;
+volatile bool sendData = false;
 
 //counters
 
@@ -53,6 +53,10 @@ static volatile uint8_t ADCReadingsCount = 0;
 static volatile uint8_t recentValuesCount = 0;
 
 //store adc current and voltage readings in arrays
+
+void setSpeedGrade(uint16_t speed){
+	speedGrade = speed;
+}
 
 void addCurrent(uint16_t adcCurrentReading) {
 	currentValues[ADCReadingsCount] = adcCurrentReading;
@@ -181,9 +185,6 @@ void setInputV(uint16_t vinD) {
 	inputV = vinD;
 }
 
-void setSpeedGrade(uint16_t speed){
-	speedGrade = speed;
-}
 
 void setDirection(bool setForward){
 	forward = setForward;
