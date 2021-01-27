@@ -25,3 +25,13 @@ void adc_init(){
 	
 	ADCSRA |= (1 << ADPS2)|(1 << ADPS1);
 }
+
+void timer2_init(){
+	TCCR2A = 0x00;
+	TCCR2A |= (1 << COM2A0);
+	TCCR2A |= (1 << WGM21); // CTC
+	TCCR2B |= (1 << CS22); // 64 Prescale
+	OCR2A = 124; // 1ms
+	TIMSK2 |= (1 << OCIE2A); // Output Compare A 
+	
+}
