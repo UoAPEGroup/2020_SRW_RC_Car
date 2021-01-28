@@ -163,9 +163,9 @@ void usart0_transmit_issue_resolved_msg()
 void usart0_transmit_start_up_msg()
 {
 	char start_up_message[100];
-	sprintf(start_up_message,	"--------\n\r"
+	sprintf(start_up_message,	"---------\n\r"
 								"GREETINGS\n\r"
-								"--------\n\r"
+								"---------\n\r"
 								"PRESS *BUTTON* TO START SYSTEM\n\r\n\r");
 								
 	usart0_transmit_string(start_up_message);
