@@ -10,7 +10,7 @@
 void uart_init(){
 	UCSR0B |= (1 << RXCIE0); // RX Complete Interrupt Enable
 	UCSR0B |= (1 << RXEN0); // Receiver Enable
-	UCSR0B |= (1 << TXEN0);	
+	UCSR0B |= (1 << TXEN0);	// Transmitter Enable
 	UBRR0 = 51; // 9600 BAUD RATE
 	UCSR0C = (1 << 2)|(1 << 1); // 8 Bit Frame 
 }

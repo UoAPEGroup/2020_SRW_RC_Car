@@ -107,7 +107,7 @@ void usart0_transmit_pwmtest()
 							"OCR0B		= %d\n\r"
 							"OCR2B		= %d\n\r\n\r",
 							 
-							timer_control_get_duty(), 
+							timer_control_get_current_duty(), 
 							OCR0B, 
 							OCR2B);
 							
@@ -271,8 +271,8 @@ ISR(USART0_RX_vect) {
 			switch (READ_USER_CMD) {
 				case DUTY_CYCLE_CHANGE:;
 					uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
-					timer_control_update_current_duty(duty_cycle);
-					timer_control_set_duty_on_user(duty_cycle);
+					timer_control_update_next_duty(duty_cycle);
+					//timer_control_set_duty_on_user(duty_cycle);
 					break;
 				case BEGIN_TX_DATA:
 					usart0_set_TX_send_data_flag();

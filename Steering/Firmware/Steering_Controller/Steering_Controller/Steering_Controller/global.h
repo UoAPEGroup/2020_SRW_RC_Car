@@ -19,6 +19,12 @@
 #define VREF 5000
 #define ADC_RES 1024
 
+// PI Controller 
+#define K_P 0.8
+#define K_I 1
+#define MAX_LIMIT 5000
+#define MIN_LIMIT 0
+
 // STATE Definitions
 #define STATIONARY_STATE 0
 #define ACTIVE_STATE 1

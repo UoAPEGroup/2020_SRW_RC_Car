@@ -13,22 +13,15 @@ void adc_init(){
 	ADCSRA |= (1 << ADPS2)|(1 << ADPS1);
 }
 
-// Convert ADC value into mV
-/*
-uint32_t adc_convert(uint16_t adc_val) {
-	
-	uint32_t voltage_val = adc_val * (VREF/ADC_RES);					// Ref. voltage divided by ADC res. multiplied by input/ADC register value
-	
-	return voltage_val;
-}*/
 
-uint16_t adc_start(){
+
+uint16_t adc_read(){
 	ADCSRA |= (1 << ADSC);
 	
 	while ((ADCSRA & (1 << ADIF)) == 0){
 		;
 	}
-	uint32_t adc_val = ((ADCL << 0) | (ADCH << 8));
-	
-	return (adc_val * 3300)/(1024);
+	uint16_t adc_val = ((ADCL << 0) | (ADCH << 8));
+	adc_val = (adc_val * VREF)/(ADC_RES);
+	return adc_val;
 }

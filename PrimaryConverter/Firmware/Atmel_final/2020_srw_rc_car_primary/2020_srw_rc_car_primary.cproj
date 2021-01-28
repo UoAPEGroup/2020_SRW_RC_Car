@@ -199,6 +199,12 @@
     <Compile Include="timer3.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="timer4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer4.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="timer_control.c">
       <SubType>compile</SubType>
     </Compile>
