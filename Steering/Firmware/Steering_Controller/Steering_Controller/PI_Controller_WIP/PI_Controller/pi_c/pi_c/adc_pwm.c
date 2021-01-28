@@ -18,7 +18,7 @@ uint16_t adc_read(){
 		;
 	}
 	adc_val = ((ADCL << 0) | (ADCH << 8));
-	adc_val = ((uint32_t) adc_val * 5000)/(1024);
+	adc_val = ((uint32_t) adc_val * VREF)/(1024);
 	return adc_val;
 }
 

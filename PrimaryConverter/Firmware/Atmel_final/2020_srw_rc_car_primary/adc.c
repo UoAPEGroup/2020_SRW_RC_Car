@@ -91,8 +91,9 @@ ISR(ADC_vect) {
 		adc_temp2[temp2_counter] = ADC;
 		if (adc_temp2[temp2_counter] >= rated_T2) { //check for rated value
 			//adc_reset_counters();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
 			set_overT2_flag();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
+			
 		}
 		temp2_counter++;
 	} else if (temp2_counter == SAMPLING_SIZE) {

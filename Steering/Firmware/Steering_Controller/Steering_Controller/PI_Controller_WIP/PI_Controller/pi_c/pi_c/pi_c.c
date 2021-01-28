@@ -15,13 +15,16 @@ char input_buffer[20];
 char error_buffer[20];
 
 void setup(){
-	setPoint = 3500;
+	setPoint = 2500;
 }
 
-void loop(){
-	input = adc_read();
-	output = computePID(input);
-	set_output = output + input;
+void pi_controller(){
+	input = adc_read(); // Reads current input
+	
+	output = compute_pi(input); // Calculates PI 
+	
+	set_output = output + input; // Calculates the output value
+	
 	// Anti-wind-up
 	if(output > MAX_LIMIT){
 		output = 5000;
@@ -29,31 +32,29 @@ void loop(){
 	else if (output < MIN_LIMIT){
 		output = 0;
 	}
+	
+	// Set output value
 	analog_write(set_output);
-	//printval();
 }
 
-int16_t computePID(uint16_t input){
-	k_p = 0.8;
-	k_i = 2;
+int16_t compute_pi(uint16_t input){
+	k_p = K_P;
+	k_i = K_I;
 	
 	sampling_t = 0.001; // 1 ms interrupt
-	error = setPoint - input;
 	
-	integrator = integrator + (1/2) * k_i * sampling_t * (error + prevError);
+	error = setPoint - input; // Proportional 
 	
-	int16_t out = k_p * error + integrator;
-	/*if ((out < 100)&&(out > -100)){
+	integrator = integrator + (1/2) * k_i * sampling_t * (error + prevError); // Integrator
+	
+	int16_t out = k_p * error + integrator; // PI Sum
+	
+	// Ignores minor errors
+	if ((out < 100)&&(out > -100)){
 		out = 0;
 	}
-	*/
-	sprintf(input_buffer, "Input:	%i \n\r", input);
-	usart0_transmit_string(input_buffer);
-	sprintf(input_buffer, "Set:	%i \n\r", setPoint);
-	usart0_transmit_string(input_buffer);
-	sprintf(error_buffer, "Error:	%i \n\r", out);
-	usart0_transmit_string(error_buffer);
-	prevError = error;
+	
+	prevError = error; // Saves error for integration
 	return out;
 }
 
