@@ -139,7 +139,7 @@ void usart0_transmit_halt_msg()
 							"*WARNING!*\n\r"
 							"**********\n\r"
 							"---------------------------\n\r"
-							"USER INITIATED HALT CMD	\n\r\n\r"
+							"INITIATED HALT CMD	        \n\r\n\r"
 							"ALL SYSTEMS STOPPED		\n\r\n\r"
 							"ENTER R TO RESTART SYSTEM	\n\r"
 							"---------------------------\n\r\n\r");

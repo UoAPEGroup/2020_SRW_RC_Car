@@ -38,45 +38,65 @@ uint32_t adc_temp3_conv[SAMPLING_SIZE];
 
 //amended by Andrey
 ISR(ADC_vect) {
-	if (voltage_counter < SAMPLING_SIZE) {
+	if (voltage_counter < SAMPLING_SIZE) { //voltage readings
 		TIMER1_COMPB_CLR;
 		adc_voltage[voltage_counter] = ADC;
+		if (adc_voltage[voltage_counter] >= rated_V) { //check for rated value
+			adc_reset_counters();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
+		}
 		voltage_counter++;
 	} else if (voltage_counter == SAMPLING_SIZE) {
 		TIMER1_COMPB_CLR;
 		ADC_CH_CLR;
 		ADC_CH_ISENS;
 		voltage_counter++;
-	} else if (current_counter < SAMPLING_SIZE) {
+	} else if (current_counter < SAMPLING_SIZE) { //current readings
 		TIMER1_COMPB_CLR;
 		adc_current[current_counter] = ADC;
+		if (adc_current[current_counter] >= rated_C) { //check for rated value
+			adc_reset_counters();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
+		}
 		current_counter++;
 	} else if (current_counter == SAMPLING_SIZE) {
 		TIMER1_COMPB_CLR;
 		ADC_CH_CLR;
 		ADC_CH_TEMP1;
 		current_counter++;
-	} else if (temp1_counter < SAMPLING_SIZE) {
+	} else if (temp1_counter < SAMPLING_SIZE) { //temp1 readings
 		TIMER1_COMPB_CLR;
 		adc_temp1[temp1_counter] = ADC;
+		if (adc_temp1[temp1_counter] >= rated_T1) { //check for rated value
+			adc_reset_counters();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
+		}
 		temp1_counter++;
 	} else if (temp1_counter == SAMPLING_SIZE) {
 		TIMER1_COMPB_CLR;
 		ADC_CH_CLR;
 		ADC_CH_TEMP2;
 		temp1_counter++;
-	} else if (temp2_counter < SAMPLING_SIZE) {
+	} else if (temp2_counter < SAMPLING_SIZE) { //temp2 readings
 		TIMER1_COMPB_CLR;
 		adc_temp2[temp2_counter] = ADC;
+		if (adc_temp2[temp2_counter] >= rated_T2) { //check for rated value
+			adc_reset_counters();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
+		}
 		temp2_counter++;
 	} else if (temp2_counter == SAMPLING_SIZE) {
 		TIMER1_COMPB_CLR;
 		ADC_CH_CLR;
 		ADC_CH_TEMP3;
 		temp2_counter++;
-	} else if (temp3_counter < SAMPLING_SIZE) {
+	} else if (temp3_counter < SAMPLING_SIZE) { //temp3 readings
 		TIMER1_COMPB_CLR;
 		adc_temp3[temp3_counter] = ADC;
+		if (adc_temp3[temp3_counter] >= rated_T3) { //check for rated value
+			adc_reset_counters();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
+		}
 		temp3_counter++;
 	} else if (temp3_counter == SAMPLING_SIZE) {
 		TIMER1_COMPB_CLR;
@@ -146,6 +166,12 @@ void adc_make_averages() {
 	adc_averages[TEMP1_POS] = sum_t1 / SAMPLING_SIZE;
 	adc_averages[TEMP2_POS] = sum_t2 / SAMPLING_SIZE;
 	adc_averages[TEMP3_POS] = sum_t3 / SAMPLING_SIZE;
+}
+
+void halt_safety_function() {
+	timer_control_halt();
+	usart0_clr_TX_all_flags();
+	usart0_transmit_halt_msg();
 }
 
 //amended by Andrey
