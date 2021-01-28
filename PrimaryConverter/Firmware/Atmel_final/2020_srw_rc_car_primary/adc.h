@@ -69,4 +69,25 @@ void adc_make_averages();															//fill array of ADC average values
 bool adc_get_full_flag();
 void adc_clr_full_flag();
 
+void set_overV_flag();
+bool get_overV_flag();
+void clr_overV_flag();
+
+void set_overC_flag();
+bool get_overC_flag();
+void clr_overC_flag();
+
+void set_overT1_flag();
+bool get_overT1_flag();
+void clr_overT1_flag();
+
+void set_overT2_flag();
+bool get_overT2_flag();
+void clr_overT2_flag();
+
+void set_overT3_flag();
+bool get_overT3_flag();
+void clr_overT3_flag();
+
+
 #endif /* ADC_H_ */

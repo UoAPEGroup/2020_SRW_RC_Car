@@ -17,7 +17,6 @@ volatile uint8_t temp1_counter = 0;
 volatile uint8_t temp2_counter = 0;
 volatile uint8_t temp3_counter = 0;
 
-
 //ADC transfer booleans
 bool adc_full = false;														//set all booleans to false 
 
@@ -34,7 +33,14 @@ uint32_t adc_voltage_conv[SAMPLING_SIZE];
 uint32_t adc_current_conv[SAMPLING_SIZE];										
 uint32_t adc_temp1_conv[SAMPLING_SIZE];											
 uint32_t adc_temp2_conv[SAMPLING_SIZE];											
-uint32_t adc_temp3_conv[SAMPLING_SIZE];										
+uint32_t adc_temp3_conv[SAMPLING_SIZE];	
+
+//ADC safety check flags									
+bool overV_flag = false;
+bool overC_flag = false;
+bool overT1_flag = false;
+bool overT2_flag = false;
+bool overT3_flag = false;
 
 //amended by Andrey
 ISR(ADC_vect) {
@@ -42,8 +48,9 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_voltage[voltage_counter] = ADC;
 		if (adc_voltage[voltage_counter] >= rated_V) { //check for rated value
-			adc_reset_counters();
+			//adc_reset_counters();
 			halt_safety_function(); //halt all timers to stop PWM signal generation
+			set_overV_flag();
 		}
 		voltage_counter++;
 	} else if (voltage_counter == SAMPLING_SIZE) {
@@ -55,8 +62,9 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_current[current_counter] = ADC;
 		if (adc_current[current_counter] >= rated_C) { //check for rated value
-			adc_reset_counters();
+			//adc_reset_counters();
 			halt_safety_function(); //halt all timers to stop PWM signal generation
+			set_overC_flag();
 		}
 		current_counter++;
 	} else if (current_counter == SAMPLING_SIZE) {
@@ -68,8 +76,9 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_temp1[temp1_counter] = ADC;
 		if (adc_temp1[temp1_counter] >= rated_T1) { //check for rated value
-			adc_reset_counters();
+			//adc_reset_counters();
 			halt_safety_function(); //halt all timers to stop PWM signal generation
+			set_overT1_flag();
 		}
 		temp1_counter++;
 	} else if (temp1_counter == SAMPLING_SIZE) {
@@ -81,8 +90,9 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_temp2[temp2_counter] = ADC;
 		if (adc_temp2[temp2_counter] >= rated_T2) { //check for rated value
-			adc_reset_counters();
+			//adc_reset_counters();
 			halt_safety_function(); //halt all timers to stop PWM signal generation
+			set_overT2_flag();
 		}
 		temp2_counter++;
 	} else if (temp2_counter == SAMPLING_SIZE) {
@@ -94,8 +104,9 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_temp3[temp3_counter] = ADC;
 		if (adc_temp3[temp3_counter] >= rated_T3) { //check for rated value
-			adc_reset_counters();
+			//adc_reset_counters();
 			halt_safety_function(); //halt all timers to stop PWM signal generation
+			set_overT3_flag();
 		}
 		temp3_counter++;
 	} else if (temp3_counter == SAMPLING_SIZE) {
@@ -172,6 +183,26 @@ void halt_safety_function() {
 	timer_control_halt();
 	usart0_clr_TX_all_flags();
 	usart0_transmit_halt_msg();
+	if (get_overV_flag()) {
+		usart0_transmit_string("SYSTEM OVER-VOLTAGE! \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+	}
+	if (get_overC_flag()) {
+		usart0_transmit_string("SYSTEM OVER-CURRENT! \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+	}
+	if (get_overT1_flag()) {
+		usart0_transmit_string("SYSTEM OVER-TEMP1!   \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+	}
+	if (get_overT2_flag()) {
+		usart0_transmit_string("SYSTEM OVER-TEMP2!   \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+	}
+	if (get_overT3_flag()) {
+		usart0_transmit_string("SYSTEM OVER-TEMP3!   \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+	}
 }
 
 //amended by Andrey
@@ -209,4 +240,54 @@ bool adc_get_full_flag()
 void adc_clr_full_flag()
 {
 	adc_full = false;
+}
+
+void set_overV_flag() {
+	overV_flag = true;
+}
+bool get_overV_flag() {
+	return overV_flag;
+}
+void clr_overV_flag() {
+	overV_flag = false;
+}
+
+void set_overC_flag() {
+	overC_flag = true;
+}
+bool get_overC_flag() {
+	return overC_flag;
+}
+void clr_overC_flag() {
+	overC_flag = false;
+}
+
+void set_overT1_flag() {
+	overT1_flag = true;
+}
+bool get_overT1_flag() {
+	return	overT1_flag;
+}
+void clr_overT1_flag() {
+	overT1_flag = false;
+}
+
+void set_overT2_flag() {
+	overT2_flag = true;
+}
+bool get_overT2_flag() {
+	return overT2_flag;
+}
+void clr_overT2_flag() {
+	overT2_flag = false;
+}
+
+void set_overT3_flag() {
+	overT3_flag = true;
+}
+bool get_overT3_flag() {
+	return overT3_flag;
+}
+void clr_overT3_flag() {
+	overT3_flag = false;
 }
