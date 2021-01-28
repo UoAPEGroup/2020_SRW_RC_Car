@@ -31,7 +31,7 @@ uint8_t calc_make_duty_cycle(uint8_t *buffer)
 		return ((buffer[DIGIT_1] - ASCII_OFF) * 100 + (buffer[DIGIT_2] - ASCII_OFF) * 10 + (buffer[DIGIT_3] - ASCII_OFF));			
 	}
 	
-	return timer_control_get_duty();																						//if non true, return current duty cycle
+	return timer_control_get_current_duty();																						//if non true, return current duty cycle
 }
 
 //calculate OCRnB value to be set for timer0 & timer2
