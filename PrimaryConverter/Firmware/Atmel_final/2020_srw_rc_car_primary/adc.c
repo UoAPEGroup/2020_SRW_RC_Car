@@ -48,9 +48,8 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_voltage[voltage_counter] = ADC;
 		if (adc_voltage[voltage_counter] >= rated_V) { //check for rated value
-			//adc_reset_counters();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
 			set_overV_flag();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
 		}
 		voltage_counter++;
 	} else if (voltage_counter == SAMPLING_SIZE) {
@@ -62,9 +61,8 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_current[current_counter] = ADC;
 		if (adc_current[current_counter] >= rated_C) { //check for rated value
-			//adc_reset_counters();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
 			set_overC_flag();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
 		}
 		current_counter++;
 	} else if (current_counter == SAMPLING_SIZE) {
@@ -76,9 +74,8 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_temp1[temp1_counter] = ADC;
 		if (adc_temp1[temp1_counter] >= rated_T1) { //check for rated value
-			//adc_reset_counters();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
 			set_overT1_flag();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
 		}
 		temp1_counter++;
 	} else if (temp1_counter == SAMPLING_SIZE) {
@@ -90,10 +87,8 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_temp2[temp2_counter] = ADC;
 		if (adc_temp2[temp2_counter] >= rated_T2) { //check for rated value
-			//adc_reset_counters();
 			set_overT2_flag();
 			halt_safety_function(); //halt all timers to stop PWM signal generation
-			
 		}
 		temp2_counter++;
 	} else if (temp2_counter == SAMPLING_SIZE) {
@@ -105,9 +100,8 @@ ISR(ADC_vect) {
 		TIMER1_COMPB_CLR;
 		adc_temp3[temp3_counter] = ADC;
 		if (adc_temp3[temp3_counter] >= rated_T3) { //check for rated value
-			//adc_reset_counters();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
 			set_overT3_flag();
+			halt_safety_function(); //halt all timers to stop PWM signal generation
 		}
 		temp3_counter++;
 	} else if (temp3_counter == SAMPLING_SIZE) {
@@ -185,24 +179,34 @@ void halt_safety_function() {
 	usart0_clr_TX_all_flags();
 	usart0_transmit_halt_msg();
 	if (get_overV_flag()) {
-		usart0_transmit_string("SYSTEM OVER-VOLTAGE! \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("SYSTEM OVER-VOLTAGE!	   \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
+		usart0_transmit_string("---------------------------\n\r");
 	}
 	if (get_overC_flag()) {
-		usart0_transmit_string("SYSTEM OVER-CURRENT! \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("SYSTEM OVER-CURRENT!       \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
+		usart0_transmit_string("---------------------------\n\r");
 	}
 	if (get_overT1_flag()) {
-		usart0_transmit_string("SYSTEM OVER-TEMP1!   \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("SYSTEM OVER-TEMP1!         \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
+		usart0_transmit_string("---------------------------\n\r");
 	}
 	if (get_overT2_flag()) {
-		usart0_transmit_string("SYSTEM OVER-TEMP2!   \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("SYSTEM OVER-TEMP2!         \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
+		usart0_transmit_string("---------------------------\n\r");
 	}
 	if (get_overT3_flag()) {
-		usart0_transmit_string("SYSTEM OVER-TEMP3!   \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET \n\r");
+		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("SYSTEM OVER-TEMP3!         \n\r");
+		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
+		usart0_transmit_string("---------------------------\n\r");
 	}
 }
 

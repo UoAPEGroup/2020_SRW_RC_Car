@@ -12,6 +12,7 @@
 #include "timer2.h"
 #include "timer3.h"
 #include "calc.h"
+#include "adc.h"
 
 #define OFFSET	34														//180deg out of phase (26 + 4 * 2)													
 
@@ -34,6 +35,13 @@ void timer_control_init()
 	TCNT1 = 0;															//set value for timer1
 	TCNT2 = OFFSET;														//set value for timer2
 	TCNT3 = 0;															//set value for timer3
+	
+	//clear all adc overflow flags
+	clr_overV_flag();
+	clr_overC_flag();
+	clr_overT1_flag();
+	clr_overT2_flag();
+	clr_overT3_flag();
 	
 	timer_control_update_current_duty(0);
 }
