@@ -12,7 +12,7 @@
 
 #include "global.h"
 
-double adc_read();
+uint16_t adc_read();
 
 void analog_write(int16_t value);
 

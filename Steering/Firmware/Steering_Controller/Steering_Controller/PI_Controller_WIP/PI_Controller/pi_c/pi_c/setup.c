@@ -20,9 +20,12 @@ void led_init(){
 }
 
 void adc_init(){
-	ADMUX |= (1 << MUX1);
+	ADMUX = 0x00;
+	DDRC &=~(1 << PINC2);
+	DDRC &=~(1 << PINC5);
+	//ADMUX |= (1 << MUX1);
+	ADMUX |= (1 << MUX2)|(1 << MUX0);
 	ADCSRA |= (1 << ADEN);
-	
 	ADCSRA |= (1 << ADPS2)|(1 << ADPS1);
 }
 
