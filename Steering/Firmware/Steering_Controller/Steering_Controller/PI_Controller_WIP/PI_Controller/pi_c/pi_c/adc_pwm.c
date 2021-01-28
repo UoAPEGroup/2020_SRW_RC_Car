@@ -10,7 +10,6 @@
 
 volatile uint16_t t_on;
 volatile uint16_t adc_val;
-int16_t analog_write_val;
 
 uint16_t adc_read(){
 	ADCSRA |= (1 << ADSC);
@@ -23,10 +22,9 @@ uint16_t adc_read(){
 }
 
 void analog_write(int16_t value){
-	analog_write_val = value;
-	t_on =	(((int32_t)value*255)/VREF);
-	if (t_on > 255){
+	t_on =	(((int32_t)value*255)/VREF); // Calculates duty cycle
+	if (t_on > 255){ 
 		t_on = 255;
 	}
-	OCR0A = t_on;
+	OCR0A = t_on; // Sets Duty Cycle
 }

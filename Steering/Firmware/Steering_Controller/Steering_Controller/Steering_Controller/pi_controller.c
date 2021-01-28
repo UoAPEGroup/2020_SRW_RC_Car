@@ -1,27 +1,16 @@
 /*
- * pi_c.c
+ * pi.c
  *
- * Created: 18/01/2021 11:39:46 am
+ * Created: 28/01/2021 4:17:43 pm
  *  Author: npat692
  */ 
 
-#include "pi_c.h"
-#include "uart.h"
-#include <stdio.h>
-#include <string.h>
-
-char output_buffer[20];
-char input_buffer[20];
-char error_buffer[20];
-
-void setup(){
-	setPoint = 1000; // Desired output
-}
+#include "pi_controller.h"
 
 void pi_controller(){
 	input = adc_read(); // Reads current input
 	
-	output = compute_pi(input); // Calculates PI 
+	output = compute_pi(input); // Calculates PI
 	
 	set_output = output + input; // Calculates the output value
 	
@@ -34,7 +23,7 @@ void pi_controller(){
 	}
 	
 	// Set output value
-	analog_write(set_output);
+	//analog_write(set_output);
 }
 
 int16_t compute_pi(uint16_t input){
@@ -43,7 +32,7 @@ int16_t compute_pi(uint16_t input){
 	
 	sampling_t = 0.001; // 1 ms interrupt
 	
-	error = setPoint - input; // Proportional 
+	error = setPoint - input; // Proportional
 	
 	integrator = integrator + (1/2) * k_i * sampling_t * (error + prevError); // Integrator
 	
@@ -56,14 +45,4 @@ int16_t compute_pi(uint16_t input){
 	
 	prevError = error; // Saves error for integration
 	return out;
-}
-
-void printval(){
-	sprintf(input_buffer, "Input:	%i \n\r", input);
-	usart0_transmit_string(input_buffer);
-	sprintf(error_buffer, "Error:	%i \n\r", output);
-	usart0_transmit_string(error_buffer);
-	sprintf(output_buffer, "Set Output:	%i \n\r", set_output);
-	usart0_transmit_string(output_buffer);
-	usart0_transmit_string("\n");
 }
