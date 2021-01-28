@@ -29,7 +29,6 @@ int main(void)
     while (1) 
     {	
 		if (adc_get_full_flag()) {
-			led_on();
 			adc_clr_full_flag();
 			adc_convert_all();
 			adc_make_averages();
