@@ -19,10 +19,10 @@ uint16_t adc_1;
 
 
 ISR(TIMER2_COMPA_vect){
-	//loop();
-	adc_1 = adc_read();
-	sprintf(input_buffer, "Input:	%i \n\r", adc_1);
-	usart0_transmit_string(input_buffer);
+	pi_controller();
+	//adc_1 = adc_read();
+	//sprintf(input_buffer, "Input:	%i \n\r", adc_1);
+	//usart0_transmit_string(input_buffer);
 }
 
 int main(void)

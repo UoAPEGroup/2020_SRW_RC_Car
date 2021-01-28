@@ -28,8 +28,8 @@ volatile int16_t set_output;
 int16_t setPoint;
 
 void setup();
-void loop();
+void pi_controller();
 void printval();
-int16_t computePID(uint16_t input);
+int16_t compute_pi(uint16_t input);
 
 #endif /* PI_C_H_ */
