@@ -6,8 +6,6 @@
  */ 
 
 #include "uart.h"
-#include <stdio.h>
-#include <string.h>
 
 //set up asynchronous USART0, 8N1, no parity
 void usart0_init(uint32_t BAUD)
