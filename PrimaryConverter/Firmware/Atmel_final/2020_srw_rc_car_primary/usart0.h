@@ -20,6 +20,7 @@ void usart0_transmit_reset_msg();
 void usart0_transmit_halt_msg();
 void usart0_transmit_start_up_msg();
 void usart0_transmit_system_ready_msg();
+void usart0_transmit_issue_resolved_msg();
 void usart0_echo_user_command();
 void usart0_clr_RX_buffer();
 void usart0_set_TX_timer_flag();

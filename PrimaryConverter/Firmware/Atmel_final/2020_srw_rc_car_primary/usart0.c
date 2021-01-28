@@ -34,6 +34,7 @@
 #define END_TX_DATA				69										//83 = E -> end TX of system data
 #define RESET					82										//82 = R -> reset system to restart PWM timers		 
 #define HALT					72										//72 = H -> halt all timers, system awaits reset command
+#define YES						89										//89 = Y -> yes, confirming system safety issue resolved 
 						
 static volatile uint8_t RX_counter  = 0;
 static volatile bool usart0_TX_timer_flag = false;						//flag set by timer1 every 1s
@@ -145,6 +146,17 @@ void usart0_transmit_halt_msg()
 							"---------------------------\n\r\n\r");
 		
 	usart0_transmit_string(halt_message);
+}
+
+//transmit safety issue resolved message 
+void usart0_transmit_issue_resolved_msg()
+{
+	char issue_resolved_message[300];
+	sprintf(issue_resolved_message,		"---------------------------\n\r"
+										"ENTER R TO RESET SYSTEM NOW\n\r"
+										"---------------------------\n\r\n\r");
+	
+	usart0_transmit_string(issue_resolved_message);
 }
 
 //transmit message on system start up
@@ -272,7 +284,6 @@ ISR(USART0_RX_vect) {
 				case DUTY_CYCLE_CHANGE:;
 					uint8_t duty_cycle = calc_make_duty_cycle(RX_data_buffer);
 					timer_control_update_next_duty(duty_cycle);
-					//timer_control_set_duty_on_user(duty_cycle);
 					break;
 				case BEGIN_TX_DATA:
 					usart0_set_TX_send_data_flag();
@@ -289,6 +300,15 @@ ISR(USART0_RX_vect) {
 					timer_control_halt();
 					usart0_clr_TX_all_flags();
 					usart0_transmit_halt_msg();
+					break;
+				case YES:
+					//clear all adc overflow flags
+					clr_overV_flag();
+					clr_overC_flag();
+					clr_overT1_flag();
+					clr_overT2_flag();
+					clr_overT3_flag();
+					usart0_transmit_issue_resolved_msg();
 			}
 		
 			usart0_clr_RX_buffer();

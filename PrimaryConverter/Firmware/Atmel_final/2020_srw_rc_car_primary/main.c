@@ -37,9 +37,8 @@ int main(void)
 		if (usart0_get_TX_reset_flag()) {
 			usart0_clr_TX_reset_flag();
 			if (get_overV_flag() || get_overC_flag() || get_overT1_flag() || get_overT2_flag() || get_overT3_flag()) {
-				; //do nothing, halt messages will be sent through the adc safety halt function
-			}
-			else {
+				halt_safety_function();											
+			} else {
 				usart0_transmit_reset_msg();
 			}
 		} else if (usart0_get_TX_timer_flag()) {

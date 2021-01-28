@@ -44,12 +44,12 @@ bool overT3_flag = false;
 
 //amended by Andrey
 ISR(ADC_vect) {
-	if (voltage_counter < SAMPLING_SIZE) { //voltage readings
+	if (voltage_counter < SAMPLING_SIZE) {									//voltage readings
 		TIMER1_COMPB_CLR;
 		adc_voltage[voltage_counter] = ADC;
-		if (adc_voltage[voltage_counter] >= rated_V) { //check for rated value
+		if (adc_voltage[voltage_counter] >= rated_V) {						//check for rated value
 			set_overV_flag();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
+			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
 		voltage_counter++;
 	} else if (voltage_counter == SAMPLING_SIZE) {
@@ -181,32 +181,32 @@ void halt_safety_function() {
 	if (get_overV_flag()) {
 		usart0_transmit_string("---------------------------\n\r");
 		usart0_transmit_string("SYSTEM OVER-VOLTAGE!	   \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
-		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("RECTIFY AND ENTER Y FOR YES\n\r");
+		usart0_transmit_string("---------------------------\n\r\n\r");
 	}
 	if (get_overC_flag()) {
 		usart0_transmit_string("---------------------------\n\r");
 		usart0_transmit_string("SYSTEM OVER-CURRENT!       \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
-		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("RECTIFY AND ENTER Y FOR YES\n\r");
+		usart0_transmit_string("---------------------------\n\r\n\r");
 	}
 	if (get_overT1_flag()) {
 		usart0_transmit_string("---------------------------\n\r");
 		usart0_transmit_string("SYSTEM OVER-TEMP1!         \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
-		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("RECTIFY AND ENTER Y FOR YES\n\r");
+		usart0_transmit_string("---------------------------\n\r\n\r");
 	}
 	if (get_overT2_flag()) {
 		usart0_transmit_string("---------------------------\n\r");
 		usart0_transmit_string("SYSTEM OVER-TEMP2!         \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
-		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("RECTIFY AND ENTER Y FOR YES\n\r");
+		usart0_transmit_string("---------------------------\n\r\n\r");
 	}
 	if (get_overT3_flag()) {
 		usart0_transmit_string("---------------------------\n\r");
 		usart0_transmit_string("SYSTEM OVER-TEMP3!         \n\r");
-		usart0_transmit_string("RECTIFY BEFORE RESET(R)    \n\r");
-		usart0_transmit_string("---------------------------\n\r");
+		usart0_transmit_string("RECTIFY AND ENTER Y FOR YES\n\r");
+		usart0_transmit_string("---------------------------\n\r\n\r");
 	}
 }
 

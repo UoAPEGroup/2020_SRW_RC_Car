@@ -71,14 +71,8 @@ void timer_control_init()
 	TCNT3 = 0;															//set value for timer3
 	TCNT4 = 0;
 	
-	//clear all adc overflow flags
-	clr_overV_flag();
-	clr_overC_flag();
-	clr_overT1_flag();
-	clr_overT2_flag();
-	clr_overT3_flag();
-	
 	timer_control_update_current_duty(0);
+	timer_control_update_next_duty(0);
 }
 
 //halt PWM timers
