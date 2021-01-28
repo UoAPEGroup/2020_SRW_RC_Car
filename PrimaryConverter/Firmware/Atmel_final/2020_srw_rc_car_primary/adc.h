@@ -9,11 +9,11 @@
 #define A_int		1024															//amplitude interval 2^10 = 1024
 
 //threshold values for protection -> trigger halt
-#define rated_V		1000															//1000mV
-#define rated_C		1000															//1000mV (needs changes)
-#define rated_T1	1000															//1000mV (needs changes)
-#define rated_T2	1000															//1000mV (needs changes)
-#define rated_T3	1000															//1000mV (needs changes)
+#define rated_V		204																//1000mV (5000mV / 1024 * 1000mV = 204.8)
+#define rated_C		204																//1000mV 
+#define rated_T1	204																//1000mV 
+#define rated_T2	204																//1000mV 
+#define rated_T3	204																//1000mV 
 
 #define ADC_used	5																//number of adc channels in use
 
@@ -56,6 +56,8 @@ void adc_convert_all();																//convert the raw adc value to original v
 void adc_reset_counters();
 
 void adc_make_averages();
+
+void halt_safety_function();
 																					//calculate the average values from their respective array of adc readings
 uint32_t adc_get_avg_voltage();														//getters for average values
 uint32_t adc_get_avg_current();
