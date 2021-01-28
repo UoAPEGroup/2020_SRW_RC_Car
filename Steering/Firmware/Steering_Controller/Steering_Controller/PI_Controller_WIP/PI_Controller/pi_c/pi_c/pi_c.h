@@ -24,11 +24,12 @@ float sampling_t;
 volatile int16_t input; 
 volatile int16_t output;
 volatile int16_t integrator;
-volatile int16_t output_1;
+volatile int16_t set_output;
 int16_t setPoint;
 
 void setup();
 void loop();
+void printval();
 int16_t computePID(uint16_t input);
 
 #endif /* PI_C_H_ */
