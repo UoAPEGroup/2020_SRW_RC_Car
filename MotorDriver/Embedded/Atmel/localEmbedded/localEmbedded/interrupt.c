@@ -12,7 +12,6 @@
 #include "global.h"
 
 static volatile uint16_t interruptCount = 0;
-static volatile uint16_t storeCount = 0;
 volatile bool inTimer = false;
 
 ISR(INT0_vect) {
@@ -83,8 +82,6 @@ ISR(TIMER3_COMPA_vect) {
 	DDRB |= (1 << DDB1);
 	PORTB ^= (1 << DDB1);
 	
-	storeCount = interruptCount;
-	
 	if (returnInterruptCount() >= (REQUIRED_INTERRUPT_COUNT)) {
 		lostRemoteConnection = false;
 	}
@@ -94,7 +91,7 @@ ISR(TIMER3_COMPA_vect) {
 	}
 	
 	resetInterruptCount();
-	inTimer = true;
+
 }
 
 //set up external interrupt on INT0 pin

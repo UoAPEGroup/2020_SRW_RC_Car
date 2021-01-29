@@ -32,11 +32,10 @@ int main(void)
 	uart_init(9600); //initialize the uart
 		
  	sei(); //turn on global interrupts
-// 	uint8_t offset = 0;
-// 	
+	  	
 	//set output pins
-// 	DDRD |= (1 << DDD3)|(1 << DDD5);
-// 	DDRB |= (1 << DDB1);
+	DDRD |= (1 << DDD3)|(1 << DDD5);
+	DDRB |= (1 << DDB1);
 
 	//set input pins
 	DDRC &= ~(1 << DDC5) | ~(1 << DDC4) | ~(1 << DDC3); //THREE PINS
@@ -56,14 +55,15 @@ int main(void)
 	//initialize timers
 	//timer0_init(132, 62);  // PWm that controls the left FET driver
 	//timer2_init(132, 20); // PWM that controls the right FET driver
+	
 	timer1_init();
 	timer3_init_1();
-	
+// 	
 // 	TCNT0 = 0;   // setting offset
-// 	TCNT2 = offset;  // setting offset(set to period to)
+// 	TCNT2 = 0;  // setting offset(set to period to)
 // 
 // 	GTCCR = 0;   // start all timers
-// 	
+	
 	char transmitValue[10];
 	
     while (1)
@@ -71,19 +71,24 @@ int main(void)
 		
  		if (arrayFull) {//every 10.5 ms
 			 
-			inTimer = false; 
-			
-						
-			TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12); //turn off adc sampling
-			
-			 //check that the remote is still in contact and sending valid signals 
+			GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC));  //stop all the timers
 
- 			convertVoltageAndCurrent();			
+ 			convertVoltageAndCurrent();	//calculate input/output voltage, and set flags for overcurrent/overvoltage	
+			updateDutyCycle();
+			
+			//re-initialize timers
+			timer0_init(returnFinalPeriod(),returnLeftOnTime());  // PWm that controls the left FET driver
+			timer2_init(returnFinalPeriod(),returnRightOnTime());  // PWM that controls the right FET driver
+
+			TCNT0 = 0;   // setting offset
+			TCNT2 = 0;  // setting offset(set to period to)
+			
+			GTCCR = 0;   // start all timers
+			 		
  			//checkADC(); //stops the ADC interrupt (i.e., sampling) and prints out current/voltage values. Uses a 500ms delay (but no sampling is happening in this time).
 			 
 			arrayFull = false;
-			
- 			TCCR1B |= (1 << CS10) | (1 << CS11); //turn on adc sampling
+
  		}
 		 
 		if (sendData) {//every 1s. Note that checkADC and checkInterrupt can't run simultaneously due to the 500 ms delay in checkADC.

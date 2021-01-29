@@ -22,18 +22,18 @@
 #define VOLTAGE_VD_MV 3703
 
 //declare variables
-static volatile uint8_t finalOnTime; //on time of the wave through the motor(in number of counts)
-static volatile uint8_t leftOnTime; //on time of the left mosfets(in number of counts)
-static volatile uint8_t rightOnTime; //on time of the right mosfets(in number of counts)
+static volatile uint8_t finalOnTime = 0; //on time of the wave through the motor(in number of counts)
+static volatile uint8_t leftOnTime = 0; //on time of the left mosfets(in number of counts)
+static volatile uint8_t rightOnTime = 0; //on time of the right mosfets(in number of counts)
 
-static volatile uint16_t inputV; //most recent input voltage to the H-bridge
-static volatile uint16_t inputI; //most recent current reading into the H-bridge
-static volatile uint16_t motorI; //most recent current flowing through the motor
-static volatile uint16_t averageV; //average voltage across one second, to be sent out via bluetooth
-static volatile uint16_t averageI; //average current across one second, to be sent out via bluetooth
+static volatile uint16_t inputV = 0; //most recent input voltage to the H-bridge
+static volatile uint16_t inputI = 0; //most recent current reading into the H-bridge
+static volatile uint16_t motorI = 0; //most recent current flowing through the motor
+static volatile uint16_t averageV = 0; //average voltage across one second, to be sent out via bluetooth
+static volatile uint16_t averageI = 0; //average current across one second, to be sent out via bluetooth
 
-static volatile uint16_t speedGrade; //voltage wanted across motor, set with setSpeedGrade
-static volatile bool forward; //determines whether the car is moving forward or backward
+static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade
+static volatile bool forward = true; //determines whether the car is moving forward or backward
 
 //store adc readings of voltage and current (taken every ms)
 static volatile uint16_t voltageValues[ADC_ARRAY_SIZE];
