@@ -14,5 +14,7 @@
 void pwm_init();
 void led_init();
 void adc_init();
+void timer2_init();
+
 
 #endif /* SETUP_H_ */

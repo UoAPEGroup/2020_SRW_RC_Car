@@ -1,0 +1,24 @@
+/*
+ * timer2.c
+ *
+ * Created: 9/12/2020 12:03:15 pm
+ *  Author: Andrey Chukhraev
+ */ 
+
+#include <avr/io.h>
+
+void timer2_init(uint8_t period) 
+{
+	TCCR2A |= (1 << COM0B1);					//Clear OC2B on compare match
+	TCCR2A |= ((1 << WGM21) | (1 << WGM20));	//Fast PWM with TOP = OCR2A
+	TCCR2B |= (1 << WGM22);
+	TCCR2B |= (1 << CS20);						//Clock select no prescaling
+	
+	OCR2A = period;								
+	OCR2B = 0;							
+}
+
+void timer2_set_OCR2B(uint8_t value)
+{
+	OCR2B = value;
+}

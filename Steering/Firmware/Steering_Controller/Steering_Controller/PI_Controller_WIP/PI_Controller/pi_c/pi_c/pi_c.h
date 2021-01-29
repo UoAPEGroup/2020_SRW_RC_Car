@@ -12,21 +12,24 @@
 #include "global.h"
 #include "adc_pwm.h"
 
+#define MAX_LIMIT 5000
+#define MIN_LIMIT 0
 
 float k_p;
 float k_i;
 
-int16_t error;
+volatile int16_t error;
 int16_t prevError;
-int16_t sampling_t;
-int16_t input; 
-int16_t output;
-int16_t integrator;
-int16_t output_1;
+float sampling_t;
+volatile int16_t input; 
+volatile int16_t output;
+volatile int16_t integrator;
+volatile int16_t set_output;
 int16_t setPoint;
 
 void setup();
-void loop();
-uint16_t computePID(uint16_t input);
+void pi_controller();
+void printval();
+int16_t compute_pi(uint16_t input);
 
 #endif /* PI_C_H_ */

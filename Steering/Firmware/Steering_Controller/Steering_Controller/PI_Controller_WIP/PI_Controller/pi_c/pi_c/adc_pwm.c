@@ -6,27 +6,25 @@
  */ 
 
 #include "adc_pwm.h"
-volatile uint8_t t_on;
-uint16_t adc_val;
-int16_t analog_write_val;
+#include "pi_c.h"
 
-double adc_read(){
+volatile uint16_t t_on;
+volatile uint16_t adc_val;
+
+uint16_t adc_read(){
 	ADCSRA |= (1 << ADSC);
-		
 	while ((ADCSRA & (1 << ADIF)) == 0){
 		;
 	}
 	adc_val = ((ADCL << 0) | (ADCH << 8));
-	adc_val = ((uint32_t) adc_val * 5000)/(1023);
+	adc_val = ((uint32_t) adc_val * VREF)/(1024);
 	return adc_val;
 }
 
 void analog_write(int16_t value){
-	analog_write_val = value;
-	t_on =	(((int32_t)value*255)/5000);
-	if (value >= 5000){
+	t_on =	(((int32_t)value*255)/VREF); // Calculates duty cycle
+	if (t_on > 255){ 
 		t_on = 255;
 	}
-	OCR0A = t_on;
-	//OCR0B = 255;
+	OCR0A = t_on; // Sets Duty Cycle
 }

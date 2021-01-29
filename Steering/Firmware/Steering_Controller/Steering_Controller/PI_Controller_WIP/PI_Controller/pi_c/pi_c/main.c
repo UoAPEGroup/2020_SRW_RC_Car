@@ -9,21 +9,25 @@
 #include "setup.h"
 #include "pi_c.h"
 #include "adc_pwm.h"
+#include "uart.h"
 
-uint16_t adc_1;
+char input_buffer[20];
+
+ISR(TIMER2_COMPA_vect){
+	pi_controller();
+}
 
 int main(void)
 {
 	led_init();
 	pwm_init();
 	adc_init();
-    /* Replace with your application code */
+	timer2_init();
+	setup();
+	usart0_init(9600);
+	sei();
     while (1) {
-		//analog_write(4000);
-		//adc_1 = adc_read();
-		setup();
-		loop();
-		
+
     }
 }
 

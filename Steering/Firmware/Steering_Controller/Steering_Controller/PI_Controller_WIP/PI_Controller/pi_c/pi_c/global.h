@@ -13,10 +13,16 @@
 #define VREF 5000
 #define ADC_RES 1024
 
+#define K_P 0.8
+#define K_I 1
+
 #include <avr/io.h>
 #include <stdint.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <stdio.h>
+#include <string.h>
+
 
 
 #endif /* GLOBAL_H_ */
