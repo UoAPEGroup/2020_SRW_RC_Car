@@ -8,8 +8,9 @@
 #include "adc.h"
 
 void adc_init(){
+	ADMUX |= (1 << REFS0); // AV_cc
 	ADMUX |= (1 << MUX0); // ADC Channel 1
-	ADCSRA |= (1 << ADIE); // ADC Complete Interrupt 
+	//ADCSRA |= (1 << ADIE); // ADC Complete Interrupt 
 	ADCSRA |= (1 << ADPS2)|(1 << ADPS1);
 }
 

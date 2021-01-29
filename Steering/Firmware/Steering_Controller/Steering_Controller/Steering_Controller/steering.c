@@ -10,7 +10,4 @@
 
 void turn_start(){
 	led_toggle();
-	while(adc_val >= 1500){
-		adc_val = adc_start();
-	}
 }

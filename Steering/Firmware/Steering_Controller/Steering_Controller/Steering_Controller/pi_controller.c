@@ -1,40 +1,55 @@
 /*
  * pi.c
  *
- * Created: 28/01/2021 4:17:43 pm
+ * Created: 28/01`/2021 4:17:43 pm
  *  Author: npat692
  */ 
 
 #include "pi_controller.h"
+#include "adc.h"
+#include "led.h"
 
 void pi_controller(){
+	led_toggle();
+	
+	setPoint = 3000;
 	input = adc_read(); // Reads current input
 	
 	output = compute_pi(input); // Calculates PI
 	
 	set_output = output + input; // Calculates the output value
-	
+	IN_1_ON;
 	// Anti-wind-up
 	if(output > MAX_LIMIT){
-		output = 5000;
+		output = MAX_LIMIT;
 	}
 	else if (output < MIN_LIMIT){
-		output = 0;
+		output = MIN_LIMIT;
+	}
+	
+	
+	
+	if (output < input){
+		IN_1_OFF;
+		IN_2_ON;
+	} else{
+		IN_2_OFF;
+		IN_1_ON;
 	}
 	
 	// Set output value
-	//analog_write(set_output);
+	//set_duty(set_output);
 }
 
 int16_t compute_pi(uint16_t input){
 	k_p = K_P;
 	k_i = K_I;
 	
-	sampling_t = 0.001; // 1 ms interrupt
+	// 1 ms interrupt
 	
 	error = setPoint - input; // Proportional
 	
-	integrator = integrator + (1/2) * k_i * sampling_t * (error + prevError); // Integrator
+	integrator = integrator + (1/2) * k_i * SAMPLING_TIME * (error + prevError); // Integrator
 	
 	int16_t out = k_p * error + integrator; // PI Sum
 	

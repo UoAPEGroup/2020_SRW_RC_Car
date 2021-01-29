@@ -1,0 +1,23 @@
+/*
+ * timer2.c
+ *
+ * Created: 29/01/2021 3:42:50 pm
+ *  Author: npat692
+ */ 
+
+#include "timer2.h"
+#include "pi_controller.h"
+
+ISR(TIMER2_COMPA_vect){
+	//led_toggle();
+	pi_controller();
+}
+
+void timer2_init(){
+	TCCR2A = 0x00;
+	TCCR2A |= (1 << WGM21); // CTC
+	TCCR2B |= (1 << CS22); // 64 Prescaler
+	OCR2A = 62; // 1ms Interrupt
+	//OCR2A = 124; // 2ms Interrupt
+	TIMSK2 |= (1 << OCIE2A); // Output Compare A
+}
