@@ -15,6 +15,7 @@
 void timer0_init(uint8_t period, uint8_t duty_cycle);
 void timer1_init();
 void timer2_init(uint8_t period, uint8_t duty_cycle);
+void timer3_init_1();
 
 
 #endif /* TIMER_H_ */

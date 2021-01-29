@@ -6,25 +6,50 @@
  */ 
 #include "uart.h"
 #include "Calculations.h"
+#include "interrupt.h"
+
+#define F_CPU 16000000
+#define ARRAY_SIZE 10
+#include <util/delay.h>
+#include <avr/io.h>
 #include <string.h>
 #include <stdio.h>
 
 void checkADC() {//send converted values to UART
 	
-	char transmitVoltage[10];
-	char transmitCurrent[10];
+	TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12); //turn off adc sampling
+	convertVoltageAndCurrent();
 	
+	char transmitValue[ARRAY_SIZE];
+		
 	uint16_t voltageValue = returnInputV(); //PC1, ADC1
 	uint16_t currentValue = returnInputI(); //PC0, ADC0
 
-	sprintf(transmitCurrent, "%u", currentValue);
-	send_data(transmitCurrent);
+	sprintf(transmitValue, "%u", currentValue);
+	send_data(transmitValue);
 	
-	sprintf(transmitCurrent, "%u", voltageValue);
-	send_data(transmitCurrent);
+	sprintf(transmitValue, "%u", voltageValue);
+	send_data(transmitValue);
+	
+	_delay_ms(500);
+	
+	arrayFull = false;
+	TCCR1B |= (1 << CS10) | (1 << CS11); //turn on adc sampling
+	
 }
 
 void checkInterrupt() {
+	
+	char transmitValue[ARRAY_SIZE];
+	//Sig0 = PC3, Sig1 = PC4, Dir = PC5
+	uint16_t speedVoltage = returnSpeedGrade();
+	sprintf(transmitValue, "%u", speedVoltage);
+	send_data(transmitValue);
+	
+	bool direction = returnDirection();
+	sprintf(transmitValue, "%d", direction);
+	send_data(transmitValue);
+	
 	
 }
 

@@ -32,13 +32,27 @@ void timer2_init(uint8_t periodHalf, uint8_t onTimeHalf) {
 
 void timer1_init() {
 	//Toggle oc1a on compare match
-	TCCR1A |= (1 << COM1A0);
+	//TCCR1A |= (1 << COM1A0);
 	
 	//Set timer1 to 64 prescaler, CTC mode with OCR1A as TOP
 	TCCR1B |= (1 << CS10) | (1 << WGM12) | (1 << CS11);
 	
 	//Set the period of sampling to 0.5ms
-	OCR1A = 63;
+	OCR1A = 63 * 2;
 	OCR1B = 40;
 	
+}
+
+void timer3_init_1() {
+	
+	//64 prescaler, with 16MHz
+	
+	TCCR3B |= (1 << CS30) | (1 << WGM32) | (1 << CS31);
+	
+	//period = 6ms
+	OCR3A = 1500;
+	//OCR3B = 50;
+	
+	//enable interrupt on compare match B
+	TIMSK3 |= (1 << OCIE3A); 
 }

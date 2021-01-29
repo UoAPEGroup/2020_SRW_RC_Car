@@ -15,7 +15,7 @@
 #include "watchdog.h"
 #include "validate.h"
 
-#define F_CPU 800000UL
+#define F_CPU 16000000
 #include <util/delay.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,16 +27,20 @@
 int main(void)
 {
 // 	watchdog_init(); //initialize the watchdog timer
-// 	adc_init(); //initialize the adc
-// 	interrupt_init(); //initialize the interrupt
+ 	adc_init(); //initialize the adc
+ 	interrupt_init(); //initialize the interrupt
 	uart_init(9600); //initialize the uart
 		
-// 	sei(); //turn on global interrupts
+ 	sei(); //turn on global interrupts
 // 	uint8_t offset = 0;
 // 	
 	//set output pins
 // 	DDRD |= (1 << DDD3)|(1 << DDD5);
 // 	DDRB |= (1 << DDB1);
+
+	//set input pins
+	DDRC &= ~(1 << DDC5) | ~(1 << DDC4) | ~(1 << DDC3); //THREE PINS
+	DDRD &= ~(1 << DDD2); //INT0
 
 	//stop all the timers
 	//GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
@@ -52,48 +56,42 @@ int main(void)
 	//initialize timers
 	//timer0_init(132, 62);  // PWm that controls the left FET driver
 	//timer2_init(132, 20); // PWM that controls the right FET driver
-	//timer1_init();
+	timer1_init();
+	timer3_init_1();
 	
 // 	TCNT0 = 0;   // setting offset
 // 	TCNT2 = offset;  // setting offset(set to period to)
 // 
 // 	GTCCR = 0;   // start all timers
 // 	
-	char hello[100] = "Hello, hi there this is so frustrating \n\r";
+	char transmitValue[10];
 	
     while (1)
     {
 		
-		//_delay_ms(500);
-		//send_data(hello);
-		
-		uart_transmit_string(hello);
-		
-		
-//  		if (arrayFull) {//every 10.5 ms
-// // 			
-//  			TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12); //turn off adc sampling
-//  			//send_data(hello);
-//  			convertVoltageAndCurrent();
-// // 			
-//  			//checkADC();
-// 			 
-// 			 	char transmitVoltage[10];
-// 			 	char transmitCurrent[10];
-// 			 	
-// 			 	uint16_t voltageValue = returnInputV(); //PC1, ADC1
-// 			 	uint16_t currentValue = returnInputI(); //PC0, ADC0
-// 
-// 			 	//sprintf(transmitCurrent, "%u", currentValue);
-// 			 	uart_transmit_string("Hello, Hi there, UoA, AUT\n\r");
-// 				 
-// 			 	//sprintf(transmitCurrent, "%u", voltageValue);
-// 			 	//uart_transmit_string("Hi\n\r");
-// // 			
-//  			arrayFull = false;
-//  			TCCR1B |= (1 << CS10) | (1 << CS11); //turn on adc sampling
-// // 			
-//  		}
+ 		if (arrayFull) {//every 10.5 ms
+			 
+			inTimer = false; 
+			
+						
+			TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12); //turn off adc sampling
+			
+			 //check that the remote is still in contact and sending valid signals 
+
+ 			convertVoltageAndCurrent();			
+ 			//checkADC(); //stops the ADC interrupt (i.e., sampling) and prints out current/voltage values. Uses a 500ms delay (but no sampling is happening in this time).
+			 
+			arrayFull = false;
+			
+ 			TCCR1B |= (1 << CS10) | (1 << CS11); //turn on adc sampling
+ 		}
+		 
+		if (sendData) {//every 1s. Note that checkADC and checkInterrupt can't run simultaneously due to the 500 ms delay in checkADC.
+			
+			checkInterrupt();
+			//averageVoltageAndCurrent();
+			sendData = false;
+		}
 		
 		
 // 		if (arrayFull) {//if 10 adc readings of current and voltage have been taken (i.e., roughly 10.5 ms)

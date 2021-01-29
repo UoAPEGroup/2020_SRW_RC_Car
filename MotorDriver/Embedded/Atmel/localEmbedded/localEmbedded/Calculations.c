@@ -111,17 +111,30 @@ void convertVoltageAndCurrent() {
 		overCurrent = false;
 	}
 	
-	if (inputV >= 20000) {
+	if (inputV >= 12000) {
 		overVoltage = true;
 		setSpeedGrade(STOP);
 	}
 	else {
 		overVoltage = false;
 	}
-	  
-	//store recent current/voltage values in an array
-	recentCurrentValues[recentValuesCount] = inputI;
-	recentVoltageValues[recentValuesCount] = inputV;
+ 	
+	uint16_t preValI = inputI;
+	uint16_t preValV = inputV;
+	
+	//shift recent current/voltage values into an array [leaving space for 50 old values], note: what happens during first iteration?
+	for (uint8_t i = 0; i < BL_ARRAY_SIZE; i ++) {
+		
+		uint16_t currentValI = recentCurrentValues[i];
+		uint16_t currentValV = recentVoltageValues[i];
+		
+		recentCurrentValues[i] = preValI;
+		recentVoltageValues[i] = preValV;
+		
+		preValI = currentValI;
+		preValV = currentValV;
+		
+	}
 	
 	recentValuesCount++;
 	
@@ -134,16 +147,25 @@ void convertVoltageAndCurrent() {
 }
 
 void averageVoltageAndCurrent() {
+	
+	//do a weight average where the weight is proportional to the number of values in the array
+	//Older values have the least weight attached to them
+	
 	uint32_t totalAverageV = 0;
 	uint32_t totalAverageI = 0;
+	uint8_t countUp = 0;
+	uint16_t sumOfWeights = 0;
 	
-	for (uint8_t i = 0; i < BL_ARRAY_SIZE; i++) {
-		totalAverageV += (recentVoltageValues[i]);
-		totalAverageI += (recentCurrentValues[i]);
+	for (uint8_t i = BL_ARRAY_SIZE; i > 0; i--) {
+		totalAverageV = i * recentVoltageValues[countUp]; //weight is the number in array, inverted (i.e., most recent value has highest weight, which is the array size)
+		totalAverageI = i * recentCurrentValues[countUp];
+		
+		sumOfWeights += i; //denominator of the average, equivalent to the summation of all the weights added to the array
+		countUp++;
 	}
 	
-	averageV = totalAverageV/BL_ARRAY_SIZE;
-	averageI = totalAverageI/BL_ARRAY_SIZE;
+	averageV = totalAverageV/sumOfWeights;
+	averageI = totalAverageI/sumOfWeights;
 
 }
 
@@ -220,4 +242,8 @@ uint16_t returnAvgV() {
 
 uint16_t returnAvgI() {
 	return averageI;
+}
+
+bool returnDirection() {
+	return forward;
 }

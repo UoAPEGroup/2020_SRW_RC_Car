@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <stdbool.h> 
 
-extern volatile bool lostRemoteConnection = true;
-extern volatile bool overCurrent = true;
-extern volatile bool overVoltage = true;
+//make sure these are true when running actual code
+volatile bool lostRemoteConnection = false;
+volatile bool overCurrent = false;
+volatile bool overVoltage = false;
