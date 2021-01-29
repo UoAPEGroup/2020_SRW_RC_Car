@@ -7,13 +7,14 @@
 
 #include "global.h"
 #include "adc.h"
-#include "timer.h"
+#include "timer2.h"
 #include "uart.h"
 #include "control.h"
 #include "led.h"
 #include "instructions_macros.h"
 #include "steering.h"
 #include "pi_controller.h"
+#include "pwm.h"
 
 ISR(USART0_RX_vect){
 	input_data = UDR0;
@@ -26,14 +27,15 @@ int main(void)
 	pin_init();
 	led_init();
     uart_init();
+	pwm0_init();
+	pwm1_init();
+	timer2_init();
+	IN_1_OFF;
+	IN_2_OFF;
 	sei();
 	system_state = ACTIVE_STATE;
     while (1) {
-		/*while (system_state == STATIONARY);
-		if(system_state == ACTIVE_STATE){
-			turn_start();
-		}*/
-		led_toggle();
+	
 	}
 }
 

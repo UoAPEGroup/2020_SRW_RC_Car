@@ -12,7 +12,7 @@
 #include "global.h"
 #include "adc.h"
 
-uint16_t adc_val;
+void calibrate_steering();
 void turn_start();
 
 #endif /* STEERING_H_ */

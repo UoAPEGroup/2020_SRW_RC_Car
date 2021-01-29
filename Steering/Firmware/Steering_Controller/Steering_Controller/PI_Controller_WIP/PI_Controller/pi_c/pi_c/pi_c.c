@@ -15,7 +15,7 @@ char input_buffer[20];
 char error_buffer[20];
 
 void setup(){
-	setPoint = 1000; // Desired output
+	setPoint = 4000; // Desired output
 }
 
 void pi_controller(){

@@ -9,9 +9,8 @@
 
 void pwm_init() {
 	TCCR0A |= (1 << COM0A1); //  Toggle OC0A on compare match
-	TCCR0A |= (1 << WGM01); // Phase Correct PWM
-	TCCR0A |= (1 << WGM00); // 
-	TCCR0B |= (1 << CS02);
+	TCCR0A |= (1 << WGM01)|(1 << WGM00); // Fast PWM
+	TCCR0B |= (1 << CS01); // 8 Prescale = 4kHz
 	OCR0A = 0; // Sets Duty Cycle to 0%
 	OCR0B = 255;
 }

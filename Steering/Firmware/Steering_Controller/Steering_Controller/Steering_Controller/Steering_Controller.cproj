@@ -173,16 +173,28 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="pi_controller.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pi_controller.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="steering.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="steering.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.c">
+    <Compile Include="timer2.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.h">
+    <Compile Include="timer2.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.c">

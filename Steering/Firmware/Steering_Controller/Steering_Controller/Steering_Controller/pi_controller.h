@@ -10,7 +10,6 @@
 #define PI_CONTROLLER_H_
 
 #include "global.h"
-#include "adc_pwm.h"
 
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0

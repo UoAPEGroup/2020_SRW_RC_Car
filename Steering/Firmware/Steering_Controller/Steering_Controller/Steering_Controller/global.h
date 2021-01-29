@@ -24,6 +24,14 @@
 #define K_I 1
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0
+#define SAMPLING_TIME 0.001
+
+// Steering Motor Control
+#define IN_1_ON TCCR0A |= (1 << COM0A1)
+#define IN_1_OFF TCCR0A &=~ (1 << COM0A1)
+
+#define IN_2_ON TCCR1A |= (1 << COM1A1)
+#define IN_2_OFF TCCR1A &=~ (1 << COM1A1)
 
 // STATE Definitions
 #define STATIONARY_STATE 0
