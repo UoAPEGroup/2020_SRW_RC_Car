@@ -15,15 +15,13 @@ char input_buffer[20];
 char error_buffer[20];
 
 void setup(){
-	setPoint = 4000; // Desired output
+	setPoint = 1500; // Desired output
 }
 
 void pi_controller(){
 	input = adc_read(); // Reads current input
 	
 	output = compute_pi(input); // Calculates PI 
-	
-	set_output = output + input; // Calculates the output value
 	
 	// Anti-wind-up
 	if(output > MAX_LIMIT){
@@ -32,6 +30,8 @@ void pi_controller(){
 	else if (output < MIN_LIMIT){
 		output = 0;
 	}
+	
+	set_output = output + input; // Calculates the output value
 	
 	// Set output value
 	analog_write(set_output);
@@ -45,14 +45,14 @@ int16_t compute_pi(uint16_t input){
 	
 	error = setPoint - input; // Proportional 
 	
-	integrator = integrator + (1/2) * k_i * sampling_t * (error + prevError); // Integrator
+	integrator = integrator + (0.5) * k_i * sampling_t * (error + prevError); // Integrator
 	
 	int16_t out = k_p * error + integrator; // PI Sum
 	
 	// Ignores minor errors
-	if ((out < 100) && (out > -100)){
+	/*if ((out < 100) && (out > -100)){
 		out = 0;
-	}
+	}*/
 	
 	prevError = error; // Saves error for integration
 	return out;

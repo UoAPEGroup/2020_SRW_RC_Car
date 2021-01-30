@@ -24,14 +24,16 @@ ISR(USART0_RX_vect){
 
 int main(void)
 {
-	pin_init();
 	led_init();
     uart_init();
 	pwm0_init();
 	pwm1_init();
 	timer2_init();
+	adc_init();
+	
 	IN_1_OFF;
 	IN_2_OFF;
+	
 	sei();
 	system_state = ACTIVE_STATE;
     while (1) {

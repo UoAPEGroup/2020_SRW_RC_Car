@@ -20,11 +20,11 @@
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 0.8
+#define K_P 1.5
 #define K_I 1
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0
-#define SAMPLING_TIME 0.001
+#define SAMPLING_TIME 0.1
 
 // Steering Motor Control
 #define IN_1_ON TCCR0A |= (1 << COM0A1)
@@ -32,6 +32,9 @@
 
 #define IN_2_ON TCCR1A |= (1 << COM1A1)
 #define IN_2_OFF TCCR1A &=~ (1 << COM1A1)
+
+#define CHECK_IN_1  (TCCR0A & (1 << COM0A1))
+#define CHECK_IN_2  (TCCR1A & (1 << COM1A1))
 
 // STATE Definitions
 #define STATIONARY_STATE 0
@@ -63,5 +66,7 @@ char input_data;
 uint8_t system_state;
 uint8_t turn_state;
 
+
+volatile uint16_t t_on;
 
 #endif /* GLOBAL_H_ */

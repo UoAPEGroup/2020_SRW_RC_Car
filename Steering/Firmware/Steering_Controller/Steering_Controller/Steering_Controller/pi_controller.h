@@ -18,13 +18,13 @@ float k_p;
 float k_i;
 
 volatile int16_t error;
-int16_t prevError;
+volatile int16_t prev_error;
 float sampling_t;
 volatile int16_t input;
 volatile int16_t output;
 volatile int16_t integrator;
 volatile int16_t set_output;
-int16_t setPoint;
+int16_t set_point;
 
 void setup();
 void pi_controller();

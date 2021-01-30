@@ -8,48 +8,49 @@
 #include "pi_controller.h"
 #include "adc.h"
 #include "led.h"
+#include "pwm.h"
 
 void pi_controller(){
 	led_toggle();
 	
-	setPoint = 3000;
+	set_point = 3000;
+	
 	input = adc_read(); // Reads current input
 	
 	output = compute_pi(input); // Calculates PI
 	
-	set_output = output + input; // Calculates the output value
-	IN_1_ON;
-	// Anti-wind-up
-	if(output > MAX_LIMIT){
-		output = MAX_LIMIT;
+	set_output = output; // Calculates the output value
+	
+	// Anti-wind-up for integrator
+	if(set_output > MAX_LIMIT){
+		set_output = MAX_LIMIT;
 	}
-	else if (output < MIN_LIMIT){
-		output = MIN_LIMIT;
+	/*
+	else if (set_output < MIN_LIMIT){
+		set_output = MIN_LIMIT;
 	}
+	*/
 	
-	
-	
-	if (output < input){
+	if (set_output > 0){
 		IN_1_OFF;
 		IN_2_ON;
+		set_duty_cycle(set_output);
 	} else{
 		IN_2_OFF;
 		IN_1_ON;
+		set_duty_cycle(set_output * (-1));
 	}
-	
-	// Set output value
-	//set_duty(set_output);
 }
 
 int16_t compute_pi(uint16_t input){
 	k_p = K_P;
-	k_i = K_I;
+	k_i = 0.2;
 	
 	// 1 ms interrupt
 	
-	error = setPoint - input; // Proportional
+	error = set_point - input; // Proportional
 	
-	integrator = integrator + (1/2) * k_i * SAMPLING_TIME * (error + prevError); // Integrator
+	//integrator += (0.5) * k_i * SAMPLING_TIME * (error + prev_error); // Integrator
 	
 	int16_t out = k_p * error + integrator; // PI Sum
 	
@@ -58,6 +59,6 @@ int16_t compute_pi(uint16_t input){
 		out = 0;
 	}
 	
-	prevError = error; // Saves error for integration
+	prev_error = error; // Saves error for integration
 	return out;
 }
