@@ -24,7 +24,7 @@ volatile int16_t input;
 volatile int16_t output;
 volatile int16_t integrator;
 volatile int16_t set_output;
-int16_t set_point;
+
 
 void setup();
 void pi_controller();

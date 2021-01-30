@@ -13,7 +13,7 @@
 void pi_controller(){
 	led_toggle();
 	
-	set_point = 3000;
+	set_point_angle = 3000;
 	
 	input = adc_read(); // Reads current input
 	
@@ -48,7 +48,7 @@ int16_t compute_pi(uint16_t input){
 	
 	// 1 ms interrupt
 	
-	error = set_point - input; // Proportional
+	error = set_point_angle - input; // Proportional
 	
 	//integrator += (0.5) * k_i * SAMPLING_TIME * (error + prev_error); // Integrator
 	

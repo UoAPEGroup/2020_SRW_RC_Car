@@ -19,7 +19,7 @@ void read_data();
 
 void set_direction();
 void set_speed();
-void set_turn_state();
+void set_turn_angle();
 
 // SPEED CONTROL FUNCTIONS
 void set_no_speed();

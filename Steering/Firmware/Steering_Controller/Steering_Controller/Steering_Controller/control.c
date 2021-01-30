@@ -7,6 +7,7 @@
 
 #include "control.h"
 #include "led.h"
+#include "steering.h"
 
 void pin_init(){
 	DDRC |= (1 << PORTC5)|(1 << PORTC2)|(1 << PORTC1);
@@ -18,7 +19,7 @@ void read_data() {
 	set_direction(); 
 	set_speed();
 	STATE_INT_TOGGLE;
-	//set_turn_state();
+	set_turn_angle();
 }
 
 void set_direction(){
@@ -30,8 +31,8 @@ void set_direction(){
 	}
 }
 
+
 void set_speed(){
-		
 	if (MED_H){
 		set_med_speed();
 	}
@@ -43,47 +44,47 @@ void set_speed(){
 	}
 }
 
-void set_turn_set(){
+void set_turn_angle(){
 	// RIGHT TURN
 	if(RIGHT_H){
 		if(HALF_TURN_H){
-			turn_state = RIGHT_HALF;
+			set_point_angle = half_r_turn;
 		} 
 		else if (FULL_TURN_H){
-			turn_state = RIGHT_FULL;
+			set_point_angle = full_r_turn;
 		}
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
-			turn_state = LEFT_HALF;
+			set_point_angle = half_l_turn;
 		}
 		else if (FULL_TURN_H){
-			turn_state = LEFT_FULL;
+			set_point_angle = full_l_turn;
 		}
 		else{
-			turn_state = STRAIGHT;
+			set_point_angle = straight_turn;
 		}
 	}
 }
 
 void set_no_speed(){
-	SPD_0_L;
-	SPD_1_L;
+	SPD_0_H;
+	SPD_1_H;
 }
 
 void set_low_speed(){
-	SPD_0_H;
-	SPD_1_L;
-}
-
-void set_med_speed(){
 	SPD_0_L;
 	SPD_1_H;
 }
 
-void set_high_speed(){
+void set_med_speed(){
 	SPD_0_H;
-	SPD_1_H;
+	SPD_1_L;
+}
+
+void set_high_speed(){
+	SPD_0_L;
+	SPD_1_L;
 }
 
 

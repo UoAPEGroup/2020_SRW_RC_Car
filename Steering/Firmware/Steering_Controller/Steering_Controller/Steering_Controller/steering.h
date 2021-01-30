@@ -12,7 +12,7 @@
 #include "global.h"
 #include "adc.h"
 
+
 void calibrate_steering();
-void turn_start();
 
 #endif /* STEERING_H_ */

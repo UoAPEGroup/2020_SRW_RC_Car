@@ -66,6 +66,13 @@ char input_data;
 uint8_t system_state;
 uint8_t turn_state;
 
+int16_t set_point_angle;
+
+int16_t half_r_turn;
+int16_t full_r_turn;
+int16_t half_l_turn;
+int16_t full_l_turn;
+int16_t straight_turn;
 
 volatile uint16_t t_on;
 
