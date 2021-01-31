@@ -14,7 +14,6 @@ void led_init(){
 	PORTB |= (1 << 2);
 }
 
-
 void led_toggle(){
 	PORTB ^= (1 << 5);
 	PORTB ^= (1 << 2);

@@ -10,18 +10,22 @@
 #define CONTROL_H_
 
 #include "global.h"
-#include "instructions_macros.h"
 #include "uart.h"
+#include "led.h"
+#include "steering.h"
 
+// OUTPUT PIN INITIALIZATION
 void pin_init();
 
+// MAIN READER FUNCTION
 void read_data();
 
+// READER AND SETTER FUNCTIONS
 void set_direction();
 void set_speed();
 void set_turn_angle();
 
-// SPEED CONTROL FUNCTIONS
+// SPEED CONTROL SETTER FUNCTIONS
 void set_no_speed();
 void set_low_speed();
 void set_med_speed();

@@ -6,24 +6,26 @@
  */ 
 
 #include "control.h"
-#include "led.h"
-#include "steering.h"
 
 void pin_init(){
-	DDRC |= (1 << PORTC5)|(1 << PORTC2)|(1 << PORTC1);
+	DDRC |= (1 << PORTC5); // State Interrupt
+	DDRC |= (1 << PORTC2)|(1 << PORTC3); // SPD_0 and SPD_1
+	DDRC |= (1 << PORTC4); // Direction 
 	STATE_INT_L;
 }
 
+// Decodes data in the Receiver Buffer
 void read_data() {
-	//led_toggle();
-	set_direction(); 
-	set_speed();
-	STATE_INT_TOGGLE;
-	set_turn_angle();
+	//led_toggle(); 
+	set_direction(); // Sets Direction 
+	set_speed(); // Sets Speed 
+	set_turn_angle(); // Sets turn angle
+	STATE_INT_TOGGLE; // Triggers state interrupt
 }
 
+// Reads data and sets Direction 
 void set_direction(){
-	if (BACKWARD_H){ 
+	if (BACKWARD_H){  
 		DRT_BCK;
 	}
 	else{
@@ -31,7 +33,7 @@ void set_direction(){
 	}
 }
 
-
+// Reads data and sets Direction
 void set_speed(){
 	if (MED_H){
 		set_med_speed();
@@ -44,6 +46,7 @@ void set_speed(){
 	}
 }
 
+// Reads data and sets angle for PI controller set point
 void set_turn_angle(){
 	// RIGHT TURN
 	if(RIGHT_H){
@@ -67,6 +70,7 @@ void set_turn_angle(){
 	}
 }
 
+// Speed setters 
 void set_no_speed(){
 	SPD_0_H;
 	SPD_1_H;
@@ -86,5 +90,3 @@ void set_high_speed(){
 	SPD_0_L;
 	SPD_1_L;
 }
-
-

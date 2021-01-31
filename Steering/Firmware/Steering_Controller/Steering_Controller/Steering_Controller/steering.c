@@ -6,8 +6,8 @@
  */ 
 
 #include "steering.h"
-#include "led.h"
 
-void turn_start(){
-	led_toggle();
+// Finds reference voltage values for each angle
+void calibrate_steering(){
+	//insert calibration code
 }

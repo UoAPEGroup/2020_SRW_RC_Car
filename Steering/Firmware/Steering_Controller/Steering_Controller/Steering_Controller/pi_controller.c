@@ -6,20 +6,23 @@
  */ 
 
 #include "pi_controller.h"
-#include "adc.h"
-#include "led.h"
-#include "pwm.h"
 
+
+// PI Controller Setup 
+void pi_setup(){
+	IN_1_OFF;
+	IN_2_OFF;
+	k_p = K_P;
+	k_i = K_I;
+}
+
+// PI Controller Function
 void pi_controller(){
-	led_toggle();
-	
-	set_point_angle = 3000;
+	//led_toggle();
 	
 	input = adc_read(); // Reads current input
 	
-	output = compute_pi(input); // Calculates PI
-	
-	set_output = output; // Calculates the output value
+	set_output = compute_pi(input); // Calculates PI
 	
 	// Anti-wind-up for integrator
 	if(set_output > MAX_LIMIT){
@@ -31,25 +34,24 @@ void pi_controller(){
 	}
 	*/
 	
-	if (set_output > 0){
+	// Sets the duty cycle on IN_1 or IN_2
+	if (set_output > 0){ // Turning Right (positive error)
 		IN_1_OFF;
+		set_duty_cycle(set_output); 
 		IN_2_ON;
-		set_duty_cycle(set_output);
-	} else{
+	} 
+	else{				// Turning Left (negative error)
 		IN_2_OFF;
+		set_duty_cycle(set_output * (-1)); 
 		IN_1_ON;
-		set_duty_cycle(set_output * (-1));
 	}
 }
 
-int16_t compute_pi(uint16_t input){
-	k_p = K_P;
-	k_i = 0.2;
-	
-	// 1 ms interrupt
-	
+// PI Controller Function: Calculates Error
+int16_t compute_pi(uint16_t input){	
 	error = set_point_angle - input; // Proportional
 	
+	// Disabled for Proteus
 	//integrator += (0.5) * k_i * SAMPLING_TIME * (error + prev_error); // Integrator
 	
 	int16_t out = k_p * error + integrator; // PI Sum

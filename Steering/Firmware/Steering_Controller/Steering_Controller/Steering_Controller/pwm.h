@@ -15,6 +15,4 @@ void pwm0_init();
 void pwm1_init();
 void set_duty_cycle(int16_t value);
 
-
-
 #endif /* PWM_H_ */

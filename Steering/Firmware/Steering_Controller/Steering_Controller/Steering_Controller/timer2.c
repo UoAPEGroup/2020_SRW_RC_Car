@@ -6,10 +6,10 @@
  */ 
 
 #include "timer2.h"
-#include "pi_controller.h"
 
+// 1ms Interrupt
 ISR(TIMER2_COMPA_vect){
-	//led_toggle();
+	check_timeout();
 	pi_controller();
 }
 

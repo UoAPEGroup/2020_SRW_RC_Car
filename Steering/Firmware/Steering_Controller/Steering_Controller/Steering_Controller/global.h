@@ -62,18 +62,23 @@
 #define SPD_1_H PORTC |= (1 << PC3)
 #define SPD_1_L PORTC &=~ (1 << PC3)
 
-char input_data;
-uint8_t system_state;
-uint8_t turn_state;
+volatile char input_data; // Stores input data 
 
-int16_t set_point_angle;
+// Set point variable for PI Controller
+volatile int16_t set_point_angle;
 
+// Reference Angle Voltage values
 int16_t half_r_turn;
 int16_t full_r_turn;
 int16_t half_l_turn;
 int16_t full_l_turn;
 int16_t straight_turn;
 
+// Duty cycle to set PWM
 volatile uint16_t t_on;
+
+// Timeout Counter
+#define MAX_TIMEOUT_COUNT 50 // in ms
+volatile uint8_t timeout_count;
 
 #endif /* GLOBAL_H_ */

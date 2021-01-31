@@ -16,7 +16,9 @@
 #include "pi_controller.h"
 #include "pwm.h"
 
+// Triggers when data is received
 ISR(USART0_RX_vect){
+	reset_timeout();
 	input_data = UDR0;
 	tx_debug(input_data);
 	read_data();
@@ -24,18 +26,20 @@ ISR(USART0_RX_vect){
 
 int main(void)
 {
+	// Initialization 
+	pin_init();
 	led_init();
-    uart_init();
+	uart_init();
 	pwm0_init();
 	pwm1_init();
 	timer2_init();
-	adc_init();
+	adc_init();	
 	
-	IN_1_OFF;
-	IN_2_OFF;
+	pi_setup();
+	
+	calibrate_steering();
 	
 	sei();
-	system_state = ACTIVE_STATE;
     while (1) {
 	
 	}
