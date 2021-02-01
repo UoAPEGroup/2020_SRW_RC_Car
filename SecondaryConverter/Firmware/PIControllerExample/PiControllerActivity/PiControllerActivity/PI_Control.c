@@ -37,5 +37,5 @@ bool returnErrorCalcFlag() {
 }
 
 bool setErrorCalcFlag() {
-	errorHasBeenCalc = true;
+	errorHasBeenCalc = false;
 }
