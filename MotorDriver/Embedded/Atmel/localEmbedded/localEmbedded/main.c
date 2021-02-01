@@ -57,7 +57,7 @@ int main(void)
 	//timer2_init(132, 20); // PWM that controls the right FET driver
 	
 	timer1_init();
-	timer3_init_1();
+	timer3_init();
 // 	
 // 	TCNT0 = 0;   // setting offset
 // 	TCNT2 = 0;  // setting offset(set to period to)
@@ -93,9 +93,16 @@ int main(void)
 		 
 		if (sendData) {//every 1s. Note that checkADC and checkInterrupt can't run simultaneously due to the 500 ms delay in checkADC.
 			
-			checkInterrupt();
-			//averageVoltageAndCurrent();
+			//stop ADC sampling
+			TCCR1B &= ~(1 << CS10) | ~(1 << CS11);
+			//checkInterrupt();
+			averageVoltageAndCurrent();
+			//checkTransmission();
+			checkAvgCalc();
 			sendData = false;
+			//start ADC sampling again
+			TCCR1B |= (1 << CS10) | (1 << CS11);
+			
 		}
 		
 		

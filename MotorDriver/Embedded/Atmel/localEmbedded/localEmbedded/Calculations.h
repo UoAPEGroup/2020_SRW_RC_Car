@@ -19,6 +19,9 @@ static volatile uint8_t rightOnTime;
 
 static volatile uint16_t inputV;
 static volatile uint16_t inputI;
+static volatile uint16_t averageV;
+static volatile uint16_t averageI;
+static volatile uint32_t averagePower;
 static volatile uint16_t speedGrade;
 static volatile bool forward;
 
@@ -40,6 +43,7 @@ uint16_t returnInputI();
 uint16_t returnInputV();
 uint16_t returnAvgV();
 uint16_t returnAvgI();
+uint32_t returnAvgP();
 bool returnDirection();
 
 void updateDutyCycle();

@@ -43,7 +43,7 @@ void timer1_init() {
 	
 }
 
-void timer3_init_1() {
+void timer3_init() {
 	
 	//64 prescaler, with 16MHz
 	
