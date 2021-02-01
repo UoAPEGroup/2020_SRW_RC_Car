@@ -17,9 +17,8 @@
 
 float k_p;
 float k_i;
-
 volatile int16_t error;
-int16_t prevError;
+volatile int16_t prevError;
 float sampling_t;
 volatile int16_t input; 
 volatile int16_t output;

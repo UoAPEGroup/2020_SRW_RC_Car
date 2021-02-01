@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <stdint.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 
 // Global Variables
 #define F_CPU 8000000UL
@@ -20,7 +21,7 @@
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 0.8
+#define K_P 1.5
 #define K_I 1
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0
@@ -32,6 +33,9 @@
 
 #define IN_2_ON TCCR1A |= (1 << COM1A1)
 #define IN_2_OFF TCCR1A &=~ (1 << COM1A1)
+
+#define CHECK_IN_1  (TCCR0A & (1 << COM0A1))
+#define CHECK_IN_2  (TCCR1A & (1 << COM1A1))
 
 // STATE Definitions
 #define STATIONARY_STATE 0
@@ -59,9 +63,24 @@
 #define SPD_1_H PORTC |= (1 << PC3)
 #define SPD_1_L PORTC &=~ (1 << PC3)
 
-char input_data;
-uint8_t system_state;
-uint8_t turn_state;
+volatile char input_data; // Stores input data 
 
+// Set point variable for PI Controller
+volatile int16_t set_point_angle;
+
+// Reference Angle Voltage values
+int16_t half_r_turn;
+int16_t full_r_turn;
+int16_t half_l_turn;
+int16_t full_l_turn;
+int16_t straight_turn;
+int16_t turn_range;
+
+// Duty cycle to set PWM
+volatile uint16_t t_on;
+
+// Timeout Counter
+#define MAX_TIMEOUT_COUNT 50 // in ms
+volatile uint8_t timeout_count;
 
 #endif /* GLOBAL_H_ */

@@ -11,6 +11,8 @@
 
 #include "global.h"
 #include "led.h"
+#include "pi_controller.h"
+#include "uart.h"
 
 void timer2_init();
 

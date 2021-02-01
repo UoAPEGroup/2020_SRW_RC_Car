@@ -11,7 +11,7 @@
 void usart0_init(uint32_t BAUD)
 {
 	UCSR0A |= 0x00;														//clear all bits
-	UCSR0B |= (1 << RXCIE0);											//enable RX complete interrupt
+	UCSR0B |= (1 << RXCIE0);											// enable RX complete interrupt
 	UCSR0B |= (1 << RXEN0);												//receiver enable
 	UCSR0B |= (1 << TXEN0);												//transmitter enable
 	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));							//8-bit packet size

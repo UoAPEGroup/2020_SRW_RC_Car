@@ -14,7 +14,7 @@
 #define ADC_RES 1024
 
 #define K_P 0.8
-#define K_I 1
+#define K_I 4
 
 #include <avr/io.h>
 #include <stdint.h>

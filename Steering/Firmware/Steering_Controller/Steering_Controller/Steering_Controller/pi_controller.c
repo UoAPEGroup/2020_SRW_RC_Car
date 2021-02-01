@@ -6,50 +6,52 @@
  */ 
 
 #include "pi_controller.h"
-#include "adc.h"
-#include "led.h"
 
-void pi_controller(){
-	led_toggle();
-	
-	setPoint = 3000;
-	input = adc_read(); // Reads current input
-	
-	output = compute_pi(input); // Calculates PI
-	
-	set_output = output + input; // Calculates the output value
-	IN_1_ON;
-	// Anti-wind-up
-	if(output > MAX_LIMIT){
-		output = MAX_LIMIT;
-	}
-	else if (output < MIN_LIMIT){
-		output = MIN_LIMIT;
-	}
-	
-	
-	
-	if (output < input){
-		IN_1_OFF;
-		IN_2_ON;
-	} else{
-		IN_2_OFF;
-		IN_1_ON;
-	}
-	
-	// Set output value
-	//set_duty(set_output);
-}
 
-int16_t compute_pi(uint16_t input){
+// PI Controller Setup 
+void pi_setup(){
 	k_p = K_P;
 	k_i = K_I;
+}
+
+// PI Controller Function
+void pi_controller(){
+	//led_toggle();
+	set_point_angle = 3000;
+	input = adc_read(); // Reads current input
 	
-	// 1 ms interrupt
+	set_output = compute_pi(input); // Calculates PI
 	
-	error = setPoint - input; // Proportional
+	// Anti-wind-up for integrator
+	if(set_output > 5000){
+		set_output = turn_range;
+	}
 	
-	integrator = integrator + (1/2) * k_i * SAMPLING_TIME * (error + prevError); // Integrator
+	/*
+	// Disabled for Proteus
+	// Anti-wind-up for integrator
+	if(set_output > turn_range){
+		set_output = turn_range;
+	}
+	else if (set_output < turn_range * (-1)){
+		set_output = turn_range * (-1);
+	}*/
+
+	// Sets the duty cycle on IN_1 or IN_2
+	if(set_output > 0){ // Turning Right (positive error)
+		set_duty_cycle_IN2(set_output);
+	}
+	else{				// Turning Left (negative error)
+		set_duty_cycle_IN1(set_output * (-1));
+	}
+}
+
+// PI Controller Function: Calculates Error
+int16_t compute_pi(uint16_t input){	
+	error = set_point_angle - input; // Proportional
+	
+	// Disabled for Proteus
+	//integrator += (0.5) * k_i * SAMPLING_TIME * (error + prev_error); // Integrator
 	
 	int16_t out = k_p * error + integrator; // PI Sum
 	
@@ -58,6 +60,6 @@ int16_t compute_pi(uint16_t input){
 		out = 0;
 	}
 	
-	prevError = error; // Saves error for integration
+	prev_error = error; // Saves error for integration
 	return out;
 }
