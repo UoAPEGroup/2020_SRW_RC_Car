@@ -37,13 +37,13 @@ void pi_controller(){
 	// Sets the duty cycle on IN_1 or IN_2
 	if (set_output > 0){ // Turning Right (positive error)
 		IN_1_OFF;
-		set_duty_cycle(set_output); 
 		IN_2_ON;
+		set_duty_cycle(set_output); 
 	} 
 	else{				// Turning Left (negative error)
 		IN_2_OFF;
-		set_duty_cycle(set_output * (-1)); 
 		IN_1_ON;
+		set_duty_cycle(set_output * (-1)); 
 	}
 }
 

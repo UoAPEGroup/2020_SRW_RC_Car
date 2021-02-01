@@ -35,13 +35,18 @@ int main(void)
 	timer2_init();
 	adc_init();	
 	
+	// Sets up PI Controller K values
 	pi_setup();
 	
-	calibrate_steering();
+	// Reads and sets up voltage reference values used for steering (Disabled for Proteus)
+	//calibrate_steering(); 
 	
-	sei();
+	//****(Enabled for Proteus)
+	min_val = MAX_LIMIT;
+	max_val = MIN_LIMIT;
     while (1) {
-	
+		//****(Enabled for Proteus)
+		calibrate_steering();
 	}
 }
 

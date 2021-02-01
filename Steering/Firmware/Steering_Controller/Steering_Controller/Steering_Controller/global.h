@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <stdint.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 
 // Global Variables
 #define F_CPU 8000000UL

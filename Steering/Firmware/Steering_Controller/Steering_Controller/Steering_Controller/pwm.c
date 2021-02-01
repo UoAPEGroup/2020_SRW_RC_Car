@@ -39,7 +39,9 @@ void set_duty_cycle(int16_t value){
 	// Checks which PWM output is ON
 	if(CHECK_IN_1){
 		OCR0A = t_on;// Sets Duty Cycle
+		OCR1A = 0;
 	} else if(CHECK_IN_2){
+		OCR0A = 0;
 		OCR1A = t_on;
 	}
 }
