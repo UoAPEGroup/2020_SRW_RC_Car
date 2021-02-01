@@ -142,6 +142,7 @@ void usart0_transmit_halt_msg()
 							"---------------------------\n\r"
 							"INITIATED HALT CMD	        \n\r\n\r"
 							"ALL SYSTEMS STOPPED		\n\r\n\r"
+							"CHECK SAFETY INFO OR		\n\r"
 							"ENTER R TO RESTART SYSTEM	\n\r"
 							"---------------------------\n\r\n\r");
 		
@@ -294,9 +295,11 @@ ISR(USART0_RX_vect) {
 				case RESET:
 					usart0_set_TX_reset_flag();
 					usart0_clr_TX_send_data_flag();
-					timer_control_init();
+					timer_control_update_next_duty(0);						//ramp duty cycle down to zero first
+					timer_control_init();									//reinitialise timers
 					break;
 				case HALT:
+					timer_control_update_next_duty(0);						//ramp duty cycle down to zero first
 					timer_control_halt();
 					usart0_clr_TX_all_flags();
 					usart0_transmit_halt_msg();
