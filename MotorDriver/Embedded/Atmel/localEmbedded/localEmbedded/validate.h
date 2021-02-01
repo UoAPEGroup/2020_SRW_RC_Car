@@ -12,6 +12,7 @@
 void checkADC();
 void checkInterrupt();
 void checkSafety();
-	
+void checkTransmission();
+void checkAvgCalc();	
 
 #endif /* VALIDATE_H_ */

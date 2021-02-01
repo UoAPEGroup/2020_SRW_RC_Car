@@ -15,6 +15,8 @@
 #include <string.h>
 #include <stdio.h>
 
+static volatile uint16_t count = 0;
+
 void checkADC() {//send converted values to UART
 	
 	TCCR1B &= ~(1 << CS10) | ~(1 << CS11) | ~(1 << CS12); //turn off adc sampling
@@ -55,4 +57,29 @@ void checkInterrupt() {
 
 void checkSafety() {
 	
+}
+
+void checkTransmission() {
+	char transmitValue[ARRAY_SIZE];
+	
+	sprintf(transmitValue, "%u", count);
+	send_data(transmitValue);
+	
+	count++;
+}
+
+void checkAvgCalc() {
+	char transmitValue[ARRAY_SIZE];
+	
+	uint32_t value = returnAvgV();
+	sprintf(transmitValue, "%lu", value);
+	send_data(transmitValue);
+	
+	value = returnAvgI();
+	sprintf(transmitValue, "%lu", value);
+	send_data(transmitValue);
+	
+	value = returnAvgP();
+	sprintf(transmitValue, "%lu", value);
+	send_data(transmitValue);
 }

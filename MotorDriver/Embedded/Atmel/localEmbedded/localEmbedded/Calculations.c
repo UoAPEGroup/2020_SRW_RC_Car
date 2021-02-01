@@ -13,7 +13,7 @@
 #define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
 
 #define ADC_ARRAY_SIZE 10
-#define BL_ARRAY_SIZE 100
+#define BL_ARRAY_SIZE 150
 #define VCC_MV 5000
 #define RESOLUTION 1024
 #define CURRENT_OPAMP_GAIN 1470
@@ -31,6 +31,7 @@ static volatile uint16_t inputI = 0; //most recent current reading into the H-br
 static volatile uint16_t motorI = 0; //most recent current flowing through the motor
 static volatile uint16_t averageV = 0; //average voltage across one second, to be sent out via bluetooth
 static volatile uint16_t averageI = 0; //average current across one second, to be sent out via bluetooth
+static volatile uint32_t averagePower = 0;//average power consumption over one seconds, to be sent out via bluetooth
 
 static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade
 static volatile bool forward = true; //determines whether the car is moving forward or backward
@@ -101,7 +102,7 @@ void convertVoltageAndCurrent() {
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
-	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle?
+	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
 	
 	if (inputI >= 3000) {
 		overCurrent = true;
@@ -151,21 +152,23 @@ void averageVoltageAndCurrent() {
 	//do a weight average where the weight is proportional to the number of values in the array
 	//Older values have the least weight attached to them
 	
-	uint32_t totalAverageV = 0;
+	uint32_t totalAverageV= 0;
 	uint32_t totalAverageI = 0;
 	uint8_t countUp = 0;
 	uint16_t sumOfWeights = 0;
 	
-	for (uint8_t i = BL_ARRAY_SIZE; i > 0; i--) {
-		totalAverageV = i * recentVoltageValues[countUp]; //weight is the number in array, inverted (i.e., most recent value has highest weight, which is the array size)
-		totalAverageI = i * recentCurrentValues[countUp];
+	for (uint8_t i = BL_ARRAY_SIZE - 1; i > 0; i--) {
+		totalAverageV += (uint32_t)i * recentVoltageValues[countUp]; //weight is the number in array, inverted (i.e., most recent value has highest weight, which is the array size)
+		totalAverageI += (uint32_t)i * recentCurrentValues[countUp];
 		
 		sumOfWeights += i; //denominator of the average, equivalent to the summation of all the weights added to the array
 		countUp++;
 	}
 	
-	averageV = totalAverageV/sumOfWeights;
-	averageI = totalAverageI/sumOfWeights;
+	averageV = totalAverageV/(uint32_t)sumOfWeights;
+	averageI = totalAverageI/(uint32_t)sumOfWeights;
+	
+	averagePower = ((uint32_t)averageI * averageV)/1000; //average power, in mWatts
 
 }
 
@@ -246,4 +249,8 @@ uint16_t returnAvgI() {
 
 bool returnDirection() {
 	return forward;
+}
+
+uint32_t returnAvgP() {
+	return averagePower;
 }

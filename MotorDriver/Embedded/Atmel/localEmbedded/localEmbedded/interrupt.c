@@ -12,7 +12,10 @@
 #include "global.h"
 
 static volatile uint16_t interruptCount = 0;
-volatile bool inTimer = false;
+
+static volatile uint8_t consecutiveChange = 0;
+static volatile bool establishedConnection = false;
+
 
 ISR(INT0_vect) {
 	
@@ -33,8 +36,9 @@ ISR(INT0_vect) {
 	
 	//read the speed pins and set the speed grade accordingly
 	
-	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage)) {
-	
+	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
+		
+		
 		if ((PINC & (1 << PINC4)) == (1 << PINC4)) {
 			
 			//if (11) then:
@@ -84,9 +88,19 @@ ISR(TIMER3_COMPA_vect) {
 	
 	if (returnInterruptCount() >= (REQUIRED_INTERRUPT_COUNT)) {
 		lostRemoteConnection = false;
+		
+		if (!establishedConnection) {
+			consecutiveChange++;
+			if (consecutiveChange >= 4) {
+				establishedConnection = true;
+			}
+		}
+		
 	}
 	else { //if contact is lost, stop the car
 		lostRemoteConnection = true; //set lost remote connection flag to true
+		establishedConnection = false;
+		consecutiveChange = 0;
 		setSpeedGrade(STOP);
 	}
 	
