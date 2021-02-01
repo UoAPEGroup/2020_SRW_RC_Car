@@ -25,7 +25,7 @@
 #define K_I 1
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0
-#define SAMPLING_TIME 0.1
+#define SAMPLING_TIME 0.001
 
 // Steering Motor Control
 #define IN_1_ON TCCR0A |= (1 << COM0A1)
@@ -74,6 +74,7 @@ int16_t full_r_turn;
 int16_t half_l_turn;
 int16_t full_l_turn;
 int16_t straight_turn;
+int16_t turn_range;
 
 // Duty cycle to set PWM
 volatile uint16_t t_on;

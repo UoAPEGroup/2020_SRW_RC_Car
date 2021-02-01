@@ -20,7 +20,7 @@
 ISR(USART0_RX_vect){
 	reset_timeout();
 	input_data = UDR0;
-	tx_debug(input_data);
+	tx_debug();
 	read_data();
 }
 
@@ -31,7 +31,7 @@ int main(void)
 	led_init();
 	uart_init();
 	pwm0_init();
-	pwm1_init();
+	pwm1_init(); 
 	timer2_init();
 	adc_init();	
 	
@@ -42,11 +42,14 @@ int main(void)
 	//calibrate_steering(); 
 	
 	//****(Enabled for Proteus)
-	min_val = MAX_LIMIT;
-	max_val = MIN_LIMIT;
+	//min_val = MAX_LIMIT;
+	//max_val = MIN_LIMIT;
+	//calibrate_steering();
+	
+	sei();
     while (1) {
 		//****(Enabled for Proteus)
-		calibrate_steering();
+
 	}
 }
 

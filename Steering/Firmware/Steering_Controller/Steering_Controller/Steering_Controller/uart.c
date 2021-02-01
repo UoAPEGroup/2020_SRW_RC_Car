@@ -17,8 +17,8 @@ void uart_init(){
 }
 
 // Echo function
-void tx_debug(char output){
-	UDR0 = output;
+void tx_debug(){
+	UDR0 = input_data;
 }
 
 // Check timeout count

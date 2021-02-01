@@ -26,15 +26,16 @@ void calibrate_steering(){
 	
 	set_reference_values();
 	
-	//Add straighten wheels function
+	//Straightens wheel
+	set_point_angle = straight_turn;
 }
 
 // Reads and sets maximum and minimum values
 void find_ref(){
-	set_duty_cycle(MAX_LIMIT);
-
+	//set_duty_cycle(MAX_LIMIT);
+	
 	while(calibration_flag == 0){
-		adc_val = adc_read();
+		adc_read();
 		if(adc_val < min_val){
 			min_val = adc_val;
 		}
@@ -60,4 +61,7 @@ void set_reference_values(){
 	
 	// Reference voltage for half right turn
 	half_r_turn = (full_r_turn - straight_turn)/2 + straight_turn;
+	
+	// Voltage range for turn
+	turn_range = full_r_turn - full_l_turn;
 }

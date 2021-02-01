@@ -10,8 +10,6 @@
 
 // PI Controller Setup 
 void pi_setup(){
-	IN_1_OFF;
-	IN_2_OFF;
 	k_p = K_P;
 	k_i = K_I;
 }
@@ -19,31 +17,32 @@ void pi_setup(){
 // PI Controller Function
 void pi_controller(){
 	//led_toggle();
-	
+	set_point_angle = 3000;
 	input = adc_read(); // Reads current input
 	
 	set_output = compute_pi(input); // Calculates PI
 	
 	// Anti-wind-up for integrator
-	if(set_output > MAX_LIMIT){
-		set_output = MAX_LIMIT;
+	if(set_output > 5000){
+		set_output = turn_range;
 	}
-	/*
-	else if (set_output < MIN_LIMIT){
-		set_output = MIN_LIMIT;
-	}
-	*/
 	
+	/*
+	// Disabled for Proteus
+	// Anti-wind-up for integrator
+	if(set_output > turn_range){
+		set_output = turn_range;
+	}
+	else if (set_output < turn_range * (-1)){
+		set_output = turn_range * (-1);
+	}*/
+
 	// Sets the duty cycle on IN_1 or IN_2
-	if (set_output > 0){ // Turning Right (positive error)
-		IN_1_OFF;
-		IN_2_ON;
-		set_duty_cycle(set_output); 
-	} 
+	if(set_output > 0){ // Turning Right (positive error)
+		set_duty_cycle_IN2(set_output);
+	}
 	else{				// Turning Left (negative error)
-		IN_2_OFF;
-		IN_1_ON;
-		set_duty_cycle(set_output * (-1)); 
+		set_duty_cycle_IN1(set_output * (-1));
 	}
 }
 

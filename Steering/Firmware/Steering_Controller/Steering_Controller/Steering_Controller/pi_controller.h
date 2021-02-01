@@ -25,7 +25,6 @@ volatile int16_t set_output;
 
 void pi_setup();
 void pi_controller();
-void printval();
 int16_t compute_pi(uint16_t input);
 
 #endif /* PI_CONTROLLER_H_ */

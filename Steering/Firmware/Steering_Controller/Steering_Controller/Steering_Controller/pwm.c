@@ -28,14 +28,13 @@ void pwm1_init(){
 	IN_2_OFF; //  Toggle OC0A on compare match
 }
 
-
+/*
 void set_duty_cycle(int16_t value){
 	t_on =	(((uint32_t)value*255)/VREF); // Calculates duty cycle
 	
 	if (t_on > 255){ // Prevent overflow
 		t_on = 255;
 	}
-	
 	// Checks which PWM output is ON
 	if(CHECK_IN_1){
 		OCR0A = t_on;// Sets Duty Cycle
@@ -44,4 +43,34 @@ void set_duty_cycle(int16_t value){
 		OCR0A = 0;
 		OCR1A = t_on;
 	}
+}*/
+
+void set_duty_cycle_IN1(uint16_t value){
+ 	IN_2_OFF;
+ 	
+ 	calculate_t_on(value);
+ 	
+ 	OCR0A = t_on; // Sets Duty Cycle
+ 	OCR1A = 0;
+ 	
+ 	IN_1_ON;
 }
+ 
+ void set_duty_cycle_IN2(uint16_t value){
+ 	IN_1_OFF;
+ 	
+ 	calculate_t_on(value);
+ 	
+	OCR1A = t_on; // Sets Duty Cycle
+ 	OCR0A = 0;
+ 	
+ 	IN_2_ON;
+ }
+ 
+ void calculate_t_on(uint16_t value){
+ 	t_on =	(((uint32_t)value*255)/VREF); // Calculates duty cycle
+ 	
+ 	if (t_on > 255){ // Prevent overflow
+ 		t_on = 255;
+ 	}
+ }
