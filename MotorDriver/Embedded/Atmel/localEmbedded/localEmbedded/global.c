@@ -12,3 +12,4 @@
 volatile bool lostRemoteConnection = false;
 volatile bool overCurrent = false;
 volatile bool overVoltage = false;
+volatile bool establishedConnection = false;

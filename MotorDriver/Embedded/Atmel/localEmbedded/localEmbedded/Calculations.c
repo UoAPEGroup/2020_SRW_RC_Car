@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include "global.h"
+#include "interrupt.h"
 
 #define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
 
@@ -180,21 +181,31 @@ void averageVoltageAndCurrent() {
 
 }
 
+uint16_t returnSpeedGrade() {
+	return speedGrade;
+}
+
 void ramp(){
+	
+	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
+		
 	if(requiredSpeedGrade > speedGrade){
 		if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
-			speedGrade += RAMPINCREMENT;
+			setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
 		}else{
-			speedGrade = requiredSpeedGrade;
+			setSpeedGrade(requiredSpeedGrade);
 		}
 	}else{
 		if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
-			speedGrade -= RAMPINCREMENT;
+			setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
 			}else{
-			speedGrade = requiredSpeedGrade;
+			setSpeedGrade(requiredSpeedGrade);
 		}
 	}
-}
+	
+	}
+
+	}
 
 void updateDutyCycle(){
 
@@ -249,10 +260,6 @@ uint8_t returnRightOnTime(){
 
 uint8_t returnFinalPeriod(){
 	return PERIOD_MOTOR;
-}
-
-uint16_t returnSpeedGrade() {
-	return speedGrade;
 }
 
 uint16_t returnInputI() {

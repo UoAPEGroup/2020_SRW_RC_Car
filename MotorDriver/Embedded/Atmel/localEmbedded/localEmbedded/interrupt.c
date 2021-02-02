@@ -12,9 +12,8 @@
 #include "global.h"
 
 static volatile uint16_t interruptCount = 0;
-
 static volatile uint8_t consecutiveChange = 0;
-static volatile bool establishedConnection = false;
+
 
 
 ISR(INT0_vect) {
@@ -36,7 +35,7 @@ ISR(INT0_vect) {
 	
 	//read the speed pins and set the speed grade accordingly
 	
-	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
+	//if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
 		
 		
 		if ((PINC & (1 << PINC4)) == (1 << PINC4)) {
@@ -70,7 +69,7 @@ ISR(INT0_vect) {
 		
 		}
 		
-	}
+	//}
 		
 }
 
@@ -95,7 +94,7 @@ ISR(TIMER3_COMPA_vect) {
 		
 		if (!establishedConnection) {
 			consecutiveChange++;
-			if (consecutiveChange >= 4) {
+			if (consecutiveChange >= 15) {
 				establishedConnection = true;
 			}
 		}

@@ -13,7 +13,6 @@ void interrupt_init();
 
 static volatile uint16_t interruptCount;
 static volatile uint8_t consecutiveChange;
-static volatile bool establishedConnection;
 
 uint16_t returnInterruptCount();
 void resetInterruptCount();

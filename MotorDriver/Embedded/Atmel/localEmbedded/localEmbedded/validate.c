@@ -80,6 +80,6 @@ void checkAvgCalc() {
 	send_data(transmitValue);
 	
 	value = returnAvgP();
-	sprintf(transmitValue, "%lu", value);
+	sprintf(transmitValue, "%lu%s", value, "P");
 	send_data(transmitValue);
 }
