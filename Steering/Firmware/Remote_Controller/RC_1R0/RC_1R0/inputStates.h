@@ -16,9 +16,9 @@
 #define HALF 5
 #define TURN 4
 #define DRT 3
-#define HIGH 2
-#define MEDIUM 1
-#define LOW 0
+#define SPEED_HIGH 2
+#define SPEED_MED 1
+#define SPEED_LOW 0
 
 
 /*******************************************************************/
@@ -29,7 +29,7 @@
 #define STR_MED_L 1
 #define STR_STRGHT 2
 #define STR_MED_R 3
-#define STR_HARD_R 4
+#define STR_FULL_R 4
 
 /*******************************************************************/
 
@@ -41,9 +41,15 @@
 
 /********************* ACCELERATION STATES *************************/
 
-#define ACCEL_NONE
-#define ACCEL_LOW
-#define ACCEL_MEDIUM
-#define ACCEL_HIGH
+#define ACCEL_NONE 0
+#define ACCEL_LOW 1
+#define ACCEL_MEDIUM 2
+#define ACCEL_HIGH 3
+
+
+/*********************** DIRECTION STATES **************************/
+
+#define FORWARD 0
+#define REVERSE 1
 
 #endif /* INPUTSTATES_H_ */
