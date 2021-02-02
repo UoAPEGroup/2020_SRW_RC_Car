@@ -6,7 +6,10 @@
  */
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
+#include "adc.h"
+#include "timer0.h"
 #include "global.h"
 #include "uart.h"
 
@@ -14,7 +17,10 @@
 
 int main(void)
 {
+	adc_init();
+	
     sei();
+	
 	
     while (1) 
     {
