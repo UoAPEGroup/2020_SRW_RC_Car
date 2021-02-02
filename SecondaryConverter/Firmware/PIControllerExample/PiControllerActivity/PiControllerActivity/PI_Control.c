@@ -25,10 +25,10 @@ void calculateError(uint16_t measuredVolt) {
 	uint32_t elapsedTime = currentTime - previousTime;
 
 	
-	int32_t error = setPoint - measuredVolt;
-	intError += error * elapsedTime;
+	int32_t propError = setPoint - measuredVolt;
+	intError += propError * elapsedTime;
 	
-	output = kp * error + ki * intError;
+	output = kp * propError + ki * intError;
 	previousTime = currentTime;
 	errorHasBeenCalc = true;
 }

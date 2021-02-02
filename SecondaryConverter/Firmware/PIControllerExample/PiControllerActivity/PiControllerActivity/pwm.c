@@ -22,6 +22,6 @@ void pwmInit(){
 }
 
 
-void setPWM(uint16_t error) {
-	OCR0A = error/setPoint * 255;
+void setPWM(uint16_t piError) {
+	OCR0A = piError/setPoint * 255;
 }
