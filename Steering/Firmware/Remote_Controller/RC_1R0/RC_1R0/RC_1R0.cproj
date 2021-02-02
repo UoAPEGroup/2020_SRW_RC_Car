@@ -132,6 +132,12 @@
     <Compile Include="instruction_macros.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="interrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
