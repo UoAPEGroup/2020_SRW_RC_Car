@@ -8,16 +8,17 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "adc.h"
+#include "PI_Control.h"
 
 ISR(ADC_vect){
 	uint16_t measuredVolt = ADC;
 	measuredVolt = (uint32_t)(measuredVolt) * 5/1024;
-	calculatePiVals(measuredVolt);
+	calculateError(measuredVolt);
 }
 
 void adcInit(){
-	DDRC &= ~(1<<PC0);
+	DDRC &= ~(1<<PORTC0);
 	ADMUX = 0b01000000;
-	ADCSRA = 0b11111000;
+	ADCSRA = 0b10111000;
 	ADCSRB = 0;
 }

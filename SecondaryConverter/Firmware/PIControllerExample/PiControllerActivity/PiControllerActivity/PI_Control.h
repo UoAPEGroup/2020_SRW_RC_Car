@@ -5,13 +5,15 @@
  *  Author: Manoj Kumaraguru
  */ 
 
+#include <stdbool.h>
 
 #ifndef PI_CONTROL_H_
 #define PI_CONTROL_H_
 
-void calculatePiVals(uint16_t measuredVolt);
+void calculateError(uint16_t measuredVolt);
 bool returnErrorCalcFlag();
-bool setErrorCalcFlag();
+void setErrorCalcFlag();
+int32_t returnOutput();
 
 
 

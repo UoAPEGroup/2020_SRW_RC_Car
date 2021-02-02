@@ -18,10 +18,10 @@
 
 // Triggers when data is received
 ISR(USART0_RX_vect){
-	reset_timeout();
-	input_data = UDR0;
-	tx_debug();
-	read_data();
+	reset_timeout(); // Resets timeout counter
+	input_data = UDR0; // Stores received data in variable
+	tx_debug(); // Echoes back input data
+	read_data(); // Reads data
 }
 
 int main(void)
@@ -44,7 +44,6 @@ int main(void)
 	//****(Enabled for Proteus)
 	//min_val = MAX_LIMIT;
 	//max_val = MIN_LIMIT;
-	//calibrate_steering();
 	
 	sei();
     while (1) {

@@ -21,7 +21,7 @@
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 1.5
+#define K_P 2
 #define K_I 1
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0
