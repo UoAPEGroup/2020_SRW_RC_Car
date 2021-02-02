@@ -43,12 +43,14 @@ ISR(INT0_vect) {
 			
 			//if (11) then:
 			if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
-				setSpeedGrade(STOP);
+				setRequiredSpeedGrade(STOP);
+				//setSpeedGrade(STOP);
 			}
 		
 			//if (10) then:
 			else {
-				setSpeedGrade(MIN_VOLTAGE);
+				setRequiredSpeedGrade(MIN_VOLTAGE);
+				//setSpeedGrade(MIN_VOLTAGE);
 			}	
 		}
 	
@@ -56,12 +58,14 @@ ISR(INT0_vect) {
 			
 			//if (01) then:
 			if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
-				setSpeedGrade(MID_VOLTAGE);
+				setRequiredSpeedGrade(MID_VOLTAGE);
+				//setSpeedGrade(MID_VOLTAGE);
 			}
 		
 			//if (00) then:
 			else {
-				setSpeedGrade(MAX_VOLTAGE);
+				setRequiredSpeedGrade(MAX_VOLTAGE);
+				//setSpeedGrade(MAX_VOLTAGE);
 			}
 		
 		}
