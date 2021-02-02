@@ -11,9 +11,9 @@
 
 #include "global.h"
 
-#define UBRR0_VAL F_CPU/(BAUD_RATE)*16 - 1								// UBRR0 value required to set Baud Rate of UART
 
-void usart_init();
+
+void usart_init(uint32_t baud_val);
 void usart_transmit(char byte);
 
 

@@ -6,10 +6,12 @@
  */ 
 
 // Initialise USART for transmission and transmission interrupts.
-void usart_init() {
+
+
+void usart_init(uint32_t baud_val) {
 	cli();														// Disable global interrupts for UART init.
 	
-	UBRR0 = UBRR0_VAL;											// Set UART Baud Rate
+	UBRR0 = F_CPU/(baud_val)*16 - 1;								// Set UART Baud Rate
 	
 	UCSR0B |= (1 << TXEN0);										// Enable UART transmission
 	//UCSR0B |= (1 << RXEN0);									// Enable UART receiver
@@ -24,3 +26,5 @@ void usart_transmit(char byte) {
 	}
 	UDR0 = byte;
 }
+
+//#define UBRR0_VAL F_CPU/(BAUD_RATE)*16 - 1								// UBRR0 value required to set Baud Rate of UART
