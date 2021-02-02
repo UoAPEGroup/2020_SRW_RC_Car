@@ -17,7 +17,7 @@ ISR(ADC_vect){
 }
 
 void adcInit(){
-	DDRC &= ~(1<<PC0);
+	DDRC &= ~(1<<PORTC0);
 	ADMUX = 0b01000000;
 	ADCSRA = 0b11111000;
 	ADCSRB = 0;
