@@ -114,7 +114,7 @@ ISR(ADC_vect) {
 }
 
 void adc_init() {
-	ADMUX |= (1<<REFS0);													//Reference voltage selected to be AVCC
+	ADMUX |= (1<<REFS0);													//Reference voltage selected to be AVCC 
 	ADCSRA |= (1<<ADEN);													//ADC enabled
 	ADC_CH_VSENS;															//set start channel to vsens
 	ADCSRA |= (1<<ADATE);													//ADC auto trigger enabled
