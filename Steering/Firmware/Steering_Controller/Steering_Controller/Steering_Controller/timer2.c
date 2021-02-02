@@ -9,7 +9,7 @@
 
 // 1ms Interrupt
 ISR(TIMER2_COMPA_vect){
-	check_timeout();
+	//check_timeout();
 	pi_controller();
 }
 

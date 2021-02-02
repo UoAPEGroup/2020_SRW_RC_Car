@@ -43,7 +43,8 @@ void set_duty_cycle(int16_t value){
 		OCR0A = 0;
 		OCR1A = t_on;
 	}
-}*/
+}
+*/
 
 void set_duty_cycle_IN1(uint16_t value){
  	IN_2_OFF;

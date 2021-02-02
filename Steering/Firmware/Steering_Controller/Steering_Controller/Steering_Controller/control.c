@@ -7,6 +7,10 @@
 
 #include "control.h"
 
+#include <stdio.h>
+#include <string.h>
+char input_buffer[20];
+
 void pin_init(){
 	DDRC |= (1 << PORTC5); // State Interrupt
 	DDRC |= (1 << PORTC2)|(1 << PORTC3); // SPD_0 and SPD_1
@@ -35,7 +39,10 @@ void set_direction(){
 
 // Reads data and sets Direction
 void set_speed(){
-	if (MED_H){
+	if (LOW_H){
+		set_low_speed()
+	}
+	else if (MED_H){
 		set_med_speed();
 	}
 	else if (HIGH_H){
@@ -54,12 +61,19 @@ void set_turn_angle(){
 			set_point_angle = half_r_turn;
 		} 
 		else if (FULL_TURN_H){
-			set_point_angle = full_r_turn;
+			/*set_point_angle = full_r_turn;*/
+			set_point_angle = 3600;//
+			led_toggle();//
 		}
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
-			set_point_angle = half_l_turn;
+			/*set_point_angle = half_l_turn;*/
+			
+			set_point_angle = 1400; //
+			led_toggle();// 
+			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
+			usart0_transmit_string(input_buffer); //
 		}
 		else if (FULL_TURN_H){
 			set_point_angle = full_l_turn;

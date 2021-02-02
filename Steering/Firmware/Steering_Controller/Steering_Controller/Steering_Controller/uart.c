@@ -6,6 +6,7 @@
  */ 
 
 #include "uart.h"
+#include "string.h"
 
 // UART Initialization
 void uart_init(){
@@ -41,4 +42,26 @@ void stall_control(){
 	set_no_speed();
 	set_point_angle = straight_turn;
 	STATE_INT_TOGGLE;
+}
+
+/* 
+	For debugging
+*/
+
+//transmit one byte of data
+void usart0_transmit_byte(uint8_t byte)
+{
+	while ((UCSR0A & (1 << UDRE0)) == 0) {
+		;
+	}
+	
+	UDR0 = byte;
+}
+
+//transmit string
+void usart0_transmit_string(char *string)
+{
+	for (uint8_t i = 0; i < strlen(string); i++) {
+		usart0_transmit_byte(string[i]);
+	}
 }
