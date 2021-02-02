@@ -72,11 +72,11 @@ void checkAvgCalc() {
 	char transmitValue[ARRAY_SIZE];
 	
 	uint32_t value = returnAvgV();
-	sprintf(transmitValue, "%lu", value);
+	sprintf(transmitValue, "%lu%s", value, "V");
 	send_data(transmitValue);
 	
 	value = returnAvgI();
-	sprintf(transmitValue, "%lu", value);
+	sprintf(transmitValue, "%lu%s", value, "A");
 	send_data(transmitValue);
 	
 	value = returnAvgP();
