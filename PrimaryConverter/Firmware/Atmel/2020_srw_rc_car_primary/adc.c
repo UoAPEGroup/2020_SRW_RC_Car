@@ -57,12 +57,12 @@ ISR(ADC_vect) {
 		ADC_CH_CLR;
 		ADC_CH_ISENS;
 		voltage_counter++;
-	} else if (current_counter < SAMPLING_SIZE) { //current readings
+	} else if (current_counter < SAMPLING_SIZE) {							//current readings
 		TIMER1_COMPB_CLR;
 		adc_current[current_counter] = ADC;
-		if (adc_current[current_counter] >= rated_C) { //check for rated value
+		if (adc_current[current_counter] >= rated_C) {						//check for rated value
 			set_overC_flag();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
+			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
 		current_counter++;
 	} else if (current_counter == SAMPLING_SIZE) {
@@ -70,12 +70,12 @@ ISR(ADC_vect) {
 		ADC_CH_CLR;
 		ADC_CH_TEMP1;
 		current_counter++;
-	} else if (temp1_counter < SAMPLING_SIZE) { //temp1 readings
+	} else if (temp1_counter < SAMPLING_SIZE) {								//temp1 readings
 		TIMER1_COMPB_CLR;
 		adc_temp1[temp1_counter] = ADC;
-		if (adc_temp1[temp1_counter] >= rated_T1) { //check for rated value
+		if (adc_temp1[temp1_counter] >= rated_T1) {							//check for rated value
 			set_overT1_flag();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
+			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
 		temp1_counter++;
 	} else if (temp1_counter == SAMPLING_SIZE) {
@@ -83,12 +83,12 @@ ISR(ADC_vect) {
 		ADC_CH_CLR;
 		ADC_CH_TEMP2;
 		temp1_counter++;
-	} else if (temp2_counter < SAMPLING_SIZE) { //temp2 readings
+	} else if (temp2_counter < SAMPLING_SIZE) {								//temp2 readings
 		TIMER1_COMPB_CLR;
 		adc_temp2[temp2_counter] = ADC;
-		if (adc_temp2[temp2_counter] >= rated_T2) { //check for rated value
+		if (adc_temp2[temp2_counter] >= rated_T2) {							//check for rated value
 			set_overT2_flag();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
+			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
 		temp2_counter++;
 	} else if (temp2_counter == SAMPLING_SIZE) {
@@ -96,12 +96,12 @@ ISR(ADC_vect) {
 		ADC_CH_CLR;
 		ADC_CH_TEMP3;
 		temp2_counter++;
-	} else if (temp3_counter < SAMPLING_SIZE) { //temp3 readings
+	} else if (temp3_counter < SAMPLING_SIZE) {								//temp3 readings
 		TIMER1_COMPB_CLR;
 		adc_temp3[temp3_counter] = ADC;
-		if (adc_temp3[temp3_counter] >= rated_T3) { //check for rated value
+		if (adc_temp3[temp3_counter] >= rated_T3) {							//check for rated value
 			set_overT3_flag();
-			halt_safety_function(); //halt all timers to stop PWM signal generation
+			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
 		temp3_counter++;
 	} else if (temp3_counter == SAMPLING_SIZE) {
@@ -114,7 +114,7 @@ ISR(ADC_vect) {
 }
 
 void adc_init() {
-	ADMUX |= (1<<REFS0);													//Reference voltage selected to be AVCC
+	ADMUX |= (1<<REFS0);													//Reference voltage selected to be AVCC 
 	ADCSRA |= (1<<ADEN);													//ADC enabled
 	ADC_CH_VSENS;															//set start channel to vsens
 	ADCSRA |= (1<<ADATE);													//ADC auto trigger enabled

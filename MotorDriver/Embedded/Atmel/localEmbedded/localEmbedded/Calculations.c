@@ -21,6 +21,9 @@
 #define CURRENT_SENSOR_OFFSET_MV 250
 #define VOLTAGE_VD_MV 3703
 
+#define RAMPTOLERANCE 3000
+#define RAMPINCREMENT 2000
+
 //declare variables
 static volatile uint8_t finalOnTime = 0; //on time of the wave through the motor(in number of counts)
 static volatile uint8_t leftOnTime = 0; //on time of the left mosfets(in number of counts)
@@ -33,7 +36,8 @@ static volatile uint16_t averageV = 0; //average voltage across one second, to b
 static volatile uint16_t averageI = 0; //average current across one second, to be sent out via bluetooth
 static volatile uint32_t averagePower = 0;//average power consumption over one seconds, to be sent out via bluetooth
 
-static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade
+static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade(in use)
+static volatile uint16_t requiredSpeedGrade = 0; //voltage required across motor, set with setSpeedGrade(new required)
 static volatile bool forward = true; //determines whether the car is moving forward or backward
 
 //store adc readings of voltage and current (taken every ms)
@@ -57,6 +61,10 @@ static volatile uint8_t recentValuesCount = 0;
 
 void setSpeedGrade(uint16_t speed){
 	speedGrade = speed;
+}
+
+void setRequiredSpeedGrade(uint16_t newSpeed){
+	requiredSpeedGrade = newSpeed;
 }
 
 void addCurrent(uint16_t adcCurrentReading) {
@@ -170,6 +178,22 @@ void averageVoltageAndCurrent() {
 	
 	averagePower = ((uint32_t)averageI * averageV)/1000; //average power, in mWatts
 
+}
+
+void ramp(){
+	if(requiredSpeedGrade > speedGrade){
+		if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
+			speedGrade += RAMPINCREMENT;
+		}else{
+			speedGrade = requiredSpeedGrade;
+		}
+	}else{
+		if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
+			speedGrade -= RAMPINCREMENT;
+			}else{
+			speedGrade = requiredSpeedGrade;
+		}
+	}
 }
 
 void updateDutyCycle(){

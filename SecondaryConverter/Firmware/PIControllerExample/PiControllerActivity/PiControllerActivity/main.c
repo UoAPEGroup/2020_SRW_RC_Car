@@ -8,7 +8,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdbool.h>
-#include "main.h"
 #include "adc.h"
 #include "timer.h"
 #include "pwm.h"
@@ -24,7 +23,7 @@ int main(void)
     while (1) 
     {
 		if(returnErrorCalcFlag()) {
-			setPWM(output);
+			setPWM(returnOutput());
 			setErrorCalcFlag();
 		}
     }

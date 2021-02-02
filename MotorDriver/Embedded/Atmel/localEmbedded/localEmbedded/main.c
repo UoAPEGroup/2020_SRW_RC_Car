@@ -74,6 +74,7 @@ int main(void)
 			GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC));  //stop all the timers
 
  			convertVoltageAndCurrent();	//calculate input/output voltage, and set flags for overcurrent/overvoltage	
+			ramp();
 			updateDutyCycle();
 			
 			//re-initialize timers
