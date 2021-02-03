@@ -39,6 +39,7 @@ static volatile uint32_t averagePower = 0;//average power consumption over one s
 
 static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade(in use)
 static volatile uint16_t requiredSpeedGrade = 0; //voltage required across motor, set with setSpeedGrade(new required)
+static volatile bool requiredForward = true; //determines whether the car is moving forward or backward
 static volatile bool forward = true; //determines whether the car is moving forward or backward
 
 //store adc readings of voltage and current (taken every ms)
@@ -66,6 +67,14 @@ void setSpeedGrade(uint16_t speed){
 
 void setRequiredSpeedGrade(uint16_t newSpeed){
 	requiredSpeedGrade = newSpeed;
+}
+
+void setDirection(bool setForward){
+	forward = setForward;
+}
+
+void setRequiredDirection(bool setRequiredForward){
+	requiredForward = setRequiredForward;
 }
 
 void addCurrent(uint16_t adcCurrentReading) {
@@ -186,25 +195,23 @@ uint16_t returnSpeedGrade() {
 }
 
 void ramp(){
-	
 	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
 		
-	if(requiredSpeedGrade > speedGrade){
-		if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
-			setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
-		}else{
-			setSpeedGrade(requiredSpeedGrade);
-		}
-	}else{
-		if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
-			setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
+				
+		if(requiredSpeedGrade > speedGrade){
+			if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
+				setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
 			}else{
-			setSpeedGrade(requiredSpeedGrade);
+				setSpeedGrade(requiredSpeedGrade);
+			}
+		}else{
+			if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
+				setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
+				}else{
+				setSpeedGrade(requiredSpeedGrade);
+				}
+			}
 		}
-	}
-	
-	}
-
 	}
 
 void updateDutyCycle(){
@@ -245,10 +252,6 @@ void setInputV(uint16_t vinD) {
 	inputV = vinD;
 }
 
-
-void setDirection(bool setForward){
-	forward = setForward;
-}
 
 uint8_t returnLeftOnTime(){
 	return leftOnTime;
