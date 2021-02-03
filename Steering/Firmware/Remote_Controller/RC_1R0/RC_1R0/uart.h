@@ -9,7 +9,12 @@
 #ifndef UART_H_
 #define UART_H_
 
+#include "global.h"
 
+
+
+void usart_init(uint32_t baud_val);
+void usart_transmit(char byte);
 
 
 

@@ -11,7 +11,7 @@
 
 #define F_CPU 8000000UL
 #define VREF 5
-#define BAUD_RATE 9600
+#define DEFAULT_BAUD_RATE 9600
 
 #include <avr/io.h>
 #include <stdint.h>
