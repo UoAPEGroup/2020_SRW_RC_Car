@@ -1,0 +1,61 @@
+Protel Design System Design Rule Check
+PCB File : \\files.auckland.ac.nz\myhome\Documents\GitHub\2020-srw-rc-car\MotorDriver\Embedded\Encoder\Encoder_PCB\HallEffectSensor.PcbDoc
+Date     : 4/02/2021
+Time     : 12:26:02 pm
+
+Processing Rule : Clearance Constraint (Gap=0.4mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.15mm) (Max=1mm) (Preferred=0.4mm) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.2mm) (Max=6.2mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)
+   Violation between Silk To Solder Mask Clearance Constraint: (0.031mm < 0.254mm) Between Pad AH374-1(160.29mm,32.827mm) on Top Layer And Track (160.74mm,31.477mm)(160.74mm,32.277mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.031mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.156mm < 0.254mm) Between Pad AH374-1(160.29mm,32.827mm) on Top Layer And Track (160.99mm,33.427mm)(161.99mm,33.427mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.156mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.073mm < 0.254mm) Between Pad AH374-2(162.69mm,31.877mm) on Top Layer And Track (162.34mm,30.327mm)(162.34mm,31.277mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.073mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.073mm < 0.254mm) Between Pad AH374-2(162.69mm,31.877mm) on Top Layer And Track (162.34mm,32.477mm)(162.34mm,33.427mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.073mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.023mm < 0.254mm) Between Pad AH374-3(160.29mm,30.927mm) on Top Layer And Track (160.74mm,31.477mm)(160.74mm,32.277mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.023mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.156mm < 0.254mm) Between Pad AH374-3(160.29mm,30.927mm) on Top Layer And Track (160.99mm,30.327mm)(161.94mm,30.327mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.156mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.216mm < 0.254mm) Between Pad R1-1(157.734mm,32.702mm) on Top Layer And Track (157.134mm,31.802mm)(158.334mm,31.802mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.216mm]
+   Violation between Silk To Solder Mask Clearance Constraint: (0.2mm < 0.254mm) Between Pad R1-2(157.734mm,30.902mm) on Top Layer And Track (157.134mm,31.802mm)(158.334mm,31.802mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.2mm]
+Rule Violations :8
+
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+   Violation between Silk To Silk Clearance Constraint: (0.187mm < 0.254mm) Between Text "Earlene Starling" (164.082mm,34.311mm) on Top Overlay And Text "Raining Xing" (165.733mm,35.073mm) on Top Overlay Silk Text to Silk Clearance [0.187mm]
+   Violation between Silk To Silk Clearance Constraint: (0.212mm < 0.254mm) Between Text "Encoder" (166.901mm,35.964mm) on Top Overlay And Text "Summer Workshop" (162.075mm,36.926mm) on Top Overlay Silk Text to Silk Clearance [0.212mm]
+   Violation between Silk To Silk Clearance Constraint: (0.222mm < 0.254mm) Between Text "P1" (170.028mm,26.524mm) on Top Overlay And Track (154.432mm,26.416mm)(169.672mm,26.416mm) on Top Overlay Silk Text to Silk Clearance [0.222mm]
+   Violation between Silk To Silk Clearance Constraint: (0.206mm < 0.254mm) Between Text "P1" (170.028mm,26.524mm) on Top Overlay And Track (169.672mm,26.416mm)(169.672mm,28.956mm) on Top Overlay Silk Text to Silk Clearance [0.206mm]
+   Violation between Silk To Silk Clearance Constraint: (0.193mm < 0.254mm) Between Text "Summer Workshop" (162.075mm,36.926mm) on Top Overlay And Text "UoA ECSE 2020" (162.075mm,37.869mm) on Top Overlay Silk Text to Silk Clearance [0.193mm]
+Rule Violations :5
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+
+Violations Detected : 13
+Waived Violations : 0
+Time Elapsed        : 00:00:01

@@ -20,6 +20,9 @@ void adc_init() {
 	ADCSRB |= (1 << ADTS1) | (1 << ADTS0);							// Set Timer0 Compare Match A as event for ADC Auto trigger
 	
 	DIDR0 = 0xff;													// Disable digital input buffer (Must be written to logic 1)
+	
+	
+	ADMUX |= 6;														// Select channel 6 for steering ADC input
 }
 
 
