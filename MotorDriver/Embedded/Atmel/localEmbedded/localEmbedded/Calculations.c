@@ -11,7 +11,7 @@
 #include "global.h"
 #include "interrupt.h"
 
-#define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
+#define PERIOD_MOTOR 32 //half of the counts for the period 30kHz
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 150
@@ -69,6 +69,9 @@ void setRequiredSpeedGrade(uint16_t newSpeed){
 	requiredSpeedGrade = newSpeed;
 }
 
+uint16_t returnRequiredSpeedGrade() {
+	return requiredSpeedGrade;
+}
 void setDirection(bool setForward){
 	forward = setForward;
 }
@@ -120,9 +123,11 @@ void convertVoltageAndCurrent() {
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
+	motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
+	
 	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
 	
-	if (inputI >= 3000) {
+	if (motorI >= 3000) {
 		overCurrent = true;
 		setSpeedGrade(STOP);
 	}
@@ -216,7 +221,7 @@ void ramp(){
 				}
 			}
 		}else{
-			if (speedGrade = 0){
+			if (speedGrade == 0){
 				forward = requiredForward;
 				setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
 			}else{
