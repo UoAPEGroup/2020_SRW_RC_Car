@@ -123,9 +123,11 @@ void convertVoltageAndCurrent() {
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
+	motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
+	
 	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
 	
-	if (inputI >= 3000) {
+	if (motorI >= 3000) {
 		overCurrent = true;
 		setSpeedGrade(STOP);
 	}
