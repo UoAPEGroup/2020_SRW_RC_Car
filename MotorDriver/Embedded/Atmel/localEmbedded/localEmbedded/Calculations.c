@@ -194,25 +194,41 @@ uint16_t returnSpeedGrade() {
 	return speedGrade;
 }
 
+bool returnDirection() {
+	return forward;
+}
+
+
 void ramp(){
 	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
-		
-				
-		if(requiredSpeedGrade > speedGrade){
-			if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
-				setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
+		if(forward == requiredForward){	
+			if(requiredSpeedGrade > speedGrade){
+				if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
+					setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
+				}else{
+					setSpeedGrade(requiredSpeedGrade);
+				}
 			}else{
-				setSpeedGrade(requiredSpeedGrade);
+				if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
+					setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
+				}else{
+					setSpeedGrade(requiredSpeedGrade);
+				}
 			}
 		}else{
-			if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
-				setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
+			if (speedGrade = 0){
+				forward = requiredForward;
+				setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
+			}else{
+				if((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
+					setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
 				}else{
-				setSpeedGrade(requiredSpeedGrade);
+					setSpeedGrade(0);
 				}
 			}
 		}
 	}
+}
 
 void updateDutyCycle(){
 
@@ -281,9 +297,6 @@ uint16_t returnAvgI() {
 	return averageI;
 }
 
-bool returnDirection() {
-	return forward;
-}
 
 uint32_t returnAvgP() {
 	return averagePower;

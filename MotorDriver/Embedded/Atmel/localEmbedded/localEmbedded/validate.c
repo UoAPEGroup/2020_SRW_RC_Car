@@ -5,6 +5,7 @@
  *  Author: Earlene
  */ 
 #include "uart.h"
+#include "global.h"
 #include "Calculations.h"
 #include "interrupt.h"
 
@@ -82,4 +83,31 @@ void checkAvgCalc() {
 	value = returnAvgP();
 	sprintf(transmitValue, "%lu%s", value, "P");
 	send_data(transmitValue);
+	
+	bool direction = returnDirection();
+	sprintf(transmitValue, "%u%s", direction, "D");
+	send_data(transmitValue);
+	
+	value = returnRequiredSpeedGrade();
+	
+	switch(value) {
+		case STOP:
+			sprintf(transmitValue, "%u%s", 0, "G");
+			break;
+		
+		case MIN_VOLTAGE:
+			sprintf(transmitValue, "%u%s", 1, "G");
+			break;
+
+		case MID_VOLTAGE:
+			sprintf(transmitValue, "%u%s", 2, "G");
+			break;
+
+		case MAX_VOLTAGE:
+			sprintf(transmitValue, "%u%s", 3, "G");
+			break;
+	}
+	
+	send_data(transmitValue);
+
 }
