@@ -12,7 +12,7 @@
 #include <avr/interrupt.h>
 
 #define ARRAYSIZE 10
-#define F_CPU 16000000
+#define F_CPU 8000000
 
 // this function initializes the UART
 void uart_init(uint32_t baudRate) {

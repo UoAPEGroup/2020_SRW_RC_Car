@@ -9,8 +9,9 @@
 #include <stdbool.h>
 #include <math.h>
 #include "global.h"
+#include "interrupt.h"
 
-#define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
+#define PERIOD_MOTOR 32 //half of the counts for the period 30kHz
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 150
@@ -20,6 +21,9 @@
 #define CURRENT_SENSOR_GAIN_MV 400
 #define CURRENT_SENSOR_OFFSET_MV 250
 #define VOLTAGE_VD_MV 3703
+
+#define RAMPTOLERANCE 3000
+#define RAMPINCREMENT 2000
 
 //declare variables
 static volatile uint8_t finalOnTime = 0; //on time of the wave through the motor(in number of counts)
@@ -33,7 +37,9 @@ static volatile uint16_t averageV = 0; //average voltage across one second, to b
 static volatile uint16_t averageI = 0; //average current across one second, to be sent out via bluetooth
 static volatile uint32_t averagePower = 0;//average power consumption over one seconds, to be sent out via bluetooth
 
-static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade
+static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with setSpeedGrade(in use)
+static volatile uint16_t requiredSpeedGrade = 0; //voltage required across motor, set with setSpeedGrade(new required)
+static volatile bool requiredForward = true; //determines whether the car is moving forward or backward
 static volatile bool forward = true; //determines whether the car is moving forward or backward
 
 //store adc readings of voltage and current (taken every ms)
@@ -57,6 +63,21 @@ static volatile uint8_t recentValuesCount = 0;
 
 void setSpeedGrade(uint16_t speed){
 	speedGrade = speed;
+}
+
+void setRequiredSpeedGrade(uint16_t newSpeed){
+	requiredSpeedGrade = newSpeed;
+}
+
+uint16_t returnRequiredSpeedGrade() {
+	return requiredSpeedGrade;
+}
+void setDirection(bool setForward){
+	forward = setForward;
+}
+
+void setRequiredDirection(bool setRequiredForward){
+	requiredForward = setRequiredForward;
 }
 
 void addCurrent(uint16_t adcCurrentReading) {
@@ -102,9 +123,11 @@ void convertVoltageAndCurrent() {
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
+	motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
+	
 	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
 	
-	if (inputI >= 3000) {
+	if (motorI >= 3000) {
 		overCurrent = true;
 		setSpeedGrade(STOP);
 	}
@@ -172,6 +195,46 @@ void averageVoltageAndCurrent() {
 
 }
 
+uint16_t returnSpeedGrade() {
+	return speedGrade;
+}
+
+bool returnDirection() {
+	return forward;
+}
+
+
+void ramp(){
+	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
+		if(forward == requiredForward){	
+			if(requiredSpeedGrade > speedGrade){
+				if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
+					setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
+				}else{
+					setSpeedGrade(requiredSpeedGrade);
+				}
+			}else{
+				if ((speedGrade - requiredSpeedGrade) > RAMPTOLERANCE){
+					setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
+				}else{
+					setSpeedGrade(requiredSpeedGrade);
+				}
+			}
+		}else{
+			if (speedGrade == 0){
+				forward = requiredForward;
+				setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
+			}else{
+				if((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
+					setSpeedGrade(returnSpeedGrade() - RAMPINCREMENT);
+				}else{
+					setSpeedGrade(0);
+				}
+			}
+		}
+	}
+}
+
 void updateDutyCycle(){
 
 	
@@ -211,10 +274,6 @@ void setInputV(uint16_t vinD) {
 }
 
 
-void setDirection(bool setForward){
-	forward = setForward;
-}
-
 uint8_t returnLeftOnTime(){
 	return leftOnTime;
 }
@@ -225,10 +284,6 @@ uint8_t returnRightOnTime(){
 
 uint8_t returnFinalPeriod(){
 	return PERIOD_MOTOR;
-}
-
-uint16_t returnSpeedGrade() {
-	return speedGrade;
 }
 
 uint16_t returnInputI() {
@@ -247,9 +302,6 @@ uint16_t returnAvgI() {
 	return averageI;
 }
 
-bool returnDirection() {
-	return forward;
-}
 
 uint32_t returnAvgP() {
 	return averagePower;

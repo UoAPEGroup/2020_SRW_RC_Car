@@ -23,7 +23,9 @@ static volatile uint16_t averageV;
 static volatile uint16_t averageI;
 static volatile uint32_t averagePower;
 static volatile uint16_t speedGrade;
+static volatile uint16_t requiredSpeedGrade; 
 static volatile bool forward;
+static volatile bool requiredForward;
 
 static volatile uint16_t voltageValues;
 static volatile uint16_t currentValues;
@@ -45,11 +47,16 @@ uint16_t returnAvgV();
 uint16_t returnAvgI();
 uint32_t returnAvgP();
 bool returnDirection();
+uint16_t returnRequiredSpeedGrade();
 
+void ramp();
 void updateDutyCycle();
 void setInputV(uint16_t vinD);
 void setSpeedGrade(uint16_t speed);
+void setRequiredSpeedGrade(uint16_t newSpeed);
 void setDirection(bool forward);
+void setRequiredDirection(bool setRequiredForward);
+
 void addCurrent(uint16_t adcCurrentReading);
 void addVoltage(uint16_t adcVoltageReading);
 void convertVoltageAndCurrent();

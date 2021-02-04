@@ -12,9 +12,8 @@
 #include "global.h"
 
 static volatile uint16_t interruptCount = 0;
-
 static volatile uint8_t consecutiveChange = 0;
-static volatile bool establishedConnection = false;
+
 
 
 ISR(INT0_vect) {
@@ -28,27 +27,31 @@ ISR(INT0_vect) {
 	interruptCount++;
 
 	if ((PINC & (1 << PINC5)) == (1 << PINC5)) {
-		setDirection(true); //set direction as forward if pinc3 is high
+		setRequiredDirection(true);
+		//setDirection(true); //set direction as forward if pinc3 is high
 	}
 	else {
-		setDirection(false);
+		setRequiredDirection(false);
+		//setDirection(false);
 	}
 	
 	//read the speed pins and set the speed grade accordingly
 	
-	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
+	//if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
 		
 		
 		if ((PINC & (1 << PINC4)) == (1 << PINC4)) {
 			
 			//if (11) then:
 			if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
-				setSpeedGrade(STOP);
+				setRequiredSpeedGrade(STOP);
+				//setSpeedGrade(STOP);
 			}
 		
 			//if (10) then:
 			else {
-				setSpeedGrade(MIN_VOLTAGE);
+				setRequiredSpeedGrade(MIN_VOLTAGE);
+				//setSpeedGrade(MIN_VOLTAGE);
 			}	
 		}
 	
@@ -56,17 +59,19 @@ ISR(INT0_vect) {
 			
 			//if (01) then:
 			if ((PINC & (1 << PINC3)) == (1 << PINC3)) {
-				setSpeedGrade(MID_VOLTAGE);
+				setRequiredSpeedGrade(MID_VOLTAGE);
+				//setSpeedGrade(MID_VOLTAGE);
 			}
 		
 			//if (00) then:
 			else {
-				setSpeedGrade(MAX_VOLTAGE);
+				setRequiredSpeedGrade(MAX_VOLTAGE);
+				//setSpeedGrade(MAX_VOLTAGE);
 			}
 		
 		}
 		
-	}
+	//}
 		
 }
 
@@ -91,7 +96,7 @@ ISR(TIMER3_COMPA_vect) {
 		
 		if (!establishedConnection) {
 			consecutiveChange++;
-			if (consecutiveChange >= 4) {
+			if (consecutiveChange >= 15) {
 				establishedConnection = true;
 			}
 		}

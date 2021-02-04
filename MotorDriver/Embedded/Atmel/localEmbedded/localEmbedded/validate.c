@@ -5,10 +5,11 @@
  *  Author: Earlene
  */ 
 #include "uart.h"
+#include "global.h"
 #include "Calculations.h"
 #include "interrupt.h"
 
-#define F_CPU 16000000
+#define F_CPU 8000000
 #define ARRAY_SIZE 10
 #include <util/delay.h>
 #include <avr/io.h>
@@ -72,14 +73,41 @@ void checkAvgCalc() {
 	char transmitValue[ARRAY_SIZE];
 	
 	uint32_t value = returnAvgV();
-	sprintf(transmitValue, "%lu", value);
+	sprintf(transmitValue, "%lu%s", value, "V");
 	send_data(transmitValue);
 	
 	value = returnAvgI();
-	sprintf(transmitValue, "%lu", value);
+	sprintf(transmitValue, "%lu%s", value, "A");
 	send_data(transmitValue);
 	
 	value = returnAvgP();
-	sprintf(transmitValue, "%lu", value);
+	sprintf(transmitValue, "%lu%s", value, "P");
 	send_data(transmitValue);
+	
+	bool direction = returnDirection();
+	sprintf(transmitValue, "%u%s", direction, "D");
+	send_data(transmitValue);
+	
+	value = returnRequiredSpeedGrade();
+	
+	switch(value) {
+		case STOP:
+			sprintf(transmitValue, "%u%s", 0, "G");
+			break;
+		
+		case MIN_VOLTAGE:
+			sprintf(transmitValue, "%u%s", 1, "G");
+			break;
+
+		case MID_VOLTAGE:
+			sprintf(transmitValue, "%u%s", 2, "G");
+			break;
+
+		case MAX_VOLTAGE:
+			sprintf(transmitValue, "%u%s", 3, "G");
+			break;
+	}
+	
+	send_data(transmitValue);
+
 }
