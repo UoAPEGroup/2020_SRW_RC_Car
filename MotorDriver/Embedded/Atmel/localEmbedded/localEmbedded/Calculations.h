@@ -47,6 +47,7 @@ uint16_t returnAvgV();
 uint16_t returnAvgI();
 uint32_t returnAvgP();
 bool returnDirection();
+uint16_t returnRequiredSpeedGrade();
 
 void ramp();
 void updateDutyCycle();

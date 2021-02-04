@@ -9,7 +9,7 @@
 #include "Calculations.h"
 #include "interrupt.h"
 
-#define F_CPU 16000000
+#define F_CPU 8000000
 #define ARRAY_SIZE 10
 #include <util/delay.h>
 #include <avr/io.h>

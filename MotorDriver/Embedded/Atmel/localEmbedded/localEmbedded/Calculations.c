@@ -11,7 +11,7 @@
 #include "global.h"
 #include "interrupt.h"
 
-#define PERIOD_MOTOR 132 //half of the counts for the period 30kHz
+#define PERIOD_MOTOR 32 //half of the counts for the period 30kHz
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 150
@@ -69,6 +69,9 @@ void setRequiredSpeedGrade(uint16_t newSpeed){
 	requiredSpeedGrade = newSpeed;
 }
 
+uint16_t returnRequiredSpeedGrade() {
+	return requiredSpeedGrade;
+}
 void setDirection(bool setForward){
 	forward = setForward;
 }
@@ -216,7 +219,7 @@ void ramp(){
 				}
 			}
 		}else{
-			if (speedGrade = 0){
+			if (speedGrade == 0){
 				forward = requiredForward;
 				setSpeedGrade(returnSpeedGrade() + RAMPINCREMENT);
 			}else{
