@@ -10,7 +10,7 @@
 // Finds reference voltage values for each angle
 // Works on two assumptions:
 // - Low voltage = Left, High voltage = Right
-// - Input pins to motor are correctly connected
+// - Input pins to motor are correctly connected (E.G so IN1 High = Motor goes left)
 void calibrate_steering(){
 	//  Sets maximum and minimum voltage ranges (Disabled for Proteus)
 	// 	min_val = MAX_LIMIT;
@@ -49,6 +49,7 @@ void find_ref(){
 	calibration_flag = 0; // Clears flag
 }
 
+// Sets up the reference values that are used as set points for the PI Controller
 void set_reference_values(){
 	full_l_turn = min_val;
 	full_r_turn = max_val;

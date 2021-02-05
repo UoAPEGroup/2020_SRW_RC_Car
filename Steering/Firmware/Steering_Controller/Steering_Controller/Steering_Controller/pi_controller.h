@@ -27,7 +27,4 @@ void pi_setup();
 void pi_controller();
 int16_t compute_pi(uint16_t input);
 
-//
-void printval();
-
 #endif /* PI_CONTROLLER_H_ */

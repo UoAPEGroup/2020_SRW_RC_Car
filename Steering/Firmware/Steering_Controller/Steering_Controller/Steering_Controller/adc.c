@@ -7,6 +7,13 @@
 
 #include "adc.h"
 
+#include "uart.h"
+
+#include <stdio.h>//
+#include <string.h>// For debugging
+char input_buffer[20];//
+
+// ADC Setup
 void adc_init(){
 	DDRC &=~(1 << PINC1); // Input
 	ADMUX = 0x00;
@@ -16,7 +23,7 @@ void adc_init(){
 	ADCSRA |= (1 << ADPS2)|(1 << ADPS1); // 125kHz Sampling time 
 }
 
-
+// Reads the ADC 
 uint16_t adc_read(){
 	ADCSRA |= (1 << ADSC); // ADC Start
 	while ((ADCSRA & (1 << ADIF)) == 0){ 

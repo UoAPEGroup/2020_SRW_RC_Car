@@ -21,7 +21,7 @@
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 2
+#define K_P 1.2
 #define K_I 1
 #define MAX_LIMIT 5000
 #define MIN_LIMIT 0
@@ -54,8 +54,8 @@
 // STATE INTERRUPT TRIGGER
 #define STATE_INT_TOGGLE PORTC ^= (1 << PC5)
 
-#define DRT_FWD PORTC &=~ (1 << PC4)
-#define DRT_BCK PORTC |= (1 << PC4)
+#define DRT_FWD PORTC |= (1 << PC4)
+#define DRT_BCK PORTC &=~ (1 << PC4)
 
 #define SPD_0_H PORTC |= (1 << PC2)
 #define SPD_0_L PORTC &=~ (1 << PC2)
@@ -63,10 +63,14 @@
 #define SPD_1_H PORTC |= (1 << PC3)
 #define SPD_1_L PORTC &=~ (1 << PC3)
 
-volatile char input_data; // Stores input data 
+// Stores input data 
+volatile char input_data; 
 
 // Set point variable for PI Controller
 volatile int16_t set_point_angle;
+
+// ADC Value
+volatile uint16_t adc_val;
 
 // Reference Angle Voltage values
 int16_t half_r_turn;

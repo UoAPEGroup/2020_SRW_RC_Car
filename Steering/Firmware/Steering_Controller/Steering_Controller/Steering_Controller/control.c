@@ -40,7 +40,7 @@ void set_direction(){
 // Reads data and sets Direction
 void set_speed(){
 	if (LOW_H){
-		set_low_speed()
+		set_low_speed();
 	}
 	else if (MED_H){
 		set_med_speed();

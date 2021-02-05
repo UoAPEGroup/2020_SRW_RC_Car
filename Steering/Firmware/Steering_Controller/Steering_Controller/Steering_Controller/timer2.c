@@ -9,10 +9,14 @@
 
 // 1ms Interrupt
 ISR(TIMER2_COMPA_vect){
-	//check_timeout();
-	pi_controller();
+	//check_timeout(); // Disabled for Testing
+	
+	// PI controller function to recalibrate steering motor 
+	pi_controller(); 
+	//adc_read();
 }
 
+// Sets up the 1ms timer used for triggering the PI Controller
 void timer2_init(){
 	TCCR2A = 0x00;
 	TCCR2A |= (1 << WGM21); // CTC

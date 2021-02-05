@@ -15,13 +15,16 @@ char input_buffer[20];
 char error_buffer[20];
 
 void setup(){
-	setPoint = 1500; // Desired output
+	setPoint = 2000; // Desired output
 }
 
 void pi_controller(){
 	input = adc_read(); // Reads current input
 	
 	output = compute_pi(input); // Calculates PI 
+	
+	sprintf(input_buffer, "Input:	%i \n\r", input);
+	usart0_transmit_string(input_buffer);
 	
 	// Anti-wind-up
 	if(output > MAX_LIMIT){

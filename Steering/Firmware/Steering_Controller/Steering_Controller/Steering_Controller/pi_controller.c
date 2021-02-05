@@ -10,7 +10,7 @@
 #include "uart.h"
 
 #include <stdio.h>//
-#include <string.h>//
+#include <string.h>// For debugging
 char input_buffer[20];//
 
 // PI Controller Setup 
@@ -22,7 +22,7 @@ void pi_setup(){
 // PI Controller Function
 void pi_controller(){
 	//led_toggle();
-	//set_point_angle = 2500;
+	set_point_angle = 3600;
 	
 	input = adc_read(); // Reads current input
 	
@@ -32,9 +32,10 @@ void pi_controller(){
 	if(set_output > 5000){
 		set_output = 5000;
 	}
-	
+ 	//sprintf(input_buffer, "Input:	%i \n\r", input);
+ 	//usart0_transmit_string(input_buffer);
 	/*
-	// Disabled for Proteus
+	// Disabled for Proteus (Uses calibration to find the range)
 	// Anti-wind-up for integrator
 	if(set_output > turn_range){
 		set_output = turn_range;
@@ -42,18 +43,9 @@ void pi_controller(){
 	else if (set_output < turn_range * (-1)){
 		set_output = turn_range * (-1);
 	}*/
-	/*
-	if (set_output > 0){ // Turning Right (positive error)
-		IN_1_OFF;
-		IN_2_ON;
-		set_duty_cycle(set_output);
-	}
-	else{				// Turning Left (negative error)
-		IN_2_OFF;
-		IN_1_ON;
-		set_duty_cycle(set_output * (-1));
-	}
-	*/
+	
+	//sprintf(input_buffer, "Input:	%i \n\r", input);
+	//usart0_transmit_string(input_buffer);
 	
 	// Sets the duty cycle on IN_1 or IN_2
 	if(set_output > 0){ // Turning Right (positive error)
@@ -62,6 +54,22 @@ void pi_controller(){
 	else{				// Turning Left (negative error)
 		set_duty_cycle_IN1(set_output * (-1));
 	}
+	/*
+	if (set_output > 0){ // Turning Right (positive error)
+		IN_1_OFF;
+		IN_2_ON;
+		sprintf(input_buffer, "Input:	%i \n\r", (set_output));
+		usart0_transmit_string(input_buffer);
+		set_duty_cycle(set_output);
+	}
+	else{				// Turning Left (negative error)
+		IN_2_OFF;
+		IN_1_ON;
+		sprintf(input_buffer, "Input:	%i \n\r", (set_output));
+		usart0_transmit_string(input_buffer);
+		set_duty_cycle(set_output * (-1));
+
+	}*/
 }
 
 // PI Controller Function: Calculates Error

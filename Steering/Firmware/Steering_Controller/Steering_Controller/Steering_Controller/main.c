@@ -18,10 +18,10 @@
 
 // Triggers when data is received
 ISR(USART0_RX_vect){
-	reset_timeout(); // Resets timeout counter
-	input_data = UDR0; // Stores received data in variable
-	tx_debug(); // Echoes back input data
-	read_data(); // Reads data
+	//reset_timeout(); // Resets timeout counter
+	//input_data = UDR0; // Stores received data in variable
+	//tx_debug(); // Echoes back input data (Enabled for testing)
+	//read_data(); // Reads data
 }
 
 int main(void)
