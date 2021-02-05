@@ -32,7 +32,7 @@ static volatile uint8_t rightOnTime = 0; //on time of the right mosfets(in numbe
 
 static volatile uint16_t inputV = 0; //most recent input voltage to the H-bridge
 static volatile uint16_t inputI = 0; //most recent current reading into the H-bridge
-static volatile uint16_t motorI = 0; //most recent current flowing through the motor
+static volatile uint32_t motorI = 0; //most recent current flowing through the motor
 static volatile uint16_t averageV = 0; //average voltage across one second, to be sent out via bluetooth
 static volatile uint16_t averageI = 0; //average current across one second, to be sent out via bluetooth
 static volatile uint32_t averagePower = 0;//average power consumption over one seconds, to be sent out via bluetooth
@@ -123,11 +123,11 @@ void convertVoltageAndCurrent() {
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
-	motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
+	///motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
 	
 	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
 	
-	if (motorI >= 3000) {
+	if (inputI >= 3000) {
 		overCurrent = true;
 		setSpeedGrade(STOP);
 	}

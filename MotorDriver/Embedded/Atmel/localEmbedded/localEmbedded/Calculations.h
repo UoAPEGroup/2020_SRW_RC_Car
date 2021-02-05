@@ -19,6 +19,7 @@ static volatile uint8_t rightOnTime;
 
 static volatile uint16_t inputV;
 static volatile uint16_t inputI;
+static volatile uint32_t motorI;
 static volatile uint16_t averageV;
 static volatile uint16_t averageI;
 static volatile uint32_t averagePower;
