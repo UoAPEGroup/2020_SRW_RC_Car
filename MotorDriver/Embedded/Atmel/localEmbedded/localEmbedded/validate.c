@@ -10,7 +10,7 @@
 #include "interrupt.h"
 
 #define F_CPU 8000000
-#define ARRAY_SIZE 10
+#define ARRAY_SIZE 50
 #include <util/delay.h>
 #include <avr/io.h>
 #include <string.h>
@@ -72,42 +72,62 @@ void checkTransmission() {
 void checkAvgCalc() {
 	char transmitValue[ARRAY_SIZE];
 	
-	uint32_t value = returnAvgV();
-	sprintf(transmitValue, "%lu%s", value, "V");
-	send_data(transmitValue);
-	
-	value = returnAvgI();
-	sprintf(transmitValue, "%lu%s", value, "A");
-	send_data(transmitValue);
-	
-	value = returnAvgP();
-	sprintf(transmitValue, "%lu%s", value, "P");
-	send_data(transmitValue);
-	
+	uint16_t voltage = returnAvgV();
+	uint16_t current = returnAvgI();
 	bool direction = returnDirection();
-	sprintf(transmitValue, "%u%s", direction, "D");
-	send_data(transmitValue);
+	uint16_t speedGrade = returnRequiredSpeedGrade();
 	
-	value = returnRequiredSpeedGrade();
-	
-	switch(value) {
+	switch(speedGrade) {
 		case STOP:
-			sprintf(transmitValue, "%u%s", 0, "G");
-			break;
+		speedGrade = 0;
+		break;
 		
 		case MIN_VOLTAGE:
-			sprintf(transmitValue, "%u%s", 1, "G");
-			break;
+		speedGrade = 1;
+		break;
 
 		case MID_VOLTAGE:
-			sprintf(transmitValue, "%u%s", 2, "G");
-			break;
+		speedGrade = 2;
+		break;
 
 		case MAX_VOLTAGE:
-			sprintf(transmitValue, "%u%s", 3, "G");
-			break;
+		speedGrade = 3;
+		break;
 	}
 	
-	send_data(transmitValue);
+	
+	//sprintf(transmitValue, "%s%u%s%u%s%u%s%u%s%s", "Z", voltage, "V", current, "A", direction, "D", speedGrade, "S", "Z");
+	send_data("hello");
+	
+// 	
+// 	value = returnAvgI();
+// 	sprintf(transmitValue, "%lu%s", value, "A");
+// 	send_data(transmitValue);
+// 	
+// 	bool direction = returnDirection();
+// 	sprintf(transmitValue, "%u%s", direction, "D");
+// 	send_data(transmitValue);
+// 	
+// 	value = returnRequiredSpeedGrade();
+// 	
+// 	switch(value) {
+// 		case STOP:
+// 			sprintf(transmitValue, "%u%s", 0, "G");
+// 			break;
+// 		
+// 		case MIN_VOLTAGE:
+// 			sprintf(transmitValue, "%u%s", 1, "G");
+// 			break;
+// 
+// 		case MID_VOLTAGE:
+// 			sprintf(transmitValue, "%u%s", 2, "G");
+// 			break;
+// 
+// 		case MAX_VOLTAGE:
+// 			sprintf(transmitValue, "%u%s", 3, "G");
+// 			break;
+// 	}
+// 	
+// 	send_data(transmitValue);
 
 }
