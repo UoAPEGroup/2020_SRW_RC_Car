@@ -2,7 +2,8 @@
  * 2020_srw_rc_car_primary.c
  *
  * Created: 9/12/2020 10:48:31 am
- * Author : Andrey Chukhraev & Kimsong Lor
+ * Author : Andrey Chukhraev & Kimsong L
+ or
  */ 
 
 #include "common.h"
@@ -44,6 +45,7 @@ int main(void)
 		} else if (usart0_get_TX_timer_flag()) {																			//check if time to transmit data via usart
 			usart0_clr_TX_timer_flag();
 			if (usart0_get_TX_send_data_flag()) {																			//if user requested data transmission with BEGIN command -> transmit data
+				
 				usart0_transmit_data();
 				usart0_transmit_pwmtest();											
 			}
