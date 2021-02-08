@@ -13,7 +13,6 @@ ISR(TIMER2_COMPA_vect){
 	
 	// PI controller function to recalibrate steering motor 
 	pi_controller(); 
-	//adc_read();
 }
 
 // Sets up the 1ms timer used for triggering the PI Controller

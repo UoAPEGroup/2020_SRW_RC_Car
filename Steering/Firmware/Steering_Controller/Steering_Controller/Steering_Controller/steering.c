@@ -7,6 +7,15 @@
 
 #include "steering.h"
 
+static volatile uint16_t input;
+
+// Reference Angle Voltage values
+static uint16_t half_r_turn;
+static uint16_t full_r_turn;
+static uint16_t half_l_turn;
+static uint16_t full_l_turn;
+static uint16_t straight_turn;
+
 // Finds reference voltage values for each angle
 // Works on two assumptions:
 // - Low voltage = Left, High voltage = Right
@@ -33,14 +42,14 @@ void calibrate_steering(){
 // Reads and sets maximum and minimum values
 void find_ref(){
 	//set_duty_cycle(MAX_LIMIT);
-	
+	input = adc_read();  
 	while(calibration_flag == 0){
-		adc_read();
-		if(adc_val < min_val){
-			min_val = adc_val;
+		input = adc_read();
+		if(input < min_val){
+			min_val = input;
 		}
-		else if (adc_val > max_val){
-			max_val = adc_val;
+		else if (input > max_val){
+			max_val = input;
 		}
 		else {
 			calibration_flag = 1; // If steering motor has turned its maximum angle
@@ -65,4 +74,24 @@ void set_reference_values(){
 	
 	// Voltage range for turn
 	turn_range = full_r_turn - full_l_turn;
+}
+
+void set_half_r_turn(){
+	set_point_angle = half_r_turn;
+}
+
+void set_full_r_turn(){
+	set_point_angle = full_r_turn;
+}
+
+void set_half_l_turn(){
+	set_point_angle = half_l_turn;
+}
+
+void set_full_l_turn(){
+	set_point_angle = full_l_turn;
+}
+
+void set_straight_turn(){
+	set_point_angle = straight_turn;
 }

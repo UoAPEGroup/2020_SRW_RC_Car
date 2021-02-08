@@ -8,16 +8,15 @@
 #include "pi_controller.h"
 
 #include "uart.h"
-
 #include <stdio.h>//
 #include <string.h>// For debugging
 char input_buffer[20];//
 
-// PI Controller Setup 
-void pi_setup(){
-	k_p = K_P;
-	k_i = K_I;
-}
+volatile int16_t error;
+volatile int16_t prev_error;
+volatile int16_t input;
+volatile int16_t integrator;
+volatile int16_t set_output;
 
 // PI Controller Function
 void pi_controller(){
@@ -77,9 +76,9 @@ int16_t compute_pi(uint16_t input){
 	error = set_point_angle - input; // Proportional
 	
 	// Disabled for Proteus
-	//integrator += (0.5) * k_i * SAMPLING_TIME * (error + prev_error); // Integrator
+	//integrator += (0.5) * K_I * SAMPLING_TIME * (error + prev_error); // Integrator
 	
-	int16_t out = k_p * error + integrator; // PI Sum
+	int16_t out = K_P * error + integrator; // PI Sum
 	
 	// Ignores minor errors
 	if ((out < 100) && (out > -100)){

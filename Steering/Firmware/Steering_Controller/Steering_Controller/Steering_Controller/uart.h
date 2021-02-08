@@ -10,10 +10,9 @@
 #define UART_H_
 
 #include "global.h"
-#include "control.h"
 
 void uart_init();
-void tx_debug();
+void tx_debug(char echo_data);
 void check_timeout();
 void stall_control();
 void reset_timeout();

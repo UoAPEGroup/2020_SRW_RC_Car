@@ -5,12 +5,13 @@
  *  Author: npat692
  */ 
 
+#include "global.h"
 #include "adc.h"
 
-#include "uart.h"
-
+// DEBUGGING
+#include "uart.h" //
 #include <stdio.h>//
-#include <string.h>// For debugging
+#include <string.h>// 
 char input_buffer[20];//
 
 // ADC Setup
@@ -29,7 +30,7 @@ uint16_t adc_read(){
 	while ((ADCSRA & (1 << ADIF)) == 0){ 
 		;
 	}
-	adc_val = ((ADCL << 0) | (ADCH << 8));
+	uint16_t adc_val = ((ADCL << 0) | (ADCH << 8));
 	adc_val = ((uint32_t) adc_val * VREF)/(ADC_RES);
 	return adc_val;
 }
