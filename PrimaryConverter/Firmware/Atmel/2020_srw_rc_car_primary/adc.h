@@ -8,7 +8,7 @@
 #define V_ref		5000															//reference voltage 3300mV (Vcc)
 #define A_int		1024															//amplitude interval 2^10 = 1024
 
-//threshold values for protection -> trigger halt
+//threshold values for protection -> trigger halt ***UPDATE FOR FINAL IMPLEMENTATION***
 #define rated_V		549																//1770mV 1770mV / (3300mV / 1024) = 549.23)
 #define rated_C		549																//1770mV 
 #define rated_T1	549																//1770mV 

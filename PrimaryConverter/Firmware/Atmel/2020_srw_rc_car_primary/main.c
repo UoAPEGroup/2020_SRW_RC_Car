@@ -9,6 +9,7 @@
 #include "common.h"
 
 #include <avr/io.h>
+#include <avr/wdt.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
@@ -19,7 +20,9 @@
 #include "usart0.h"
 
 int main(void)
-{
+{	
+	//wdt_reset();
+																																															
 	io_init();
 	adc_init();
 	usart0_init(9600);
@@ -29,6 +32,11 @@ int main(void)
 	
     while (1) 
     {	
+		//cli();
+		//wdt_reset();
+		//wdt_enable(WDTO_8S);																								//enable watchdog timer with 8s time-out
+		//sei();
+		
 		if (adc_get_full_flag()) {																							//if all 50 ADC samples have been taken -> convert data -> average each channel
 			adc_clr_full_flag();
 			adc_convert_all();
@@ -49,7 +57,9 @@ int main(void)
 				usart0_transmit_data();
 				usart0_transmit_pwmtest();											
 			}
-		}
+		}		
+		
+		//wdt_reset();
 	}
 }
 
