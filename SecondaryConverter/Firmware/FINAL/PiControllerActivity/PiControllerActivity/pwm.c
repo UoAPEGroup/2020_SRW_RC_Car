@@ -15,7 +15,7 @@ void pwmInit(){
 	
 	TCCR0A |= (1<<COM0A1); //Clear OC0A on C match, set at Bottom. -Non-inverting.
 	TCCR0A |= (1<<WGM01) | (1<<WGM00); //Fast PWM mode.
-	TCCR0B |= (1<<CS00); //No prescaling.
+	TCCR0B |= (1<<CS02); // 256x prescaling.
 	DDRD |= (1<<PORTD6);
 	OCR0A = 0; //Set duty cycle to 0% to begin with
 	OCR0B = 255;
