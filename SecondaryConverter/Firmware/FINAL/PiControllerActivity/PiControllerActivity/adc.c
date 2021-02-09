@@ -23,4 +23,6 @@ void adcInit(){
 	ADMUX = 0b01000000;
 	ADCSRA = 0b11101000;
 	ADCSRB = 0;
+	DIDR0 = 0b0000000;
+	//PINC |= (1<<PORTC2);
 }

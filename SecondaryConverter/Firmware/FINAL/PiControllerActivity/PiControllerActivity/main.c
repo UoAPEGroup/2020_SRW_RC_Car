@@ -15,6 +15,7 @@
 
 int main(void)
 {
+	DDRC |= (1<<PORTC2);
 	adcInit();
 	timerInit();
 	pwmInit();
