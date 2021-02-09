@@ -24,5 +24,5 @@ void pwmInit(){
 
 
 void setPWM(uint16_t piError) {
-	OCR0A = piError/VREF * 255; //Adjusts pwm based on error. Needs to be improved
+	OCR0A = OCR0A/OCR0B * 255 + piError/100000; //Adjusts pwm based on error. Needs to be improved
 }
