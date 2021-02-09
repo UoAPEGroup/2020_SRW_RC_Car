@@ -14,6 +14,8 @@
 ==================================
 Bit Instructions 
 ==================================
+
+These are not used in the firmware, just used as a lookup table
  
 | FUTURE | FULL | HALF | TURN (L/R) | DRT (FWD/BWD) | HIGH | MED | LOW |
 */

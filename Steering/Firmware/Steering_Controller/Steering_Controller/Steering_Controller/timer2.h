@@ -14,7 +14,6 @@
 #include "pi_controller.h"
 #include "uart.h"
 
-void timer2_init();
-
+void timer2_init(); 
 
 #endif /* TIMER2_H_ */
