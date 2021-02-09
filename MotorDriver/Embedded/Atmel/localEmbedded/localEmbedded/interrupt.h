@@ -11,6 +11,10 @@
 
 void interrupt_init();
 
+static volatile uint16_t interruptCount;
+static volatile uint8_t consecutiveChange;
 
+uint16_t returnInterruptCount();
+void resetInterruptCount();
 
 #endif /* INTERRUPT_H_ */

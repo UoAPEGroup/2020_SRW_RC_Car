@@ -1,0 +1,28 @@
+/*
+ * 2020_srw_rc_car_primary.c
+ *
+ * Created: 9/12/2020 10:48:31 am
+ * Author : Andrey Chukhraev
+ */ 
+
+#include "common.h"
+#include "usart0.h"
+#include "adc.h"
+#include "timer1.h"
+
+#include <avr/io.h>
+
+int main(void)
+{
+	uint32_t adc_averages[] = {0};
+	
+	timer1_init();
+	adc_init();
+	usart0_init(9600);
+	
+    while (1) {
+		get_adc_averages(adc_averages);
+		usart0_transmit_data(adc_averages); //needs check
+    }
+}
+

@@ -12,8 +12,17 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void check();
+#define MAX_VOLTAGE 9500
+#define MID_VOLTAGE 7000
+#define MIN_VOLTAGE 5000
+#define STOP 0
 
+#define REQUIRED_INTERRUPT_COUNT 4
+
+extern volatile bool lostRemoteConnection;
+extern volatile bool overCurrent;
+extern volatile bool overVoltage;
+extern volatile bool establishedConnection;
 
 
 #endif /* GLOBAL_H_ */

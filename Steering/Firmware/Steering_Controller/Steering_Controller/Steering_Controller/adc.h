@@ -9,9 +9,7 @@
 #ifndef ADC_H_
 #define ADC_H_
 
-#include "global.h"
-
 void adc_init();
-void adc_start();
+uint16_t adc_read();
 
 #endif /* ADC_H_ */

@@ -7,30 +7,45 @@
 
 #include "global.h"
 #include "adc.h"
-#include "timer.h"
+#include "timer2.h"
 #include "uart.h"
 #include "control.h"
 #include "led.h"
 #include "instructions_macros.h"
+#include "steering.h"
+#include "pi_controller.h"
+#include "pwm.h"
 
+// Triggers when data is received
 ISR(USART0_RX_vect){
-	input_data = UDR0;
-	tx_debug(input_data);
-	read_data();
+	//reset_timeout(); // Resets timeout counter
+	// // Stores received data in variable
+	//tx_debug(); // Echoes back input data (Enabled for testing)
+	//read_data(); // Reads data
 }
 
 int main(void)
 {
+	// Initialization 
 	pin_init();
 	led_init();
-    uart_init();
+	uart_init();
+	pwm0_init();
+	pwm1_init(); 
+	timer2_init();
+	adc_init();	
+
+	// Reads and sets up voltage reference values used for steering (Disabled for Proteus)
+	//calibrate_steering(); 
+	
+	//****(Enabled for Proteus)
+	//min_val = MAX_LIMIT;
+	//max_val = MIN_LIMIT;
+	
 	sei();
     while (1) {
-		while (system_state == STATIONARY);
-	
-		/*if(system_state == ACTIVE_STATE){
-			adc_start();
-		}*/
+		//****(Enabled for Proteus)
+
 	}
 }
 

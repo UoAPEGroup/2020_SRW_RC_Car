@@ -1,0 +1,20 @@
+** Profile: "SCHEMATIC1-TRANSIENT"  [ C:\Macromodels\Models\CSPS\TMCS110x\Release\RTM\TMCS1100A3\TMCS1100A3-PSpiceFiles\SCHEMATIC1\TRANSIENT.sim ] 
+
+** Creating circuit file "TRANSIENT.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.LIB "../../../tmcs1100a3.lib" 
+* From [PSPICE NETLIST] section of C:\Users\a0282827\AppData\Roaming\SPB_Data\cdssetup\OrCAD_PSpice/16.6.0/PSpice.ini file:
+.lib "nom.lib" 
+
+*Analysis directives: 
+.TRAN  0 200u 100u 100n 
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+.END

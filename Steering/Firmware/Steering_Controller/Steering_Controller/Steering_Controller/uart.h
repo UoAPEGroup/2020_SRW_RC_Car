@@ -12,7 +12,13 @@
 #include "global.h"
 
 void uart_init();
-void tx_debug(char output);
+void tx_debug(char echo_data);
+void check_timeout();
+void stall_control();
+void reset_timeout();
 
+// UART Debugging 
+void usart0_transmit_byte(uint8_t byte);
+void usart0_transmit_string(char *string);
 
 #endif /* UART_H_ */

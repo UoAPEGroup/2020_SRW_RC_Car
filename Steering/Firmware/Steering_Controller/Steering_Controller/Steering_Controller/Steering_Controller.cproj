@@ -55,16 +55,15 @@
     </com_atmel_avrdbg_tool_medbg>
     <avrtoolinterface>ISP</avrtoolinterface>
     <com_atmel_avrdbg_tool_simulator>
-      <ToolOptions xmlns="">
+      <ToolOptions>
         <InterfaceProperties>
         </InterfaceProperties>
-        <InterfaceName>
-        </InterfaceName>
+        <InterfaceName>ISP</InterfaceName>
       </ToolOptions>
-      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
-      <ToolNumber xmlns="">
+      <ToolType>com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber>
       </ToolNumber>
-      <ToolName xmlns="">Simulator</ToolName>
+      <ToolName>Simulator</ToolName>
     </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -173,10 +172,28 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.c">
+    <Compile Include="pi_controller.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="timer.h">
+    <Compile Include="pi_controller.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="steering.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="steering.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer2.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.c">

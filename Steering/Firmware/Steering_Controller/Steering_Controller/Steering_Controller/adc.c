@@ -5,22 +5,32 @@
  *  Author: npat692
  */ 
 
+#include "global.h"
 #include "adc.h"
 
+// DEBUGGING
+#include "uart.h" //
+#include <stdio.h>//
+#include <string.h>// 
+char input_buffer[20];//
+
+// ADC Setup
 void adc_init(){
+	DDRC &=~(1 << PINC1); // Input
+	ADMUX = 0x00;
+	ADMUX |= (1 << REFS0); // AVCC
 	ADMUX |= (1 << MUX0); // ADC Channel 1
-	ADCSRA |= (1 << ADIE); // ADC Complete Interrupt 
-	ADCSRA |= (1 << ADPS2)|(1 << ADPS1);
+	ADCSRA |= (1 << ADEN); // ADC Enable
+	ADCSRA |= (1 << ADPS2)|(1 << ADPS1); // 125kHz Sampling time 
 }
 
-// Convert ADC value into mV
-uint32_t adc_convert(uint16_t adc_val) {
-	
-	uint32_t voltage_val = adc_val * (VREF/ADC_RES);					// Ref. voltage divided by ADC res. multiplied by input/ADC register value
-	
-	return voltage_val;
-}
-
-void adc_start(){
-	
+// Reads the ADC 
+uint16_t adc_read(){
+	ADCSRA |= (1 << ADSC); // ADC Start
+	while ((ADCSRA & (1 << ADIF)) == 0){ 
+		;
+	}
+	uint16_t adc_val = ((ADCL << 0) | (ADCH << 8));
+	adc_val = ((uint32_t) adc_val * VREF)/(ADC_RES);
+	return adc_val;
 }

@@ -14,7 +14,7 @@ static volatile uint16_t checkADC = 0;
 
 static volatile uint8_t channelReading = 0; //change the ADC channel to read from
 
-ISR(ADC_vect) {
+ISR(ADC_vect) { 
 	
 	//clear timer1 compare match B flag
 	TIFR1 |= (1 << OCF1B);
@@ -48,8 +48,8 @@ void adc_init() {
 	//Set reference to Vcc, initial channel to 0
 	ADMUX |= (1 << REFS0);
 	//enable the ADC and the interrupt
-	//set ADC clock frequency to 125kh (64 prescale)
-	ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE) | (1 << ADIE) | (1 << ADPS2) | (1 << ADPS1);
+	//set ADC clock frequency to 125kh (128 prescale) (for 16MHz)
+	ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE) | (1 << ADIE) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 	//set trigger source to timer/timer1 compare match b
 	ADCSRB |= (1 << ADTS2) | (1 << ADTS0);
 	

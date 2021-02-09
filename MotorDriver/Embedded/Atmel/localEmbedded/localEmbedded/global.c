@@ -5,6 +5,11 @@
  *  Author: Earlene
  */ 
 
-#include "Calculations.h"
 #include <stdint.h>
 #include <stdbool.h> 
+
+//make sure these are true when running actual code
+volatile bool lostRemoteConnection = false;
+volatile bool overCurrent = false;
+volatile bool overVoltage = false;
+volatile bool establishedConnection = false;
