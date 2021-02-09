@@ -21,26 +21,29 @@ static uint32_t previousTime = 0;
 static bool errorHasBeenCalc = false;
 
 void calculateError(uint16_t measuredVolt) {
-	uint32_t currentTime = returnOverflowCount() * 65536 / clkfreq + TCNT1 / clkfreq;
-	uint32_t elapsedTime = currentTime - previousTime;
+	uint32_t currentTime = returnOverflowCount() * 65536 / clkfreq + TCNT1 / clkfreq; //Calculate time since startup. Should set sampling frequency to fixed value so time is consistent
+	uint32_t elapsedTime = currentTime - previousTime; //Calculate time since last error calculation
 
 	
-	int32_t propError = setPoint - measuredVolt;
-	intError += propError * elapsedTime;
+	int32_t propError = setPoint - measuredVolt; //Calculate the proportional error
+	intError += propError * elapsedTime; //Calculate the integral error
 	
-	output = kp * propError + ki * intError;
+	output = kp * propError + ki * intError; //Sum errors
 	previousTime = currentTime;
-	errorHasBeenCalc = true;
+	errorHasBeenCalc = true; //Set flag to true to adjust pi. Could just call pi adjustment function from here - no need for flags
 }
 
+//Returns whether the error has been calculated or not
 bool returnErrorCalcFlag() {
 	return errorHasBeenCalc;
 }
 
+//Resets the error calculated flag for after pi has been adjusted
 void setErrorCalcFlag() {
 	errorHasBeenCalc = false;
 }
 
+//Returns the total error
 int32_t returnOutput() {
 	return output;
 }

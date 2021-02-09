@@ -15,6 +15,7 @@
 
 int main(void)
 {
+	//Initialise modules and ports
 	DDRC |= (1<<PORTC2);
 	adcInit();
 	timerInit();
@@ -23,9 +24,10 @@ int main(void)
 
     while (1) 
     {
+		//Check if error has been calculated
 		if(returnErrorCalcFlag()) {
-			setPWM(returnOutput());
-			setErrorCalcFlag();
+			setPWM(returnOutput()); //Adjust pwm through PI controller
+			setErrorCalcFlag(); //Reset flag
 		}
     }
 }
