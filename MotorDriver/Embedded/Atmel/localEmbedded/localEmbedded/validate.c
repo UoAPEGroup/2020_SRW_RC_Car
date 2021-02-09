@@ -96,8 +96,8 @@ void checkAvgCalc() {
 	}
 	
 	
-	//sprintf(transmitValue, "%s%u%s%u%s%u%s%u%s%s", "Z", voltage, "V", current, "A", direction, "D", speedGrade, "S", "Z");
-	send_data("hello");
+	sprintf(transmitValue, "%s%u%s%u%s%u%s%u%s%s", "M", voltage, "V", current, "A", direction, "D", speedGrade, "S", "N");
+	send_data(transmitValue);
 	
 // 	
 // 	value = returnAvgI();
