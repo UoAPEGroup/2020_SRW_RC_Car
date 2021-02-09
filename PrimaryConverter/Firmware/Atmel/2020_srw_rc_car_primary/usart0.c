@@ -35,12 +35,13 @@
 #define RESET					82										//82 = R -> reset system to restart PWM timers		 
 #define HALT					72										//72 = H -> halt all timers, system awaits reset command
 #define YES						89										//89 = Y -> yes, confirming system safety issue resolved 
+#define WATCH_DOG_TEST			87										//87 = W -> watch dog timer test, infinite while(1) loop
 						
 static volatile uint8_t RX_counter  = 0;
 static volatile bool usart0_TX_timer_flag = false;						//flag set by timer1 every 1s
 static volatile bool usart0_TX_send_data_flag = false;					//TX data if flag is set
 static volatile bool usart0_TX_reset_flag = false;						//TX reset confirmation
-static volatile bool usart0_TX_system_active_flag = false;				//system active flag set on start up by user input at INT0
+static volatile bool usart0_TX_system_active_flag = true;				//system active flag set on start up by user input at INT0			***change to false for final implementation***
 
 static volatile uint8_t RX_data_buffer[RX_BUFFER];
 
@@ -312,6 +313,11 @@ ISR(USART0_RX_vect) {
 					clr_overT2_flag();
 					clr_overT3_flag();
 					usart0_transmit_issue_resolved_msg();
+				case WATCH_DOG_TEST:
+					while(1){
+						;
+					}
+					break;
 			}
 		
 			usart0_clr_RX_buffer();
