@@ -26,8 +26,10 @@ int main(void)
     {
 		//Check if error has been calculated
 		if(returnErrorCalcFlag()) {
+			cli(); 
 			setPWM(returnOutput()); //Adjust pwm through PI controller
 			setErrorCalcFlag(); //Reset flag
+			sei();
 		}
     }
 }

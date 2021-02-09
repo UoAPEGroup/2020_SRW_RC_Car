@@ -17,7 +17,7 @@ void pwmInit(){
 	TCCR0A |= (1<<WGM01) | (1<<WGM00); //Fast PWM mode.
 	TCCR0B |= (1<<CS00); //No prescaling.
 	DDRD |= (1<<PORTD6);
-	OCR0A = 0; //Set duty cycle to 50% to begin with
+	OCR0A = 0; //Set duty cycle to 0% to begin with
 	OCR0B = 255;
 	
 }
