@@ -17,7 +17,6 @@
 
 static int32_t intError = 0;
 static int32_t output = 0;
-static uint32_t previousTime = 0;
 static bool errorHasBeenCalc = false;
 
 void calculateError(uint16_t measuredVolt) {

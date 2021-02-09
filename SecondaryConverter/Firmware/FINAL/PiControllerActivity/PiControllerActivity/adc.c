@@ -23,6 +23,8 @@ void adcInit(){ //Initialise ADC
 	ADMUX = 0b01000000;
 	ADCSRA = 0b11101000;
 	ADCSRB = 0;
+	ADCSRB |= (1<<ADTS1);
+	ADCSRB |= (1<<ADTS2);
 	DIDR0 = 0b0000000;
 	//PINC |= (1<<PORTC2); //Debugging led
 }

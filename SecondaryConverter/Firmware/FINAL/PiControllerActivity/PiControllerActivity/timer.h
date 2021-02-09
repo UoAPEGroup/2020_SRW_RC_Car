@@ -10,7 +10,6 @@
 #define TIMER_H_
 
 void timerInit();
-uint32_t returnOverflowCount();
 
 
 
