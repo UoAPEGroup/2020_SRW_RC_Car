@@ -25,11 +25,14 @@ int main(void)
     while (1) 
     {
 		//Check if error has been calculated
+		
 		if(returnErrorCalcFlag()) {
 			cli(); 
 			setPWM(returnOutput()); //Adjust pwm through PI controller
 			setErrorCalcFlag(); //Reset flag
+			
 			sei();
 		}
+		//PINC ^= (1<<PORTC2); //debug led
     }
 }

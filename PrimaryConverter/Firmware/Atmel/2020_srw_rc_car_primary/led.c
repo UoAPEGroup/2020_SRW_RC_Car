@@ -9,15 +9,15 @@
 
 void led_on()
 {
-	PORTB |= (1 << PORTB5);
+	PORTB |= (1 << PORTB0);
 }
 
 void led_off()
 {
-	PORTB &= ~(1 << PORTB5);
+	PORTB &= ~(1 << PORTB0);
 }
 
 void led_toggle()
 {
-	PORTB ^= (1 << PORTB5);
+	PORTB ^= (1 << PORTB0);
 }

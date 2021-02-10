@@ -13,7 +13,7 @@
 void io_init()
 {
 	//set up test led
-	DDRB |= (1 << DDB5);
+	DDRB |= (1 << DDB1);
 	
 	//set up PWM
 	DDRD |= (1 << DDD5);						//PWM for LHS

@@ -10,7 +10,7 @@
 #define PWM_H_
 
 void pwmInit();
-void setPWM(uint16_t error);
+void setPWM(int32_t error);
 
 
 
