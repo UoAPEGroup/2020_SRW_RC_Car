@@ -21,7 +21,6 @@ volatile int16_t set_output;
 // PI Controller Function
 void pi_controller(){
 	//led_toggle();
-	set_point_angle = 3600;
 	
 	input = adc_read(); // Reads current input
 	
@@ -45,6 +44,7 @@ void pi_controller(){
 	
 	//sprintf(input_buffer, "Input:	%i \n\r", input);
 	//usart0_transmit_string(input_buffer);
+	
 	
 	// Sets the duty cycle on IN_1 or IN_2
 	if(set_output > 0){ // Turning Right (positive error)
@@ -81,10 +81,11 @@ int16_t compute_pi(uint16_t input){
 	int16_t out = K_P * error + integrator; // PI Sum
 	
 	// Ignores minor errors
-	if ((out < 100) && (out > -100)){
-		out = 0;
-	}
+// 	if ((out < 100) && (out > -100)){
+// 		out = 0;
+// 	}
 	
 	prev_error = error; // Saves error for integration
+	
 	return out;
 }

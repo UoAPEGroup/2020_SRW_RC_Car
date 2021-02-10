@@ -47,4 +47,8 @@ volatile uint16_t t_on;
 #define MAX_TIMEOUT_COUNT 50 // in ms
 volatile uint8_t timeout_count;
 
+// Calibration timer
+volatile uint8_t calibration_count;
+#define CALIBRATION_MAX 200
+
 #endif /* GLOBAL_H_ */
