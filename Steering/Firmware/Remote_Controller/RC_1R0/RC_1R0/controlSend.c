@@ -5,6 +5,7 @@
  *  Author: htom380
  */ 
 
+#include <avr/interrupt.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -13,7 +14,44 @@
 
 volatile uint8_t sendValue = 0b00000000;
 volatile bool RTS_flag = false;
- 
+
+
+volatile bool accel_sw_1 = false;
+volatile bool accel_sw_2 = false;
+volatile bool accel_sw_3 = false;
+volatile bool accel_sw_4 = false;
+
+ISR(PCINT0_vect) {
+	if (PINB & (1 << PB0)) {
+		accel_sw_1 = true;
+	}
+	else {
+		accel_sw_1 = false;
+	}
+	if (PINB & (1 << PB1)) {
+		accel_sw_4 = true;
+	}
+	else {
+		accel_sw_4 = false;
+	}
+	if (PIND & (1 << PD6)) {
+		accel_sw_2 = true;
+	}
+	else {
+		accel_sw_2 = false;
+	}
+	if (PIND & (1 << PD7)) {
+		accel_sw_3 = true;
+	}
+	else {
+		accel_sw_3 = false;
+	}
+}
+
+uint8_t str_data_conversion() {
+	
+}
+
 void instructionSend(uint8_t str_data, uint8_t accel_data, uint8_t dir_data) {
 	
 	sendValue = 0b00000000;
