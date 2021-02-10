@@ -93,7 +93,6 @@ int main(void)
  		}
 		 
 		 // run every second
-		 
 // 		//calculate speed and clear counter
 // 		realSpeedCalc();
 // 		rotCount = 0;
