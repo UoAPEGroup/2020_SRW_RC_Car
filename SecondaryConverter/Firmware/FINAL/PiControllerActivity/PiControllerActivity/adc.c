@@ -16,7 +16,7 @@ ISR(ADC_vect){
 	uint16_t measuredVolt = ADC; //Get value from ADC 
 	measuredVolt = (uint32_t)(measuredVolt) * VOLTREF/1024; //Calculate actual voltage value. Still need to add resistor voltage ratios
 	calculateError(measuredVolt); //Calculate error for PI
-	PINC ^= (1<<PORTC2); //Debugging pin
+	
 }
 
 void adcInit(){ //Initialise ADC
