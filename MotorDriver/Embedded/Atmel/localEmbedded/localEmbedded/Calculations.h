@@ -63,6 +63,8 @@ void addVoltage(uint16_t adcVoltageReading);
 void convertVoltageAndCurrent();
 void averageVoltageAndCurrent();
 
+void realSpeedCalc();
+
 uint16_t adcConvert(uint16_t adcValue);
 
 
