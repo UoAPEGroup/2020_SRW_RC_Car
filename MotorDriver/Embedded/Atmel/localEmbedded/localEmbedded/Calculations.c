@@ -12,6 +12,7 @@
 #include "interrupt.h"
 
 #define PERIOD_MOTOR 32 //half of the counts for the period 30kHz
+#define ROTLENGTH 21 //length of on rotation, perimeter of wheel in cm
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 150
@@ -41,6 +42,9 @@ static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with
 static volatile uint16_t requiredSpeedGrade = 0; //voltage required across motor, set with setSpeedGrade(new required)
 static volatile bool requiredForward = true; //determines whether the car is moving forward or backward
 static volatile bool forward = true; //determines whether the car is moving forward or backward
+
+static volatile uint16_t realSpeed = 0; //result of real speed calculation in cm/s
+
 
 //store adc readings of voltage and current (taken every ms)
 static volatile uint16_t voltageValues[ADC_ARRAY_SIZE];
@@ -268,6 +272,9 @@ void updateDutyCycle(){
 		
 }
 
+void realSpeedCalc(){
+	realSpeed = rotCount*ROTLENGTH;// assuming calculated every second, actual calculation (rotCount/seconds)*rotLength
+}
 
 void setInputV(uint16_t vinD) {
 	inputV = vinD;
