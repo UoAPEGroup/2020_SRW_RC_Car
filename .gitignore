@@ -45,3 +45,4 @@ Project\ Logs
 ## Ignore ANSYS Electronics files
 *.aedtresults
 *.asol
+MotorDriver/Embedded/Software/app/__pycache__/siteContent.cpython-38.pyc

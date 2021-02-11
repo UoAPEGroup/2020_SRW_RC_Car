@@ -1,4 +1,3 @@
-import serial
 import time
 import psycopg2
 
@@ -133,50 +132,44 @@ maxID = maxID[0]
 '''Layout for the web app'''
 bluetooth.layout = dbc.Container(
 
-children = [
-
-    html.Div( 
-        html.Div(
-            children = [
-                html.H1('IPT Car Live Updates'),
-                html.H4('UoA FoE Summer Workshop 2020'),
-            ]
-        ),
-        style = {
-            'fontFamily': 'Verdana, sans-serif',
-            'fontSize': '2vw', 
-            'fontWeight': 'bold', 
-            'padding': '2vw 0vw 2vw 0vw',
-            'backgroundColor': headerColor,
-            'textAlign': 'left'
-        }
-    ),
-    
-    html.Div(
-        dbc.Row( [
-            dbc.Col(
-                dcc.Graph(
-                    id = 'carData',
-                    animate = False
-                ),
-                width = 9
-            ), 
-            dbc.Col(
+    children = [
+        
+        html.Div( 
+            dbc.Container(
+                dbc.Jumbotron(
                 html.Div(
-                    id = 'direction'
-                ),
-                width = 3
-            ),
-        ],
+                    children = [
+                        html.H1('RC Car Live Updates', className = "display-3"),
+                        html.Hr(className = "my-2", style = {"margin-right": "50vw"}),
+                        html.P('UoA FoE Summer Workshop 2020', className = "lead", style = {"margin-top": "2vw"}),
+                ], style = {"margin-left": "2vw"} ), fluid = True, style = {"backgroundColor": "green !important"}),
+            fluid = True),
         ),
-    ),
+        
+        html.Div(
+            
+            dbc.Row( 
+                [ 
+                    dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 10), 
+                    dbc.Col( children = [
+                        dbc.Row(dbc.Card( children = [dbc.CardHeader("System Information:"), dbc.CardBody(id = 'direction', className = "card-title")], color = uoaDarkBlue, inverse = True, outline = True), style = { "margin-top": "6vw"}),
+                        ], width = 2),
+                    
 
-    dcc.Interval(
-        id='updateGraph',
-        interval = 1*1000,
-        n_intervals = 0
-    ),
-    ],
+                ],
+            ),
+        ),
+        
+
+
+        dcc.Interval(
+            id='updateGraph',
+            interval = 1*1000,
+            n_intervals = 0
+        ),
+
+        ],
+    fluid = True, style = {"backgroundColor" : "#FAFAFA"},
 )
 
 @bluetooth.callback(Output('direction', 'children'),
