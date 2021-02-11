@@ -23,7 +23,7 @@ ISR(TIMER0_COMPA_vect) {
 	}
 	else {
 		set_RTS_flag(true);															// Set RTS true for BLE transmission
-		
+		usart_transmit(get_instruction_byte());
 	}
 };
 

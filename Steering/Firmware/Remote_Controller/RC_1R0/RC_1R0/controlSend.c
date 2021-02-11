@@ -162,6 +162,10 @@ void instructionSend() {
 	};
 }
 
+uint8_t get_instruction_byte() {
+	return sendValue;
+}
+
 void set_RTS_flag(bool flag_val) {
 	RTS_flag = flag_val;
 }

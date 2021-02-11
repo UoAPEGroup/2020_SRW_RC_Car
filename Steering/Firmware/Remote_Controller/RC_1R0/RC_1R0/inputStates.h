@@ -44,9 +44,9 @@
 /************************* STEERING STATES *************************/
 
 #define STR_FULL_L 0
-#define STR_MED_L 1
+#define STR_HALF_L 1
 #define STR_STRGHT 2
-#define STR_MED_R 3
+#define STR_HALF_R 3
 #define STR_FULL_R 4
 
 /*******************************************************************/
