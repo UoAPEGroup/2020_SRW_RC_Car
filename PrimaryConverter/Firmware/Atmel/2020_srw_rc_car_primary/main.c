@@ -28,7 +28,16 @@ int main(void)
 	usart0_init(9600);
 	sei();
 	
-	usart0_transmit_start_up_msg();																							//ask user to confirm system is ready to start by pressing a button	
+	//test
+	usart0_transmit_start_up_msg();	
+	
+	usart0_set_TX_reset_flag();
+	usart0_clr_TX_send_data_flag();
+	timer_control_update_next_duty(0);						//ramp duty cycle down to zero first
+	timer_control_init();
+	
+	usart0_set_TX_send_data_flag();																						//ask user to confirm system is ready to start by pressing a button	
+	//test
 	
     while (1) 
     {	

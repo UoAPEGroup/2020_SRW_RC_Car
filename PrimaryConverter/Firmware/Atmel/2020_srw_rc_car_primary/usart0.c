@@ -50,8 +50,8 @@ static volatile uint8_t RX_data_buffer[RX_BUFFER];
 void usart0_init(uint32_t BAUD)
 {
 	UCSR0A |= 0x00;														//clear all bits
-	UCSR0B |= (1 << RXCIE0);											//enable RX complete interrupt
-	UCSR0B |= (1 << RXEN0);												//receiver enable
+	//UCSR0B |= (1 << RXCIE0);											//enable RX complete interrupt
+	//UCSR0B |= (1 << RXEN0);												//receiver enable
 	UCSR0B |= (1 << TXEN0);												//transmitter enable
 	UCSR0C |= ((1 << UCSZ01) | (1 << UCSZ00));							//8-bit packet size
 	UCSR0C &= ~(1 << UCPOL0);											//clear polarity bit - not used
@@ -273,6 +273,7 @@ void usart0_clr_RX_buffer()
 }
 
 //on receive complete interrupt
+/*
 ISR(USART0_RX_vect) {
 	if (usart0_get_TX_system_active_flag()){
 		RX_data_buffer[RX_counter] = UDR0;									//read byte from usart0 on user TX into buffer
@@ -324,3 +325,4 @@ ISR(USART0_RX_vect) {
 		}
 	}
 }
+*/
