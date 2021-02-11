@@ -96,20 +96,19 @@ def openSerialPort(port = ""):
     
     try:
         s = serial.Serial(
-        port = 'COM3', 
+        port = 'COM8', 
         baudrate = 9600, 
         bytesize = serial.EIGHTBITS,
         parity = serial.PARITY_NONE,
         stopbits= serial.STOPBITS_ONE,
         )
-        print("OKAY")
     
     except serial.SerialException as msg:
         print("Can't open port")
     
     return s
 
-port = openSerialPort('COM3')
+port = openSerialPort('COM8')
 if port == None:
     sys.exit(1)
     
