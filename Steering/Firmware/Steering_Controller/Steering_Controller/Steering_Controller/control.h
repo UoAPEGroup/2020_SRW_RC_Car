@@ -9,11 +9,6 @@
 #ifndef CONTROL_H_
 #define CONTROL_H_
 
-#include "global.h"
-#include "uart.h"
-#include "led.h"
-#include "steering.h"
-
 // OUTPUT PIN INITIALIZATION
 void pin_init();
 
@@ -43,6 +38,22 @@ void set_high_speed();
 #define RIGHT_H (input_data & (1 << 4))
 #define HALF_TURN_H (input_data & (1 << 5))
 #define FULL_TURN_H (input_data & (1 << 6))
+
+// Motor Controller
+#define STATE_INT_H PORTC |= (1 << PC5)
+#define STATE_INT_L PORTC &=~ (1 << PC5)
+
+// STATE INTERRUPT TRIGGER
+#define STATE_INT_TOGGLE PORTC ^= (1 << PC5)
+
+#define DRT_FWD PORTC |= (1 << PC4)
+#define DRT_BCK PORTC &=~ (1 << PC4)
+
+#define SPD_0_H PORTC |= (1 << PC2)
+#define SPD_0_L PORTC &=~ (1 << PC2)
+
+#define SPD_1_H PORTC |= (1 << PC3)
+#define SPD_1_L PORTC &=~ (1 << PC3)
 
 
 #endif /* CONTROL_H_ */

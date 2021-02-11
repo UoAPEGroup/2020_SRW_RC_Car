@@ -6,7 +6,12 @@
  */ 
 
 #include "uart.h"
+#include "control.h"
+#include "steering.h"
+
 #include "string.h"
+
+
 
 // UART Initialization
 void uart_init(){
@@ -18,8 +23,8 @@ void uart_init(){
 }
 
 // Echo function
-void tx_debug(){
-	UDR0 = input_data;
+void tx_debug(char echo_data){
+	UDR0 = echo_data;
 }
 
 // Check timeout count
@@ -40,7 +45,7 @@ void reset_timeout(){
 // Stalls all motion
 void stall_control(){
 	set_no_speed();
-	set_point_angle = straight_turn;
+	set_straight_turn();
 	STATE_INT_TOGGLE;
 }
 

@@ -18,9 +18,9 @@
 
 // Triggers when data is received
 ISR(USART0_RX_vect){
-	reset_timeout(); // Resets timeout counter
-	input_data = UDR0; // Stores received data in variable
-	tx_debug(); // Echoes back input data
+	//reset_timeout(); // Resets timeout counter
+	// // Stores received data in variable
+
 	read_data(); // Reads data
 }
 
@@ -34,10 +34,10 @@ int main(void)
 	pwm1_init(); 
 	timer2_init();
 	adc_init();	
-	
-	// Sets up PI Controller K values
-	pi_setup();
-	
+
+	// For testing
+	//set_point_angle = 1700;
+
 	// Reads and sets up voltage reference values used for steering (Disabled for Proteus)
 	//calibrate_steering(); 
 	
@@ -45,7 +45,7 @@ int main(void)
 	//min_val = MAX_LIMIT;
 	//max_val = MIN_LIMIT;
 	
-	sei();
+	//sei();
     while (1) {
 		//****(Enabled for Proteus)
 

@@ -5,15 +5,15 @@
  *  Author: Kimsong Lor
  */ 
 
-#define V_ref		5000															//reference voltage 3300mV (Vcc)
+#define V_ref		3300															//reference voltage 3300mV (Vcc)
 #define A_int		1024															//amplitude interval 2^10 = 1024
 
-//threshold values for protection -> trigger halt
-#define rated_V		204																//1000mV (5000mV / 1024 * 1000mV = 204.8)
-#define rated_C		204																//1000mV 
-#define rated_T1	204																//1000mV 
-#define rated_T2	204																//1000mV 
-#define rated_T3	204																//1000mV 
+//threshold values for protection -> trigger halt ***UPDATE FOR FINAL IMPLEMENTATION***
+#define rated_V		664																//~60V
+#define rated_C		1023															//for testing only 
+#define rated_T1	1023															//for testing only 
+#define rated_T2	1023															//for testing only 
+#define rated_T3	1023															//for testing only 
 
 #define ADC_used	5																//number of adc channels in use
 

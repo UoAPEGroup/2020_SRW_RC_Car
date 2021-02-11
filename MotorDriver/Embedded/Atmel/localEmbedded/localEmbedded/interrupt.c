@@ -37,7 +37,7 @@ ISR(INT0_vect) {
 	
 	//read the speed pins and set the speed grade accordingly
 	
-	//if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
+	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
 		
 		
 		if ((PINC & (1 << PINC4)) == (1 << PINC4)) {
@@ -71,7 +71,7 @@ ISR(INT0_vect) {
 		
 		}
 		
-	//}
+	}
 		
 }
 
@@ -106,7 +106,7 @@ ISR(TIMER3_COMPA_vect) {
 		lostRemoteConnection = true; //set lost remote connection flag to true
 		establishedConnection = false;
 		consecutiveChange = 0;
-		setSpeedGrade(STOP);
+		setRequiredSpeedGrade(STOP);
 	}
 	
 	resetInterruptCount();

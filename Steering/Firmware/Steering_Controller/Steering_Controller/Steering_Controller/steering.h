@@ -22,4 +22,10 @@ volatile uint16_t min_val;
 volatile uint16_t max_val;
 volatile uint8_t calibration_flag;
 
+void set_half_r_turn();
+void set_full_r_turn();
+void set_half_l_turn();
+void set_full_l_turn();
+void set_straight_turn();
+
 #endif /* STEERING_H_ */

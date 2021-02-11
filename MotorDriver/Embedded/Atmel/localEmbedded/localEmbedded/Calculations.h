@@ -19,6 +19,7 @@ static volatile uint8_t rightOnTime;
 
 static volatile uint16_t inputV;
 static volatile uint16_t inputI;
+static volatile uint32_t motorI;
 static volatile uint16_t averageV;
 static volatile uint16_t averageI;
 static volatile uint32_t averagePower;
@@ -61,6 +62,8 @@ void addCurrent(uint16_t adcCurrentReading);
 void addVoltage(uint16_t adcVoltageReading);
 void convertVoltageAndCurrent();
 void averageVoltageAndCurrent();
+
+void realSpeedCalc();
 
 uint16_t adcConvert(uint16_t adcValue);
 

@@ -5,11 +5,18 @@
  *  Author: npat692
  */ 
 
+#include "global.h"
+#include "uart.h"
+#include "led.h"
+#include "steering.h"
 #include "control.h"
 
 #include <stdio.h>
 #include <string.h>
 char input_buffer[20];
+
+// Stores input data
+static volatile char input_data;
 
 void pin_init(){
 	DDRC |= (1 << PORTC5); // State Interrupt
@@ -20,11 +27,16 @@ void pin_init(){
 
 // Decodes data in the Receiver Buffer
 void read_data() {
-	//led_toggle(); 
+	
+	input_data = UDR0;
 	set_direction(); // Sets Direction 
 	set_speed(); // Sets Speed 
+	
 	set_turn_angle(); // Sets turn angle
+	
 	STATE_INT_TOGGLE; // Triggers state interrupt
+	
+	tx_debug(input_data); // Echoes back input data (Enabled for testing)
 }
 
 // Reads data and sets Direction 
@@ -40,7 +52,7 @@ void set_direction(){
 // Reads data and sets Direction
 void set_speed(){
 	if (LOW_H){
-		set_low_speed()
+		set_low_speed();
 	}
 	else if (MED_H){
 		set_med_speed();
@@ -58,28 +70,28 @@ void set_turn_angle(){
 	// RIGHT TURN
 	if(RIGHT_H){
 		if(HALF_TURN_H){
-			set_point_angle = half_r_turn;
+			set_half_l_turn();
 		} 
 		else if (FULL_TURN_H){
-			/*set_point_angle = full_r_turn;*/
-			set_point_angle = 3600;//
+			set_full_r_turn();
+			//set_point_angle = 2700;//
 			led_toggle();//
 		}
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
-			/*set_point_angle = half_l_turn;*/
+			//set_half_l_turn();
 			
-			set_point_angle = 1400; //
-			led_toggle();// 
-			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
-			usart0_transmit_string(input_buffer); //
+			set_point_angle = 1700; //
+			//led_toggle();// 
+			//sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
+			//usart0_transmit_string(input_buffer); //
 		}
 		else if (FULL_TURN_H){
-			set_point_angle = full_l_turn;
+			set_full_l_turn();
 		}
 		else{
-			set_point_angle = straight_turn;
+			set_straight_turn();
 		}
 	}
 }

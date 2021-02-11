@@ -92,8 +92,14 @@ int main(void)
 
  		}
 		 
+		 // run every second
+// 		//calculate speed and clear counter
+// 		realSpeedCalc();
+// 		rotCount = 0;
+		 
 		if (sendData) {//every 1s. Note that checkADC and checkInterrupt can't run simultaneously due to the 500 ms delay in checkADC.
 			
+
 			//stop ADC sampling
 			TCCR1B &= ~(1 << CS10) | ~(1 << CS11);
 			//checkInterrupt();

@@ -24,5 +24,7 @@ extern volatile bool overCurrent;
 extern volatile bool overVoltage;
 extern volatile bool establishedConnection;
 
+extern volatile uint8_t rotCount;
+
 
 #endif /* GLOBAL_H_ */
