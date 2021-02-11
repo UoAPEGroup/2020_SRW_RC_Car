@@ -5,6 +5,15 @@
  *  Author: htom380
  */ 
 
+#include "adc.h"
+
+#include <avr/interrupt.h>
+
+volatile uint32_t steering_val = 0;
+
+ISR(ADC_vect) {
+	steering_val = adc_convert(return_adc_reg());
+}
 
 // ADC Initialisation (Boot)
 void adc_init() {
@@ -26,6 +35,10 @@ void adc_init() {
 }
 
 
+uint16_t return_adc_reg() {
+	return ADC;
+}
+
 // Convert ADC value into mV
 uint32_t adc_convert(uint16_t adc_val) {	
 		
@@ -34,7 +47,9 @@ uint32_t adc_convert(uint16_t adc_val) {
 	return voltage_val;
 }
 
-
+uint32_t return_adc_val() {
+	return adc_convert(return_adc_reg());
+}
 
 /******************************** OBSOLETE FUNCTIONS ********************************/
 

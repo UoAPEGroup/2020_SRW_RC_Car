@@ -41,7 +41,9 @@ int main(void)
 	
     while (1) 
     {
-		
+		str_data_conversion();
+		accel_data_conversion();
+		instructionSend();
     }
 }
 

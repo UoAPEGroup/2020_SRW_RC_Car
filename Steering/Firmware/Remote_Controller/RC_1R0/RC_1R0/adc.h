@@ -15,7 +15,9 @@
 #define ADC_RES 1024
 
 void adc_init();
+uint16_t return_adc_reg();
 uint32_t adc_convert(uint16_t adc_val);
+uint32_t return_adc_val();
 
 uint16_t adc_read(uint8_t channel);
 
