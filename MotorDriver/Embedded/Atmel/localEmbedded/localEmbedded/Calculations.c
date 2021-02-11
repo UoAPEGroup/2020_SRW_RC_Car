@@ -260,6 +260,7 @@ void updateDutyCycle(){
 			
 			}else{
 					//set the duty cycle to maximum if the input voltage to the H-bridge is less or equal than the voltage wanted across the motor:
+					setSpeedGrade(inputV);
 					if(forward){
 						leftOnTime = PERIOD_MOTOR - 1;
 						rightOnTime = 1;
