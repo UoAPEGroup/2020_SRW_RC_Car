@@ -10,6 +10,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "global.h"
+
 void timer0_init(uint8_t periodHalf, uint8_t onTimeHalf) {
 	
 	//Phase Correct PWM, clear OC0B on compare match(inverting),prescaler of 8
@@ -45,12 +47,12 @@ void timer1_init() {
 
 void timer3_init() {
 	
-	//64 prescaler, with 16MHz
+	//64 prescaler, with 8MHz, (125000MHz, 8us per count)
 	
 	TCCR3B |= (1 << CS30) | (1 << WGM32) | (1 << CS31);
 	
-	//period = 10ms
-	OCR3A = 1250;
+	//period = 40ms
+	OCR3A = 5000;
 	//OCR3B = 50;
 	
 	//enable interrupt on compare match B

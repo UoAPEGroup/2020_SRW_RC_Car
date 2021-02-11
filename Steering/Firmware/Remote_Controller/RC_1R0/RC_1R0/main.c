@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdbool.h>
 
 #include "adc.h"
 #include "timer0.h"
@@ -22,8 +23,11 @@ ISR(TIMER0_COMPA_vect) {
 	}
 	else {
 		set_RTS_flag(true);															// Set RTS true for BLE transmission
+		usart_transmit(get_instruction_byte());
 	}
 };
+
+
 
 int main(void)
 {
@@ -37,6 +41,9 @@ int main(void)
 	
     while (1) 
     {
+		str_data_conversion();
+		accel_data_conversion();
+		instructionSend();
     }
 }
 

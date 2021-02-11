@@ -12,15 +12,18 @@
 #include "interrupt.h"
 
 #define PERIOD_MOTOR 32 //half of the counts for the period 30kHz
+#define ROTLENGTH 21 //length of on rotation, perimeter of wheel in cm
 
 #define ADC_ARRAY_SIZE 10
 #define BL_ARRAY_SIZE 150
 #define VCC_MV 5000
 #define RESOLUTION 1024
-#define CURRENT_OPAMP_GAIN 1470
+#define CURRENT_OPAMP_GAIN 1467
 #define CURRENT_SENSOR_GAIN_MV 400
 #define CURRENT_SENSOR_OFFSET_MV 250
-#define VOLTAGE_VD_MV 3703
+#define VOLTAGE_VD_MV 6600
+#define MAXV 20000
+#define MAXI 3000
 
 #define RAMPTOLERANCE 3000
 #define RAMPINCREMENT 2000
@@ -41,6 +44,9 @@ static volatile uint16_t speedGrade = 0; //voltage wanted across motor, set with
 static volatile uint16_t requiredSpeedGrade = 0; //voltage required across motor, set with setSpeedGrade(new required)
 static volatile bool requiredForward = true; //determines whether the car is moving forward or backward
 static volatile bool forward = true; //determines whether the car is moving forward or backward
+
+static volatile uint16_t realSpeed = 0; //result of real speed calculation in cm/s
+
 
 //store adc readings of voltage and current (taken every ms)
 static volatile uint16_t voltageValues[ADC_ARRAY_SIZE];
@@ -127,17 +133,17 @@ void convertVoltageAndCurrent() {
 	
 	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
 	
-	if (inputI >= 3000) {
+	if (inputI >= MAXI) {
 		overCurrent = true;
-		setSpeedGrade(STOP);
+		setRequiredSpeedGrade(STOP);
 	}
 	else {
 		overCurrent = false;
 	}
 	
-	if (inputV >= 12000) {
+	if (inputV >= MAXV) {
 		overVoltage = true;
-		setSpeedGrade(STOP);
+		setRequiredSpeedGrade(STOP);
 	}
 	else {
 		overVoltage = false;
@@ -205,7 +211,7 @@ bool returnDirection() {
 
 
 void ramp(){
-	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
+//	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
 		if(forward == requiredForward){	
 			if(requiredSpeedGrade > speedGrade){
 				if ((requiredSpeedGrade - speedGrade) > RAMPTOLERANCE){
@@ -232,42 +238,52 @@ void ramp(){
 				}
 			}
 		}
-	}
+	//}
 }
 
 void updateDutyCycle(){
 
 	
 		//if the input voltage to the H-bridge is greater than the voltage wanted across the motor:
-		if(inputV > speedGrade){
+		if(inputV != 0){
+			if(inputV > speedGrade){
 			
-			finalOnTime = ((uint32_t)PERIOD_MOTOR*speedGrade)/inputV; //calculate the on time of the final wave across the motor
+				finalOnTime = ((uint32_t)PERIOD_MOTOR*speedGrade)/inputV; //calculate the on time of the final wave across the motor
 			
-			if (forward){
-				leftOnTime = (PERIOD_MOTOR + finalOnTime)/2; //set the on time of left fets
-				rightOnTime = (PERIOD_MOTOR - finalOnTime)/2; //set the on time of the right fets
-				}else{
-				leftOnTime = (PERIOD_MOTOR - finalOnTime)/2; //set on time of the left fets
-				rightOnTime = (PERIOD_MOTOR + finalOnTime)/2; //set the on time of the right fets
-				}
+				if (forward){
+					leftOnTime = (PERIOD_MOTOR + finalOnTime)/2; //set the on time of left fets
+					rightOnTime = (PERIOD_MOTOR - finalOnTime)/2; //set the on time of the right fets
+					}else{
+					leftOnTime = (PERIOD_MOTOR - finalOnTime)/2; //set on time of the left fets
+					rightOnTime = (PERIOD_MOTOR + finalOnTime)/2; //set the on time of the right fets
+					}
 			
-		}else{
-				//set the duty cycle to maximum if the input voltage to the H-bridge is less or equal than the voltage wanted across the motor:
-				if(forward){
-					leftOnTime = PERIOD_MOTOR - 1;
-					rightOnTime = 1;
-				}else{
-					leftOnTime = 1;
-					rightOnTime = PERIOD_MOTOR - 1;
-				}
+			}else{
+					//set the duty cycle to maximum if the input voltage to the H-bridge is less or equal than the voltage wanted across the motor:
+					setSpeedGrade(inputV);
+					if(forward){
+						leftOnTime = PERIOD_MOTOR - 1;
+						rightOnTime = 1;
+					}else{
+						leftOnTime = 1;
+						rightOnTime = PERIOD_MOTOR - 1;
+					}
 				
 			}
+		}else{
+			leftOnTime = PERIOD_MOTOR/2;
+			rightOnTime = PERIOD_MOTOR/2;
+		}
+			
 			
 		//calculate current flowing through motor using the inverse of the duty cycle
 		//motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
 		
 }
 
+void realSpeedCalc(){
+	realSpeed = rotCount*ROTLENGTH;//assuming calculated every second, actual calculation (rotCount/seconds)*rotLength
+}
 
 void setInputV(uint16_t vinD) {
 	inputV = vinD;
