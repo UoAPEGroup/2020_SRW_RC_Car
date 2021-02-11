@@ -313,6 +313,7 @@ ISR(USART0_RX_vect) {
 					clr_overT2_flag();
 					clr_overT3_flag();
 					usart0_transmit_issue_resolved_msg();
+					break;
 				case WATCH_DOG_TEST:
 					while(1){
 						;
