@@ -22,12 +22,9 @@
 int main(void)
 {	
 	//wdt_reset();
-	
-	DDRD |= (1 << DDD6);
-	PORTD |= (1 << PORTD6);
-																																															
+																																											
 	io_init();
-	//adc_init();
+	adc_init();
 	usart0_init(9600);
 	sei();
 	

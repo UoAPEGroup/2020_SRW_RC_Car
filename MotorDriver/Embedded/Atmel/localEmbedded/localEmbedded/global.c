@@ -13,3 +13,6 @@ volatile bool lostRemoteConnection = false;
 volatile bool overCurrent = false;
 volatile bool overVoltage = false;
 volatile bool establishedConnection = false;
+
+volatile uint8_t rotCount = 0;
+volatile uint8_t oneSecCounter = 0;
