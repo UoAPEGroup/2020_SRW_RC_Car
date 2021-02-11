@@ -99,9 +99,9 @@ int main(void)
 
  		}
 		 
-		 if(oneSecCounter >= 100){//run every second
+		 if(oneSecCounter >= 25){//run every second
 			//calculate speed and clear counter
-			PORTD ^= (1 << DDD4);	
+			PORTD ^= (1 << DDD4);
 			realSpeedCalc();
 			rotCount = 0;
 			oneSecCounter = 0;		 

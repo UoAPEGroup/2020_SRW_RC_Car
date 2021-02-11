@@ -51,8 +51,8 @@ void timer3_init() {
 	
 	TCCR3B |= (1 << CS30) | (1 << WGM32) | (1 << CS31);
 	
-	//period = 10ms
-	OCR3A = 1250;
+	//period = 40ms
+	OCR3A = 5000;
 	//OCR3B = 50;
 	
 	//enable interrupt on compare match B
