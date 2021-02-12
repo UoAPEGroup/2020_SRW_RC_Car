@@ -85,9 +85,9 @@ void usart0_transmit_data()
 	char buffer_isens[TX_BUFFER];
 	char buffer_vsens[TX_BUFFER];
 	
-	sprintf(buffer_temp1, "TEMP1:	%ld mV\n\r", adc_get_avg_temp1());
-	sprintf(buffer_temp2, "TEMP2:	%ld mV\n\r", adc_get_avg_temp2());
-	sprintf(buffer_temp3, "TEMP3:	%ld mV\n\r", adc_get_avg_temp3());
+	sprintf(buffer_temp1, "TEMP1:	%ld deg\n\r", adc_get_avg_temp1());
+	sprintf(buffer_temp2, "TEMP2:	%ld deg\n\r", adc_get_avg_temp2());
+	sprintf(buffer_temp3, "TEMP3:	%ld deg\n\r", adc_get_avg_temp3());
 	sprintf(buffer_isens, "ISENS:	%ld mV\n\r", adc_get_avg_current());
 	sprintf(buffer_vsens, "VSENS:	%ld mV\n\r\n\r", adc_get_avg_voltage());
 	
@@ -314,11 +314,11 @@ ISR(USART0_RX_vect) {
 					clr_overT3_flag();
 					usart0_transmit_issue_resolved_msg();
 					break;
-				case WATCH_DOG_TEST:
-					while(1){
-						;
-					}
-					break;
+// 				case WATCH_DOG_TEST:
+// 					while(1){
+// 						;
+// 					}
+// 					break;
 			}
 		
 			usart0_clr_RX_buffer();
