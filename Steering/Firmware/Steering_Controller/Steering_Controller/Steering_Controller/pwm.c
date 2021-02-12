@@ -19,10 +19,10 @@ void pwm0_init(){
 	DDRD |= (1 << PORTD6); // Output PD6
 	TCCR0A |= (1 << WGM01)|(1 << WGM00); // Fast PWM
 	TCCR0B |= (1 << CS00); // ~33kHz
-	OCR0A = 100; // Sets Duty Cycle to 0%
+	OCR0A = 0; // Sets Duty Cycle to 0%
 	OCR0B = 255;
-	//IN_1_OFF; //  Toggle OC0A on compare match
-	IN_1_ON;
+	IN_1_OFF; //  Toggle OC0A on compare match
+	//IN_1_ON;
 }
 
 // IN2 PWM Initialization (33kHz)
@@ -37,7 +37,7 @@ void pwm1_init(){
 	//IN_2_ON; //  Toggle OC0A on compare match
 }
 
-
+// Delete function
 void set_duty_cycle(int16_t value){
 	//t_on =	(((uint32_t)value*255)/VREF); // Calculates duty cycle
 	
@@ -95,5 +95,5 @@ void set_duty_cycle_IN1(uint16_t value){
  	
  	if (t_on > 255){ // Prevent overflow
  		t_on = 255;
- 	}
+	}
  }

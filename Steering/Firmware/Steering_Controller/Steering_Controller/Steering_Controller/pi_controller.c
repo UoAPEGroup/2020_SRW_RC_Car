@@ -81,9 +81,9 @@ int16_t compute_pi(uint16_t input){
 	int16_t out = K_P * error + integrator; // PI Sum
 	
 	// Ignores minor errors
-// 	if ((out < 100) && (out > -100)){
-// 		out = 0;
-// 	}
+ 	if ((out < 100) && (out > -100)){
+ 		out = 0;
+ 	}
 	
 	prev_error = error; // Saves error for integration
 	
