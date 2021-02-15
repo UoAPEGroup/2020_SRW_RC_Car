@@ -10,7 +10,7 @@
 #include "PI_Control.h"
 #include "timer.h"
 
-#define kp 1
+#define kp 1 //NEED to Consider this too
 #define ki 1
 #define setPoint 15000000 //15V wanted (10^6 factor)
 #define clkfreq 8000000
@@ -22,7 +22,7 @@ static bool errorHasBeenCalc = false;
 void calculateError(uint16_t measuredVolt) {
 
 	uint32_t elapsedTime = 54; //micro seconds
-	measuredVolt = measuredVolt * 10 * 10 * 10; //Make factor * 10^6 to match time
+	measuredVolt = measuredVolt * 10 * 10 * 10; //Make factor * 10^6 to match time -- NOTE FOR LATER, NEED TO RECHECK.
 	int32_t propError = setPoint - measuredVolt; //Calculate the proportional error
 	intError += propError * elapsedTime; //Calculate the integral error
 	

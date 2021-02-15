@@ -30,7 +30,6 @@ int main(void)
 			cli(); 
 			setPWM(returnOutput()); //Adjust pwm through PI controller
 			setErrorCalcFlag(); //Reset flag
-			
 			sei();
 		}
 		//PINC ^= (1<<PORTC2); //debug led
