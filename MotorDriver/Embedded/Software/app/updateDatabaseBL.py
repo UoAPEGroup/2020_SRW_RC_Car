@@ -69,7 +69,6 @@ def decode(string):
 def processData(sender, data):
     global pos, maxID
     
-    print(str(data))
     '''Figure out how to translate data from NSlineData to python string'''
     stringToDecode = str(data)
     stringToDecode = stringToDecode[2:-5]
@@ -84,7 +83,7 @@ def processData(sender, data):
                 pos = 0
 
         maxID = maxID + 1
-
+        
         '''change indexes when speed calculation has been done'''
         cur.execute(updateCarVCS, (maxID, updateString[0], updateString[1], pos))
         cur.execute(updateCarDS, (updateString[2], updateString[3]))
