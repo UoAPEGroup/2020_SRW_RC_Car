@@ -96,38 +96,7 @@ void checkAvgCalc() {
 	}
 	
 	
-	sprintf(transmitValue, "%s%u%s%u%s%u%s%u%s%s", "M", voltage, "V", current, "A", direction, "D", speedGrade, "S", "N");
+	sprintf(transmitValue, "%s%u%s%u%s%u%s%u%s%u%s%u%s%u%s%s", "M", voltage, "V", current, "A", direction, "D", speedGrade, "G", overVoltage,"O", overCurrent,"C", establishedConnection,"E", "N");
 	send_data(transmitValue);
-	
-// 	
-// 	value = returnAvgI();
-// 	sprintf(transmitValue, "%lu%s", value, "A");
-// 	send_data(transmitValue);
-// 	
-// 	bool direction = returnDirection();
-// 	sprintf(transmitValue, "%u%s", direction, "D");
-// 	send_data(transmitValue);
-// 	
-// 	value = returnRequiredSpeedGrade();
-// 	
-// 	switch(value) {
-// 		case STOP:
-// 			sprintf(transmitValue, "%u%s", 0, "G");
-// 			break;
-// 		
-// 		case MIN_VOLTAGE:
-// 			sprintf(transmitValue, "%u%s", 1, "G");
-// 			break;
-// 
-// 		case MID_VOLTAGE:
-// 			sprintf(transmitValue, "%u%s", 2, "G");
-// 			break;
-// 
-// 		case MAX_VOLTAGE:
-// 			sprintf(transmitValue, "%u%s", 3, "G");
-// 			break;
-// 	}
-// 	
-// 	send_data(transmitValue);
 
 }

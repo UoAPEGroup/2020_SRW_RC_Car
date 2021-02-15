@@ -103,7 +103,6 @@ ISR(TIMER3_COMPA_vect) {
 	
 	if (returnInterruptCount() >= (REQUIRED_INTERRUPT_COUNT)) {
 		lostRemoteConnection = false;
-		
 		if (!establishedConnection) {
 			consecutiveChange++;
 			if (consecutiveChange >= 15) {

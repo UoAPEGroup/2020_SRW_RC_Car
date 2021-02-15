@@ -14,7 +14,10 @@ updateCarVCS = """ UPDATE carVCS
 
 updateCarDS = """ update carDS
                 SET direction = %s, 
-                speedGrade = %s
+                speedGrade = %s,
+                overVoltage = %s,
+                overCurrent = %s,
+                establishedConnection = %s
                 where id = 0
                 """
 
@@ -65,7 +68,7 @@ def decode(string):
         string = string[1:(len(string) - 1)]
 
     if validInput:
-        listOfUnits = ['V', 'A', 'D', 'G']
+        listOfUnits = ['V', 'A', 'D', 'G', 'O', 'C', 'E']
 
         indexList = []
         calculations = []
@@ -127,7 +130,7 @@ while True:
 
                 '''change indexes when speed calculation has been done'''
                 cur.execute(updateCarVCS, (maxID, updateString[0], updateString[1], pos))
-                cur.execute(updateCarDS, (updateString[2], updateString[3]))
+                cur.execute(updateCarDS, (updateString[2], updateString[3], updateString[4], updateString[5], updateString[6]))
 
                 con.commit() 
 
