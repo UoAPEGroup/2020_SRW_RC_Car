@@ -34,24 +34,16 @@ void calibrate_steering(){
 	 max_val = MIN_LIMIT;
 	 
 	calibration_flag = 0;
-	//sprintf(input_buffer, "Point	%i \n\r", 1);
-	//usart0_transmit_string(input_buffer);
+
+	set_duty_cycle_IN1(MAX_LIMIT-1);
+	find_ref();
+	IN_1_OFF;
 	
 	//sprintf(input_buffer, "Min value:	%i \n\r", min_val);
 	//usart0_transmit_string(input_buffer);
 	
 	//sprintf(input_buffer, "Max value:	%i \n\r", max_val);
 	//usart0_transmit_string(input_buffer);
-	
-	set_duty_cycle_IN1(MAX_LIMIT-1);
-	find_ref();
-	IN_1_OFF;
-	
-	sprintf(input_buffer, "Min value:	%i \n\r", min_val);
-	usart0_transmit_string(input_buffer);
-	
-	sprintf(input_buffer, "Max value:	%i \n\r", max_val);
-	usart0_transmit_string(input_buffer);
 	
 	
 	//sprintf(input_buffer, "Passed:	%i \n\r", 1);
@@ -71,15 +63,14 @@ void calibrate_steering(){
 	
 	//Straightens wheel
 	set_point_angle = straight_turn;
-	
 }
 
 // Reads and sets maximum and minimum values
 void find_ref(){
 	//set_duty_cycle(MAX_LIMIT);
 	input = adc_read();  
+	_delay_ms(1000);
 	while(calibration_flag == 0){
-		_delay_ms(1000);
 		input = adc_read();
 		if(input < min_val){
 			min_val = input;
@@ -111,6 +102,20 @@ void set_reference_values(){
 	// Voltage range for turn
 	turn_range = full_r_turn - full_l_turn;
 	
+	sprintf(input_buffer, "straight_turn:	%i \n\r", straight_turn);
+	usart0_transmit_string(input_buffer);
+	
+	sprintf(input_buffer, "half_l_turn:	%i \n\r", half_l_turn);
+	usart0_transmit_string(input_buffer);
+	
+	sprintf(input_buffer, "half_r_turn:	%i \n\r",half_r_turn);
+	usart0_transmit_string(input_buffer);
+	
+	sprintf(input_buffer, "turn_range:	%i \n\r", turn_range);
+	usart0_transmit_string(input_buffer);
+}
+
+void print_refs(){
 	sprintf(input_buffer, "straight_turn:	%i \n\r", straight_turn);
 	usart0_transmit_string(input_buffer);
 	

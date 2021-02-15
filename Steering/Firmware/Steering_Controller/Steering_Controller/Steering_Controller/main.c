@@ -39,13 +39,13 @@ int main(void)
 	//set_point_angle = 1700;
 
 	// Reads and sets up voltage reference values used for steering (Disabled for Proteus)
-	//calibrate_steering(); 
 	
+	calibrate_steering();
 	//****(Enabled for Proteus)
 	//min_val = MAX_LIMIT;
 	//max_val = MIN_LIMIT;
 	
-	//sei();
+	sei();
     while (1) {
 		//****(Enabled for Proteus)
 

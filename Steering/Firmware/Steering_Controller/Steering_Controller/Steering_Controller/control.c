@@ -36,6 +36,9 @@ void read_data() {
 	
 	STATE_INT_TOGGLE; // Triggers state interrupt
 	
+	//print_refs();
+	
+	
 	tx_debug(input_data); // Echoes back input data (Enabled for testing)
 }
 
@@ -73,19 +76,20 @@ void set_turn_angle(){
 			set_half_l_turn();
 		} 
 		else if (FULL_TURN_H){
-			set_full_r_turn();
-			//set_point_angle = 2700;//
-			led_toggle();//
+			//set_full_r_turn();
+			set_point_angle = 2100;//
+			//led_toggle();//
+			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
+			usart0_transmit_string(input_buffer); //
 		}
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
 			//set_half_l_turn();
-			
 			set_point_angle = 1700; //
 			//led_toggle();// 
-			//sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
-			//usart0_transmit_string(input_buffer); //
+			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
+			usart0_transmit_string(input_buffer); //
 		}
 		else if (FULL_TURN_H){
 			set_full_l_turn();

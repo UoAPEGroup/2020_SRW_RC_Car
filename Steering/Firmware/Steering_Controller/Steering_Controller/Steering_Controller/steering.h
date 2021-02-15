@@ -28,4 +28,6 @@ void set_half_l_turn();
 void set_full_l_turn();
 void set_straight_turn();
 
+void print_refs();
+
 #endif /* STEERING_H_ */

@@ -19,6 +19,7 @@ void read_data();
 void set_direction();
 void set_speed();
 void set_turn_angle();
+void manual_steering();
 
 // SPEED CONTROL SETTER FUNCTIONS
 void set_no_speed();

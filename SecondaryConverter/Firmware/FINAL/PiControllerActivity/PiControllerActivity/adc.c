@@ -11,12 +11,14 @@
 #include "PI_Control.h"
 
 #define VOLTREF 3.3
+#define VOLTDIVRATIO 6.1
 
 ISR(ADC_vect){
 	PINC ^= (1<<PORTC2); //debug led
 	TIMSK1 &= ~(1<<TOIE1);
 	uint16_t measuredVolt = ADC; //Get value from ADC 
 	measuredVolt = (uint32_t)(measuredVolt) * VOLTREF/1024; //Calculate actual voltage value. Still need to add resistor voltage ratios
+	measuredVolt = measuredVolt * VOLTDIVRATIO;
 	calculateError(measuredVolt); //Calculate error for PI
 	
 }
