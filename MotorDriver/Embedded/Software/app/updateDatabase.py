@@ -35,6 +35,7 @@ def openSerialPort(portToOpen = ""):
     
     except serial.SerialException as msg:
         print("Can't open port")
+        sys.exit()
     
     return s
 
@@ -61,20 +62,29 @@ def readFromPort(s):
 
 def decode(string):
 
-    validInput = False
-
-    if (string[0] == 'M' and string[len(string) - 1] == 'N'):
-        validInput = True
-        string = string[1:(len(string) - 1)]
-
-    if validInput:
-        listOfUnits = ['V', 'A', 'T']
+    #check if input is valid 
+    if ( ((string[0] == 'H') or (string[0] == 'S')) and string[len(string) - 1] == 'P'):
 
         calculations = []
+        listOfUnits = []
+        databaseToUpdate = 3
 
+        if(string[0] == "H"):
+            listOfUnits = ['V', 'A']
+            databaseToUpdate = 0
+
+        if(string[0] == "S"):
+            listOfUnits = ['P']
+            databaseToUpdate = 1
+
+        #if input is valid, delete extraneous start/stop characters
+        string = string[1:(len(string))]
+
+        #set values to search for in string, and specify which database needs to be updated 
         index = 0
         count = 0
-
+        
+        #extract relevant values from string
         for unit in listOfUnits:
 
             index = string.find(unit)
@@ -84,11 +94,12 @@ def decode(string):
 
             count = count + 1
 
-        return calculations
+        print(calculations, databaseToUpdate)
+        return [calculations, databaseToUpdate]
 
     else:
         print("Invalid output")
-        return -1
+        return [-1, -1]
 
 
 '''connect to database/bluetooth'''
@@ -115,23 +126,33 @@ pos = output[0]
 
 while True:
 
-        stringToDecode = readFromPort(s)
-        updateString = []
-        updateString = decode(stringToDecode)
+    stringToDecode = readFromPort(s)
 
-        if (updateString != -1):
-                
-                pos = pos + 1
+    (updateString, databaseToUpdate) = decode(stringToDecode)
 
-                if pos == 10:
-                        pos = 0
-                maxID = maxID + 1
+    print(updateString)
 
-                '''change indexes when speed calculation has been done'''
-                cur.execute(updateCarVCS, (maxID, updateString[0], updateString[1], pos))
-                cur.execute(updateCarDS, (updateString[2][0], updateString[2][1], updateString[2][2], updateString[2][3], updateString[2][4]))
+    if (updateString != -1):
+            
+        pos = pos + 1
 
-                con.commit() 
+        if pos == 10:
+            pos = 0
+
+        maxID = maxID + 1
+
+        #change indexes when speed calculation has been done
+        if databaseToUpdate == 0:
+            cur.execute(updateCarVCS, (maxID, updateString[0], updateString[1], pos))
+            for value in updateString:
+                print(value)
+
+        elif databaseToUpdate == 1:
+            cur.execute(updateCarDS, (updateString[0][0], updateString[0][1], updateString[0][2], updateString[0][3], updateString[0][4]))
+            for x in range(len(updateString)):
+                print(updateString[x])
+
+        con.commit() 
 
 '''Close bluetooth/database connections'''
 cur.close()
