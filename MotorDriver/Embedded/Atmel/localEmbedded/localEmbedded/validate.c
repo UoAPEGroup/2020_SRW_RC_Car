@@ -96,7 +96,7 @@ void checkAvgCalc() {
 	}
 	
 	
-	sprintf(transmitValue, "%s%u%s%u%s%u%s%u%s%u%s%u%s%u%s%s", "M", voltage, "V", current, "A", direction, "D", speedGrade, "G", overVoltage,"O", overCurrent,"C", establishedConnection,"E", "N");
+	sprintf(transmitValue, "%s%u%s%u%s%u%u%u%u%u%s%s", "M", voltage, "V", current, "A", direction, speedGrade, overVoltage, overCurrent, establishedConnection,"T", "N");
 	send_data(transmitValue);
 
 }
