@@ -68,9 +68,8 @@ def decode(string):
         string = string[1:(len(string) - 1)]
 
     if validInput:
-        listOfUnits = ['V', 'A', 'D', 'G', 'O', 'C', 'E']
+        listOfUnits = ['V', 'A', 'T']
 
-        indexList = []
         calculations = []
 
         index = 0
@@ -130,7 +129,7 @@ while True:
 
                 '''change indexes when speed calculation has been done'''
                 cur.execute(updateCarVCS, (maxID, updateString[0], updateString[1], pos))
-                cur.execute(updateCarDS, (updateString[2], updateString[3], updateString[4], updateString[5], updateString[6]))
+                cur.execute(updateCarDS, (updateString[2][0], updateString[2][1], updateString[2][2], updateString[2][3], updateString[2][4]))
 
                 con.commit() 
 

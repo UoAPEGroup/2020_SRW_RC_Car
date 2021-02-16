@@ -21,7 +21,7 @@ readNewestCarVCS = """
             SELECT voltage, current FROM carVCS WHERE id = %s
             """
 readNewestCarDS = """
-            SELECT direction, speedGrade FROM carDS WHERE id = 0
+            SELECT direction, speedGrade, overVoltage, overCurrent, establishedConnection FROM carDS WHERE id = 0
                 """
 
 def openDatabaseConnection():
@@ -37,7 +37,7 @@ def openDatabaseConnection():
     return con
 
 def updateValues(cur, currentId):
-    global direction, speedGrade
+    global direction, speedGrade, overVoltage, overCurrent, establishedConnection
 
     cur.execute(readNewestCarVCS, (currentId,))
 
@@ -69,11 +69,45 @@ def updateValues(cur, currentId):
     try: 
         values = cur.fetchall()
 
+        count = 0
+        
+        for value in values:
+            systemParameters[count] = value[count]   
+            count = count + 1
+        
+        for parameter in systemParameters:
+            print(parameter)
+
         if (values != None):
             direction = values[0][0]
             speedGrade = values[0][1]
+            overVoltage = values[0][2]
+            overCurrent = values[0][3]
+            establishedConnection = values[0][4]
+
     except Exception: 
         pass
+
+def returnDirectionAndSpeedString(direction, speedGrade):
+    directionAndSpeedString = []
+
+    directionString = {
+        0: "Forward",
+        1: "Reverse"
+    }
+
+    speedString = {
+        0: "Stopped",
+        1: "Min",
+        2: "Mid",
+        3: "Max"
+    }
+
+    directionAndSpeedString.append(directionString.get(direction, "Invalid"))
+    directionAndSpeedString.append((speedString.get(speedGrade, "Invalid")))
+
+    return directionAndSpeedString
+
 
 bluetooth = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], update_title='Updating...')
 
@@ -145,10 +179,21 @@ cur.execute(""" SELECT * FROM carDS """)
 rows = cur.fetchall()
 
 ''' store the highest ID value and the direction/speedgrade'''
-global direction, speedGrade, maxID
+global direction, speedGrade, overCurrent, overVoltage, establishedConnection, maxID
+systemParameters = []
+count = 0
+for row in rows:
+    systemParameters.append([row][count])
+    count = count + 1
+
+for parameter in systemParameters:
+    print(parameter)
 
 direction = rows[0][1]
 speedGrade = rows[0][2]
+overVoltage = rows[0][3]
+overCurrent = rows[0][4]
+establishedConnection = rows[0][5]
 
 cur.execute("""
             SELECT MAX(id) FROM carVCS""")
@@ -207,7 +252,12 @@ bluetooth.layout = dbc.Container(
         ],
         ),
 
-        
+        html.Div(
+            children = [
+                html.Div(id = "safety")
+
+            ],
+        ),
 
         dcc.Interval(
             id='updateGraph',
@@ -230,7 +280,7 @@ def toggleCollapseSR(n, is_open):
 @bluetooth.callback(Output('direction', 'children'),
                     Input('updateGraph', 'n_intervals'))
 def metric_update(self):
-    global direction, direction_string, speedGrade, speedGrade_string, maxID
+    global direction, speedGrade, maxID, directionAndSpeedString
 
     ''' check if there's been an update to the database'''
 
@@ -248,19 +298,7 @@ def metric_update(self):
                 maxID = currentId
                 updateValues(cur, maxID)
 
-            if (direction == 1):
-                direction_string = "Forward"
-            else:
-                direction_string = "Reverse"
-
-            if(speedGrade == 0):
-                speedGrade_string = "Stopped"
-            elif(speedGrade == 1):
-                speedGrade_string = "Min"
-            elif(speedGrade == 2):
-                speedGrade_string = "Mid"
-            elif(speedGrade == 3):
-                speedGrade_string = "Max"
+            directionAndSpeedString  = returnDirectionAndSpeedString(direction, speedGrade)
 
     except Exception: 
         pass
@@ -270,13 +308,23 @@ def metric_update(self):
             children = [
             html.H2("Direction: ", className = "display-5", style = {"fontSize": "1.5vw"}),
             html.Hr(style = {"backgroundColor": "white", "marginTop": "-0.3vw"}),
-            html.H4(direction_string, className = "display-4", style = {"fontSize": "2.5vw", "marginTop": "-0.7vw"}), 
+            html.H4(directionAndSpeedString[0], className = "display-4", style = {"fontSize": "2.5vw", "marginTop": "-0.7vw"}), 
             html.H2("Speed: ", className = "display-5", style = {"fontSize": "1.5vw", "marginTop": "2vw"}),
             html.Hr(style = {"backgroundColor": "white", "marginTop": "-0.3vw"}),
-            html.H4(speedGrade_string, style = {"fontSize": "2.5vw", "marginTop": "-0.7vw"}, className = "display-4")],
+            html.H4(directionAndSpeedString[1], style = {"fontSize": "2.5vw", "marginTop": "-0.7vw"}, className = "display-4")],
         ),
     ]
 
+@bluetooth.callback(Output('safety', 'children'),
+                    Input('updateGraph', 'n_intervals'))
+def update_safety(self):
+    global overVoltage, overCurrent, establishedConnection
+
+    return [
+        html.P(str(overVoltage)), 
+        html.P(str(overCurrent)),
+        html.P(str(establishedConnection))
+    ]
 
 @bluetooth.callback(Output('carData', 'figure'),
                     [Input('updateGraph', 'n_intervals')])
