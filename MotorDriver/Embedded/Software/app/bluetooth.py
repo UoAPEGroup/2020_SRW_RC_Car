@@ -1,20 +1,25 @@
-import time
-import psycopg2
-
-'''dash/ploty '''
+#dash/plotly 
 import dash
+import asyncio
 from dash.dependencies import Output, Input, State
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly
 import plotly.graph_objs as go
-import plotly.express as px
-import pandas as pd
-from collections import deque
 from plotly.subplots import make_subplots
-import dash_bootstrap_components as dbc
+
+#misc
+import time
 from datetime import datetime
 
+from collections import deque
+import psycopg2
+
+#local files
+from reuse import *
+
+#define SQL to read from online database
 global readNewestCarVCS, readNewestCarDS
 
 readNewestCarVCS = """ 
@@ -37,7 +42,7 @@ def openDatabaseConnection():
     return con
 
 def updateValues(cur, currentId):
-    global direction, speedGrade, overVoltage, overCurrent, establishedConnection
+    global systemParameters
 
     cur.execute(readNewestCarVCS, (currentId,))
 
@@ -45,9 +50,9 @@ def updateValues(cur, currentId):
         values = cur.fetchall()
 
         if (values != None):
-
             voltage = values[0][0]/1000
             current = values[0][1]/1000
+            print(voltage)
 
             power = voltage * current
 
@@ -61,29 +66,14 @@ def updateValues(cur, currentId):
             X2.append(X2[-1] + 1)
             X3.append(X3[-1] + 1)
 
-    except Exception: 
-        pass
-
-    cur.execute(readNewestCarDS)
+        cur.execute(readNewestCarDS)
     
-    try: 
         values = cur.fetchall()
-
         count = 0
-        
-        for value in values:
-            systemParameters[count] = value[count]   
-            count = count + 1
-        
-        for parameter in systemParameters:
-            print(parameter)
 
-        if (values != None):
-            direction = values[0][0]
-            speedGrade = values[0][1]
-            overVoltage = values[0][2]
-            overCurrent = values[0][3]
-            establishedConnection = values[0][4]
+        for value in values:
+            systemParameters[count] = value
+            count = count + 1
 
     except Exception: 
         pass
@@ -108,55 +98,50 @@ def returnDirectionAndSpeedString(direction, speedGrade):
 
     return directionAndSpeedString
 
+def initializeLists():
+    global X, X2, X3, X4, voltageValues, voltageMax, currentValues, powerValues, speedValues
+
+    X = deque(maxlen = 20)
+    X.append(0)
+    voltageValues = deque(maxlen = 20)
+    voltageValues.append(0)
+
+    voltageMax = deque(maxlen = 20)
+    voltageMax.append(20)
+
+    X2 = deque(maxlen = 20)
+    X2.append(0)
+    currentValues = deque(maxlen = 20)
+    currentValues.append(0)
+
+    X3 = deque(maxlen = 20)
+    X3.append(0)
+    powerValues = deque(maxlen = 20) 
+    powerValues.append(0)
+
+    X4 = deque(maxlen = 20)
+    X4.append(0)
+    speedValues = deque(maxlen = 20)
+    speedValues.append(0)
 
 bluetooth = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], update_title='Updating...')
 
 startTime = time.time()
 
-backgroundColor = 'white'
-headerColor = 'white'
-uoaLightBlue = '#009AC7'
-uoaDarkBlue = 'rgb(18, 61, 113)'
-uoaGray = "#8D9091"
-textColor = 'black'
-lightGray = "rgb(228, 231, 235)"
+#initialize lists that will be the x and y values of graphs
+initializeLists()
 
-'''initalize lists that will hold the x and y values in graphs'''
-X = deque(maxlen = 20)
-X.append(0)
-voltageValues = deque(maxlen = 20)
-voltageValues.append(0)
+global maxID, systemParameters
+systemParameters = []
 
-voltageMax = deque(maxlen = 20)
-voltageMax.append(20)
-
-X2 = deque(maxlen = 20)
-X2.append(0)
-currentValues = deque(maxlen = 20)
-currentValues.append(0)
-
-X3 = deque(maxlen = 20)
-X3.append(0)
-powerValues = deque(maxlen = 20) 
-powerValues.append(0)
-
-X4 = deque(maxlen = 20)
-X4.append(0)
-speedValues = deque(maxlen = 20)
-speedValues.append(0)
-
-
-''' create connection to database'''
+#open connection to database
 con = openDatabaseConnection()
 
 cur = con.cursor()
 
+#extract initial voltage, current, and speed values
 cur.execute(""" select * from carVCS order by id""")
-
 rows = cur.fetchall()
-
-'''update initial values for voltage/current '''
-
 for row in rows:
     voltage = row[1]/1000
     current = row[2]/1000
@@ -172,15 +157,10 @@ for row in rows:
     X2.append(X2[-1] + 1)
     X3.append(X3[-1] + 1)
 
-'''store original direction and speedgrade''' 
-
+#extract initial system parameters (direction, speedGrade, and safety parameters)
 cur.execute(""" SELECT * FROM carDS """)
-
 rows = cur.fetchall()
 
-''' store the highest ID value and the direction/speedgrade'''
-global direction, speedGrade, overCurrent, overVoltage, establishedConnection, maxID
-systemParameters = []
 count = 0
 for row in rows:
     systemParameters.append([row][count])
@@ -189,29 +169,13 @@ for row in rows:
 for parameter in systemParameters:
     print(parameter)
 
-direction = rows[0][1]
-speedGrade = rows[0][2]
-overVoltage = rows[0][3]
-overCurrent = rows[0][4]
-establishedConnection = rows[0][5]
-
-cur.execute("""
-            SELECT MAX(id) FROM carVCS""")
+#identify the largest ID in the system (i.e., the last transmission sent by the uC)
+cur.execute("""SELECT MAX(id) FROM carVCS""")
 
 maxID = cur.fetchone()
 maxID = maxID[0]
 
-global parameterTable
-
-parameterTableHeader = [html.Thead(html.Tr([html.Th("Parameter"), html.Th("Value")]))]
-row1 = html.Tr([html.Td("Max Voltage at H-Bridge"), html.Td("20V")])
-row2 = html.Tr([html.Td("Max Current at H-Bridge"), html.Td("3A")])
-row3 = html.Tr([html.Td("Car Power Rating"), html.Td("30W")])
-parameterTableBody = [html.Tbody([row1, row2, row3])]
-
-parameterTable = dbc.Table(parameterTableHeader + parameterTableBody, bordered= True, striped = True, hover = True)
-
-'''Layout for the web app'''
+#layout for the webpage
 bluetooth.layout = dbc.Container(
 
     children = [
@@ -241,22 +205,18 @@ bluetooth.layout = dbc.Container(
                     dbc.Col( children = [
                         dbc.Row(dbc.Card( children = [dbc.CardBody(id = 'direction', className = "card-title", style = {"textAlign": "left"})], color = uoaDarkBlue, inverse = True, style = {"marginTop": "6vw"})),
                         dbc.Row([
-                            dbc.Button("System Ratings:", outline = False, id = "collapseButtonSR", style = {"backgroundColor": "#FAFAFA", "color": "black", "marginTop": "2vw"}), 
+                            dbc.Button("System Ratings:", outline = False, id = "collapseButtonSR", style = {"backgroundColor": "#FAFAFA", "color": "black", "marginTop": "1vw"}), 
                             dbc.Collapse(parameterTable, id = "collapseSR", style = {"marginTop": "0.5vw", "marginLeft": "0.2vw"})
-                        ])
+                        ]),
+                        dbc.Row(
+                            id = "safety",
+                        ),
                         ], width = 2),
                     
 
                 ],
             ),
         ],
-        ),
-
-        html.Div(
-            children = [
-                html.Div(id = "safety")
-
-            ],
         ),
 
         dcc.Interval(
@@ -268,6 +228,8 @@ bluetooth.layout = dbc.Container(
     fluid = True, style = {"backgroundColor" : "#FAFAFA"},
 )
 
+#system callbacks
+
 @bluetooth.callback(Output("collapseSR", "is_open"), 
                     [Input("collapseButtonSR", "n_clicks")], 
                     [State("collapseSR", "is_open")],)
@@ -276,11 +238,10 @@ def toggleCollapseSR(n, is_open):
         return not is_open
     return is_open
 
-
 @bluetooth.callback(Output('direction', 'children'),
                     Input('updateGraph', 'n_intervals'))
 def metric_update(self):
-    global direction, speedGrade, maxID, directionAndSpeedString
+    global maxID, directionAndSpeedString, systemParameters
 
     ''' check if there's been an update to the database'''
 
@@ -298,7 +259,7 @@ def metric_update(self):
                 maxID = currentId
                 updateValues(cur, maxID)
 
-            directionAndSpeedString  = returnDirectionAndSpeedString(direction, speedGrade)
+            directionAndSpeedString = returnDirectionAndSpeedString(systemParameters[0][1], systemParameters[0][1])
 
     except Exception: 
         pass
@@ -318,12 +279,26 @@ def metric_update(self):
 @bluetooth.callback(Output('safety', 'children'),
                     Input('updateGraph', 'n_intervals'))
 def update_safety(self):
-    global overVoltage, overCurrent, establishedConnection
+    global systemParameters
+
+    voltageColor = "success"
+    currentColor = "success"
+    establishedConnection = "danger"
+
+    if systemParameters[0][2]:
+        voltageColor = "danger"
+    if systemParameters[0][3]:
+        currentColor = "danger"
+    if systemParameters[0][4]:
+        establishedConnection = "success"
 
     return [
-        html.P(str(overVoltage)), 
-        html.P(str(overCurrent)),
-        html.P(str(establishedConnection))
+        dbc.ButtonGroup ([
+        dbc.Button("OverVoltage", color = voltageColor, style = {"marginTop": "1vw"}), 
+        dbc.Button("OverCurrent", color = currentColor, style = {'marginTop': "0.5vw"}),
+        dbc.Button("Connection Established", color = establishedConnection, style = {"marginTop": "0.5vw"})
+        ], vertical = True, style = {}
+        ),
     ]
 
 @bluetooth.callback(Output('carData', 'figure'),
@@ -404,7 +379,7 @@ def update_graph(self):
     return fig
 
 if __name__ == '__main__':    
-
+    
     bluetooth.run_server(debug=True, use_reloader = False)
     cur.close()
     con.close()
