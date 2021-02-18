@@ -5,13 +5,20 @@
  *  Author: npat692
  */ 
 
+#include <avr/interrupt.h>
+
+#include "global.h"
 #include "timer2.h"
+#include "led.h"
+#include "pi_controller.h"
+#include "uart.h"
+
 
 // 1ms Interrupt
 ISR(TIMER2_COMPA_vect){
 	//check_timeout(); // Disabled for Testing
-
-	// PI controller function to recalibrate steering motor 
+	
+	// PI controller function used for steering motor 
 	pi_controller(); 
 }
 

@@ -6,14 +6,16 @@
  */ 
 
 #include "global.h"
+
+#include "control.h"
 #include "uart.h"
 #include "led.h"
 #include "steering.h"
-#include "control.h"
 
-#include <stdio.h>
-#include <string.h>
-char input_buffer[20];
+// DEBUGGING
+#include <stdio.h> //
+#include <string.h> //
+char input_buffer[20]; //
 
 // Stores input data
 static volatile char input_data;
@@ -76,8 +78,7 @@ void set_turn_angle(){
 			set_half_l_turn();
 		} 
 		else if (FULL_TURN_H){
-			//set_full_r_turn();
-			set_point_angle = 2100;//
+			set_full_r_turn();
 			//led_toggle();//
 			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
 			usart0_transmit_string(input_buffer); //
@@ -85,9 +86,7 @@ void set_turn_angle(){
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
-			//set_half_l_turn();
-			set_point_angle = 1700; //
-			//led_toggle();// 
+			set_half_l_turn(); 
 			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
 			usart0_transmit_string(input_buffer); //
 		}

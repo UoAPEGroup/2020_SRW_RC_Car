@@ -20,18 +20,18 @@
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 1.2
-#define K_I 1
-#define MAX_LIMIT 5000
+#define K_P 0.4 // Proportional Gain
+#define K_I 0.5 // Integral Gain
+#define MAX_LIMIT 5000 
 #define MIN_LIMIT 0
 #define SAMPLING_TIME 0.001
 
 // Steering Motor Control
-#define IN_1_ON TCCR0A |= (1 << COM0A1)
-#define IN_1_OFF TCCR0A &=~ (1 << COM0A1)
+#define IN_1_ON TCCR1A |= (1 << COM1A1)
+#define IN_1_OFF TCCR1A &=~ (1 << COM1A1)
 
-#define IN_2_ON TCCR1A |= (1 << COM1A1)
-#define IN_2_OFF TCCR1A &=~ (1 << COM1A1)
+#define IN_2_ON TCCR0A |= (1 << COM0A1)
+#define IN_2_OFF TCCR0A &=~ (1 << COM0A1)
 
 #define CHECK_IN_1  (TCCR0A & (1 << COM0A1))
 #define CHECK_IN_2  (TCCR1A & (1 << COM1A1))

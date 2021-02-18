@@ -16,14 +16,6 @@
 #include "pi_controller.h"
 #include "pwm.h"
 
-// Triggers when data is received
-ISR(USART0_RX_vect){
-	//reset_timeout(); // Resets timeout counter
-	// // Stores received data in variable
-
-	read_data(); // Reads data
-}
-
 int main(void)
 {
 	// Initialization 
@@ -38,12 +30,7 @@ int main(void)
 	// For testing
 	//set_point_angle = 1700;
 
-	// Reads and sets up voltage reference values used for steering (Disabled for Proteus)
-	
-	calibrate_steering();
-	//****(Enabled for Proteus)
-	//min_val = MAX_LIMIT;
-	//max_val = MIN_LIMIT;
+	calibrate_steering(); 
 	
 	sei();
     while (1) {

@@ -6,13 +6,8 @@
  */ 
 
 #include "global.h"
-#include "adc.h"
 
-// DEBUGGING
-#include "uart.h" //
-#include <stdio.h>//
-#include <string.h>// 
-char input_buffer[20];//
+#include "adc.h"
 
 // ADC Setup
 void adc_init(){
