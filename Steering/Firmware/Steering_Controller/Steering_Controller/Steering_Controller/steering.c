@@ -45,19 +45,19 @@ void calibrate_steering(){
 	min_val = MAX_LIMIT;
 	max_val = MIN_LIMIT;
 	
-	set_duty_cycle_IN1(MAX_LIMIT);
+	set_duty_cycle_IN1(2500);
 	find_ref();
 	IN_1_OFF;
 	
-	set_duty_cycle_IN2(MAX_LIMIT);
+	set_duty_cycle_IN2(2500);
 	find_ref();
 	IN_2_OFF;
 	
- 	sprintf(input_buffer, "Min value:	%i \n\r", min_val);
- 	usart0_transmit_string(input_buffer);
+//  	sprintf(input_buffer, "Min value:	%i \n\r", min_val);
+//  	usart0_transmit_string(input_buffer);
  	
- 	sprintf(input_buffer, "Max value:	%i \n\r", max_val);
- 	usart0_transmit_string(input_buffer);
+//  	sprintf(input_buffer, "Max value:	%i \n\r", max_val);
+//  	usart0_transmit_string(input_buffer);
 	
 	set_reference_values();
 	

@@ -16,13 +16,13 @@
 // Global Variables
 #define F_CPU 8000000UL
 #define BAUD_RATE 9600
-#define VREF 5000
+#define VREF 3300
 #define ADC_RES 1024
 
 // PI Controller 
 #define K_P 0.4 // Proportional Gain
-#define K_I 0.5 // Integral Gain
-#define MAX_LIMIT 5000 
+#define K_I 32 // Integral Gain
+#define MAX_LIMIT 3300 
 #define MIN_LIMIT 0
 #define SAMPLING_TIME 0.001
 
@@ -41,7 +41,7 @@ volatile int16_t set_point_angle;
 uint16_t turn_range;
 
 // Duty cycle to set PWM
-volatile uint16_t t_on;
+volatile int16_t t_on;
 
 // Timeout Counter
 #define MAX_TIMEOUT_COUNT 50 // in ms

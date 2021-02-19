@@ -72,9 +72,16 @@ void pwm0_init(){
  
  // Calculates the duty cycle 
  void calculate_t_on(uint16_t value){
- 	t_on =	(((uint32_t)value*255)/VREF); // Calculates duty cycle
+	sprintf(input_buffer, "Value:	%i \n\r", value);
+	usart0_transmit_string(input_buffer);
+	
+ 	t_on =	(((uint32_t)value * 255)/VREF); // Calculates duty cycle
+	 
+	sprintf(input_buffer, "T_On:	%i \n\r", t_on);
+ 	usart0_transmit_string(input_buffer);
  	
  	if (t_on > 255){ // Prevent overflow
  		t_on = 255;
-	}
+	} 
+	
  }

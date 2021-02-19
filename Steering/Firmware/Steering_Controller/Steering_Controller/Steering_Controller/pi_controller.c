@@ -36,20 +36,27 @@ void pi_controller(){
 	
 	// Disabled for Proteus (Uses calibration to find the range)
 	// Anti-wind-up for integrator
-	if(set_output > turn_range){
+	/*if(set_output > turn_range){
 		set_output = turn_range;
 	}
 	else if (set_output < turn_range * (-1)){
 		set_output = turn_range * (-1);
-	}
-
+	}*/
+ 	sprintf(input_buffer, "Input:	%i \n\r", input);
+ 	usart0_transmit_string(input_buffer);
 	// Sets the duty cycle on IN_1 or IN_2
-	if(set_output > 0){ // Turning Left (negative error)
+	if(set_output < 0){ // Turning Left (negative error)
+		sprintf(input_buffer, "Set Ouput IN1:	%i \n\r", set_output);
+		usart0_transmit_string(input_buffer);
 		set_duty_cycle_IN1(set_output * (-1));
 	}
 	else{				// Turning Right (positive error)
+		sprintf(input_buffer, "Set Ouput IN2:	%i \n\r", set_output);
+		usart0_transmit_string(input_buffer);
 		set_duty_cycle_IN2(set_output);
+		
 	}
+	
 }
 
 // PI Controller Function: Calculates Error

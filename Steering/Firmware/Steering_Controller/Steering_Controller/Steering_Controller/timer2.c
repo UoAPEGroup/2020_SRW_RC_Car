@@ -29,5 +29,6 @@ void timer2_init(){
 	TCCR2B |= (1 << CS22); // 64 Prescaler
 	OCR2A = 62; // 1ms Interrupt
 	//OCR2A = 124; // 2ms Interrupt
+	//OCR2A = 255; // 2ms Interrupt
 	TIMSK2 |= (1 << OCIE2A); // Output Compare A
 }
