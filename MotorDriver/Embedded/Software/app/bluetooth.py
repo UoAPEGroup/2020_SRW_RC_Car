@@ -180,47 +180,39 @@ maxID = cur.fetchone()
 maxID = maxID[0]
 
 #layout for the webpage
-bluetooth.layout = dbc.Container(
+bluetooth.layout = html.Div(
 
     children = [
 
         #create the header
         html.Div( 
-            dbc.Container(
-                dbc.Jumbotron(
+            
+            dbc.Jumbotron(
+                dbc.Container(
                 html.Div(
                     children = [
+                        html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"height": "10vw", "paddingLeft": "78vw", "marginTop": "-3vw"}),
                         html.Div (
                             children = [
-                            html.H1('RC Car Live Updates', className = "display-4", style = {"marginTop": "28vw", 'paddingTop': "1vw"}),
+                            html.H1('RC Car Live Updates', className = "display-4", style = {"marginTop": "50vh", 'paddingTop': "1vw"}),
                             html.Hr(style = {"margin-right": "57vw", "backgroundColor": "white"}),
                             html.P('UoA FoE Summer Workshop 2020', className = "lead", style = {"margin-top": "2vw"})], style = {}),
-                        html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"height": "10vw", "paddingLeft": "78vw", "marginTop": "-3vw"}),
-                ], style = {"marginLeft": "5vw", "color": "white"} ), fluid = True, style = {"backgroundImage": "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1465447142348-e9952c393450?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80)",
-                "backgroundPosition": "center center", "backgroundSize": "cover", "height": "45vw", "marginLeft": "0"}),
-            fluid = True),
+                ], style = {"marginLeft": "5vw", "color": "white"} ), fluid = True, style = {"width": "100vw"}), fluid = True, style = {"backgroundImage": "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1465447142348-e9952c393450?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80)",
+                "backgroundPosition": "center center", "backgroundSize": "cover", "height": "100vh", "width": "100vw", "marginLeft": "0"}),
         ),
         
         html.Div( [
-            dbc.Row(dbc.Col(dbc.Jumbotron(html.H1("Live Graphs", className = "display-4", style = {}), style = {"height": "10vw", "marginTop": "2vw", "marginLeft": "2vw", "backgroundColor": oxfordBlue}), width = 10), style = {} ),
-            dbc.Row( 
-                [ 
-                    dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 10), 
-                    dbc.Col( children = [
-                        dbc.Row(dbc.Col([dbc.Card( children = [dbc.CardBody(id = 'direction', className = "card-title", style = {"textAlign": "left"})], color = uoaDarkBlue, inverse = True, style = {"marginTop": "6vw", "float": "center"})], width = 12)),
-                        dbc.Row(dbc.Col([
-                            dbc.Button("System Ratings:", outline = False, id = "collapseButtonSR", style = {"backgroundColor": "#FAFAFA", "color": "black", "marginTop": "1vw"}), 
-                            dbc.Collapse(parameterTable, id = "collapseSR", style = {"marginTop": "0.5vw", "marginLeft": "0.2vw"})
-                        ], width = 12)),
-                        dbc.Row(dbc.Col(
-                            id = "safety",
-                        width = 12)),
-                        ], width = 2),
-                    
-
-                ],
-            ),
-        ],
+            dbc.Row(html.H1("Live Graphs", className = "display-4", style = {}), style = {"height": "10vh", "marginLeft": "5vw", "color": textColor, "backgroundColor": oxfordBlue}),
+            dbc.Row([
+                    dbc.Col(dbc.Row([
+                            html.Div(id = 'direction'), 
+                            html.Div(id = "safety"),
+                            dbc.Button("System Ratings:", className = "btn mr-3", id = "collapseButtonSR", style = {}), 
+                            dbc.Collapse(parameterTable, id = "collapseSR", style = {"marginLeft": "0.2vw"})]), width = 12, style = {"background": oxfordBlue, "paddingTop": "5vh"}),
+                    ],
+                    ),
+            dbc.Row(dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 12)),
+            ],
         ),
 
         dcc.Interval(
@@ -229,7 +221,7 @@ bluetooth.layout = dbc.Container(
         ),
 
         ],
-    fluid = True, style = {"backgroundColor" : oxfordBlue},
+    style = {"backgroundColor" : oxfordBlue, "width": "100vw"},
 )
 
 #system callbacks
@@ -271,12 +263,9 @@ def metric_update(self):
     return [
         html.Div(
             children = [
-            html.H2("Direction: ", className = "display-5", style = {"fontSize": "1.5vw"}),
-            html.Hr(style = {"backgroundColor": "white", "marginTop": "-0.3vw"}),
-            html.H4(directionAndSpeedString[0], className = "display-4", style = {"fontSize": "2.5vw", "marginTop": "-0.7vw"}), 
-            html.H2("Speed: ", className = "display-5", style = {"fontSize": "1.5vw", "marginTop": "2vw"}),
-            html.Hr(style = {"backgroundColor": "white", "marginTop": "-0.3vw"}),
-            html.H4(directionAndSpeedString[1], style = {"fontSize": "2.5vw", "marginTop": "-0.7vw"}, className = "display-4")],
+            dbc.Button(directionAndSpeedString[0], className = "btn mr-3", style = {"marginLeft": "6vw"}), 
+            dbc.Button(directionAndSpeedString[1], className = "btn mr-3"),
+            ]
         ),
     ]
 
@@ -297,12 +286,11 @@ def update_safety(self):
         establishedConnection = "success"
 
     return [
-        dbc.ButtonGroup ([
-        dbc.Button("OverVoltage", color = voltageColor, style = {"marginTop": "1vw"}), 
-        dbc.Button("OverCurrent", color = currentColor, style = {'marginTop': "0.5vw"}),
-        dbc.Button("Connection Established", color = establishedConnection, style = {"marginTop": "0.5vw"})
-        ], vertical = True, style = {}
-        ),
+        
+        dbc.Button("Over Voltage", color = voltageColor, className = "btn mr-3"), 
+        dbc.Button("Over Current", color = currentColor, className = "btn mr-3"),
+        dbc.Button("Connection Established", color = establishedConnection, className = "btn mr-3")
+
     ]
 
 @bluetooth.callback(Output('carData', 'figure'),
@@ -378,7 +366,7 @@ def update_graph(self):
     for i in fig['layout']['annotations']:
         i['font'] = dict(size=18)
 
-    fig.update_layout(xaxis_color = gridColor, paper_bgcolor = richBlack, plot_bgcolor = oxfordBlue, height = 800, font_color = textColor, showlegend = False),
+    fig.update_layout(paper_bgcolor = richBlack, plot_bgcolor = oxfordBlue, height = 800, font_color = textColor, showlegend = False),
 
     return fig
 
