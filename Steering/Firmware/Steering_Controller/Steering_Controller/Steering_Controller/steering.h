@@ -9,18 +9,9 @@
 #ifndef STEERING_H_
 #define STEERING_H_
 
-#include "global.h"
-#include "adc.h"
-#include "pwm.h"
-#include "led.h"
-
 void calibrate_steering();
 void find_ref();
 void set_reference_values();
- 
-volatile uint16_t min_val;
-volatile uint16_t max_val;
-volatile uint8_t calibration_flag;
 
 void set_half_r_turn();
 void set_full_r_turn();

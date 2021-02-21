@@ -43,29 +43,9 @@ int main(void)
 	DDRC &= ~(1 << DDC5) | ~(1 << DDC4) | ~(1 << DDC3); //THREE PINS
 	DDRD &= ~(1 << DDD2); //INT0
 
-	//stop all the timers
-	//GTCCR = ((1<<TSM)|(1<<PSRASY)|(1<<PSRSYNC)); 
-	
-// 	setSpeedGrade(STOP);
-// 	setInputV(10000);
-// 	setDirection(true); // true = forward, false = backward
-// 	updateDutyCycle();
-// 	
-// 	//initialize timers
-// 	timer0_init(returnFinalPeriod(),returnLeftOnTime());  // PWm that controls the left FET driver
-// 	timer2_init(returnFinalPeriod(),returnRightOnTime());  // PWM that controls the right FET driver
-	//initialize timers
-	//timer0_init(132, 62);  // PWm that controls the left FET driver
-	//timer2_init(132, 20); // PWM that controls the right FET driver
-	
 	timer1_init();
 	timer3_init();
-// 	
-// 	TCNT0 = 0;   // setting offset
-// 	TCNT2 = 0;  // setting offset(set to period to)
-// 
-// 	GTCCR = 0;   // start all timers
-	
+
 	char transmitValue[10];
 	
     while (1)

@@ -15,6 +15,4 @@ bool returnErrorCalcFlag();
 void setErrorCalcFlag();
 int32_t returnOutput();
 
-
-
 #endif /* PI_CONTROL_H_ */

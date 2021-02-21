@@ -1,26 +1,32 @@
-import time
-import psycopg2
-
-'''dash/ploty '''
+#dash/plotly 
 import dash
-from dash.dependencies import Output, Input
+import asyncio
+from dash.dependencies import Output, Input, State
+import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly
 import plotly.graph_objs as go
-import plotly.express as px
-import pandas as pd
-from collections import deque
 from plotly.subplots import make_subplots
-import dash_bootstrap_components as dbc
 
+#misc
+import time
+from datetime import datetime
+
+from collections import deque
+import psycopg2
+
+#local files
+from reuse import *
+
+#define SQL to read from online database
 global readNewestCarVCS, readNewestCarDS
 
 readNewestCarVCS = """ 
             SELECT voltage, current FROM carVCS WHERE id = %s
             """
 readNewestCarDS = """
-            SELECT direction, speedGrade FROM carDS WHERE id = 0
+            SELECT direction, speedGrade, overVoltage, overCurrent, establishedConnection FROM carDS WHERE id = 0
                 """
 
 def openDatabaseConnection():
@@ -36,187 +42,265 @@ def openDatabaseConnection():
     return con
 
 def updateValues(cur, currentId):
-    global direction, speedGrade
+    global systemParameters
 
     cur.execute(readNewestCarVCS, (currentId,))
 
-    values = cur.fetchall()
+    try: 
+        values = cur.fetchall()
 
-    voltageValues.append(values[0][0])
-    voltageMax.append(10000)
-    X.append(X[-1] + 1)
-    currentValues.append(values[0][1])
-    X2.append(X2[-1] + 1)
-    powerValues.append((values[0][0] * values[0][1])/1000)
-    X3.append(X3[-1] + 1)
+        if (values != None):
+            voltage = values[0][0]/1000
+            current = values[0][1]/1000
+            print(voltage)
 
-    cur.execute(readNewestCarDS)
+            power = voltage * current
 
-    values = cur.fetchall()
+            voltageValues.append(voltage)
+            currentValues.append(current)
+            powerValues.append(power)
 
-    direction = values[0][0]
-    speedGrade = values[0][1]
+            voltageMax.append(20)
+            currentMax.append(3)
+            
+            X.append(X[-1] + 1)
+            X2.append(X2[-1] + 1)
+            X3.append(X3[-1] + 1)
 
+        cur.execute(readNewestCarDS)
+    
+        values = cur.fetchall()
+        count = 0
 
-bluetooth = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+        for value in values:
+            systemParameters[count] = value
+            count = count + 1
+
+    except Exception: 
+        pass
+
+def returnDirectionAndSpeedString(direction, speedGrade):
+    directionAndSpeedString = []
+
+    directionString = {
+        0: "Forward",
+        1: "Reverse"
+    }
+
+    speedString = {
+        0: "Stopped",
+        1: "Min",
+        2: "Mid",
+        3: "Max"
+    }
+
+    directionAndSpeedString.append(directionString.get(direction, "Invalid"))
+    directionAndSpeedString.append((speedString.get(speedGrade, "Invalid")))
+
+    return directionAndSpeedString
+
+def initializeLists():
+    global X, X2, X3, X4, voltageValues, voltageMax, currentValues, currentMax, powerValues, speedValues
+
+    X = deque(maxlen = 20)
+    X.append(0)
+    voltageValues = deque(maxlen = 20)
+    voltageValues.append(0)
+
+    voltageMax = deque(maxlen = 20)
+    voltageMax.append(20)
+
+    X2 = deque(maxlen = 20)
+    X2.append(0)
+    currentValues = deque(maxlen = 20)
+    currentValues.append(0)
+
+    currentMax = deque(maxlen = 20)
+    currentMax.append(3)
+
+    X3 = deque(maxlen = 20)
+    X3.append(0)
+    powerValues = deque(maxlen = 20) 
+    powerValues.append(0)
+
+    X4 = deque(maxlen = 20)
+    X4.append(0)
+    speedValues = deque(maxlen = 20)
+    speedValues.append(0)
+
+bluetooth = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], update_title='Updating...')
 
 startTime = time.time()
 
-backgroundColor = 'white'
-headerColor = 'white'
-uoaLightBlue = '#009AC7'
-uoaDarkBlue = '#00457d'
-textColor = 'black'
+#initialize lists that will be the x and y values of graphs
+initializeLists()
 
-'''initalize lists that will hold the x and y values in graphs'''
-X = deque(maxlen = 20)
-voltageValues = deque(maxlen = 20)
-voltageMax = deque(maxlen = 20)
-X.append(0)
-voltageValues.append(0)
-voltageMax.append(10000)
+global maxID, systemParameters
+systemParameters = []
 
-X2 = deque(maxlen=20)
-currentValues = deque(maxlen = 20)
-X2.append(0)
-currentValues.append(0)
-
-X3 = deque(maxlen=20)
-powerValues = deque(maxlen = 20) 
-X3.append(0)
-powerValues.append(0)
-
-X4 = deque(maxlen = 20)
-speedValues = deque(maxlen = 20)
-X4.append(0)
-speedValues.append(0)
-
-''' create connection to database'''
+#open connection to database
 con = openDatabaseConnection()
 
 cur = con.cursor()
 
+#extract initial voltage, current, and speed values
 cur.execute(""" select * from carVCS order by id""")
-
 rows = cur.fetchall()
-
-'''update initial values for voltage/current '''
-
 for row in rows:
-    voltageValues.append(row[1])
-    voltageMax.append(10000)
+    voltage = row[1]/1000
+    current = row[2]/1000
+    power = voltage * current
+
+    voltageValues.append(voltage)
+    currentValues.append(current)
+    powerValues.append(power)
+    
+    voltageMax.append(20)
+
     X.append(X[-1] + 1)
-    currentValues.append(row[2])
     X2.append(X2[-1] + 1)
-    powerValues.append((row[1] * row[2])/1000)
     X3.append(X3[-1] + 1)
 
-'''store original direction and speedgrade''' 
-
+#extract initial system parameters (direction, speedGrade, and safety parameters)
 cur.execute(""" SELECT * FROM carDS """)
-
 rows = cur.fetchall()
 
-''' store the highest ID value and the direction/speedgrade'''
-global direction, speedGrade, maxID
+count = 0
+for row in rows:
+    systemParameters.append([row][count])
+    count = count + 1
 
-direction = rows[0][1]
-speedGrade = rows[0][2]
+for parameter in systemParameters:
+    print(parameter)
 
-cur.execute("""
-            SELECT MAX(id) FROM carVCS""")
+#identify the largest ID in the system (i.e., the last transmission sent by the uC)
+cur.execute("""SELECT MAX(id) FROM carVCS""")
 
 maxID = cur.fetchone()
 maxID = maxID[0]
 
-'''Layout for the web app'''
-bluetooth.layout = dbc.Container(
+#layout for the webpage
+bluetooth.layout = html.Div(
 
     children = [
-        
+
+        #create the header
         html.Div( 
-            dbc.Container(
-                dbc.Jumbotron(
+            
+            dbc.Jumbotron(
+                dbc.Container(
                 html.Div(
                     children = [
-                        html.H1('RC Car Live Updates', className = "display-3"),
-                        html.Hr(className = "my-2", style = {"margin-right": "50vw"}),
-                        html.P('UoA FoE Summer Workshop 2020', className = "lead", style = {"margin-top": "2vw"}),
-                ], style = {"margin-left": "2vw"} ), fluid = True, style = {"backgroundColor": "green !important"}),
-            fluid = True),
+                        html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"height": "10vw", "paddingLeft": "78vw", "marginTop": "-3vw"}),
+                        html.Div (
+                            children = [
+                            html.H1('RC Car Live Updates', className = "display-4", style = {"marginTop": "50vh", 'paddingTop': "1vw"}),
+                            html.Hr(style = {"margin-right": "57vw", "backgroundColor": "white"}),
+                            html.P('UoA FoE Summer Workshop 2020', className = "lead", style = {"margin-top": "2vw"})], style = {}),
+                ], style = {"marginLeft": "5vw", "color": "white"} ), fluid = True, style = {"width": "100vw"}), fluid = True, style = {"backgroundImage": "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1465447142348-e9952c393450?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80)",
+                "backgroundPosition": "center center", "backgroundSize": "cover", "height": "100vh", "width": "100vw", "marginLeft": "0"}),
         ),
         
-        html.Div(
-            
-            dbc.Row( 
-                [ 
-                    dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 10), 
-                    dbc.Col( children = [
-                        dbc.Row(dbc.Card( children = [dbc.CardHeader("System Information:"), dbc.CardBody(id = 'direction', className = "card-title")], color = uoaDarkBlue, inverse = True, outline = True), style = { "margin-top": "6vw"}),
-                        ], width = 2),
-                    
-
-                ],
-            ),
+        html.Div( [
+            dbc.Row(html.H1("Live Graphs", className = "display-4", style = {}), style = {"height": "10vh", "marginLeft": "5vw", "color": textColor, "backgroundColor": oxfordBlue}),
+            dbc.Row([
+                    dbc.Col(dbc.Row([
+                            html.Div(id = 'direction'), 
+                            html.Div(id = "safety"),
+                            dbc.Button("System Ratings:", className = "btn mr-3", id = "collapseButtonSR", style = {}), 
+                            dbc.Collapse(parameterTable, id = "collapseSR", style = {"marginLeft": "0.2vw"})]), width = 12, style = {"background": oxfordBlue, "paddingTop": "5vh"}),
+                    ],
+                    ),
+            dbc.Row(dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 12)),
+            ],
         ),
-        
-
 
         dcc.Interval(
             id='updateGraph',
-            interval = 1*1000,
-            n_intervals = 0
+            interval = 1*800,
         ),
 
         ],
-    fluid = True, style = {"backgroundColor" : "#FAFAFA"},
+    style = {"backgroundColor" : oxfordBlue, "width": "100vw"},
 )
+
+#system callbacks
+
+@bluetooth.callback(Output("collapseSR", "is_open"), 
+                    [Input("collapseButtonSR", "n_clicks")], 
+                    [State("collapseSR", "is_open")],)
+def toggleCollapseSR(n, is_open): 
+    if n:
+        return not is_open
+    return is_open
 
 @bluetooth.callback(Output('direction', 'children'),
                     Input('updateGraph', 'n_intervals'))
 def metric_update(self):
-    global direction, direction_string, speedGrade, speedGrade_string, maxID
+    global maxID, directionAndSpeedString, systemParameters
 
     ''' check if there's been an update to the database'''
 
     cur.execute("SELECT MAX(id) FROM carVCS")
-    currentId = cur.fetchone()
-    print(currentId[0])
 
-    currentId = currentId[0]
+    try: 
+        currentId = cur.fetchone()
 
-    if ((currentId != None) and (currentId > maxID)):
-        maxID = currentId
-        updateValues(cur, maxID)
+        if currentId != None: 
+            print(currentId[0])
 
-    if (direction == 1):
-        direction_string = "Forward"
-    else:
-        direction_string = "Reverse"
+            currentId = currentId[0]
 
-    if(speedGrade == 0):
-        speedGrade_string = "Braked"
-    elif(speedGrade == 1):
-        speedGrade_string = "Minimum Speed"
-    elif(speedGrade == 2):
-        speedGrade_string = "Medium Speed"
-    elif(speedGrade == 3):
-        speedGrade_string = "Maximum Speed"
+            if ((currentId != None) and (currentId > maxID)):
+                maxID = currentId
+                updateValues(cur, maxID)
+
+            directionAndSpeedString = returnDirectionAndSpeedString(systemParameters[0][0], systemParameters[0][1])
+
+    except Exception: 
+        pass
 
     return [
-            html.H4(direction_string), 
-            html.H4(speedGrade_string)]
+        html.Div(
+            children = [
+            dbc.Button(directionAndSpeedString[0], className = "btn mr-3", style = {"marginLeft": "6vw"}), 
+            dbc.Button(directionAndSpeedString[1], className = "btn mr-3"),
+            ]
+        ),
+    ]
 
+@bluetooth.callback(Output('safety', 'children'),
+                    Input('updateGraph', 'n_intervals'))
+def update_safety(self):
+    global systemParameters
 
+    voltageColor = "success"
+    currentColor = "success"
+    establishedConnection = "danger"
+
+    if systemParameters[0][2]:
+        voltageColor = "danger"
+    if systemParameters[0][3]:
+        currentColor = "danger"
+    if systemParameters[0][4]:
+        establishedConnection = "success"
+
+    return [
+        
+        dbc.Button("Over Voltage", color = voltageColor, className = "btn mr-3"), 
+        dbc.Button("Over Current", color = currentColor, className = "btn mr-3"),
+        dbc.Button("Connection Established", color = establishedConnection, className = "btn mr-3")
+
+    ]
 
 @bluetooth.callback(Output('carData', 'figure'),
                     [Input('updateGraph', 'n_intervals')])
 def update_graph(self):
 
     fig = make_subplots(
-        rows = 4, cols = 1, 
-        vertical_spacing = 0.1, 
-        subplot_titles = ("Voltage at H-Bridge vs Time", "Current at H-Bridge vs Time", "Motor Power vs. Time", "Car Speed vs. Time")
+        rows = 2, cols = 2, 
+        vertical_spacing = 0.2, 
+        subplot_titles = ("Voltage at H-Bridge vs Time", "Current at H-Bridge vs Time", "Motor Power vs. Time", "Car Speed vs. Time"),
     )
 
     fig.add_trace(
@@ -245,7 +329,7 @@ def update_graph(self):
             name = 'Current',
             mode = 'lines+markers',
         ),
-        row = 2, col = 1)
+        row = 1, col = 2)
 
     fig.add_trace(
         go.Scatter(
@@ -254,7 +338,7 @@ def update_graph(self):
             name = 'Power',
             mode = 'lines+markers',
         ),
-        row = 3, col = 1
+        row = 2, col = 1
     ) 
 
     fig.add_trace(
@@ -264,25 +348,30 @@ def update_graph(self):
             name = "Speed",
             mode = "lines+markers"
         ),
-        row = 4, col = 1
+        row = 2, col = 2
     )
 
-    fig.update_xaxes(title_text = "time(s)", range = [min(X) - 1, max(X) + 1], row = 1, col = 1)
-    fig.update_xaxes(title_text = "time(s)", range = [min(X2) - 1, max(X2) + 1], row = 2, col = 1)
-    fig.update_xaxes(title_text = "time(s)", range = [min(X3) - 1, max(X3) + 1], row = 3, col = 1)
-    fig.update_xaxes(title_text = "time(s)", range = [min(X4) - 1, max(X4) + 1], row = 4, col = 1)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X) - 1, max(X) + 1], row = 1, col = 1)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X2) - 1, max(X2) + 1], row = 1, col = 2)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X3) - 1, max(X3) + 1], row = 2, col = 1)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X4) - 1, max(X4) + 1], row = 2, col = 2)
 
-    fig.update_yaxes(title_text = "voltage(mV)", range = [min(voltageValues) - 0.25*(min(voltageValues)), max(voltageValues) + 0.25*(max(voltageValues))], row = 1, col = 1)
-    fig.update_yaxes(title_text = "current(mA)", range = [min(currentValues) - 0.25 *(min(currentValues)), max(currentValues) + 0.25 * (max(currentValues))], row = 2, col = 1)
-    fig.update_yaxes(title_text = "power(mW)", range = [min(powerValues) - 0.25 *(min(powerValues)), max(powerValues) + 0.25 * (max(powerValues))], row = 3, col = 1)
-    fig.update_yaxes(title_text = "speed(m/s)", range = [min(speedValues) - 0.25 * (min(speedValues)), max(speedValues) + 0.25 * (max(speedValues))], row = 4, col = 1)
+    axesCoefficient = 0.1
 
-    fig.update_layout(paper_bgcolor = backgroundColor, height = 1000, font_color = textColor)
+    fig.update_yaxes(title_text = "Voltage(V)", gridcolor = gridColor, range = [min(voltageValues) - axesCoefficient*(min(voltageValues)), max(voltageValues) + axesCoefficient*(max(voltageValues))], row = 1, col = 1)
+    fig.update_yaxes(title_text = "Current(A)", gridcolor = gridColor, range = [min(currentValues) - axesCoefficient *(min(currentValues)), max(currentValues) + axesCoefficient * (max(currentValues))], row = 1, col = 2)
+    fig.update_yaxes(title_text = "Power(W)", gridcolor = gridColor, range = [min(powerValues) - axesCoefficient *(min(powerValues)), max(powerValues) + axesCoefficient * (max(powerValues))], row = 2, col = 1)
+    fig.update_yaxes(title_text = "Speed(m/s)", gridcolor = gridColor, range = [min(speedValues) - axesCoefficient * (min(speedValues)), max(speedValues) + axesCoefficient * (max(speedValues))], row = 2, col = 2)
+
+    for i in fig['layout']['annotations']:
+        i['font'] = dict(size=18)
+
+    fig.update_layout(paper_bgcolor = richBlack, plot_bgcolor = oxfordBlue, height = 800, font_color = textColor, showlegend = False),
 
     return fig
 
 if __name__ == '__main__':    
-
+    
     bluetooth.run_server(debug=True, use_reloader = False)
     cur.close()
     con.close()
