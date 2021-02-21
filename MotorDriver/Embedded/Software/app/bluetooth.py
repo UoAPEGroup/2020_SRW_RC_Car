@@ -61,6 +61,7 @@ def updateValues(cur, currentId):
             powerValues.append(power)
 
             voltageMax.append(20)
+            currentMax.append(3)
             
             X.append(X[-1] + 1)
             X2.append(X2[-1] + 1)
@@ -99,7 +100,7 @@ def returnDirectionAndSpeedString(direction, speedGrade):
     return directionAndSpeedString
 
 def initializeLists():
-    global X, X2, X3, X4, voltageValues, voltageMax, currentValues, powerValues, speedValues
+    global X, X2, X3, X4, voltageValues, voltageMax, currentValues, currentMax, powerValues, speedValues
 
     X = deque(maxlen = 20)
     X.append(0)
@@ -113,6 +114,9 @@ def initializeLists():
     X2.append(0)
     currentValues = deque(maxlen = 20)
     currentValues.append(0)
+
+    currentMax = deque(maxlen = 20)
+    currentMax.append(3)
 
     X3 = deque(maxlen = 20)
     X3.append(0)
@@ -198,19 +202,19 @@ bluetooth.layout = dbc.Container(
         ),
         
         html.Div( [
-            dbc.Row(dbc.Col(dbc.Jumbotron(html.H1("Live Graphs", className = "display-4", style = {}), style = {"height": "10vw", "marginTop": "2vw", "marginLeft": "2vw", "backgroundColor": "#FAFAFA"}), width = 10), style = {} ),
+            dbc.Row(dbc.Col(dbc.Jumbotron(html.H1("Live Graphs", className = "display-4", style = {}), style = {"height": "10vw", "marginTop": "2vw", "marginLeft": "2vw", "backgroundColor": oxfordBlue}), width = 10), style = {} ),
             dbc.Row( 
                 [ 
                     dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 10), 
                     dbc.Col( children = [
-                        dbc.Row(dbc.Card( children = [dbc.CardBody(id = 'direction', className = "card-title", style = {"textAlign": "left"})], color = uoaDarkBlue, inverse = True, style = {"marginTop": "6vw"})),
-                        dbc.Row([
+                        dbc.Row(dbc.Col([dbc.Card( children = [dbc.CardBody(id = 'direction', className = "card-title", style = {"textAlign": "left"})], color = uoaDarkBlue, inverse = True, style = {"marginTop": "6vw", "float": "center"})], width = 12)),
+                        dbc.Row(dbc.Col([
                             dbc.Button("System Ratings:", outline = False, id = "collapseButtonSR", style = {"backgroundColor": "#FAFAFA", "color": "black", "marginTop": "1vw"}), 
                             dbc.Collapse(parameterTable, id = "collapseSR", style = {"marginTop": "0.5vw", "marginLeft": "0.2vw"})
-                        ]),
-                        dbc.Row(
+                        ], width = 12)),
+                        dbc.Row(dbc.Col(
                             id = "safety",
-                        ),
+                        width = 12)),
                         ], width = 2),
                     
 
@@ -225,7 +229,7 @@ bluetooth.layout = dbc.Container(
         ),
 
         ],
-    fluid = True, style = {"backgroundColor" : "#FAFAFA"},
+    fluid = True, style = {"backgroundColor" : oxfordBlue},
 )
 
 #system callbacks
@@ -259,7 +263,7 @@ def metric_update(self):
                 maxID = currentId
                 updateValues(cur, maxID)
 
-            directionAndSpeedString = returnDirectionAndSpeedString(systemParameters[0][1], systemParameters[0][1])
+            directionAndSpeedString = returnDirectionAndSpeedString(systemParameters[0][0], systemParameters[0][1])
 
     except Exception: 
         pass
@@ -359,22 +363,22 @@ def update_graph(self):
         row = 2, col = 2
     )
 
-    fig.update_xaxes(title_text = "time(s)", gridcolor = lightGray, range = [min(X) - 1, max(X) + 1], row = 1, col = 1)
-    fig.update_xaxes(title_text = "time(s)", gridcolor = lightGray, range = [min(X2) - 1, max(X2) + 1], row = 1, col = 2)
-    fig.update_xaxes(title_text = "time(s)", gridcolor = lightGray, range = [min(X3) - 1, max(X3) + 1], row = 2, col = 1)
-    fig.update_xaxes(title_text = "time(s)", gridcolor = lightGray, range = [min(X4) - 1, max(X4) + 1], row = 2, col = 2)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X) - 1, max(X) + 1], row = 1, col = 1)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X2) - 1, max(X2) + 1], row = 1, col = 2)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X3) - 1, max(X3) + 1], row = 2, col = 1)
+    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X4) - 1, max(X4) + 1], row = 2, col = 2)
 
     axesCoefficient = 0.1
 
-    fig.update_yaxes(title_text = "Voltage(V)", gridcolor = lightGray, range = [min(voltageValues) - axesCoefficient*(min(voltageValues)), max(voltageValues) + axesCoefficient*(max(voltageValues))], row = 1, col = 1)
-    fig.update_yaxes(title_text = "Current(A)", gridcolor = lightGray, range = [min(currentValues) - axesCoefficient *(min(currentValues)), max(currentValues) + axesCoefficient * (max(currentValues))], row = 1, col = 2)
-    fig.update_yaxes(title_text = "Power(W)", gridcolor = lightGray, range = [min(powerValues) - axesCoefficient *(min(powerValues)), max(powerValues) + axesCoefficient * (max(powerValues))], row = 2, col = 1)
-    fig.update_yaxes(title_text = "Speed(m/s)", gridcolor = lightGray, range = [min(speedValues) - axesCoefficient * (min(speedValues)), max(speedValues) + axesCoefficient * (max(speedValues))], row = 2, col = 2)
+    fig.update_yaxes(title_text = "Voltage(V)", gridcolor = gridColor, range = [min(voltageValues) - axesCoefficient*(min(voltageValues)), max(voltageValues) + axesCoefficient*(max(voltageValues))], row = 1, col = 1)
+    fig.update_yaxes(title_text = "Current(A)", gridcolor = gridColor, range = [min(currentValues) - axesCoefficient *(min(currentValues)), max(currentValues) + axesCoefficient * (max(currentValues))], row = 1, col = 2)
+    fig.update_yaxes(title_text = "Power(W)", gridcolor = gridColor, range = [min(powerValues) - axesCoefficient *(min(powerValues)), max(powerValues) + axesCoefficient * (max(powerValues))], row = 2, col = 1)
+    fig.update_yaxes(title_text = "Speed(m/s)", gridcolor = gridColor, range = [min(speedValues) - axesCoefficient * (min(speedValues)), max(speedValues) + axesCoefficient * (max(speedValues))], row = 2, col = 2)
 
     for i in fig['layout']['annotations']:
         i['font'] = dict(size=18)
 
-    fig.update_layout(paper_bgcolor = "white", plot_bgcolor = "white", height = 800, font_color = textColor, showlegend = True),
+    fig.update_layout(xaxis_color = gridColor, paper_bgcolor = richBlack, plot_bgcolor = oxfordBlue, height = 800, font_color = textColor, showlegend = False),
 
     return fig
 
