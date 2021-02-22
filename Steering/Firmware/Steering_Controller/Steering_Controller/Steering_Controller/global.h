@@ -20,8 +20,8 @@
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 0.4 // Proportional Gain
-#define K_I 32 // Integral Gain
+#define K_P 0.8 // Proportional Gain
+#define K_I 4 // Integral Gain
 #define MAX_LIMIT 3300 
 #define MIN_LIMIT 0
 #define SAMPLING_TIME 0.001

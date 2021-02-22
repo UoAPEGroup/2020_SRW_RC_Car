@@ -28,8 +28,7 @@ void pin_init(){
 }
 
 // Decodes data in the Receiver Buffer
-void read_data() {
-	
+void read_data() {	
 	input_data = UDR0;
 	set_direction(); // Sets Direction 
 	set_speed(); // Sets Speed 
@@ -38,8 +37,7 @@ void read_data() {
 	
 	STATE_INT_TOGGLE; // Triggers state interrupt
 	
-	//print_refs();
-	
+	print_refs();
 	
 	tx_debug(input_data); // Echoes back input data (Enabled for testing)
 }
@@ -86,7 +84,7 @@ void set_turn_angle(){
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
-			set_half_l_turn(); 
+			set_half_l_turn(); -
 			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
 			usart0_transmit_string(input_buffer); //
 		}

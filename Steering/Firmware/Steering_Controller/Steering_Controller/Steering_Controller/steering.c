@@ -40,24 +40,21 @@ static uint16_t straight_turn;
 // Works on two assumptions:
 // - Low voltage = Left, High voltage = Right
 // - Input pins to motor are correctly connected (E.G so IN1 High = Motor goes left)
+// - BLACK Wire -> OUT1, and RED Wire -> OUT2
 void calibrate_steering(){
 	//  Sets maximum and minimum voltage ranges (Disabled for Proteus)
 	min_val = MAX_LIMIT;
 	max_val = MIN_LIMIT;
 	
-	set_duty_cycle_IN1(2500);
-	find_ref();
-	IN_1_OFF;
 	
-	set_duty_cycle_IN2(2500);
+	
+	set_duty_cycle_IN2(MAX_LIMIT * 0.7);
 	find_ref();
 	IN_2_OFF;
 	
-//  	sprintf(input_buffer, "Min value:	%i \n\r", min_val);
-//  	usart0_transmit_string(input_buffer);
- 	
-//  	sprintf(input_buffer, "Max value:	%i \n\r", max_val);
-//  	usart0_transmit_string(input_buffer);
+	set_duty_cycle_IN1(MAX_LIMIT * 0.7);
+	find_ref();
+	IN_1_OFF;
 	
 	set_reference_values();
 	
@@ -100,20 +97,15 @@ void set_reference_values(){
 	// Voltage range for turn
 	turn_range = full_r_turn - full_l_turn;
 	
-	sprintf(input_buffer, "straight_turn:	%i \n\r", straight_turn);
-	usart0_transmit_string(input_buffer);
-	
-	sprintf(input_buffer, "half_l_turn:	%i \n\r", half_l_turn);
-	usart0_transmit_string(input_buffer);
-	
-	sprintf(input_buffer, "half_r_turn:	%i \n\r",half_r_turn);
-	usart0_transmit_string(input_buffer);
-	
-	sprintf(input_buffer, "turn_range:	%i \n\r", turn_range);
-	usart0_transmit_string(input_buffer);
 }
 
 void print_refs(){
+	 sprintf(input_buffer, "Min value:	%i \n\r", min_val);
+	 usart0_transmit_string(input_buffer);
+	  	
+	 sprintf(input_buffer, "Max value:	%i \n\r", max_val);
+	 usart0_transmit_string(input_buffer);
+	
 	sprintf(input_buffer, "straight_turn:	%i \n\r", straight_turn);
 	usart0_transmit_string(input_buffer);
 	

@@ -16,6 +16,11 @@
 #include "pi_controller.h"
 #include "pwm.h"
 
+#include "uart.h" //
+#include <stdio.h>//
+#include <string.h>//
+char input_buffer[20];//
+
 int main(void)
 {
 	// Initialization 
@@ -26,7 +31,10 @@ int main(void)
 	pwm1_init(); 
 	timer2_init();
 	adc_init();	
-
+	
+	sprintf(input_buffer, "RESET");
+	usart0_transmit_string(input_buffer);
+	
 	// For testing
 	//set_point_angle = 1700;
 
