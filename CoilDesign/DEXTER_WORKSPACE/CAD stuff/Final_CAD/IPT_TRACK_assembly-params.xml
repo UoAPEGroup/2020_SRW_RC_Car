@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParamWithValueList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <version>20080502</version>
+  <parameterTypes>
+    <ParamType>
+      <typeName>Inventor</typeName>
+      <typeCode>0</typeCode>
+    </ParamType>
+    <ParamType>
+      <typeName>String</typeName>
+      <typeCode>1</typeCode>
+    </ParamType>
+    <ParamType>
+      <typeName>Boolean</typeName>
+      <typeCode>2</typeCode>
+    </ParamType>
+  </parameterTypes>
+  <parameters>
+    <ParamWithValue>
+      <name>d0</name>
+      <typeCode>mm</typeCode>
+      <value>0.000 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>d1</name>
+      <typeCode>mm</typeCode>
+      <value>0.000 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>d2</name>
+      <typeCode>mm</typeCode>
+      <value>0.000 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>d3</name>
+      <typeCode>mm</typeCode>
+      <value>0.000 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>track_length</name>
+      <typeCode>mm</typeCode>
+      <value>800 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>track_width</name>
+      <typeCode>mm</typeCode>
+      <value>300 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>layer_length</name>
+      <typeCode>mm</typeCode>
+      <value>800 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>layer_width</name>
+      <typeCode>mm</typeCode>
+      <value>400 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>real_sheet_width</name>
+      <typeCode>mm</typeCode>
+      <value>500 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>ferrite_length</name>
+      <typeCode>mm</typeCode>
+      <value>109 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>ferrite_width</name>
+      <typeCode>mm</typeCode>
+      <value>15 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>ferrite_height</name>
+      <typeCode>mm</typeCode>
+      <value>8 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>number_of_ferrites</name>
+      <typeCode>ul</typeCode>
+      <value>7 ul</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>edge_gap_distance</name>
+      <typeCode>mm</typeCode>
+      <value>14.5 mm</value>
+      <comment>pls dont change this</comment>
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>parameter_2</name>
+      <typeCode>mm</typeCode>
+      <value>30 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>parameter_5</name>
+      <typeCode>mm</typeCode>
+      <value>( track_length - 2 ul * edge_gap_distance - 15 mm ) / ( number_of_ferrites - 1 ul )</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>parameter_6</name>
+      <typeCode>mm</typeCode>
+      <value>120 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>bolt_diameter</name>
+      <typeCode>mm</typeCode>
+      <value>8 mm</value>
+      <comment>M8 bolts</comment>
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>number_of_bolts</name>
+      <typeCode>ul</typeCode>
+      <value>5 ul</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>x_offset_for_bolts</name>
+      <typeCode>mm</typeCode>
+      <value>20 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>y_offset_for_bolts</name>
+      <typeCode>mm</typeCode>
+      <value>25 mm + 150 mm</value>
+      <comment>bolt holes at 500mm: 75mm+150mm                            bolt holes at 400mm: 25mm+150mm</comment>
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>wire_diameter</name>
+      <typeCode>mm</typeCode>
+      <value>4.5 mm</value>
+      <comment>CONSTANT</comment>
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>distance_between_wires</name>
+      <typeCode>mm</typeCode>
+      <value>( parameter_6 - 6 ul * wire_diameter ) / 5 ul</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>distance_between_wires_edge</name>
+      <typeCode>mm</typeCode>
+      <value>( parameter_2 - 3 ul * wire_diameter ) / 2 ul</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>bend_radius_inner</name>
+      <typeCode>mm</typeCode>
+      <value>15 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>bend_radius_outer</name>
+      <typeCode>mm</typeCode>
+      <value>bend_radius_inner + 3.5 mm</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>wall_length</name>
+      <typeCode>mm</typeCode>
+      <value>track_length</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>wall_width</name>
+      <typeCode>mm</typeCode>
+      <value>( layer_width - track_width ) / 2 ul</value>
+      <comment />
+      <isKey>false</isKey>
+    </ParamWithValue>
+    <ParamWithValue>
+      <name>wall_thickness</name>
+      <typeCode>mm</typeCode>
+      <value>25 mm</value>
+      <comment>need to be atleast 25mm!</comment>
+      <isKey>false</isKey>
+    </ParamWithValue>
+  </parameters>
+</ParamWithValueList>
