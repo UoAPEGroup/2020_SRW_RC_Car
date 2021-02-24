@@ -31,7 +31,7 @@ void adc_init() {
 	DIDR0 = 0xff;													// Disable digital input buffer (Must be written to logic 1)
 	
 	
-	ADMUX |= 2;														// Select channel 2 for steering ADC input
+	ADMUX |= (1 << MUX1);														// Select channel 2 for steering ADC input
 }
 
 
