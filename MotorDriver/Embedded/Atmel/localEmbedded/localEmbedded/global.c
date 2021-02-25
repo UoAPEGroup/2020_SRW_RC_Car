@@ -9,7 +9,10 @@
 #include <stdbool.h> 
 
 //make sure these are true when running actual code
-volatile bool lostRemoteConnection = false;
+volatile bool lostRemoteConnection = true;
 volatile bool overCurrent = false;
 volatile bool overVoltage = false;
 volatile bool establishedConnection = false;
+
+volatile uint8_t rotCount = 0;
+volatile uint8_t oneSecCounter = 0;

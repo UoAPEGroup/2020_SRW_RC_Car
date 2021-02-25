@@ -9,11 +9,14 @@
 #define A_int		1024															//amplitude interval 2^10 = 1024
 
 //threshold values for protection -> trigger halt ***UPDATE FOR FINAL IMPLEMENTATION***
-#define rated_V		664																//~60V
-#define rated_C		1023															//for testing only 
-#define rated_T1	1023															//for testing only 
-#define rated_T2	1023															//for testing only 
-#define rated_T3	1023															//for testing only 
+#define rated_V		721																//~60V
+#define rated_C		1023 															//for testing only 
+#define rated_T1	550																//~78deg
+#define rated_T2	550																//~78deg
+#define rated_T3	550																//~78deg
+
+#define V_GAIN		(28500 / 1100)
+#define C_GAIN 
 
 #define ADC_used	5																//number of adc channels in use
 

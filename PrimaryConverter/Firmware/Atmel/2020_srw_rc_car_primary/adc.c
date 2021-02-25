@@ -73,7 +73,7 @@ ISR(ADC_vect) {
 	} else if (temp1_counter < SAMPLING_SIZE) {								//temp1 readings
 		TIMER1_COMPB_CLR;
 		adc_temp1[temp1_counter] = ADC;
-		if (adc_temp1[temp1_counter] >= rated_T1) {							//check for rated value
+		if (adc_temp1[temp1_counter] <= rated_T1) {							//check for rated value
 			set_overT1_flag();
 			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
@@ -86,7 +86,7 @@ ISR(ADC_vect) {
 	} else if (temp2_counter < SAMPLING_SIZE) {								//temp2 readings
 		TIMER1_COMPB_CLR;
 		adc_temp2[temp2_counter] = ADC;
-		if (adc_temp2[temp2_counter] >= rated_T2) {							//check for rated value
+		if (adc_temp2[temp2_counter] <= rated_T2) {							//check for rated value
 			set_overT2_flag();
 			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
@@ -99,7 +99,7 @@ ISR(ADC_vect) {
 	} else if (temp3_counter < SAMPLING_SIZE) {								//temp3 readings
 		TIMER1_COMPB_CLR;
 		adc_temp3[temp3_counter] = ADC;
-		if (adc_temp3[temp3_counter] >= rated_T3) {							//check for rated value
+		if (adc_temp3[temp3_counter] <= rated_T3) {							//check for rated value
 			set_overT3_flag();
 			halt_safety_function();											//halt all timers to stop PWM signal generation
 		}
@@ -134,11 +134,11 @@ uint16_t adc_read(uint8_t channel) {
 //amended by Andrey
 void adc_convert_all() {  
 	for (uint8_t i = 0; i < SAMPLING_SIZE; i++) {
-		adc_voltage_conv[i] = ((uint32_t)adc_voltage[i] * V_ref) / A_int;
+		adc_voltage_conv[i] = (((uint32_t)adc_voltage[i] * V_ref) / A_int) * V_GAIN;
 		adc_current_conv[i] = ((uint32_t)adc_current[i] * V_ref) / A_int;
-		adc_temp1_conv[i] = ((uint32_t)adc_temp1[i] * V_ref) / A_int;
-		adc_temp2_conv[i] = ((uint32_t)adc_temp2[i] * V_ref) / A_int;
-		adc_temp3_conv[i] = ((uint32_t)adc_temp3[i] * V_ref) / A_int;
+		adc_temp1_conv[i] = ((3500 - (int32_t)(((uint32_t)adc_temp1[i] * V_ref) / A_int)) / 22);
+		adc_temp2_conv[i] = ((3500 - (int32_t)(((uint32_t)adc_temp2[i] * V_ref) / A_int)) / 22);
+		adc_temp3_conv[i] = ((3500 - (int32_t)(((uint32_t)adc_temp3[i] * V_ref) / A_int)) / 22);
 	}							
 }
 

@@ -5,13 +5,22 @@
  *  Author: npat692
  */ 
 
+#include <avr/interrupt.h>
+
+#include "global.h"
 #include "uart.h"
 #include "control.h"
 #include "steering.h"
 
 #include "string.h"
 
-
+// Triggers when data is received
+ISR(USART0_RX_vect){
+	//reset_timeout(); // Resets timeout counter
+	// // Stores received data in variable
+	//tx_debug(); // Echoes back input data (Enabled for testing)
+	read_data(); // Reads data
+}
 
 // UART Initialization
 void uart_init(){

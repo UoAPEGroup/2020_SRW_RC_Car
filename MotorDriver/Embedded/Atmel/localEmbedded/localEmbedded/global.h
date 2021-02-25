@@ -17,7 +17,7 @@
 #define MIN_VOLTAGE 5000
 #define STOP 0
 
-#define REQUIRED_INTERRUPT_COUNT 4
+#define REQUIRED_INTERRUPT_COUNT 2
 
 extern volatile bool lostRemoteConnection;
 extern volatile bool overCurrent;
@@ -25,6 +25,7 @@ extern volatile bool overVoltage;
 extern volatile bool establishedConnection;
 
 extern volatile uint8_t rotCount;
+extern volatile uint8_t oneSecCounter;
 
 
 #endif /* GLOBAL_H_ */

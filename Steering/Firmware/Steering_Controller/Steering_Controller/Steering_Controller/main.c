@@ -16,36 +16,32 @@
 #include "pi_controller.h"
 #include "pwm.h"
 
-// Triggers when data is received
-ISR(USART0_RX_vect){
-	//reset_timeout(); // Resets timeout counter
-	// // Stores received data in variable
-
-	read_data(); // Reads data
-}
+#include "uart.h" //
+#include <stdio.h>//
+#include <string.h>//
+char input_buffer[20];//
 
 int main(void)
 {
 	// Initialization 
-	pin_init();
-	led_init();
+	
+ 	pin_init();
+ 	led_init();
 	uart_init();
 	pwm0_init();
 	pwm1_init(); 
 	timer2_init();
 	adc_init();	
-
+	
+// 	sprintf(input_buffer, "RESET");
+// 	usart0_transmit_string(input_buffer);
+// 	
 	// For testing
 	//set_point_angle = 1700;
 
-	// Reads and sets up voltage reference values used for steering (Disabled for Proteus)
-	//calibrate_steering(); 
+	/*calibrate_steering(); */
 	
-	//****(Enabled for Proteus)
-	//min_val = MAX_LIMIT;
-	//max_val = MIN_LIMIT;
-	
-	//sei();
+	sei();
     while (1) {
 		//****(Enabled for Proteus)
 

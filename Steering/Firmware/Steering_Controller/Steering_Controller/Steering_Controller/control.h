@@ -19,6 +19,7 @@ void read_data();
 void set_direction();
 void set_speed();
 void set_turn_angle();
+void manual_steering();
 
 // SPEED CONTROL SETTER FUNCTIONS
 void set_no_speed();
@@ -54,6 +55,5 @@ void set_high_speed();
 
 #define SPD_1_H PORTC |= (1 << PC3)
 #define SPD_1_L PORTC &=~ (1 << PC3)
-
 
 #endif /* CONTROL_H_ */

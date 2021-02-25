@@ -23,7 +23,7 @@ int main(void)
 {	
 	//wdt_reset();
 																																											
-	io_init();
+ 	io_init();
 	adc_init();
 	usart0_init(9600);
 	sei();

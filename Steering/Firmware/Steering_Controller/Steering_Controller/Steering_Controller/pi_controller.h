@@ -9,11 +9,6 @@
 #ifndef PI_CONTROLLER_H_
 #define PI_CONTROLLER_H_
 
-#include "global.h"
-#include "adc.h"
-#include "led.h"
-#include "pwm.h"
-
 void pi_setup();
 void pi_controller();
 int16_t compute_pi(uint16_t input);

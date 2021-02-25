@@ -75,6 +75,11 @@ ISR(INT0_vect) {
 		
 }
 
+ISR(PCINT0_vect){
+	rotCount++;
+	/*PORTD ^= (1 << DDD4);*/
+}
+
 void resetInterruptCount() {
 	interruptCount = 0;
 }
@@ -91,9 +96,14 @@ ISR(TIMER3_COMPA_vect) {
 	DDRB |= (1 << DDB1);
 	PORTB ^= (1 << DDB1);
 	
+	//encoder second counter
+	oneSecCounter++;
+	/*PORTD ^= (1 << DDD4);*/
+
+// 	establishedConnection = true;
+// 	lostRemoteConnection = false;
 	if (returnInterruptCount() >= (REQUIRED_INTERRUPT_COUNT)) {
 		lostRemoteConnection = false;
-		
 		if (!establishedConnection) {
 			consecutiveChange++;
 			if (consecutiveChange >= 15) {
@@ -106,6 +116,7 @@ ISR(TIMER3_COMPA_vect) {
 		lostRemoteConnection = true; //set lost remote connection flag to true
 		establishedConnection = false;
 		consecutiveChange = 0;
+		//setSpeedGrade(STOP);
 		setRequiredSpeedGrade(STOP);
 	}
 	
@@ -114,10 +125,15 @@ ISR(TIMER3_COMPA_vect) {
 }
 
 //set up external interrupt on INT0 pin
-void interrupt_init() {
+void stChangeInterrupt_init() {
 	
 	EICRA |= (1 << ISC00);
 	EIMSK |= (1 << INT0);
+}
+
+void encoderInterrupt_init(){
+	PCICR |= (1 << PCIE0); // pin change interrupt PCINT[0:7]
+	PCMSK0 |= (1 << PCINT2);// Set PB2 to change interrupt
 }
 
 

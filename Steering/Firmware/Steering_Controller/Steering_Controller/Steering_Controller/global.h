@@ -16,22 +16,22 @@
 // Global Variables
 #define F_CPU 8000000UL
 #define BAUD_RATE 9600
-#define VREF 5000
+#define VREF 3300
 #define ADC_RES 1024
 
 // PI Controller 
-#define K_P 1.2
-#define K_I 1
-#define MAX_LIMIT 5000
+#define K_P 0.8 // Proportional Gain
+#define K_I 4 // Integral Gain
+#define MAX_LIMIT 3300 
 #define MIN_LIMIT 0
 #define SAMPLING_TIME 0.001
 
 // Steering Motor Control
-#define IN_1_ON TCCR0A |= (1 << COM0A1)
-#define IN_1_OFF TCCR0A &=~ (1 << COM0A1)
+#define IN_1_ON TCCR1A |= (1 << COM1A1)
+#define IN_1_OFF TCCR1A &=~ (1 << COM1A1)
 
-#define IN_2_ON TCCR1A |= (1 << COM1A1)
-#define IN_2_OFF TCCR1A &=~ (1 << COM1A1)
+#define IN_2_ON TCCR0A |= (1 << COM0A1)
+#define IN_2_OFF TCCR0A &=~ (1 << COM0A1)
 
 #define CHECK_IN_1  (TCCR0A & (1 << COM0A1))
 #define CHECK_IN_2  (TCCR1A & (1 << COM1A1))
@@ -41,7 +41,7 @@ volatile int16_t set_point_angle;
 uint16_t turn_range;
 
 // Duty cycle to set PWM
-volatile uint16_t t_on;
+volatile int16_t t_on;
 
 // Timeout Counter
 #define MAX_TIMEOUT_COUNT 50 // in ms
