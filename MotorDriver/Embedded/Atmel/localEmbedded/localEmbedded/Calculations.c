@@ -22,11 +22,11 @@
 #define CURRENT_SENSOR_GAIN_MV 400
 #define CURRENT_SENSOR_OFFSET_MV 250
 #define VOLTAGE_VD_MV 6600
-#define MAXV 20000
-#define MAXI 3000
+#define MAXV 12000
+#define MAXI 2500
 
-#define RAMPTOLERANCE 3000
-#define RAMPINCREMENT 2000
+#define RAMPTOLERANCE 100 
+#define RAMPINCREMENT 100
 
 //declare variables
 static volatile uint8_t finalOnTime = 0; //on time of the wave through the motor(in number of counts)
@@ -136,6 +136,7 @@ void convertVoltageAndCurrent() {
 	if (inputI >= MAXI) {
 		overCurrent = true;
 		setRequiredSpeedGrade(STOP);
+		//setSpeedGrade(STOP);
 	}
 	else {
 		overCurrent = false;
@@ -144,6 +145,7 @@ void convertVoltageAndCurrent() {
 	if (inputV >= MAXV) {
 		overVoltage = true;
 		setRequiredSpeedGrade(STOP);
+		//setSpeedGrade(STOP);
 	}
 	else {
 		overVoltage = false;

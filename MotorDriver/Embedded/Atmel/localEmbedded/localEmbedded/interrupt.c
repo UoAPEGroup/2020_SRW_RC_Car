@@ -100,7 +100,8 @@ ISR(TIMER3_COMPA_vect) {
 	oneSecCounter++;
 	/*PORTD ^= (1 << DDD4);*/
 
-	
+// 	establishedConnection = true;
+// 	lostRemoteConnection = false;
 	if (returnInterruptCount() >= (REQUIRED_INTERRUPT_COUNT)) {
 		lostRemoteConnection = false;
 		if (!establishedConnection) {
@@ -115,6 +116,7 @@ ISR(TIMER3_COMPA_vect) {
 		lostRemoteConnection = true; //set lost remote connection flag to true
 		establishedConnection = false;
 		consecutiveChange = 0;
+		//setSpeedGrade(STOP);
 		setRequiredSpeedGrade(STOP);
 	}
 	
