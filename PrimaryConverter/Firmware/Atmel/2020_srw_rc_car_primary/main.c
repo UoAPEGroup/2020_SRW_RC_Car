@@ -2,8 +2,7 @@
  * 2020_srw_rc_car_primary.c
  *
  * Created: 9/12/2020 10:48:31 am
- * Author : Andrey Chukhraev & Kimsong L
- or
+ * Author : Andrey Chukhraev & Kimsong Lor
  */ 
 
 #include "common.h"
