@@ -12,6 +12,7 @@
 #include "controlSend.h"
 #include "inputStates.h"
 #include "adc.h"
+#include "uart.h"
 
 volatile uint8_t sendValue = 0b00000000;
 volatile bool RTS_flag = false;
@@ -25,8 +26,9 @@ volatile bool accel_sw_2 = false;
 volatile bool accel_sw_3 = false;
 volatile bool accel_sw_4 = false;
 
-ISR(INT0_vect) {
-	if (PIND & (1 << PD2)) {
+ISR(INT1_vect) {
+	usart0_transmit_string("INT1 trigd\n");
+	if (PIND & (1 << PD3)) {
 		dir_data = REVERSE;
 	}
 	else {
@@ -34,36 +36,46 @@ ISR(INT0_vect) {
 	}
 }
 
+ISR(INT0_vect) {
+	usart0_transmit_string("INT0 trigd\n");
+}
+
 ISR(PCINT0_vect) {
+	/*usart0_transmit_string("Acc sw trgd.\r\n");*/
 	if (PINB & (1 << PB0)) {
 		accel_sw_1 = true;
+		//usart0_transmit_string("1\n");
 	}
 	else {
 		accel_sw_1 = false;
 	}
 	if (PINB & (1 << PB1)) {
+		//usart0_transmit_string("4\n");
 		accel_sw_4 = true;
 	}
 	else {
 		accel_sw_4 = false;
 	}
 	if (PIND & (1 << PD6)) {
+		//usart0_transmit_string("2\n");
 		accel_sw_2 = true;
 	}
 	else {
 		accel_sw_2 = false;
 	}
 	if (PIND & (1 << PD7)) {
+		//usart0_transmit_string("3\n");
 		accel_sw_3 = true;
 	}
 	else {
 		accel_sw_3 = false;
 	}
+	
 }
 
 void str_data_conversion() {
-	uint32_t steering_adc_val = -1;
-	//uint32_t steering_adc_val = return_adc_val();
+	//uint32_t steering_adc_val = -1;
+	uint32_t steering_adc_val = return_adc_val();
 	if (steering_adc_val > ADC_STR_FULL_L) {
 		str_data = STR_FULL_L;
 	}
@@ -82,16 +94,16 @@ void str_data_conversion() {
 }
 
 void accel_data_conversion() {
-	if (!accel_sw_1 && accel_sw_2) {
+	if (accel_sw_4 && accel_sw_3) {
 		accel_data = ACCEL_NONE;
 	}
 	else if (!accel_sw_1 && !accel_sw_2 && accel_sw_3) {
 		accel_data = ACCEL_LOW;
 	}
-	else if (!accel_sw_1 && accel_sw_2) {
+	else if (accel_sw_1 && !accel_sw_2) {
 		accel_data = ACCEL_MEDIUM;
 	}
-	else if (!accel_sw_1 && accel_sw_4) {
+	else if (accel_sw_2 && accel_sw_3) {
 		accel_data = ACCEL_HIGH;
 	}
 }
@@ -103,61 +115,72 @@ void instructionSend() {
 	switch (str_data)
 	{
 		case STR_FULL_L:
-			sendValue &= ~(1 << TURN);
-			sendValue |= (1 << FULL);
+// 			sendValue &= ~(1 << TURN);
+// 			sendValue |= (1 << FULL);
+			sendValue = 69;
 			break;
 		
 		case STR_HALF_L:
-			sendValue &= ~(1 << TURN);
-			sendValue |= (1 << HALF);
+// 			sendValue &= ~(1 << TURN);
+// 			sendValue |= (1 << HALF);
+			sendValue = 70;
 			break;
 		
 		case STR_FULL_R:
-			sendValue |= (1 << TURN);
-			sendValue |= (1 << FULL);
+// 			sendValue |= (1 << TURN);
+// 			sendValue |= (1 << FULL);
+			sendValue = 71;
 			break;
 		
 		case STR_HALF_R:
-			sendValue |= (1 << TURN);
-			sendValue |= (1 << HALF);
+// 			sendValue |= (1 << TURN);
+// 			sendValue |= (1 << HALF);
+			sendValue = 72;
 			break;
 			
 		case STR_STRGHT:
-			sendValue &= ~(1 << TURN);
-			sendValue &= ~(1 << FULL);
-			sendValue &= ~(1 << HALF);
+// 			sendValue &= ~(1 << TURN);
+// 			sendValue &= ~(1 << FULL);
+// 			sendValue &= ~(1 << HALF);
+			sendValue = 73;
 			break;
 	};
 	
 	switch (accel_data) 
 	{
 		case ACCEL_HIGH:
-			sendValue |= (1 << SPEED_HIGH);
+			//sendValue |= (1 << SPEED_HIGH); // CHANGE THESE!!!!!!!!!!
+			//sendValue = 65;
 			break;
 		
 		case ACCEL_MEDIUM:
-			sendValue |= (1 << SPEED_MED);
+			//sendValue |= (1 << SPEED_MED);
+			//sendValue = 66;
 			break;
 			
 		case ACCEL_LOW:
-			sendValue |= (1 << SPEED_LOW);
+			//sendValue |= (1 << SPEED_LOW);
+			//sendValue = 67;
 			break;
 			
 		case ACCEL_NONE:
-			sendValue &= ~(1 << SPEED_HIGH);
-			sendValue &= ~(1 << SPEED_MED);
-			sendValue &= ~(1 << SPEED_LOW);
+// 			sendValue &= ~(1 << SPEED_HIGH);
+// 			sendValue &= ~(1 << SPEED_MED);
+// 			sendValue &= ~(1 << SPEED_LOW);
+			//sendValue = 68;
 			break;
 	};
 	
 	switch (dir_data)
 	{
 		case FORWARD:
-			sendValue &= ~(1 << DRT);
+			//sendValue &= ~(1 << DRT);
+			//usart0_transmit_string("Fwd\n");
 			break;
 			
 		case REVERSE:
-			sendValue |= (1 << DRT);
+			//sendValue |= (1 << DRT);
+			//usart0_transmit_string("Rev\n");
 			break;
 		
 	};

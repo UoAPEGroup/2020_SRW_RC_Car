@@ -6,6 +6,7 @@
  */ 
 
 #include "adc.h"
+#include "uart.h"
 
 #include <avr/interrupt.h>
 
@@ -13,6 +14,7 @@ volatile uint32_t steering_val = 0;
 
 ISR(ADC_vect) {
 	steering_val = adc_convert(return_adc_reg());
+	//usart0_transmit_string("adc trigd'\n");
 }
 
 // ADC Initialisation (Boot)
