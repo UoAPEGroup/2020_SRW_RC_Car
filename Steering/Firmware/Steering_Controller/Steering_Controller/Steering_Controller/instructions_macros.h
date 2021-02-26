@@ -79,7 +79,7 @@ These are not used in the firmware, just used as a lookup table
 #define HALF_R_BMED_S 0b00111010 // Half Right Turn and Backward Medium Speed
 #define HALF_R_BHIGH_S 0b00111100 // Half Right Turn and Backward High Speed
 
-// FULL LEFT TURN AND BACKWARD
+// FULL RIGHT TURN AND BACKWARD
 #define FULL_R_BLOW_S 0b01011001 // Full Right Turn and Backward Low Speed
 #define FULL_R_BMED_S 0b01011010 // Full Right Turn and Backward Medium Speed
 #define FULL_R_BHIGH_S 0b01011100 // Full Right Turn and Backward High Speed

@@ -16,7 +16,7 @@ void adc_init(){
 	ADMUX |= (1 << REFS0); // AVCC
 	ADMUX |= (1 << MUX0); // ADC Channel 1
 	ADCSRA |= (1 << ADEN); // ADC Enable
-	ADCSRA |= (1 << ADPS2)|(1 << ADPS1); // 125kHz Sampling time 
+	ADCSRA |= (1 << ADPS2)|(1 << ADPS0); // 250kHz Sampling time 
 }
 
 // Reads the ADC 

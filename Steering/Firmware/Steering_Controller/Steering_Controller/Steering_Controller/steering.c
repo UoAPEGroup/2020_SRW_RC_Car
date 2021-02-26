@@ -45,9 +45,7 @@ void calibrate_steering(){
 	//  Sets maximum and minimum voltage ranges (Disabled for Proteus)
 	min_val = MAX_LIMIT;
 	max_val = MIN_LIMIT;
-	
-	
-	
+
 	set_duty_cycle_IN2(MAX_LIMIT * 0.7);
 	find_ref();
 	IN_2_OFF;
@@ -97,6 +95,7 @@ void set_reference_values(){
 	// Voltage range for turn
 	turn_range = full_r_turn - full_l_turn;
 	
+	straight_turn = full_r_turn - full_l_turn;
 }
 
 void print_refs(){

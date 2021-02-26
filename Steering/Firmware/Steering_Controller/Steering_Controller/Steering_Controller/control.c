@@ -38,8 +38,6 @@ void read_data() {
 	STATE_INT_TOGGLE; // Triggers state interrupt
 	
 	print_refs();
-	
-	tx_debug(input_data); // Echoes back input data (Enabled for testing)
 }
 
 // Reads data and sets Direction 
@@ -73,26 +71,31 @@ void set_turn_angle(){
 	// RIGHT TURN
 	if(RIGHT_H){
 		if(HALF_TURN_H){
-			set_half_l_turn();
+			set_half_r_turn();
+			sprintf(input_buffer, "Set Output (Half R):	%i \n\r", set_point_angle); //
+			usart0_transmit_string(input_buffer); //
 		} 
 		else if (FULL_TURN_H){
 			set_full_r_turn();
-			//led_toggle();//
-			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
+			sprintf(input_buffer, "Set Output (Full R):	%i \n\r", set_point_angle); //
 			usart0_transmit_string(input_buffer); //
 		}
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
-			set_half_l_turn(); -
-			sprintf(input_buffer, "Set Output:	%i \n\r", set_point_angle); //
+			set_half_l_turn(); 
+			sprintf(input_buffer, "Set Output (Half L):	%i \n\r", set_point_angle); //
 			usart0_transmit_string(input_buffer); //
 		}
 		else if (FULL_TURN_H){
 			set_full_l_turn();
+			sprintf(input_buffer, "Set Output (Full R):	%i \n\r", set_point_angle); //
+			usart0_transmit_string(input_buffer); //
 		}
 		else{
 			set_straight_turn();
+			sprintf(input_buffer, "Set Output (Straight):	%i \n\r", set_point_angle); //
+			usart0_transmit_string(input_buffer); //
 		}
 	}
 }

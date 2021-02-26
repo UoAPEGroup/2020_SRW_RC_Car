@@ -13,11 +13,9 @@
 #include "pi_controller.h"
 #include "uart.h"
 
-
 // 1ms Interrupt
 ISR(TIMER2_COMPA_vect){
 	//check_timeout(); // Disabled for Testing
-	
 	// PI controller function used for steering motor 
 	pi_controller(); 
 }
@@ -28,7 +26,5 @@ void timer2_init(){
 	TCCR2A |= (1 << WGM21); // CTC
 	TCCR2B |= (1 << CS22); // 64 Prescaler
 	OCR2A = 62; // 1ms Interrupt
-	//OCR2A = 124; // 2ms Interrupt
-	//OCR2A = 255; // 2ms Interrupt
 	TIMSK2 |= (1 << OCIE2A); // Output Compare A
 }

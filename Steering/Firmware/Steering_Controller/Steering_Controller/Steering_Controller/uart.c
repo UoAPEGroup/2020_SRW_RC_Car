@@ -18,8 +18,8 @@
 ISR(USART0_RX_vect){
 	//reset_timeout(); // Resets timeout counter
 	// // Stores received data in variable
-	//tx_debug(); // Echoes back input data (Enabled for testing)
-	read_data(); // Reads data
+	//tx_debug(); // Echoes back input data (Enabled for testing
+	read_data(); // Reads data	
 }
 
 // UART Initialization
