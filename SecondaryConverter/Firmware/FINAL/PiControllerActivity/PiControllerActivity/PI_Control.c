@@ -27,7 +27,7 @@ void calculateError(uint16_t measuredVolt) {
 	intError += propError * elapsedTime; //Calculate the integral error
 	
 	int32_t output = kp * propError + ki * intError; //Sum errors
-	setPWM(output);
+	//setPWM(output);
 	
 	//errorHasBeenCalc = true; //Set flag to true to adjust pi. Could just call pi adjustment function from here - no need for flags
 }
