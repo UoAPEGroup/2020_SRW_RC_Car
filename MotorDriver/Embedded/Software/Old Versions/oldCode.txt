@@ -1,0 +1,22 @@
+        html.Div( 
+            
+            dbc.Jumbotron(
+                dbc.Container(
+                html.Div(
+                    children = [
+                        html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"height": "10vw", "paddingLeft": "78vw", "marginTop": "-3vw"}),
+                        html.Div (
+                            children = [
+                            html.H1('RC Car Live Updates', className = "display-4", style = {"marginTop": "50vh", 'paddingTop': "1vw"}),
+                            html.Hr(style = {"margin-right": "57vw", "backgroundColor": "white"}),
+                            html.P('UoA FoE Summer Workshop 2020', className = "lead", style = {"margin-top": "2vw"})], style = {}),
+                ], style = {"marginLeft": "5vw", "color": "white"} ), fluid = True, style = {"width": "100vw"}), fluid = True, style = {"backgroundImage": "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1465447142348-e9952c393450?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80)",
+                "backgroundPosition": "center center", "backgroundSize": "cover", "height": "100vh", "width": "100vw"}), style = {},
+        ),
+
+        html.Div(
+            html.Div(
+                [html.Video(src = bluetooth.get_asset_url("car.mp4"), muted = True, loop = True, autoPlay = True, style = {"height": "100vh", "zIndex": "0", "position": "fixed"}),
+                html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"zIndex": "0", "position": "relative"})]),
+            style = {"width": "100vw", "position": "fixed"},
+        ),

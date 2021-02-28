@@ -143,6 +143,19 @@ con = openDatabaseConnection()
 
 cur = con.cursor()
 
+#initialize arrays to hold ten blank values
+
+for value in range(10):
+    voltageValues.append(0)
+    voltageMax.append(20)
+
+    currentValues.append(0)
+    powerValues.append(0)
+
+    X.append(X[-1] + 1)
+    X2.append(X2[-1] + 1)
+    X3.append(X3[-1] + 1)
+
 #extract initial voltage, current, and speed values
 cur.execute(""" select * from carVCS order by id""")
 rows = cur.fetchall()
@@ -184,35 +197,28 @@ bluetooth.layout = html.Div(
 
     children = [
 
+        #create header w/ video
+        html.Header(
+            html.Div(
+                children = [
+                html.Video(src = bluetooth.get_asset_url("car.mp4"), muted = True, loop = True, autoPlay = True, style = {"width": "100vw", "position": "absolute"}),
+                html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"position": "relative", "float": "left", "height": "10vw", "left": "89vw", "top": "2vh"}),
+                ], style = {"width": "100vw", "zIndex": "50", "position": "fixed"}
+            )),
         #create the header
-        html.Div( 
-            
-            dbc.Jumbotron(
-                dbc.Container(
-                html.Div(
-                    children = [
-                        html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"height": "10vw", "paddingLeft": "78vw", "marginTop": "-3vw"}),
-                        html.Div (
-                            children = [
-                            html.H1('RC Car Live Updates', className = "display-4", style = {"marginTop": "50vh", 'paddingTop': "1vw"}),
-                            html.Hr(style = {"margin-right": "57vw", "backgroundColor": "white"}),
-                            html.P('UoA FoE Summer Workshop 2020', className = "lead", style = {"margin-top": "2vw"})], style = {}),
-                ], style = {"marginLeft": "5vw", "color": "white"} ), fluid = True, style = {"width": "100vw"}), fluid = True, style = {"backgroundImage": "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1465447142348-e9952c393450?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1568&q=80)",
-                "backgroundPosition": "center center", "backgroundSize": "cover", "height": "100vh", "width": "100vw", "marginLeft": "0"}),
-        ),
         
         html.Div( [
-            dbc.Row(html.H1("Live Graphs", className = "display-4", style = {}), style = {"height": "10vh", "marginLeft": "5vw", "color": textColor, "backgroundColor": oxfordBlue}),
+            dbc.Row(html.H1("Live Graphs", className = "display-4", style = {'zIndex': "5000"}), style = {"height": "10vh", "width": "100vw", "paddingTop": "1vw", "paddingLeft": "5.5vw", "color": textColor}),
             dbc.Row([
                     dbc.Col(dbc.Row([
                             html.Div(id = 'direction'), 
-                            html.Div(id = "safety"),
-                            dbc.Button("System Ratings:", className = "btn mr-3", id = "collapseButtonSR", style = {}), 
-                            dbc.Collapse(parameterTable, id = "collapseSR", style = {"marginLeft": "0.2vw"})]), width = 12, style = {"background": oxfordBlue, "paddingTop": "5vh"}),
-                    ],
+                            html.Div(id = 'safety'),
+                            dbc.Button("System Ratings:", className = "btn mr-3", id = "collapseButtonSR"), 
+                            dbc.Collapse(parameterTable, id = "collapseSR", style = {"paddingLeft": "0.2vw"})], style = {"width": "100vw"}), style = {"background": oxfordBlue, "paddingTop": "5vh"}),
+                    ], style = {"width": "100vw"},
                     ),
-            dbc.Row(dbc.Col( dcc.Graph( id = 'carData', animate = False), width = 12)),
-            ],
+            dbc.Row(dbc.Col(dcc.Graph( id = 'carData', animate = False, style = {"width": "100vw"}), width = 12), style = {"width": "100vw"}),
+            ], style = {"position": "relative", "zIndex": "500", "top": "100vh", "backgroundColor": oxfordBlue},
         ),
 
         dcc.Interval(
@@ -221,7 +227,7 @@ bluetooth.layout = html.Div(
         ),
 
         ],
-    style = {"backgroundColor" : oxfordBlue, "width": "100vw"},
+    style = {"backgroundColor": oxfordBlue},
 )
 
 #system callbacks
@@ -351,15 +357,17 @@ def update_graph(self):
         row = 2, col = 2
     )
 
-    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X) - 1, max(X) + 1], row = 1, col = 1)
-    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X2) - 1, max(X2) + 1], row = 1, col = 2)
-    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X3) - 1, max(X3) + 1], row = 2, col = 1)
-    fig.update_xaxes(title_text = "time(s)", gridcolor = gridColor, range = [min(X4) - 1, max(X4) + 1], row = 2, col = 2)
+    xAxisText = "Time stamp"
+
+    fig.update_xaxes(title_text = xAxisText, gridcolor = gridColor, range = [min(X) - 1, max(X) + 1], row = 1, col = 1)
+    fig.update_xaxes(title_text = xAxisText, gridcolor = gridColor, range = [min(X2) - 1, max(X2) + 1], row = 1, col = 2)
+    fig.update_xaxes(title_text = xAxisText, gridcolor = gridColor, range = [min(X3) - 1, max(X3) + 1], row = 2, col = 1)
+    fig.update_xaxes(title_text = xAxisText, gridcolor = gridColor, range = [min(X4) - 1, max(X4) + 1], row = 2, col = 2)
 
     axesCoefficient = 0.1
 
-    fig.update_yaxes(title_text = "Voltage(V)", gridcolor = gridColor, range = [min(voltageValues) - axesCoefficient*(min(voltageValues)), max(voltageValues) + axesCoefficient*(max(voltageValues))], row = 1, col = 1)
-    fig.update_yaxes(title_text = "Current(A)", gridcolor = gridColor, range = [min(currentValues) - axesCoefficient *(min(currentValues)), max(currentValues) + axesCoefficient * (max(currentValues))], row = 1, col = 2)
+    fig.update_yaxes(title_text = "Voltage(V)", gridcolor = gridColor, range = [0, 12.5], row = 1, col = 1)
+    fig.update_yaxes(title_text = "Current(A)", gridcolor = gridColor, range = [0, 3.5], row = 1, col = 2)
     fig.update_yaxes(title_text = "Power(W)", gridcolor = gridColor, range = [min(powerValues) - axesCoefficient *(min(powerValues)), max(powerValues) + axesCoefficient * (max(powerValues))], row = 2, col = 1)
     fig.update_yaxes(title_text = "Speed(m/s)", gridcolor = gridColor, range = [min(speedValues) - axesCoefficient * (min(speedValues)), max(speedValues) + axesCoefficient * (max(speedValues))], row = 2, col = 2)
 
