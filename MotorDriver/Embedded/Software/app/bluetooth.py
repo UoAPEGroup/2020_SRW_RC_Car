@@ -8,6 +8,7 @@ import dash_html_components as html
 import plotly
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
+import gunicorn 
 
 #misc
 import time
@@ -129,6 +130,7 @@ def initializeLists():
     speedValues.append(0)
 
 bluetooth = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], update_title='Updating...')
+server = bluetooth.server
 
 startTime = time.time()
 
