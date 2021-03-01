@@ -23,8 +23,8 @@ gridColor = '#192841'
 
 #system parameter table
 parameterTableHeader = [html.Thead(html.Tr([html.Th("Parameter"), html.Th("Value")]))]
-row1 = html.Tr([html.Td("Max Voltage at H-Bridge"), html.Td("20V")])
-row2 = html.Tr([html.Td("Max Current at H-Bridge"), html.Td("3A")])
+row1 = html.Tr([html.Td("Max Voltage at H-Bridge"), html.Td("12V")])
+row2 = html.Tr([html.Td("Max Current at H-Bridge"), html.Td("2.5A")])
 row3 = html.Tr([html.Td("Car Power Rating"), html.Td("30W")])
 parameterTableBody = [html.Tbody([row1, row2, row3])]
 
