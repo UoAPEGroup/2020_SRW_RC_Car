@@ -28,12 +28,12 @@
 
 
 /*********************** STEERING THRESHOLDS ***********************/
-
-#define ADC_STR_FULL_L 3000
-#define ADC_STR_HALF_L 2100
-#define ADC_STR_STRGHT 1650
-#define ADC_STR_HALF_R 900
-#define ADC_STR_FULL_R 0
+// 200mV Interval for everything except Straight
+#define ADC_STR_FULL_L 1200
+#define ADC_STR_HALF_L 1000
+#define ADC_STR_STRGHT 700
+#define ADC_STR_HALF_R 500
+#define ADC_STR_FULL_R 300
 
 /*******************************************************************/
 

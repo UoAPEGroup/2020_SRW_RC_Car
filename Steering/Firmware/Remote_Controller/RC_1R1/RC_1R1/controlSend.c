@@ -115,34 +115,34 @@ void instructionSend() {
 	switch (str_data)
 	{
 		case STR_FULL_L:
-// 			sendValue &= ~(1 << TURN);
-// 			sendValue |= (1 << FULL);
-			sendValue = 69;
+			sendValue &= ~(1 << TURN);
+			sendValue |= (1 << FULL);
+			//sendValue = 69; //E
 			break;
 		
 		case STR_HALF_L:
-// 			sendValue &= ~(1 << TURN);
-// 			sendValue |= (1 << HALF);
-			sendValue = 70;
+			sendValue &= ~(1 << TURN);
+			sendValue |= (1 << HALF);
+			//sendValue = 70; //F
 			break;
 		
 		case STR_FULL_R:
-// 			sendValue |= (1 << TURN);
-// 			sendValue |= (1 << FULL);
-			sendValue = 71;
+			sendValue |= (1 << TURN);
+			sendValue |= (1 << FULL);
+			//sendValue = 71; //G
 			break;
 		
 		case STR_HALF_R:
-// 			sendValue |= (1 << TURN);
-// 			sendValue |= (1 << HALF);
-			sendValue = 72;
+			sendValue |= (1 << TURN);
+			sendValue |= (1 << HALF);
+			//sendValue = 72; //H
 			break;
 			
 		case STR_STRGHT:
-// 			sendValue &= ~(1 << TURN);
-// 			sendValue &= ~(1 << FULL);
-// 			sendValue &= ~(1 << HALF);
-			sendValue = 73;
+			sendValue &= ~(1 << TURN);
+			sendValue &= ~(1 << FULL);
+			sendValue &= ~(1 << HALF);
+			//sendValue = 73; // I
 			break;
 	};
 	

@@ -9,7 +9,6 @@
 
 #include "control.h"
 #include "uart.h"
-#include "led.h"
 #include "steering.h"
 
 // DEBUGGING
