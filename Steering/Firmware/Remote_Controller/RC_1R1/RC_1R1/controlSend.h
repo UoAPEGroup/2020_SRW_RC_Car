@@ -22,4 +22,13 @@ void set_RTS_flag(bool flag_val);
 bool check_RTS_flag();
 
 
+/***************** ACCEL. SW. MACROS ******************/
+
+#define READ_ACCEL_SW_1 PINB & (1 << PB0)
+#define READ_ACCEL_SW_2 PIND & (1 << PD6)
+#define READ_ACCEL_SW_3 PIND & (1 << PD7)
+#define READ_ACCEL_SW_4 PINB & (1 << PB1)
+
+/******************************************************/
+
 #endif /* CONTROLSEND_H_ */

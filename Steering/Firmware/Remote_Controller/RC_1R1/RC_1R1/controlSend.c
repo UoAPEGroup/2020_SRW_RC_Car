@@ -37,33 +37,33 @@ ISR(INT1_vect) {
 }
 
 ISR(INT0_vect) {
-	usart0_transmit_string("INT0 trigd\n");
+	//usart0_transmit_string("INT0 trigd\n");
 }
 
 ISR(PCINT0_vect) {
 	/*usart0_transmit_string("Acc sw trgd.\r\n");*/
-	if (PINB & (1 << PB0)) {
+	if (READ_ACCEL_SW_1) {
 		accel_sw_1 = true;
 		//usart0_transmit_string("1\n");
 	}
 	else {
 		accel_sw_1 = false;
 	}
-	if (PINB & (1 << PB1)) {
+	if (READ_ACCEL_SW_4) {
 		//usart0_transmit_string("4\n");
 		accel_sw_4 = true;
 	}
 	else {
 		accel_sw_4 = false;
 	}
-	if (PIND & (1 << PD6)) {
+	if (READ_ACCEL_SW_2) {
 		//usart0_transmit_string("2\n");
 		accel_sw_2 = true;
 	}
 	else {
 		accel_sw_2 = false;
 	}
-	if (PIND & (1 << PD7)) {
+	if (READ_ACCEL_SW_3) {
 		//usart0_transmit_string("3\n");
 		accel_sw_3 = true;
 	}
@@ -174,12 +174,12 @@ void instructionSend() {
 	switch (dir_data)
 	{
 		case FORWARD:
-			//sendValue &= ~(1 << DRT);
+			sendValue &= ~(1 << DRT);
 			//usart0_transmit_string("Fwd\n");
 			break;
 			
 		case REVERSE:
-			//sendValue |= (1 << DRT);
+			sendValue |= (1 << DRT);
 			//usart0_transmit_string("Rev\n");
 			break;
 		

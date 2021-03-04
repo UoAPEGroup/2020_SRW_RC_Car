@@ -40,7 +40,6 @@ int main(void)
     interrupt_init();
 	
 	sei();
-/*	cli();*/
     while (1)
     {
 		str_data_conversion();
