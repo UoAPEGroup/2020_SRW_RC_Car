@@ -16,7 +16,7 @@ void str_data_conversion();
 void accel_data_conversion();
 
 void instructionSend();
-uint8_t get_instruction_byte();
+void get_instruction_byte();
 
 void set_RTS_flag(bool flag_val);
 bool check_RTS_flag();

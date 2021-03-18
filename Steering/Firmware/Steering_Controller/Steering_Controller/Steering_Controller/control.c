@@ -35,8 +35,6 @@ void read_data() {
 	set_turn_angle(); // Sets turn angle
 	
 	STATE_INT_TOGGLE; // Triggers state interrupt
-	
-	print_refs();
 }
 
 // Reads data and sets Direction 

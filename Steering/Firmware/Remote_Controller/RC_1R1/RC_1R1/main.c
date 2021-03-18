@@ -19,12 +19,12 @@
 volatile uint8_t transmitTimerCounter = 0;											// This counter checks if enough time has passed for BLE transmission to occur
 
 ISR(TIMER0_COMPA_vect) {
-	if (transmitTimerCounter < 50) {
+	if (transmitTimerCounter < 60) {
 		transmitTimerCounter++;
 	}
 	else {
-		//set_RTS_flag(true);															// Set RTS true for BLE transmission
-		usart0_transmit_byte(get_instruction_byte());
+		//														// Set RTS true for BLE transmission
+		get_instruction_byte();
 		//usart0_transmit_string("hello\r\n");
 		transmitTimerCounter = 0;
 	}

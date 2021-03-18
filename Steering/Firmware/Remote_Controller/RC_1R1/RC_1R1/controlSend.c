@@ -14,6 +14,13 @@
 #include "adc.h"
 #include "uart.h"
 
+// DEBUGGING
+#include <stdio.h>//
+#include <string.h>// For debugging
+char input_buffer[20];//
+
+#include "uart.h"
+
 volatile uint8_t sendValue = 0b00000000;
 volatile bool RTS_flag = false;
 
@@ -76,6 +83,8 @@ ISR(PCINT0_vect) {
 void str_data_conversion() {
 	//uint32_t steering_adc_val = -1;
 	uint32_t steering_adc_val = return_adc_val();
+	//sprintf(input_buffer, "\n\r ADC:	%i \n\r", (int16_t)steering_adc_val);
+	//usart0_transmit_string(input_buffer);
 	if (steering_adc_val > ADC_STR_FULL_L) {
 		str_data = STR_FULL_L;
 	}
@@ -109,8 +118,10 @@ void accel_data_conversion() {
 }
 
 void instructionSend() {
+	set_RTS_flag(false);
 	
-	sendValue = 0b00000000;
+	sendValue = 0b10000000;
+	sendValue &=~ (1 << FUTURE);
 	
 	switch (str_data)
 	{
@@ -184,10 +195,14 @@ void instructionSend() {
 			break;
 		
 	};
+	set_RTS_flag(true);
+	
 }
 
-uint8_t get_instruction_byte() {
-	return sendValue;
+void get_instruction_byte() {
+	if (check_RTS_flag()){
+		usart0_transmit_byte(sendValue);
+	}
 }
 
 void set_RTS_flag(bool flag_val) {

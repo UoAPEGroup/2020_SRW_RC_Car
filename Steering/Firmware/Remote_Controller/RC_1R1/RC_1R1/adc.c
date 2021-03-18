@@ -8,6 +8,8 @@
 #include "adc.h"
 #include "uart.h"
 
+
+
 #include <avr/interrupt.h>
 
 volatile uint32_t steering_val = 0;
@@ -32,7 +34,6 @@ void adc_init() {
 	
 	DIDR0 = 0xff;													// Disable digital input buffer (Must be written to logic 1)
 	
-	
 	ADMUX |= (1 << MUX1);														// Select channel 2 for steering ADC input
 }
 
@@ -45,8 +46,9 @@ uint16_t return_adc_reg() {
 uint32_t adc_convert(uint16_t adc_val) {	
 		
 	uint32_t voltage_val = adc_val * (AREF/ADC_RES);					// Ref. voltage divided by ADC res. multiplied by input/ADC register value
-	
+
 	return voltage_val;
+
 }
 
 uint32_t return_adc_val() {
