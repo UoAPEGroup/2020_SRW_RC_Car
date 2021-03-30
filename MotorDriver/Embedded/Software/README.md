@@ -2,8 +2,7 @@
 
 This website presents the H-Bridge voltage, H-Bridge current, and power through the wirelessly powered RC car through live-updating graphs. It also indicates the speed range (STOP, MIN, MID, MAX), direction (FORWARD, REVERSE), and which safety parameters (over voltage, over current, lost remote connection) are currently triggered.
 
-https://user-images.githubusercontent.com/68805955/112985851-393bd100-91bd-11eb-9404-28fae8885a19.mov
-
+![website demo](https://github.com/UoAPEGroup/2020-srw-rc-car/blob/main/MotorDriver/Embedded/Software/Demo/Website%20Scrolling2.gif)
 
 ## Features
 
@@ -21,7 +20,7 @@ A downstream script (bluetooth.py) periodically checks for updates in the databs
 
 The webpage uses the Flask framework and is deployed via Heroku. 
 
-# Key python libraries used: 
+## Key python libraries used: 
 
 * Dash
 * Plotly
