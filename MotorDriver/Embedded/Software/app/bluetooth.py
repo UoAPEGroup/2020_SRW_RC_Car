@@ -206,7 +206,7 @@ bluetooth.layout = html.Div(
                     html.Div(
                         [
                             html.Video(src = bluetooth.get_asset_url("car.mp4"), muted = True, loop = True, autoPlay = True, style = {"opacity": "0.6", "width": "100vw", "position": "absolute"}),
-                            html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"position": "relative", "float": "left", "height": "10vw", "left": "89vw", "top": "2vh"}),
+                            html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"position": "relative", "float": "left", "height": "10vw", "left": "85vw", "top": "2vh"}),
                         ],
                     ),
 
@@ -223,7 +223,7 @@ bluetooth.layout = html.Div(
             )
         ),
 
-        #create the header
+        #create the live graphs 
         
         html.Div( [
             dbc.Row(html.H1("Live Graphs", className = "display-4", style = {'zIndex': "5000"}), style = {"height": "10vh", "width": "100vw", "paddingTop": "1vw", "paddingLeft": "5.5vw", "color": textColor}),
@@ -235,9 +235,9 @@ bluetooth.layout = html.Div(
                             dbc.Collapse(parameterTable, id = "collapseSR", style = {"paddingLeft": "0.2vw"})], style = {"width": "100vw"}), style = {"background": oxfordBlue, "paddingTop": "5vh"}),
                     ], style = {"width": "100vw"},
                     ),
-            dbc.Row(dbc.Col(dcc.Graph( id = 'carData', animate = False, style = {"width": "100vw"}), width = 12), style = {"width": "100vw"}),
+             dbc.Row(dbc.Col(dcc.Graph( id = 'carData', animate = False), width = 12), style = {"width": "100vw"}),
             ], style = {"position": "relative", "zIndex": "500", "top": "100vh", "backgroundColor": oxfordBlue},
-        ),
+         ),
 
         dcc.Interval(
             id='updateGraph',
