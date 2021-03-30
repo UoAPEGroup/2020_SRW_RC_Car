@@ -14,6 +14,13 @@
 #include "adc.h"
 #include "uart.h"
 
+// DEBUGGING
+#include <stdio.h>//
+#include <string.h>// For debugging
+char input_buffer[20];//
+
+#include "uart.h"
+
 volatile uint8_t sendValue = 0b00000000;
 volatile bool RTS_flag = false;
 
@@ -37,33 +44,33 @@ ISR(INT1_vect) {
 }
 
 ISR(INT0_vect) {
-	usart0_transmit_string("INT0 trigd\n");
+	//usart0_transmit_string("INT0 trigd\n");
 }
 
 ISR(PCINT0_vect) {
 	/*usart0_transmit_string("Acc sw trgd.\r\n");*/
-	if (PINB & (1 << PB0)) {
+	if (READ_ACCEL_SW_1) {
 		accel_sw_1 = true;
 		//usart0_transmit_string("1\n");
 	}
 	else {
 		accel_sw_1 = false;
 	}
-	if (PINB & (1 << PB1)) {
+	if (READ_ACCEL_SW_4) {
 		//usart0_transmit_string("4\n");
 		accel_sw_4 = true;
 	}
 	else {
 		accel_sw_4 = false;
 	}
-	if (PIND & (1 << PD6)) {
+	if (READ_ACCEL_SW_2) {
 		//usart0_transmit_string("2\n");
 		accel_sw_2 = true;
 	}
 	else {
 		accel_sw_2 = false;
 	}
-	if (PIND & (1 << PD7)) {
+	if (READ_ACCEL_SW_3) {
 		//usart0_transmit_string("3\n");
 		accel_sw_3 = true;
 	}
@@ -76,6 +83,8 @@ ISR(PCINT0_vect) {
 void str_data_conversion() {
 	//uint32_t steering_adc_val = -1;
 	uint32_t steering_adc_val = return_adc_val();
+	//sprintf(input_buffer, "\n\r ADC:	%i \n\r", (int16_t)steering_adc_val);
+	//usart0_transmit_string(input_buffer);
 	if (steering_adc_val > ADC_STR_FULL_L) {
 		str_data = STR_FULL_L;
 	}
@@ -109,40 +118,42 @@ void accel_data_conversion() {
 }
 
 void instructionSend() {
+	set_RTS_flag(false);
 	
-	sendValue = 0b00000000;
+	sendValue = 0b10000000;
+	sendValue &=~ (1 << FUTURE);
 	
 	switch (str_data)
 	{
 		case STR_FULL_L:
-// 			sendValue &= ~(1 << TURN);
-// 			sendValue |= (1 << FULL);
-			sendValue = 69;
+			sendValue &= ~(1 << TURN);
+			sendValue |= (1 << FULL);
+			//sendValue = 69; //E
 			break;
 		
 		case STR_HALF_L:
-// 			sendValue &= ~(1 << TURN);
-// 			sendValue |= (1 << HALF);
-			sendValue = 70;
+			sendValue &= ~(1 << TURN);
+			sendValue |= (1 << HALF);
+			//sendValue = 70; //F
 			break;
 		
 		case STR_FULL_R:
-// 			sendValue |= (1 << TURN);
-// 			sendValue |= (1 << FULL);
-			sendValue = 71;
+			sendValue |= (1 << TURN);
+			sendValue |= (1 << FULL);
+			//sendValue = 71; //G
 			break;
 		
 		case STR_HALF_R:
-// 			sendValue |= (1 << TURN);
-// 			sendValue |= (1 << HALF);
-			sendValue = 72;
+			sendValue |= (1 << TURN);
+			sendValue |= (1 << HALF);
+			//sendValue = 72; //H
 			break;
 			
 		case STR_STRGHT:
-// 			sendValue &= ~(1 << TURN);
-// 			sendValue &= ~(1 << FULL);
-// 			sendValue &= ~(1 << HALF);
-			sendValue = 73;
+			sendValue &= ~(1 << TURN);
+			sendValue &= ~(1 << FULL);
+			sendValue &= ~(1 << HALF);
+			//sendValue = 73; // I
 			break;
 	};
 	
@@ -174,20 +185,24 @@ void instructionSend() {
 	switch (dir_data)
 	{
 		case FORWARD:
-			//sendValue &= ~(1 << DRT);
+			sendValue &= ~(1 << DRT);
 			//usart0_transmit_string("Fwd\n");
 			break;
 			
 		case REVERSE:
-			//sendValue |= (1 << DRT);
+			sendValue |= (1 << DRT);
 			//usart0_transmit_string("Rev\n");
 			break;
 		
 	};
+	set_RTS_flag(true);
+	
 }
 
-uint8_t get_instruction_byte() {
-	return sendValue;
+void get_instruction_byte() {
+	if (check_RTS_flag()){
+		usart0_transmit_byte(sendValue);
+	}
 }
 
 void set_RTS_flag(bool flag_val) {

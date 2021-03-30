@@ -10,7 +10,7 @@
 #define GLOBAL_H_
 
 #define F_CPU 8000000UL
-#define VREF 5
+#define VREF 3.3
 #define DEFAULT_BAUD_RATE 9600
 
 #include <avr/io.h>
