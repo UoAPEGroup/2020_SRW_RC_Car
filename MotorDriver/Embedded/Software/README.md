@@ -1,14 +1,17 @@
-#Live-updating Website
+# Live-updating Website
 
 This website presents the H-Bridge voltage, H-Bridge current, and power through the wirelessly powered RC car through live-updating graphs. It also indicates the speed range (STOP, MIN, MID, MAX), direction (FORWARD, REVERSE), and which safety parameters (over voltage, over current, lost remote connection) are currently triggered.
 
-##Features
+https://user-images.githubusercontent.com/68805955/112985851-393bd100-91bd-11eb-9404-28fae8885a19.mov
+
+
+## Features
 
 * Graphs update live-time data relating to the voltage, current, and power of the car (speed is to be implemented)
 * Indicates which safety parameter is triggered through button colors (red means that safety is triggered and that the car is stopped)
 * Can be updated via bluetooth connection or serial connection to uController (note: serial connection is primarily used for testing)
 
-##Documentation 
+## Documentation 
 
 A local script (checkNearbyBLE.py) is used to find nearby BLE devices and print out their UUID numbers. 
 
@@ -18,7 +21,7 @@ A downstream script (bluetooth.py) periodically checks for updates in the databs
 
 The webpage uses the Flask framework and is deployed via Heroku. 
 
-#Key python libraries used: 
+# Key python libraries used: 
 
 * Dash
 * Plotly
