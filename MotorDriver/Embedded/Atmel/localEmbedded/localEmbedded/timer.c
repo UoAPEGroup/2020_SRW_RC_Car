@@ -13,8 +13,9 @@
 #include "global.h"
 
 void timer0_init(uint8_t periodHalf, uint8_t onTimeHalf) {
+	// generates pwm wave for left FET
 	
-	//Phase Correct PWM, clear OC0B on compare match(inverting),prescaler of 8
+	// phase Correct PWM, clear OC0B on compare match(inverting), with prescaler of 8
 	TCCR0A |= (1 << COM0B1)|(1 << WGM00);
 	TCCR0B |= (1 << WGM02)|(1 << CS01);
 	
@@ -24,7 +25,9 @@ void timer0_init(uint8_t periodHalf, uint8_t onTimeHalf) {
 }
 
 void timer2_init(uint8_t periodHalf, uint8_t onTimeHalf) {
-	//Phase Correct PWM, clear OC2B on compare match(inverting), prescaler of 8
+	// generates pwm for right FET 
+	
+	// phase Correct PWM, clear OC2B on compare match(inverting), prescaler of 8
 	TCCR2A |= (1 << COM2B1)|(1 << WGM20);
 	TCCR2B |= (1 << WGM22)|(1 << CS21);
 	
@@ -48,7 +51,6 @@ void timer1_init() {
 void timer3_init() {
 	
 	//64 prescaler, with 8MHz, (125000MHz, 8us per count)
-	
 	TCCR3B |= (1 << CS30) | (1 << WGM32) | (1 << CS31);
 	
 	//period = 40ms
