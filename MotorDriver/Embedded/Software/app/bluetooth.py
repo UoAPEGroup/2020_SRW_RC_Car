@@ -11,9 +11,6 @@ from plotly.subplots import make_subplots
 import gunicorn 
 
 #misc
-import time
-from datetime import datetime
-
 from collections import deque
 import psycopg2
 
@@ -30,6 +27,7 @@ readNewestCarDS = """
             SELECT direction, speedGrade, overVoltage, overCurrent, establishedConnection FROM carDS WHERE id = 0
                 """
 
+#connect to online PostGreSQL database
 def openDatabaseConnection():
     con = None
 
@@ -42,21 +40,23 @@ def openDatabaseConnection():
 
     return con
 
+# update display parameters
 def updateValues(cur, currentId):
     global systemParameters
 
-    cur.execute(readNewestCarVCS, (currentId,))
+    cur.execute(readNewestCarVCS, (currentId,)) # get newest voltage and current values from database
 
     try: 
         values = cur.fetchall()
 
         if (values != None):
-            voltage = values[0][0]/1000
+            voltage = values[0][0]/1000 # divide by 1000 to get parameters in base units (e.g., volts/amps)
             current = values[0][1]/1000
             print(voltage)
 
-            power = voltage * current
+            power = voltage * current # calculate power
 
+            # add values to display arrays
             voltageValues.append(voltage)
             currentValues.append(current)
             powerValues.append(power)
@@ -64,15 +64,18 @@ def updateValues(cur, currentId):
             voltageMax.append(20)
             currentMax.append(3)
             
+            # update x axis values
             X.append(X[-1] + 1)
             X2.append(X2[-1] + 1)
             X3.append(X3[-1] + 1)
 
-        cur.execute(readNewestCarDS)
+        #  get safety parameters (over voltage, over current, connection established), direction, and speed grade data from database
+        cur.execute(readNewestCarDS) 
     
         values = cur.fetchall()
         count = 0
 
+        # add values to display array
         for value in values:
             systemParameters[count] = value
             count = count + 1
@@ -80,6 +83,7 @@ def updateValues(cur, currentId):
     except Exception: 
         pass
 
+# return direction and speed grade strings using dicts
 def returnDirectionAndSpeedString(direction, speedGrade):
     directionAndSpeedString = []
 
@@ -100,6 +104,8 @@ def returnDirectionAndSpeedString(direction, speedGrade):
 
     return directionAndSpeedString
 
+# initialize x and y axis values of graphs
+# limit graph x/y values to twenty
 def initializeLists():
     global X, X2, X3, X4, voltageValues, voltageMax, currentValues, currentMax, powerValues, speedValues
 
@@ -129,24 +135,21 @@ def initializeLists():
     speedValues = deque(maxlen = 20)
     speedValues.append(0)
 
+# create new dash app 
 bluetooth = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], update_title='Updating...')
 server = bluetooth.server
 
-startTime = time.time()
-
-#initialize lists that will be the x and y values of graphs
+# initialize lists that will be the x and y values of graphs
 initializeLists()
 
 global maxID, systemParameters
 systemParameters = []
 
-#open connection to database
+# open connection to database
 con = openDatabaseConnection()
-
 cur = con.cursor()
 
-#initialize arrays to hold ten blank values
-
+# initialize arrays to hold ten blank values
 for value in range(10):
     voltageValues.append(0)
     voltageMax.append(20)
@@ -158,7 +161,7 @@ for value in range(10):
     X2.append(X2[-1] + 1)
     X3.append(X3[-1] + 1)
 
-#extract initial voltage, current, and speed values
+# extract initial voltage, current, and speed values from database
 cur.execute(""" select * from carVCS order by id""")
 rows = cur.fetchall()
 for row in rows:
@@ -176,7 +179,7 @@ for row in rows:
     X2.append(X2[-1] + 1)
     X3.append(X3[-1] + 1)
 
-#extract initial system parameters (direction, speedGrade, and safety parameters)
+# extract initial system parameters (direction, speedGrade, and safety parameters)
 cur.execute(""" SELECT * FROM carDS """)
 rows = cur.fetchall()
 
@@ -188,25 +191,25 @@ for row in rows:
 for parameter in systemParameters:
     print(parameter)
 
-#identify the largest ID in the system (i.e., the last transmission sent by the uC)
+# identify the largest ID in the system (i.e., the last transmission sent by the uC)
 cur.execute("""SELECT MAX(id) FROM carVCS""")
 
 maxID = cur.fetchone()
 maxID = maxID[0]
 
-#layout for the webpage
+# layout for the webpage
 bluetooth.layout = html.Div(
 
     children = [
 
-        #create header w/ video
+        # create header w/ video
         html.Header(
             html.Div(
                 children = [
                     html.Div(
                         [
                             html.Video(src = bluetooth.get_asset_url("car.mp4"), muted = True, loop = True, autoPlay = True, style = {"opacity": "0.6", "width": "100vw", "position": "absolute"}),
-                            html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"position": "relative", "float": "left", "height": "10vw", "left": "89vw", "top": "2vh"}),
+                            html.Img(src = bluetooth.get_asset_url("uoaSquare.png"), style = {"position": "relative", "float": "left", "height": "10vw", "left": "85vw", "top": "2vh"}),
                         ],
                     ),
 
@@ -223,8 +226,7 @@ bluetooth.layout = html.Div(
             )
         ),
 
-        #create the header
-        
+        # create live graphs 
         html.Div( [
             dbc.Row(html.H1("Live Graphs", className = "display-4", style = {'zIndex': "5000"}), style = {"height": "10vh", "width": "100vw", "paddingTop": "1vw", "paddingLeft": "5.5vw", "color": textColor}),
             dbc.Row([
@@ -235,9 +237,9 @@ bluetooth.layout = html.Div(
                             dbc.Collapse(parameterTable, id = "collapseSR", style = {"paddingLeft": "0.2vw"})], style = {"width": "100vw"}), style = {"background": oxfordBlue, "paddingTop": "5vh"}),
                     ], style = {"width": "100vw"},
                     ),
-            dbc.Row(dbc.Col(dcc.Graph( id = 'carData', animate = False, style = {"width": "100vw"}), width = 12), style = {"width": "100vw"}),
+             dbc.Row(dbc.Col(dcc.Graph( id = 'carData', animate = False), width = 12), style = {"width": "100vw"}),
             ], style = {"position": "relative", "zIndex": "500", "top": "100vh", "backgroundColor": oxfordBlue},
-        ),
+         ),
 
         dcc.Interval(
             id='updateGraph',
@@ -248,8 +250,9 @@ bluetooth.layout = html.Div(
     style = {"backgroundColor": oxfordBlue},
 )
 
-#system callbacks
+# system callbacks
 
+# check whether 
 @bluetooth.callback(Output("collapseSR", "is_open"), 
                     [Input("collapseButtonSR", "n_clicks")], 
                     [State("collapseSR", "is_open")],)
@@ -258,13 +261,13 @@ def toggleCollapseSR(n, is_open):
         return not is_open
     return is_open
 
+# check for database updates
 @bluetooth.callback(Output('direction', 'children'),
                     Input('updateGraph', 'n_intervals'))
 def metric_update(self):
     global maxID, directionAndSpeedString, systemParameters
 
-    ''' check if there's been an update to the database'''
-
+    # check whether new data has been put into the database
     cur.execute("SELECT MAX(id) FROM carVCS")
 
     try: 
@@ -275,10 +278,13 @@ def metric_update(self):
 
             currentId = currentId[0]
 
+            # if new values found, update system parameter values (e.g., voltage, current, direction, etc.)
             if ((currentId != None) and (currentId > maxID)):
                 maxID = currentId
                 updateValues(cur, maxID)
 
+            # generate strings indicating direction and speed
+            # update buttons accordingly
             directionAndSpeedString = returnDirectionAndSpeedString(systemParameters[0][0], systemParameters[0][1])
 
     except Exception: 
@@ -293,11 +299,13 @@ def metric_update(self):
         ),
     ]
 
+# update safety parameter buttons
 @bluetooth.callback(Output('safety', 'children'),
                     Input('updateGraph', 'n_intervals'))
 def update_safety(self):
     global systemParameters
 
+    # update colors of buttons based on whether safety is triggered 
     voltageColor = "success"
     currentColor = "success"
     establishedConnection = "danger"
@@ -317,6 +325,7 @@ def update_safety(self):
 
     ]
 
+# generate graphs
 @bluetooth.callback(Output('carData', 'figure'),
                     [Input('updateGraph', 'n_intervals')])
 def update_graph(self):
