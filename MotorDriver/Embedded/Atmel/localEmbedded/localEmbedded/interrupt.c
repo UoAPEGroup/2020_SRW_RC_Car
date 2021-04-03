@@ -27,15 +27,15 @@ ISR(INT0_vect) {
 	interruptCount++;
 
 	if ((PINC & (1 << PINC5)) == (1 << PINC5)) {
-		setRequiredDirection(true);
-		//setDirection(true); //set direction as forward if pinc3 is high
+		setRequiredDirection(true); //set direction as forward if pinc5 is high
+		//setDirection(true); 
 	}
 	else {
 		setRequiredDirection(false);
 		//setDirection(false);
 	}
 	
-	//read the speed pins and set the speed grade accordingly
+	// read the speed pins and set the speed grade accordingly
 	
 	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && establishedConnection) {
 		

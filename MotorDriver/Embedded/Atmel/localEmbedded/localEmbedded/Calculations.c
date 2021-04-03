@@ -61,38 +61,44 @@ volatile bool arrayFull = false;
 volatile bool sendData = false;
 
 //counters
-
 static volatile uint8_t ADCReadingsCount = 0;
 static volatile uint8_t recentValuesCount = 0;
 
-//store adc current and voltage readings in arrays
-
+// update current speed of car
 void setSpeedGrade(uint16_t speed){
 	speedGrade = speed;
 }
 
+// set the required speed of car
 void setRequiredSpeedGrade(uint16_t newSpeed){
 	requiredSpeedGrade = newSpeed;
 }
 
+// return required speed of car
 uint16_t returnRequiredSpeedGrade() {
 	return requiredSpeedGrade;
 }
+
+// set car direction
 void setDirection(bool setForward){
 	forward = setForward;
 }
 
+// set required car direction
 void setRequiredDirection(bool setRequiredForward){
 	requiredForward = setRequiredForward;
 }
 
+// add ADC current reading to array
 void addCurrent(uint16_t adcCurrentReading) {
 	currentValues[ADCReadingsCount] = adcCurrentReading;
 }
 
+// add ADC voltage reading to array
 void addVoltage(uint16_t adcVoltageReading) {
 	 voltageValues[ADCReadingsCount] = adcVoltageReading;	
 	 ADCReadingsCount++;
+	 
 	 //reset count when array fills up
 	 if (ADCReadingsCount == 10) {
 		ADCReadingsCount = 0;
@@ -100,39 +106,44 @@ void addVoltage(uint16_t adcVoltageReading) {
 	}
 }
 
-//returns the result of an ADC conversion in millivolts
+// return ADC conversion result in millivolts
 uint16_t adcConvert(uint16_t adcValue) {
 	uint16_t convertedValue = ((uint32_t)adcValue * VCC_MV)/RESOLUTION;
 	
 	return convertedValue;
 }
 
+// convert adc voltage and current values to H-Bridge voltage and current
 void convertVoltageAndCurrent() {
-	//assuming range being read is 0 - 5A, convert back to original current value
+	
+	// assumed input current range is 0 - 5A
+	
 	uint32_t totalC = 0;
 	uint32_t totalV = 0;
 	inputI = 0;
 	
-	//take the average of ten current readings and ten voltage readings
+	// convert adc voltage/current readings back to H-Bridge values
+	// take the average of ten readings
+	
 	for (uint8_t i = 0; i < 10; i++) {
 		
-		inputI = (((uint32_t)adcConvert(currentValues[i]) * 1000)/CURRENT_OPAMP_GAIN); //undo OpAmp gain
-		inputI -= CURRENT_SENSOR_OFFSET_MV; //undo current sensor offset
+		inputI = (((uint32_t)adcConvert(currentValues[i]) * 1000)/CURRENT_OPAMP_GAIN); // undo OpAmp gain
+		inputI -= CURRENT_SENSOR_OFFSET_MV; // undo current sensor offset
 		inputI = ((uint32_t)inputI * 1000)/CURRENT_SENSOR_GAIN_MV; //undo current sensor gain
 		
 		totalC += inputI;
 		
-		totalV += ((uint32_t)adcConvert(voltageValues[i]) * (VOLTAGE_VD_MV))/1000; //undo voltage divider gain
+		totalV += ((uint32_t)adcConvert(voltageValues[i]) * (VOLTAGE_VD_MV))/1000; // undo voltage divider gain
 
 		}
-		
+	
+	// update voltage and current readings
 	inputI = totalC/ADC_ARRAY_SIZE;
 	inputV = totalV/ADC_ARRAY_SIZE;
 	
 	///motorI = ((uint32_t)inputI * PERIOD_MOTOR)/finalOnTime;
 	
-	//check for overvoltage and overcurrent scenarios. A note: how do we limit the current flow through the motor, when considering the inverse of the duty cycle? 
-	
+	// update over voltage and over current flags
 	if (inputI >= MAXI) {
 		overCurrent = true;
 		setRequiredSpeedGrade(STOP);
@@ -154,7 +165,8 @@ void convertVoltageAndCurrent() {
 	uint16_t preValI = inputI;
 	uint16_t preValV = inputV;
 	
-	//shift recent current/voltage values into an array [leaving space for 50 old values], note: what happens during first iteration?
+	// shift recent current/voltage values into array [leaving space for 50 old values]
+	
 	for (uint8_t i = 0; i < BL_ARRAY_SIZE; i ++) {
 		
 		uint16_t currentValI = recentCurrentValues[i];
@@ -170,7 +182,7 @@ void convertVoltageAndCurrent() {
 	
 	recentValuesCount++;
 	
-	//after one second 
+	// after one second, set data send flag to true
 	if (recentValuesCount == BL_ARRAY_SIZE) {
 		sendData = true;
 		recentValuesCount = 0;
@@ -180,8 +192,8 @@ void convertVoltageAndCurrent() {
 
 void averageVoltageAndCurrent() {
 	
-	//do a weight average where the weight is proportional to the number of values in the array
-	//Older values have the least weight attached to them
+	// do a weight average where the weight is proportional to the number of values in the array
+	// plder values have the least weight attached to them
 	
 	uint32_t totalAverageV= 0;
 	uint32_t totalAverageI = 0;
@@ -196,12 +208,13 @@ void averageVoltageAndCurrent() {
 		countUp++;
 	}
 	
-	averageV = totalAverageV/(uint32_t)sumOfWeights;
+	averageV = totalAverageV/(uint32_t)sumOfWeights; 
 	averageI = totalAverageI/(uint32_t)sumOfWeights;
 	
 	averagePower = ((uint32_t)averageI * averageV)/1000; //average power, in mWatts
 
 }
+
 
 uint16_t returnSpeedGrade() {
 	return speedGrade;
@@ -213,6 +226,7 @@ bool returnDirection() {
 
 
 void ramp(){
+	// update the speed of the car in increments to prevent current spikes
 //	if ((!lostRemoteConnection) && (!overCurrent) && (!overVoltage) && (establishedConnection)) {
 		if(forward == requiredForward){	
 			if(requiredSpeedGrade > speedGrade){
@@ -245,7 +259,8 @@ void ramp(){
 
 void updateDutyCycle(){
 
-	
+		// update the on time of the right and left PWM waves (which control the FETs)
+		
 		//if the input voltage to the H-bridge is greater than the voltage wanted across the motor:
 		if(inputV != 0){
 			if(inputV > speedGrade){
