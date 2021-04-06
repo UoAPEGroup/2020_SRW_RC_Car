@@ -14,9 +14,11 @@
 
 #include "string.h"
 
+static volatile uint8_t st_int_connect_count;
+
 // Triggers when data is received
 ISR(USART0_RX_vect){
-	//reset_timeout(); // Resets timeout counter
+	reset_timeout(); // Resets timeout counter
 	// // Stores received data in variable
 	//tx_debug(); // Echoes back input data (Enabled for testing
 	read_data(); // Reads data	
@@ -55,7 +57,13 @@ void reset_timeout(){
 void stall_control(){
 	set_no_speed();
 	set_straight_turn();
-	STATE_INT_TOGGLE;
+	if (st_int_connect_count ==  STATE_CONNECT_COUNT){
+		STATE_INT_TOGGLE;
+		st_int_connect_count = 0;
+	}
+	else{
+		st_int_connect_count++;
+	}
 }
 
 /* 

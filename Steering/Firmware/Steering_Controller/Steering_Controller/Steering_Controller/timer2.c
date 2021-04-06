@@ -14,7 +14,7 @@
 
 // 1ms Interrupt
 ISR(TIMER2_COMPA_vect){
-	//check_timeout(); // Disabled for Testing
+	check_timeout(); // Disabled for Testing
 	// PI controller function used for steering motor 
 	pi_controller(); 
 }

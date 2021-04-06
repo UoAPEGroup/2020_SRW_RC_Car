@@ -44,7 +44,8 @@ uint16_t turn_range;
 volatile int16_t t_on;
 
 // Timeout Counter
-#define MAX_TIMEOUT_COUNT 50 // in ms
+#define STATE_CONNECT_COUNT 500 // in ms
+#define MAX_TIMEOUT_COUNT 500 // in ms
 volatile uint8_t timeout_count;
 
 // Calibration timer

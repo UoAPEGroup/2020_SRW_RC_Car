@@ -18,6 +18,11 @@ static volatile int16_t input;
 static volatile int16_t integrator;
 static volatile int16_t set_output;
 
+
+#include <stdio.h> //
+#include <string.h> //
+char input_buffer[20]; //
+
 // PI Controller Function
 void pi_controller(){
 	input = adc_read(); // Reads current input

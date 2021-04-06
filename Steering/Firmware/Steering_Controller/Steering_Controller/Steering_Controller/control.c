@@ -11,11 +11,6 @@
 #include "uart.h"
 #include "steering.h"
 
-// DEBUGGING
-#include <stdio.h> //
-#include <string.h> //
-char input_buffer[20]; //
-
 // Stores input data
 static volatile char input_data;
 
@@ -69,30 +64,20 @@ void set_turn_angle(){
 	if(RIGHT_H){
 		if(HALF_TURN_H){
 			set_half_r_turn();
-			sprintf(input_buffer, "Set Output (Half R):	%i \n\r", set_point_angle); //
-			usart0_transmit_string(input_buffer); //
 		} 
 		else if (FULL_TURN_H){
 			set_full_r_turn();
-			sprintf(input_buffer, "Set Output (Full R):	%i \n\r", set_point_angle); //
-			usart0_transmit_string(input_buffer); //
 		}
 	} // LEFT TURN
 	else{
 		if(HALF_TURN_H){
 			set_half_l_turn(); 
-			sprintf(input_buffer, "Set Output (Half L):	%i \n\r", set_point_angle); //
-			usart0_transmit_string(input_buffer); //
 		}
 		else if (FULL_TURN_H){
 			set_full_l_turn();
-			sprintf(input_buffer, "Set Output (Full R):	%i \n\r", set_point_angle); //
-			usart0_transmit_string(input_buffer); //
 		}
 		else{
 			set_straight_turn();
-			sprintf(input_buffer, "Set Output (Straight):	%i \n\r", set_point_angle); //
-			usart0_transmit_string(input_buffer); //
 		}
 	}
 }

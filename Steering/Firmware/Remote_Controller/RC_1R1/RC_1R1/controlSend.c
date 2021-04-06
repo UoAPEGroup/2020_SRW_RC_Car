@@ -48,34 +48,29 @@ ISR(INT0_vect) {
 }
 
 ISR(PCINT0_vect) {
-	/*usart0_transmit_string("Acc sw trgd.\r\n");*/
 	if (READ_ACCEL_SW_1) {
 		accel_sw_1 = true;
-		//usart0_transmit_string("1\n");
 	}
 	else {
 		accel_sw_1 = false;
 	}
-	if (READ_ACCEL_SW_4) {
-		//usart0_transmit_string("4\n");
-		accel_sw_4 = true;
-	}
-	else {
-		accel_sw_4 = false;
-	}
 	if (READ_ACCEL_SW_2) {
-		//usart0_transmit_string("2\n");
 		accel_sw_2 = true;
 	}
 	else {
 		accel_sw_2 = false;
 	}
 	if (READ_ACCEL_SW_3) {
-		//usart0_transmit_string("3\n");
 		accel_sw_3 = true;
 	}
 	else {
 		accel_sw_3 = false;
+	}
+	if (READ_ACCEL_SW_4) {
+		accel_sw_4 = true;
+	}
+	else {
+		accel_sw_4 = false;
 	}
 	
 }
@@ -103,26 +98,34 @@ void str_data_conversion() {
 }
 
 void accel_data_conversion() {
-	if (accel_sw_4 && accel_sw_3) {
+	if (accel_sw_1 && !accel_sw_2 && accel_sw_3 && accel_sw_4) {
 		accel_data = ACCEL_NONE;
+		//usart0_transmit_string("none");
 	}
-	else if (!accel_sw_1 && !accel_sw_2 && accel_sw_3) {
+	else if (accel_sw_1 && !accel_sw_2 && accel_sw_3 && !accel_sw_4) {
 		accel_data = ACCEL_LOW;
+		//usart0_transmit_string("low");
 	}
-	else if (accel_sw_1 && !accel_sw_2) {
+	else if (!accel_sw_1 && !accel_sw_2 && accel_sw_3 && !accel_sw_4) {
 		accel_data = ACCEL_MEDIUM;
+		//usart0_transmit_string("medium");
 	}
-	else if (accel_sw_2 && accel_sw_3) {
+	else if (accel_sw_1 && accel_sw_2 && !accel_sw_3 && !accel_sw_4) {
 		accel_data = ACCEL_HIGH;
+		//usart0_transmit_string("high");
 	}
 }
 
 void instructionSend() {
 	set_RTS_flag(false);
+// 	sprintf(input_buffer, "\n\r ADC:	%i %i %i %i \n\r", (int16_t)accel_sw_1, (int16_t)accel_sw_2, (int16_t)accel_sw_3, (int16_t)accel_sw_4 );
+// 	usart0_transmit_string(input_buffer);
 	
 	sendValue = 0b10000000;
 	sendValue &=~ (1 << FUTURE);
 	
+	accel_data_conversion();
+
 	switch (str_data)
 	{
 		case STR_FULL_L:
@@ -160,24 +163,28 @@ void instructionSend() {
 	switch (accel_data) 
 	{
 		case ACCEL_HIGH:
-			//sendValue |= (1 << SPEED_HIGH); // CHANGE THESE!!!!!!!!!!
+			//usart0_transmit_string("high");
+			sendValue |= (1 << SPEED_HIGH); // CHANGE THESE!!!!!!!!!!
 			//sendValue = 65;
 			break;
 		
 		case ACCEL_MEDIUM:
-			//sendValue |= (1 << SPEED_MED);
+			//usart0_transmit_string("medium");
+			sendValue |= (1 << SPEED_MED);
 			//sendValue = 66;
 			break;
 			
 		case ACCEL_LOW:
-			//sendValue |= (1 << SPEED_LOW);
+			//usart0_transmit_string("low");
+			sendValue |= (1 << SPEED_LOW);
 			//sendValue = 67;
 			break;
 			
 		case ACCEL_NONE:
-// 			sendValue &= ~(1 << SPEED_HIGH);
-// 			sendValue &= ~(1 << SPEED_MED);
-// 			sendValue &= ~(1 << SPEED_LOW);
+			//usart0_transmit_string("none");
+ 			sendValue &= ~(1 << SPEED_HIGH);
+ 			sendValue &= ~(1 << SPEED_MED);
+ 			sendValue &= ~(1 << SPEED_LOW);
 			//sendValue = 68;
 			break;
 	};

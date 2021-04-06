@@ -30,7 +30,7 @@ int main(void)
 	
 	sei();
     while (1) {
-
+		
 	}
 }
 
