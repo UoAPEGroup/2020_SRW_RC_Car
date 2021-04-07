@@ -53,8 +53,8 @@ void timer3_init() {
 	//64 prescaler, with 8MHz, (125000MHz, 8us per count)
 	TCCR3B |= (1 << CS30) | (1 << WGM32) | (1 << CS31);
 	
-	//period = 40ms
-	OCR3A = 5000;
+	//period = 150ms
+	OCR3A = 18750;
 	//OCR3B = 50;
 	
 	//enable interrupt on compare match B

@@ -27,11 +27,11 @@ ISR(INT0_vect) {
 	interruptCount++;
 
 	if ((PINC & (1 << PINC5)) == (1 << PINC5)) {
-		setRequiredDirection(true); //set direction as forward if pinc5 is high
+		setRequiredDirection(false); //set direction as reverse if pinc5 is high
 		//setDirection(true); 
 	}
 	else {
-		setRequiredDirection(false);
+		setRequiredDirection(true);
 		//setDirection(false);
 	}
 	
