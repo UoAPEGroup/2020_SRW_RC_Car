@@ -1,0 +1,13 @@
+xgatt_serial_number 14
+ota_control 27
+ota_data 29
+ota_data_w_response 31
+ota_control_wo_response 33
+device_reset 36
+xgatt_debug 40
+xgatt_write 45
+xgatt_who 48
+xgatt_pwr1 52
+xgatt_pwr2 56
+xgatt_ratediv 60
+xgatt_sensor 64

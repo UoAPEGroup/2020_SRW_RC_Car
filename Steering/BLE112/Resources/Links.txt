@@ -1,0 +1,11 @@
+BGSript VScode:
+https://marketplace.visualstudio.com/items?itemName=SzczepanMejer.bgscript-support
+
+https://www.digikey.com/eewiki/display/Wireless/Getting+Started+with+the+BlueGiga+BLE112+Bluetooth+Low+Energy+module
+https://www.silabs.com/community/wireless/bluetooth/knowledge-base.entry.html/2015/08/06/_how-to_update_the-saZT
+
+https://github.com/slackhappy/ble112/tree/master/serial_debug
+https://sureshjoshi.com/embedded/bled112-virtual-com-stops-working/
+https://github.com/CANBus-Triple/CBT-BLE112-Firmware
+https://github.com/kilianc/iBeacon
+https://github.com/sureshjoshi/ble113-firmware-examples
