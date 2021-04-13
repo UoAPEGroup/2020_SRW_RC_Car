@@ -10,13 +10,13 @@
 
 //threshold values for protection -> trigger halt ***UPDATE FOR FINAL IMPLEMENTATION***
 #define rated_V		721																//~60V
-#define rated_C		1023 															//for testing only 
+#define rated_C		125 															//~2A 
 #define rated_T1	550																//~78deg
 #define rated_T2	550																//~78deg
 #define rated_T3	550																//~78deg
 
 #define V_GAIN		(28500 / 1100)
-#define C_GAIN 
+#define C_GAIN		5
 
 #define ADC_used	5																//number of adc channels in use
 
