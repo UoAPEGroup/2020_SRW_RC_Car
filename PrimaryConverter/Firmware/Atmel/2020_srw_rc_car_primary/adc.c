@@ -135,7 +135,7 @@ uint16_t adc_read(uint8_t channel) {
 void adc_convert_all() {  
 	for (uint8_t i = 0; i < SAMPLING_SIZE; i++) {
 		adc_voltage_conv[i] = (((uint32_t)adc_voltage[i] * V_ref) / A_int) * V_GAIN;
-		adc_current_conv[i] = ((uint32_t)adc_current[i] * V_ref) / A_int;
+		adc_current_conv[i] = (((uint32_t)adc_current[i] * V_ref) / A_int) * C_GAIN;
 		adc_temp1_conv[i] = ((3500 - (int32_t)(((uint32_t)adc_temp1[i] * V_ref) / A_int)) / 22);
 		adc_temp2_conv[i] = ((3500 - (int32_t)(((uint32_t)adc_temp2[i] * V_ref) / A_int)) / 22);
 		adc_temp3_conv[i] = ((3500 - (int32_t)(((uint32_t)adc_temp3[i] * V_ref) / A_int)) / 22);
