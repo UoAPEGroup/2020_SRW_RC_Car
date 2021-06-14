@@ -11,4 +11,3 @@ xgatt_pwr1 52
 xgatt_pwr2 56
 xgatt_ratediv 60
 xgatt_sensor 64
-xgatt_led 69

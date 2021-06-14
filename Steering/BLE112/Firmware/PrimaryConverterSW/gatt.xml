@@ -6,7 +6,7 @@
 
         <characteristic uuid="2a00">
             <properties read="true" const="true" />
-            <value>Sponsored by Duleepa</value>
+            <value>Sponsored by Earlene</value>
         </characteristic>
 
         <characteristic uuid="2a01">
@@ -138,14 +138,7 @@
         </characteristic>       
     </service>
 	
-	<service uuid="384abbc5-9ad6-4eaa-86af-1ee629ba9838" advertise="true">
-      <description>LED Control Service</description>
-      <characteristic uuid="ee7c328f-6d47-4935-96ae-7ab28942074c" id="xgatt_led">
-        <description>LED Toggle</description>
-        <properties read="true" write="true" />
-        <value length="1" type="hex">01</value>
-      </characteristic>
-    </service>
+	
     
 </configuration>
 

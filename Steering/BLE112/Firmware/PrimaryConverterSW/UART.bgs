@@ -41,6 +41,10 @@ procedure handle_ota_control(connection, offset, value_len, value_data())
 end
 
 
+dim out(20) # endpoint data out
+dim out_len
+
+
 # Incoming data event listener
 event attributes_value(connection, reason, handle, offset, value_len, value_data)
     
@@ -62,6 +66,11 @@ event attributes_value(connection, reason, handle, offset, value_len, value_data
     if handle = ota_data || handle = ota_data_w_response then
         call flash_write_data(dfu_pointer, value_len, value_data(0:value_len))
         dfu_pointer = dfu_pointer + value_len
+
+        out(0:value_len) = value_data(0:value_len)
+        out_len = value_len
+        call system_endpoint_tx(system_endpoint_uart0, 7, "Hello\n")
+        # call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, out_len) # set TX watermark
     end if
 end
 
@@ -104,10 +113,14 @@ dim result
 dim port
 dim data
 
+
+# For reading data
+
 # System endpoint watermark event listener
 # Generated when there is data available from UART
 event system_endpoint_watermark_rx(endpoint, size)
    call hardware_io_port_read(0, $80)(result, port, data)
+
 
    if data & $80 then
       call hardware_io_port_write(0, $80, 0)
@@ -118,48 +131,48 @@ event system_endpoint_watermark_rx(endpoint, size)
    if endpoint = system_endpoint_uart0 then
         in_len = size
 
-        call system_endpoint_rx(system_endpoint_uart0, in_len)(result, in_len, in(0:in_len))	# read data from UART
         call system_endpoint_set_watermarks(system_endpoint_uart0, 0, $ff) 						# disable RX watermark
-		call system_endpoint_set_watermarks(system_endpoint_uart0, 12, $ff) 						# enable RX watermark
+        call system_endpoint_rx(system_endpoint_uart0, in_len)(result, in_len, in(0:in_len))	# read data from UART
         call attributes_write(xgatt_sensor, 0, in_len, in(0:in_len))								# Write data to GATT
-		#call system_endpoint_tx(system_endpoint_uart0, 7, "Hello\n")
-    end if
-end
-
-dim out(20) # endpoint data out
-dim out_len
-
-event attributes_value(connection, reason, handle, offset, value_len, value_data)
-
-    if handle = xgatt_led then
-        out(0:value_len) = value_data(0:value_len)
-        out_len = value_len
+        call system_endpoint_tx(system_endpoint_uart0, 7, "Harri\n")
         call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, out_len) # set TX watermark
+        call system_endpoint_set_watermarks(system_endpoint_uart0, 12, $ff) # enable RX watermark
+
     end if
-    
 end
+
+
+# event attributes_value(connection, reason, handle, offset, value_len, value_data)
+
+#     if handle = xgatt_led then
+#         out(0:value_len) = value_data(0:value_len)
+#         out_len = value_len
+#         call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, out_len) # set TX watermark
+#     end if
+    
+# end
 
 dim tx_len
+dim read_value
 
 event system_endpoint_watermark_tx(curr_endpoint, size)
-
     if curr_endpoint = system_endpoint_uart0 then
 		#out_len = size #################
+        call system_endpoint_tx(system_endpoint_uart0, 7, "Harri\n")
+		
         call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, 0) # disable TX watermark
-        call system_endpoint_tx(system_endpoint_uart0, out_len, out(0:out_len))
+        #call system_endpoint_tx(system_endpoint_uart0, out_len, out(0:out_len))
         call attributes_user_write_response(0, 0)
     end if
-    
 end
 
-#event system_endpoint_watermark_tx(endpoint,size)
+# event system_endpoint_watermark_tx(endpoint,size)
 
-#	tx_len = size
+# 	call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, 0) # disable TX watermark
 	
-#	if endpoint = system_endpoint_uart0 then
+# 		call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, 0) # disable TX watermark
+# 		call system_endpoint_tx(system_endpoint_uart0, tx_len, "Hello\n")
+        
+# 		#call attributes_user_write_response(0, 0)
 	
-#		call system_endpoint_set_watermarks(endpoint, $ff, 0) # disable TX watermark
-#		call system_endpoint_tx(system_endpoint_uart0, tx_len, "Hello\n")
-		
-#	end if
-#end
+# end
