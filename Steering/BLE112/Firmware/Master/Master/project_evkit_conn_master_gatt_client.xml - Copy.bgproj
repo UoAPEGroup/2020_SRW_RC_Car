@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project>
+    <config in="evkit_conn_master_gatt_client-config.xml" />
+    <gatt in="gatt.xml" />
+    <hardware in="evkit_hardware.xml" /> 
+    <script in="evkit_conn_master_gatt_client.bgs" />
+    <image out="out.hex" />
+</project>

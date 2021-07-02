@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <service uuid="1800" id="generic_access">
+      <description>Generic Access Profile</description>
+      <characteristic uuid="2a00" id="c_device_name">
+        <properties read="true" />
+        <value>BioLine</value>
+      </characteristic>
+    </service>
+    
+    <service uuid="1d5688de-866d-3aa4-ec46-a1bddb37ecf6" advertise="true">
+        <description>SPP-over-BLE service</description>        
+        <characteristic uuid="99db0f4b-b2ec-4cf8-ba6e-dd835743758c" id="xgatt_data">
+
+			<properties  write_no_response="true" notify="true"/>
+            <value variable_length="true" length="20" type="user" />
+        </characteristic>
+    </service>
+    
+</configuration>

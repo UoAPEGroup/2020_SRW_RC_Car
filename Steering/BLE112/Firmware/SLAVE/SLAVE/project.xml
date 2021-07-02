@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project>
+    <config in="evkit_conn_slave_gatt_server-config.xml" />
+    <gatt in="gatt.xml" />
+    <hardware in="evkit_hardware.xml" />
+    <script in="evkit_conn_slave_gatt_server.bgs" />
+    <image out="out.hex" />
+</project>

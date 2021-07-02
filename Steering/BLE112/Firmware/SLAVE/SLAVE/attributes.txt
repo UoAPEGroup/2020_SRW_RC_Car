@@ -1,0 +1,2 @@
+c_device_name 3
+xgatt_data 6

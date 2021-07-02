@@ -1,0 +1,139 @@
+dim result
+dim endpoint
+dim in(20) # endpoint data in
+dim in_len
+dim out(20) # endpoint data out
+dim out_len
+
+dim custom_adv_data(11)
+
+#######################
+
+#			Delete ### Debug ### in code for debugging 
+# 			line 34 (custom_adv_data(4:1)) and lines 35 to 38 must be change for each board 
+
+#######################
+
+
+event system_boot(major, minor, patch, build, ll_version, protocol_version, hw)
+    	
+
+	# configure P0.7 as output
+	call hardware_io_port_config_direction(0, $80)
+	
+	# turn P0.7 off
+	call hardware_io_port_write(0, $80, $00)
+
+
+    endpoint = system_endpoint_uart0
+    
+    ### Debug ### call system_endpoint_tx(endpoint, 63, "\n\r** Boot: Connection Slave, GATT Server ** Version: et-1.0 **\n")
+    call system_endpoint_set_watermarks(endpoint, 0, 0) # disable watermarks
+    
+    custom_adv_data(0:1) = $04 #Length of adv data
+    custom_adv_data(1:1) = $ff #AD type is Manufacturer Specific Data AD type
+    custom_adv_data(2:1) = $47 #Bluegiga Company Identifier Code - octet 2
+    custom_adv_data(3:1) = $00 #Bluegiga Company Identifier Code - octet 1
+    custom_adv_data(4:1) = $15 #V 2.1  --  Custom data (Board Version)
+    custom_adv_data(5:1) = $05 #Length of next adv data
+    custom_adv_data(6:1) = $09 # AD type is Complete local name
+    custom_adv_data(7:1) = $31 #1
+    custom_adv_data(8:1) = $32 #2
+	custom_adv_data(9:1) = $33 #3
+	custom_adv_data(10:1) = $34 #4
+
+    call gap_set_adv_data(1, 11, custom_adv_data(0:11)) #overwrites the friendly name in gatt.xml with ET but also allows closed system's companion module-dongle to automatically connect
+    call gap_set_mode(gap_user_data, gap_undirected_connectable)
+    
+end
+######################################################
+event connection_status(connection, flags, address, address_type, conn_interval, timeout, latency, bonding)
+    
+    ### Debug ### call system_endpoint_tx(endpoint, 17, "\n\r++ Connected ++")
+    ### Debug ### call system_endpoint_tx(endpoint, 26, "\n\r++ Connection interval: ")
+    ### Debug ### call system_endpoint_tx(endpoint, 4, conn_interval)
+    ### Debug ### call system_endpoint_tx(endpoint, 4, " ++\n")
+
+    call attclient_attribute_write(connection, xgatt_data + 1, 2, "\x01\x00")  ##########################
+
+end
+######################################################
+event system_endpoint_watermark_rx(curr_endpoint, size)
+
+    call system_endpoint_set_watermarks(endpoint, 0, $ff) # disable RX watermark
+
+    in_len = size
+    if in_len > 20 then
+       in_len = 20
+    end if
+
+    call system_endpoint_rx(endpoint, in_len)(result, in_len, in(0:in_len))
+	call system_endpoint_set_watermarks(endpoint, 1, $ff) 
+    call attributes_write(xgatt_data, 0, in_len, in(0:in_len))
+    
+end
+##############################################################
+event attributes_status(handle, flags) ### chera master nadare ino 
+
+    if (handle = xgatt_data) && (flags = 1) then
+    
+		### Debug ### call system_endpoint_tx(endpoint, 57, "\n\r++ Local CCC set by remote side to start indications ++")
+        ### Debug ### call system_endpoint_tx(endpoint, 46, "\n\r++ Transparent data exchange can start ++\n\n\r")
+	   
+	    call system_endpoint_set_watermarks(endpoint, 1, 0) # set RX watermark
+	
+		# configure P0.7 as output
+		#call hardware_io_port_config_direction(0, $80)
+
+	    #turn Pin On
+        call hardware_io_port_write(0, $80, $80)
+    	
+    end if
+
+end
+######################################################
+event attclient_indicated(connection, handle)
+
+    if handle = xgatt_data then
+        call system_endpoint_set_watermarks(endpoint, 1, $ff) # set RX watermark
+    end if
+    
+end
+#######################################################
+event attributes_value(connection, reason, handle, offset, value_len, value_data)
+
+    if handle = xgatt_data then
+        out(0:value_len) = value_data(0:value_len)
+        out_len = value_len
+        call system_endpoint_set_watermarks(endpoint, $ff, out_len) # set TX watermark
+    end if
+    
+end
+######################################################
+event system_endpoint_watermark_tx(curr_endpoint, size)
+
+	call system_endpoint_set_watermarks(endpoint, $ff, 0) # disable TX watermark
+
+    if curr_endpoint = endpoint then
+        call system_endpoint_set_watermarks(endpoint, $ff, 0) # disable TX watermark
+        call system_endpoint_tx(endpoint, out_len, out(0:out_len))
+    end if
+    
+end
+######################################################
+event connection_disconnected(conn, reas)
+    
+    ### Debug ### call system_endpoint_tx(endpoint, 22, "\n\n\r-- Disconnected --\n")
+    ### Debug ### call system_endpoint_tx(endpoint, 17, "\r-- Reason code: ")
+    ### Debug ### call system_endpoint_tx(endpoint, 2, reas)
+    ### Debug ### call system_endpoint_tx(endpoint, 4, " --\n")
+
+	call system_endpoint_set_watermarks(endpoint, 0, 0) # disable watermarks
+
+	#turn Pin Off
+    call hardware_io_port_write(0, $80, 0)
+    
+    call gap_set_adv_data(1, 11, custom_adv_data(0:11))
+    call gap_set_mode(gap_user_data, gap_undirected_connectable)
+	
+end

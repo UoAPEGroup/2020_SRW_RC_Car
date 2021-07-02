@@ -1,0 +1,131 @@
+dim addr(6)
+dim result
+dim endpoint
+dim in(20) # endpoint data in
+dim in_len
+dim out(20) # endpoint data out
+dim out_len
+
+#######################
+
+#			Delete ### Debug ### in code for debugging 
+# 			line 36 (if packet_type = 4 ....)  first data_data in version other in last 4 board number in ASCII
+
+#######################
+
+
+event system_boot(major, minor, patch, build, ll_version, protocol_version, hw)
+
+	# turn P0.7 off
+	call hardware_io_port_write(0, $80, $00)
+
+	# configure P0.7 as output
+	call hardware_io_port_config_direction(0, $80)
+
+		
+    endpoint = system_endpoint_uart0
+
+    ### Debug ### call system_endpoint_tx(endpoint, 64, "\n\r** Boot: Connection Master, GATT Client ** Version: et-1.0 **\n")
+    call system_endpoint_set_watermarks(endpoint, 0, 0) # disable watermarks
+    
+    call gap_set_scan_parameters(1600, 800, 1)
+    call gap_discover(2)
+    
+end
+######################################################
+event gap_scan_response(rssi, packet_type, sender, address_type, bond, data_len, data_data)
+
+    if packet_type = 4 && data_data(4:1) = $15 && data_data(7:1) = $31 && data_data(8:1) = $32 && data_data(9:1) = $33 && data_data(10:1) = $34 then
+       #call gap_connect_direct(sender(0:6), 0, 800, 800, 500, 0) # 1000ms connection interval meaning 10B/s
+       #call gap_connect_direct(sender(0:6), 0, 80, 80, 500, 0) # 100ms connection interval meaning 100B/s
+       call gap_connect_direct(sender(0:6), 0, 6, 6, 20, 0) # 7.5ms connection interval meaning ~1.3KB/s
+	   
+    end if
+
+end
+######################################################
+event connection_status(connection, flags, address, address_type, conn_interval, timeout, latency, bonding)
+    
+    ### Debug ### call system_endpoint_tx(endpoint, 17, "\n\r++ Connected ++")
+    ### Debug ### call system_endpoint_tx(endpoint, 26, "\n\r++ Connection interval: ")
+    ### Debug ### call system_endpoint_tx(endpoint, 4, conn_interval)
+    ### Debug ### call system_endpoint_tx(endpoint, 4, " ++\n")
+	
+    call system_endpoint_set_watermarks(endpoint, 1, 0) # set RX watermark
+
+    call attclient_attribute_write(connection, xgatt_data + 1, 2, "\x01\x00")
+	
+end
+######################################################
+event system_endpoint_watermark_rx(curr_endpoint, size)
+
+	call system_endpoint_set_watermarks(endpoint, 0, $ff) # disable RX watermark
+
+	in_len = size
+	if in_len > 20 then
+		in_len = 20
+	end if
+	
+	call system_endpoint_rx(endpoint, in_len)(result, in_len, in(0:in_len))
+	call system_endpoint_set_watermarks(endpoint, 1, $ff) 
+	call attclient_write_command(0, xgatt_data , in_len, in(0:in_len))
+
+end
+#################################################################
+event attclient_procedure_completed(connection, resultt, handle)
+
+    if (handle = xgatt_data + 1) then
+		### Debug ### call system_endpoint_tx(endpoint, 43, "\n\r++ Remote CCC set to start indications ++")
+		### Debug ### call system_endpoint_tx(endpoint, 46, "\n\r++ Transparent data exchange can start ++\n\n\r")
+	   
+		call system_endpoint_set_watermarks(endpoint, 1, $ff) # set RX watermark
+		
+		#turn Pin On
+		call hardware_io_port_write(0, $80, $80)
+	
+    end if
+
+    if (handle = xgatt_data) then
+        call system_endpoint_set_watermarks(endpoint, 1, $ff) # set RX watermark
+    end if
+    
+end
+######################################################
+event attclient_attribute_value(connection, handle, type, value_len, value_data)
+
+    #if (handle = xgatt_data ) then
+        out(0:value_len) = value_data(0:value_len)
+        out_len = value_len
+        call system_endpoint_set_watermarks(endpoint, $ff, out_len) # set TX watermark
+    #end if
+    
+end
+######################################################
+event system_endpoint_watermark_tx(curr_endpoint, size)
+
+    call system_endpoint_set_watermarks(endpoint, $ff, 0)
+
+    if curr_endpoint = endpoint then
+        call system_endpoint_set_watermarks(endpoint, $ff, 0) # disable TX watermark
+        call system_endpoint_tx(endpoint, out_len, out(0:out_len))
+    end if
+    
+end
+######################################################
+event connection_disconnected(conn, reas)
+    
+    ### Debug ### call system_endpoint_tx(endpoint, 22, "\n\n\r-- Disconnected --\n")
+    ### Debug ### call system_endpoint_tx(endpoint, 17, "\r-- Reason code: ")
+    ### Debug ### call system_endpoint_tx(endpoint, 2, reas)
+    ### Debug ### call system_endpoint_tx(endpoint, 4, " --\n")
+	
+    call system_endpoint_set_watermarks(endpoint, 1, 0) # disable watermarks
+
+	#turn Pin Off
+    call hardware_io_port_write(0, $80, 0)
+
+    call gap_set_scan_parameters(1600, 800, 1)
+	##########call gap_set_scan_parameters(4, 4, 1)
+    call gap_discover(2)
+	
+end
