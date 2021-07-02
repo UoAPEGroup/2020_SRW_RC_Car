@@ -1,0 +1,14 @@
+Cable Replacement BGProject Code For BlueGiga BLE112 Module
+
+This is based on Bluetooth Smart Cable Replacement App Note from BlueGiga
+
+USE:
+- Install Bluegiga BLE SW Update Tool
+- Attach CC Debugger to BLE Module
+- Open project.bgproj to start update tool
+- Press 'Update' button on lower right to upload firmware
+
+NOTES:
+- UART Channel 0, Alt 1 is being used for RX/TX. Flow control is off. Other USART 
+	channels can be used by changing settings in hardware.xml. See BLE112 Datasheet
+	for pin assignment details.

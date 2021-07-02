@@ -69,7 +69,7 @@ event attributes_value(connection, reason, handle, offset, value_len, value_data
 
         out(0:value_len) = value_data(0:value_len)
         out_len = value_len
-        call system_endpoint_tx(system_endpoint_uart0, 7, "Hello\n")
+        # call system_endpoint_tx(system_endpoint_uart0, 7, "Hello\n")
         # call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, out_len) # set TX watermark
     end if
 end
@@ -134,10 +134,9 @@ event system_endpoint_watermark_rx(endpoint, size)
         call system_endpoint_set_watermarks(system_endpoint_uart0, 0, $ff) 						# disable RX watermark
         call system_endpoint_rx(system_endpoint_uart0, in_len)(result, in_len, in(0:in_len))	# read data from UART
         call attributes_write(xgatt_sensor, 0, in_len, in(0:in_len))								# Write data to GATT
-        call system_endpoint_tx(system_endpoint_uart0, 7, "Harri\n")
-        call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, out_len) # set TX watermark
+        #call system_endpoint_tx(system_endpoint_uart0, 7, "Harri\n")
+        #call system_endpoint_set_watermarks(system_endpoint_uart0, $ff, out_len) # set TX watermark
         call system_endpoint_set_watermarks(system_endpoint_uart0, 12, $ff) # enable RX watermark
-
     end if
 end
 

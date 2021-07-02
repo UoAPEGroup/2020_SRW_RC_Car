@@ -1,0 +1,86 @@
+dim in(20) 				# INCOMING DATA
+dim in_len
+
+dim out(20) 			# OUTGOING DATA
+dim out_len
+
+dim result				# COMMAND RESULT
+
+# ******************************************
+# POWER/CONNECTION STATE *******************
+# ******************************************
+
+# CALLED WHEN DEVICE IS POWERED ON
+event system_boot(major, minor, patch, build, ll_version, protocol_version, hw)
+    call system_endpoint_set_watermarks(4, 1, 0) 								# DISABLE WATERMARKS
+	call gap_set_adv_parameters(32, 48, 7)										# CONFIGURE ADVERTISEMENT PARAMETERS 20-30 ms, ALL CHANNELS
+    call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)		# START ADVERTISEMENT
+end
+
+# CALLED WHEN DEVICE IS DISCONNECTED (RESET)
+event connection_disconnected(connection, reason)
+    call system_endpoint_set_watermarks(4, 1, 0) 								# DISABLE WATERMARKS
+    call gap_set_adv_parameters(32, 48, 7)										# CONFIGURE ADVERTISEMENT PARAMETERS 20-30 ms, ALL CHANNELS
+    call gap_set_mode(gap_general_discoverable, gap_undirected_connectable)		# START ADVERTISEMENT
+end
+
+
+# ******************************************
+# RECEIVE DATA FROM BLUETOOTH ************
+# ******************************************
+
+# CALLED WHEN DATA INCOMING FROM BLUETOOTH (GATT)
+event attributes_value(connection, reason, handle, offset, value_len, value_data)
+    if handle = xgatt_data then
+        out(0:value_len) = value_data(0:value_len)								# COPY DATA FROM GATT
+        out_len = value_len														# STORE DATA LENGTH
+        call system_endpoint_set_watermarks(4, $ff, out_len) 					# TX WATERMARK = DATA LENGTH
+    end if
+end
+
+# CALLED WHEN WATERMARK SET TO WRITE DATA
+event system_endpoint_watermark_tx(endpoint, size)
+    if endpoint = 4 then
+        call system_endpoint_set_watermarks(4, $ff, 0) 							# DISABLE TX WATERMARK
+        call system_endpoint_tx(4, out_len, out(0:out_len))						# WRITE DATA TO UART
+        call attributes_user_write_response(0, 0) 								# RESPOND TO CONNECTION HANDLE 0
+        out_len = 0
+    end if
+end
+
+# ******************************************
+# TRANSMIT DATA VIA BLUETOOTH **********
+# ******************************************
+
+# CALLED WHEN ATTRIBUTE CLIENT CHARACTERISTIC CONFIGURATION VALUE CHANGES
+event attributes_status(handle, flags)
+    if handle = xgatt_data then
+        if flags & 2 then
+            call system_endpoint_set_watermarks(4, 1, $ff) 						# RX WATERMARK = 1
+        else
+            call system_endpoint_set_watermarks(4, 0, $ff) 						# DISABLE RX WATERMARK
+        end if
+    end if
+end
+
+# CALLED WHEN THERE IS DATA AVAILABLE FROM UART
+event system_endpoint_watermark_rx(endpoint, size)
+    if endpoint = 4 then
+        in_len = size
+        if in_len > 20 then
+            in_len = 20
+        end if
+
+        call system_endpoint_set_watermarks(4, 0, $ff) 							# DISABLE RX WATERMARK
+        call system_endpoint_rx(4, in_len)(result, in_len, in(0:in_len))		# READ DATA FROM UART
+        call attributes_write(xgatt_data, 0, in_len, in(0:in_len))				# WRITE DATA TO GATT
+    end if
+end
+
+# CALLED WHEN UART DATA IS INDICATED TO BLUETOOTH GATT
+event attclient_indicated(connection, attrhandle)
+    if attrhandle = xgatt_data then
+        call system_endpoint_set_watermarks(4, 1, $ff) 							# RX WATERMARK = 1 TO CATCH REMAINING DATA
+        in_len = 0
+    end if
+end

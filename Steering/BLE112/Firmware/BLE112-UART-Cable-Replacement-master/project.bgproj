@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+THIS FILE DEFINES THE NAMES AND LOCATIONS OF FILES NECESSARY
+FOR THE FIRMWARE BUILD PROCESS
+-->
+
+<project>
+
+	<!-- GATT PROFILE SPECIFICATION -->
+    <gatt in="gatt.xml" />
+	
+	<!-- HARDWARE CONFIGURATION FILE -->
+    <hardware in="hardware.xml" />
+	<device type="ble112" />
+	<!-- BGSCRIPT PROGRAM -->	
+    <script in="script.bgs" />
+	
+	<!-- FIRMWARE IMAGE OUTPUT -->
+    <image out="out.hex" />
+	
+</project>

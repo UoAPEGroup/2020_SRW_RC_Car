@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hardware>
+	<!-- USB NOT USED -->
+	<usb enable="false" />
+	
+	<!-- ENABLE 32.768KHz SLEEP OSCILLATOR -->
+    <sleeposc enable="true" ppm="100" />
+	
+	<!-- DISABLE POWER SAVE MODES -->
+    <sleep enable="false" />
+	
+	<!-- TRANSMIT POWER LEVEL (0-15) -->
+    <txpower power="15" bias="5" />
+	
+	<!-- PROGRAM WRITTEN IN BGSCRIPT -->
+    <script enable="true" />
+	
+	<!-- UART SETTINGS: SEE BLE112 DATA SHEET. FLOW = FALSE FOR NO FLOW CONTROL, RX/TX ONLY -->
+    <usart channel="0" alternate="1" baud="9600" endpoint="none" flow="false"/>
+	
+</hardware>
